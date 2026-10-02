@@ -26,7 +26,7 @@
   - *Hồ sơ chuyên môn:* Cựu học viên lớp CHAT3P, KMA TP.HCM ([LinkedIn Profile](https://www.linkedin.com/in/nguyen-huu-hoang-huy-abb138366/))
   - *Nhiệm vụ:* Điều phối hạ tầng Docker, hỗ trợ kỹ thuật OpenSSL 3.5 / Step-CA / SoftHSM, kiểm tra Pull Request và phúc khảo bài Lab.
 - **Lớp trưởng Lớp CHAT4P:** Học viên Tăng Triển Nguyên (Nhóm 3)
-  - *Email liên hệ:* triennguyen1911@gmail.com
+  - *Email liên hệ:* Lớp CHAT4P (GitHub: @AlexNguyen19)
   - *Nhiệm vụ:* Đầu mối thông báo lớp, tổng hợp danh sách nhóm chuyên đề và tiếp nhận kiến nghị học vụ.
 
 ---
@@ -70,11 +70,11 @@ Dữ liệu chính thức từ tệp [`DS_Nhom_CHAT_4P_PKI.xlsx`](file:///Users/
 
 | Nhóm | Tên Nhóm | Trưởng nhóm | Thành viên nhóm | Ngành | Đơn vị công tác & Lĩnh vực | Buổi bảo vệ |
 | :---: | :---: | :--- | :--- | :---: | :--- | :---: |
-| **Nhóm 1** | **VAULT** | **Nguyễn Ngọc Hoài** | Nguyễn Trần Hoàng Long<br>Nguyễn Đình Quân | ATTT<br>ATTT<br>ATTT | Công ty AgileOps (DevOps Engineer)<br>Công ty CP An ninh mạng THD<br>Trường Đại học Nguyễn Tất Thành | **Buổi S07**<br>(14/11) |
-| **Nhóm 2** | **RootCA** | **Nguyễn Vĩnh Hiển** | Nguyễn Ngọc Sơn<br>Nguyễn Trường Phú | CNTT<br>CNTT<br>CNTT | Dược phẩm Imexpharm (Sec & Helpdesk)<br>VinSmart Future (Data Engineer)<br>Cố vấn An ninh mạng tự do (OWASP) | **Buổi S07**<br>(14/11) |
-| **Nhóm 3** | **TMN Root of Trust** | **Võ Thông Minh** | Tăng Triển Nguyên<br>Trần Minh Triết | ATTT<br>CNTT<br>ATTT | Ngân hàng Nam Á<br>VPDD Getz Pharma (Lớp trưởng CHAT4P)<br>OPSWAT Việt Nam (Malware Analyst) | **Buổi S08**<br>(21/11) |
-| **Nhóm 4** | **CAP** | **Vũ Thị Diệu Anh** | Diệp Kim Chi<br>Đoàn Quang Phúc | CNTT<br>CNTT<br>THƯD | Công ty TMA Solutions (Manual QA)<br>Công ty Digityze Asia (PHP Dev)<br>Trung tâm 286 - Bộ Tư lệnh 86 | **Buổi S08**<br>(21/11) |
-| **Nhóm 5** | **TYN** | **Võ Minh Nhật** | Hồ Quốc Thái<br>Nguyễn Công Ý | CNTT<br>CNTT<br>CNTT | Đi học chuyên sâu<br>Hitachi Digital Service Việt Nam<br>Ngân hàng TMCP Á Châu (ACB) | **Buổi S09**<br>(28/11) |
+| **Nhóm 1** | **VAULT** | **Nguyễn Ngọc Hoài** | Nguyễn Trần Hoàng Long<br>Nguyễn Đình Quân | ATTT<br>ATTT<br>ATTT | `@hoainn`<br>`@JackkNguyen1209`<br>`@DiWien` | **Buổi S07**<br>(14/11) |
+| **Nhóm 2** | **RootCA** | **Nguyễn Vĩnh Hiển** | Nguyễn Ngọc Sơn<br>Nguyễn Trường Phú | CNTT<br>CNTT<br>CNTT | `@jerryhien`<br>`@sonnn`<br>`@crazykid95` | **Buổi S07**<br>(14/11) |
+| **Nhóm 3** | **TMN** | **Võ Thông Minh** | Tăng Triển Nguyên<br>Trần Minh Triết | ATTT<br>CNTT<br>ATTT | `@ngayhomay`<br>`@AlexNguyen19`<br>`@chuoihat` | **Buổi S08**<br>(21/11) |
+| **Nhóm 4** | **CAP** | **Vũ Thị Diệu Anh** | Diệp Kim Chi<br>Đoàn Quang Phúc | CNTT<br>CNTT<br>Tin học UD | `@dieuanh1511`<br>`@chidiep2312`<br>`@medvedru777` | **Buổi S08**<br>(21/11) |
+| **Nhóm 5** | **TYN** | **Võ Minh Nhật** | Hồ Quốc Thái<br>Nguyễn Công Ý | CNTT<br>CNTT<br>CNTT | `@vominhat`<br>`@thaisonnam`<br>`@nguyencongy` | **Buổi S09**<br>(28/11) |
 
 > [!NOTE]
 > **Học viên được miễn học phần này:**  

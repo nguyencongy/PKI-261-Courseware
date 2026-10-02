@@ -108,7 +108,7 @@ function taoGoogleFormPKI() {
   form.addTextItem().setTitle('3. Số điện thoại liên hệ (Zalo)').setRequired(true);
 
   // Câu 4: Đơn vị công tác
-  form.addTextItem().setTitle('4. Đơn vị công tác & Vị trí chuyên môn hiện tại (Ví dụ: Opswat - Malware Analyst, Imexpharm - Helpdesk & Security...)').setRequired(true);
+  form.addTextItem().setTitle('4. Đơn vị công tác & Vị trí chuyên môn hiện tại (Ví dụ: Doanh nghiệp CNTT - Kỹ sư Bảo mật, Khối Tài chính - Chuyên viên An toàn Mạng...)').setRequired(true);
 
   // --- PHẦN II: THIẾT LẬP KỸ THUẬT & GITHUB ---
   form.addSectionHeaderItem().setTitle('Phần II: Thiết lập Kỹ thuật & Kho GitHub');

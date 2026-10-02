@@ -25,7 +25,7 @@ Tài liệu này là **Cẩm nang duy nhất** tổng hợp toàn bộ thông ti
 | :--- | :--- | :--- | :--- | :--- |
 | **Giảng viên phụ trách** | **Nguyễn An Khương** | Khoa Khoa học & Kỹ thuật Máy tính, Trường ĐHBK Tp. HCM | nakhuong@hcmut.edu.vn | Phụ trách toàn diện nội dung học thuật, giảng dạy, định hướng đề tài và đánh giá tổng kết |
 | **Trợ giảng học phần (TA)** | **Mr. Nguyễn Hữu Hoàng Huy** | Cựu học viên CHAT3P, KMA TP.HCM | [LinkedIn Profile](https://www.linkedin.com/in/nguyen-huu-hoang-huy-abb138366/) | Hỗ trợ hạ tầng Docker/OpenSSL, giải đáp kỹ thuật Lab, kiểm tra Pull Request và chấm chéo |
-| **Lớp trưởng CHAT4P** | **HV Tăng Triển Nguyên** | Lớp CHAT4P | triennguyen1911@gmail.com | Điều phối thông báo lớp, tổng hợp danh sách nhóm chuyên đề, cầu nối giữa lớp và Ban giảng dạy |
+| **Lớp trưởng CHAT4P** | **HV Tăng Triển Nguyên** | Lớp CHAT4P | Lớp CHAT4P (GitHub: @AlexNguyen19) | Điều phối thông báo lớp, tổng hợp danh sách nhóm chuyên đề, cầu nối giữa lớp và Ban giảng dạy |
 
 ---
 
@@ -184,11 +184,11 @@ Theo dữ liệu từ tệp đăng ký chính thức của lớp (`DS_Nhom_CHAT_
 
 | Nhóm | Tên Nhóm | Trưởng nhóm | Thành viên nhóm | Ngành | Đơn vị công tác & Lĩnh vực | Buổi bảo vệ |
 | :---: | :---: | :--- | :--- | :---: | :--- | :---: |
-| **Nhóm 1** | **VAULT** | **Nguyễn Ngọc Hoài** | Nguyễn Trần Hoàng Long<br>Nguyễn Đình Quân | ATTT | AgileOps (DevOps) / An ninh mạng THD / ĐH Nguyễn Tất Thành | **Buổi S07** (14/11) |
-| **Nhóm 2** | **RootCA** | **Nguyễn Vĩnh Hiển** | Nguyễn Ngọc Sơn<br>Nguyễn Trường Phú | CNTT | Dược Imexpharm / VinSmart Future / Cố vấn OWASP | **Buổi S07** (14/11) |
-| **Nhóm 3** | **TMN Root of Trust** | **Võ Thông Minh** | Tăng Triển Nguyên<br>Trần Minh Triết | ATTT<br>CNTT | Ngân hàng Nam Á / Getz Pharma (Lớp trưởng) / OPSWAT | **Buổi S08** (21/11) |
-| **Nhóm 4** | **CAP** | **Vũ Thị Diệu Anh** | Diệp Kim Chi<br>Đoàn Quang Phúc | CNTT<br>THƯD | TMA Solutions / Digityze Asia / Trung tâm 286 - Bộ Tư lệnh 86 | **Buổi S08** (21/11) |
-| **Nhóm 5** | **TYN** | **Võ Minh Nhật** | Hồ Quốc Thái<br>Nguyễn Công Ý | CNTT | Đi học / Hitachi Digital Services / Ngân hàng ACB | **Buổi S09** (28/11) |
+| **Nhóm 1** | **VAULT** | **Nguyễn Ngọc Hoài** | Nguyễn Trần Hoàng Long<br>Nguyễn Đình Quân | ATTT | `@hoainn`<br>`@JackkNguyen1209`<br>`@DiWien` | **Buổi S07** (14/11) |
+| **Nhóm 2** | **RootCA** | **Nguyễn Vĩnh Hiển** | Nguyễn Ngọc Sơn<br>Nguyễn Trường Phú | CNTT | `@jerryhien`<br>`@sonnn`<br>`@crazykid95` | **Buổi S07** (14/11) |
+| **Nhóm 3** | **TMN** | **Võ Thông Minh** | Tăng Triển Nguyên<br>Trần Minh Triết | ATTT / CNTT | `@ngayhomay`<br>`@AlexNguyen19`<br>`@chuoihat` | **Buổi S08** (21/11) |
+| **Nhóm 4** | **CAP** | **Vũ Thị Diệu Anh** | Diệp Kim Chi<br>Đoàn Quang Phúc | CNTT | `@dieuanh1511`<br>`@chidiep2312`<br>`@medvedru777` | **Buổi S08** (21/11) |
+| **Nhóm 5** | **TYN** | **Võ Minh Nhật** | Hồ Quốc Thái<br>Nguyễn Công Ý | CNTT | `@vominhat`<br>`@thaisonnam`<br>`@nguyencongy` | **Buổi S09** (28/11) |
 
 *Ghi chú:* Học viên Nguyễn Tuấn Anh (CHAT4P002) và Huỳnh Trần Trọng Nghĩa (CHAT4P011) được miễn học phần này theo quy định của Học viện, do đó lớp chính thức gồm 15 học viên chia đều vào đúng 5 nhóm chuyên đề (3 thành viên/nhóm).
 
