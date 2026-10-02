@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Handout S05</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 30px auto; padding: 0 20px; color: #24292e; background: #fff; }
+  h1, h2, h3, h4 { color: #0a2540; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; margin-top: 1.5em; }
+  h1 { font-size: 2em; border-bottom: 2px solid #0066cc; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.95em; }
+  th, td { border: 1px solid #dfe2e5; padding: 8px 12px; }
+  th { background-color: #f6f8fa; font-weight: 600; text-align: left; }
+  tr:nth-child(2n) { background-color: #fbfcfd; }
+  code { background: #f3f4f4; padding: 0.2em 0.4em; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 85%; }
+  pre { background: #0a2540; color: #f8f8f2; padding: 14px; border-radius: 6px; overflow-x: auto; }
+  pre code { background: none; color: inherit; padding: 0; font-size: 0.9em; }
+  blockquote { border-left: 4px solid #0066cc; margin: 0; padding-left: 16px; color: #57606a; background: #f8fbfd; padding: 8px 16px; border-radius: 0 6px 6px 0; }
+  a { color: #0066cc; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Handout S05</h1>
+</header>
+<h1
+id="handout-s05-bảo-vệ-khóa-riêng-tư-softhsmv2-pkcs11-chuyển-dịch-hậu-lượng-tử-pqc">Handout
+S05: Bảo vệ Khóa Riêng tư: SoftHSMv2, PKCS#11 &amp; Chuyển dịch Hậu
+Lượng tử (PQC)</h1>
+<p><strong>Học phần:</strong> Cơ sở hạ tầng khóa công khai (ATHK 512) ·
+Lớp CHAT4P<br />
+<strong>Đơn vị:</strong> Khoa An toàn Thông tin — Phân hiệu Học viện Kỹ
+thuật Mật mã tại TP.HCM<br />
+<strong>Giảng viên:</strong> Nguyễn An Khương (Khoa Khoa học &amp; Kỹ
+thuật Máy tính, Trường ĐHBK Tp. HCM)<br />
+<strong>Trợ giảng:</strong> Nguyễn Hữu Hoàng Huy</p>
+<hr />
+<h2 id="cách-ly-khóa-riêng-tư-qua-chuẩn-giao-tiếp-pkcs11">1. Cách ly
+Khóa Riêng tư qua Chuẩn Giao tiếp PKCS#11</h2>
+<p>Khóa riêng tư của CA không bao giờ được phép xuất hiện dưới dạng văn
+bản rõ (plaintext) trong bộ nhớ RAM của hệ điều hành:</p>
+<pre class="mermaid"><code>graph TD
+    App[&quot;Ứng dụng CA (OpenSSL / Step-CA)&quot;]
+    API[&quot;Giao diện Lập trình Cryptoki (PKCS#11 API)&quot;]
+    Driver[&quot;Trình điều khiển Module Bảo mật (SoftHSM / Thales / YubiHSM)&quot;]
+    Hardware[&quot;Phần cứng Bảo mật Cách ly (Secure Element / Cryptographic Boundary)&quot;]
+
+    App --&gt;|Gọi hàm C_Sign, C_GenerateKeyPair| API
+    API --&gt; Driver
+    Driver --&gt; Hardware
+
+    subgraph SecurityBoundary[&quot;RANH GIỚI BẢO MẬT AN TOÀN&quot;]
+        Hardware --&gt; KeyStorage[&quot;Khóa Riêng tư (Private Key)&lt;br/&gt;Không thể trích xuất ra ngoài!&quot;]
+        Hardware --&gt; CryptoEngine[&quot;Bộ vi xử lý Mật mã&lt;br/&gt;Thực hiện ký trực tiếp bên trong&quot;]
+    end</code></pre>
+<hr />
+<h2 id="mối-đe-dọa-lượng-tử-bộ-chuẩn-fips-pqc-của-nist-082024">2. Mối Đe
+dọa Lượng tử &amp; Bộ Chuẩn FIPS PQC của NIST (08/2024)</h2>
+<p>Máy tính lượng tử quy mô lớn ứng dụng thuật toán Shor sẽ giải quyết
+bài toán logarit rời rạc và phân tích thừa số nguyên trong thời gian đa
+thức, bẻ gãy hoàn toàn RSA và ECC:</p>
+<pre class="mermaid"><code>graph TD
+    Threat[&quot;MÁY TÍNH LƯỢNG TỬ (THUẬT TOÁN SHOR)&quot;]
+    
+    Threat --&gt; Broken[&quot;BỊ BẺ GÃY HOÀN TOÀN&lt;br/&gt;- RSA-2048 / 3072 / 4096&lt;br/&gt;- ECDSA (P-256, P-384)&lt;br/&gt;- Ed25519 &amp; ECDH&quot;]
+    
+    Threat --&gt; Safe[&quot;AN TOÀN KHÁNG LƯỢNG TỬ (NIST CHUẨN HÓA 2024)&lt;br/&gt;Dựa trên bài toán Mạng tinh thể (Lattice-based)&quot;]
+
+    Safe --&gt; FIPS203[&quot;NIST FIPS 203: ML-KEM&lt;br/&gt;Cơ chế Đóng gói Khóa (KEM)&lt;br/&gt;Mức an toàn: ML-KEM-512 / 768 / 1024&quot;]
+    Safe --&gt; FIPS204[&quot;NIST FIPS 204: ML-DSA&lt;br/&gt;Chữ ký số Mạng tinh thể (RFC 9881)&lt;br/&gt;Mức an toàn: ML-DSA-44 / 65 / 87&quot;]
+    Safe --&gt; FIPS205[&quot;NIST FIPS 205: SLH-DSA&lt;br/&gt;Chữ ký số Dựa trên Hàm băm&quot;]</code></pre>
+<hr />
+<h2 id="bắt-tay-lai-hậu-lượng-tử-hybrid-key-exchange-trong-tls-1.3">3.
+Bắt tay Lai Hậu Lượng tử (Hybrid Key Exchange) trong TLS 1.3</h2>
+<p>Để bảo đảm tính tương thích và bảo vệ hai lớp (phòng ngừa trường hợp
+thuật toán PQC mới có lỗ hổng toán học tiềm ẩn), các hệ thống Web PKI
+tiên tiến áp dụng cơ chế lai:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    participant Client as Web Client / Trình duyệt
+    participant Server as Web Server (TLS 1.3)
+
+    Note over Client: Sinh khóa tạm thời Cổ điển (X25519)&lt;br/&gt;+ Khóa tạm thời PQC (ML-KEM-768)
+    Client-&gt;&gt;Server: ClientHello [Key Share: X25519 + ML-KEM-768]
+    Note over Server: Đóng gói bí mật chung (KEM Encap)&lt;br/&gt;+ Tính toán trao đổi khóa X25519
+    Server--&gt;&gt;Client: ServerHello [Key Share: X25519 + ML-KEM Ciphertext]
+    Note over Client,Server: Khóa phiên chung = KDF(Shared_X25519 || Shared_MLKEM)
+    Note over Client,Server: Phiên mã hóa bắt đầu (Bảo vệ an toàn trước cả Siêu máy tính và Máy tính lượng tử!)</code></pre>
+<hr />
+<h2 id="tài-liệu-tham-khảo-chuẩn-quốc-tế">4. Tài liệu Tham khảo Chuẩn
+Quốc tế</h2>
+<ol type="1">
+<li><strong>OASIS Standard:</strong> <em>PKCS #11 Cryptographic Token
+Interface Base Specification Version 3.0</em>, 2020.</li>
+<li><strong>NIST FIPS 203:</strong> <em>Module-Lattice-Based
+Key-Encapsulation Mechanism Standard (ML-KEM)</em>, 2024. <a
+href="https://doi.org/10.6028/NIST.FIPS.203">doi.org/10.6028/NIST.FIPS.203</a></li>
+<li><strong>NIST FIPS 204:</strong> <em>Module-Lattice-Based Digital
+Signature Standard (ML-DSA)</em>, 2024. <a
+href="https://doi.org/10.6028/NIST.FIPS.204">doi.org/10.6028/NIST.FIPS.204</a></li>
+<li><strong>IETF RFC 9881:</strong> <em>Use of the ML-DSA Algorithm in
+Internet X.509 PKI and CRL Profiles</em>, 2024.</li>
+</ol>
+</body>
+</html>

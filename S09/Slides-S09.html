@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Slides S09</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 30px auto; padding: 0 20px; color: #24292e; background: #fff; }
+  h1, h2, h3, h4 { color: #0a2540; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; margin-top: 1.5em; }
+  h1 { font-size: 2em; border-bottom: 2px solid #0066cc; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.95em; }
+  th, td { border: 1px solid #dfe2e5; padding: 8px 12px; }
+  th { background-color: #f6f8fa; font-weight: 600; text-align: left; }
+  tr:nth-child(2n) { background-color: #fbfcfd; }
+  code { background: #f3f4f4; padding: 0.2em 0.4em; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 85%; }
+  pre { background: #0a2540; color: #f8f8f2; padding: 14px; border-radius: 6px; overflow-x: auto; }
+  pre code { background: none; color: inherit; padding: 0; font-size: 0.9em; }
+  blockquote { border-left: 4px solid #0066cc; margin: 0; padding-left: 16px; color: #57606a; background: #f8fbfd; padding: 8px 16px; border-radius: 0 6px 6px 0; }
+  a { color: #0066cc; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Slides S09</h1>
+</header>
+<h1
+id="slides-s09-báo-cáo-tổng-kết-đồ-án-chuyên-sâu-đối-soát-điểm-công-khai">Slides
+S09: Báo cáo Tổng kết Đồ án Chuyên sâu &amp; Đối soát Điểm Công
+khai</h1>
+<p><strong>Học phần:</strong> Cơ sở hạ tầng khóa công khai (ATHK 512) ·
+Lớp CHAT4P<br />
+<strong>Giảng viên:</strong> Nguyễn An Khương (Khoa Khoa học &amp; Kỹ
+thuật Máy tính, Trường ĐHBK Tp. HCM)<br />
+<strong>Trợ giảng:</strong> Nguyễn Hữu Hoàng Huy</p>
+<hr />
+<h2 id="slide-1-đích-đến-của-hành-trình-pki-pqc">Slide 1: Đích đến của
+Hành trình PKI &amp; PQC</h2>
+<ul>
+<li>Chúc mừng 5 nhóm kỹ thuật lớp CHAT4P đã hoàn thành chặng đường 9
+buổi học chuyên sâu!</li>
+<li>Hôm nay là thời khắc chuyển giao tri thức: Các bạn không còn là
+người học lý thuyết đơn thuần, mà là những <strong>Kỹ sư Hạ tầng Mật mã
+Thực chiến (Cryptographic Systems Engineers)</strong>.</li>
+</ul>
+<hr />
+<h2 id="slide-2-lịch-trình-bảo-vệ-đồ-án-buổi-s09">Slide 2: Lịch Trình
+Bảo vệ Đồ án Buổi S09</h2>
+<ul>
+<li><strong>13h30 - 13h40:</strong> Khai mạc và phổ biến quy chế chấm
+điểm cuối kỳ.</li>
+<li><strong>13h40 - 14h15:</strong> Nhóm 1 (VAULT - Zero Trust mTLS
+Gateway &amp; SoftHSM).</li>
+<li><strong>14h15 - 14h50:</strong> Nhóm 2 (RootCA - Mô phỏng Tấn công
+&amp; Phòng thủ PKI).</li>
+<li><strong>14h50 - 15h25:</strong> Nhóm 3 (TMN Root of Trust - PQC
+Migration cho Web PKI).</li>
+<li><strong>15h25 - 16h00:</strong> Nhóm 4 (CAP - Step-CA &amp; ACME
+Automation).</li>
+<li><strong>16h00 - 16h35:</strong> Nhóm 5 (TYN - ZLint, OCSP Stapling
+&amp; CT Logs).</li>
+<li><strong>16h35 - 17h00:</strong> Hội đồng thảo luận, đối soát bảng
+điểm công khai và bế mạc môn học.</li>
+</ul>
+</body>
+</html>

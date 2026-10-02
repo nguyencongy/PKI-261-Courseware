@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Handout S08</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 30px auto; padding: 0 20px; color: #24292e; background: #fff; }
+  h1, h2, h3, h4 { color: #0a2540; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; margin-top: 1.5em; }
+  h1 { font-size: 2em; border-bottom: 2px solid #0066cc; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.95em; }
+  th, td { border: 1px solid #dfe2e5; padding: 8px 12px; }
+  th { background-color: #f6f8fa; font-weight: 600; text-align: left; }
+  tr:nth-child(2n) { background-color: #fbfcfd; }
+  code { background: #f3f4f4; padding: 0.2em 0.4em; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 85%; }
+  pre { background: #0a2540; color: #f8f8f2; padding: 14px; border-radius: 6px; overflow-x: auto; }
+  pre code { background: none; color: inherit; padding: 0; font-size: 0.9em; }
+  blockquote { border-left: 4px solid #0066cc; margin: 0; padding-left: 16px; color: #57606a; background: #f8fbfd; padding: 8px 16px; border-radius: 0 6px 6px 0; }
+  a { color: #0066cc; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Handout S08</h1>
+</header>
+<h1
+id="handout-s08-mô-phỏng-tấn-công-phòng-thủ-hạ-tầng-pki-ad-cs-rogue-ca-mitm">Handout
+S08: Mô phỏng Tấn công &amp; Phòng thủ Hạ tầng PKI (AD CS, Rogue CA,
+MitM)</h1>
+<p><strong>Học phần:</strong> Cơ sở hạ tầng khóa công khai (ATHK 512) ·
+Lớp CHAT4P<br />
+<strong>Đơn vị:</strong> Khoa An toàn Thông tin — Phân hiệu Học viện Kỹ
+thuật Mật mã tại TP.HCM<br />
+<strong>Giảng viên:</strong> Nguyễn An Khương (Khoa Khoa học &amp; Kỹ
+thuật Máy tính, Trường ĐHBK Tp. HCM)<br />
+<strong>Trợ giảng:</strong> Nguyễn Hữu Hoàng Huy</p>
+<hr />
+<h2
+id="bề-mặt-tấn-công-khai-thác-lỗ-hổng-cấu-hình-mẫu-chứng-thư-ad-cs-esc1">1.
+Bề mặt Tấn công Khai thác Lỗ hổng Cấu hình Mẫu Chứng thư (AD CS
+ESC1)</h2>
+<p>Trong môi trường Active Directory Certificate Services (AD CS), cấu
+hình sai mẫu chứng thư (Certificate Template) là con đường ngắn nhất để
+kẻ tấn công chiếm toàn quyền kiểm soát miền (Domain Admin):</p>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    actor Attacker as Kẻ tấn công (Tài khoản User cấp thấp)
+    participant CA as Active Directory CS (CA)
+    participant DC as Domain Controller (KDC Kerberos)
+
+    Note over Attacker: Phát hiện Template có cờ:&lt;br/&gt;ENROLLEE_SUPPLIES_SUBJECT (CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT)&lt;br/&gt;và EKU = Client Authentication
+    Attacker-&gt;&gt;CA: Gửi yêu cầu xin cấp chứng chỉ cho chính mình&lt;br/&gt;nhưng chèn SAN: administrator@kma.internal
+    Note over CA: Không kiểm duyệt đặc quyền!&lt;br/&gt;Phát hành chứng chỉ mạo danh Domain Admin
+    CA--&gt;&gt;Attacker: Trả về chứng chỉ Administrator.pfx
+    Attacker-&gt;&gt;DC: Bắt tay Kerberos PKINIT sử dụng chứng chỉ mạo danh
+    DC--&gt;&gt;Attacker: Trả về Kerberos TGT (Ticket Granting Ticket) của Domain Admin
+    Note over Attacker: Toàn bộ Active Directory Domain bị chiếm quyền hoàn toàn!</code></pre>
+<hr />
+<h2
+id="kỹ-thuật-tấn-công-tiếp-sóng-ntlm-relay-vào-web-enrollment-esc8">2.
+Kỹ thuật Tấn công Tiếp sóng NTLM Relay vào Web Enrollment (ESC8)</h2>
+<p>Kẻ tấn công ép buộc máy chủ Domain Controller xác thực ngược lại máy
+mình thông qua giao thức RPC (PetitPotam / MS-EFSRPC), sau đó chuyển
+tiếp (relay) bản tin xác thực NTLM tới dịch vụ AD CS Web Enrollment
+(chưa bật HTTPS hoặc thiếu Extended Protection for Authentication - EPA)
+để lấy chứng chỉ quản trị máy tính:</p>
+<pre class="mermaid"><code>flowchart LR
+    Attacker[&quot;Kẻ tấn công&lt;br/&gt;(ntlmrelayx)&quot;]
+    Victim[&quot;Domain Controller&lt;br/&gt;(Nạn nhân)&quot;]
+    ADCS[&quot;AD CS Web Enrollment&lt;br/&gt;(http://ca/certsrv)&quot;]
+
+    Attacker --&gt;|1. Kích hoạt PetitPotam| Victim
+    Victim --&gt;|2. Gửi gói tin NTLM Auth| Attacker
+    Attacker --&gt;|3. Tiếp sóng NTLM Relay| ADCS
+    ADCS --&gt;|4. Cấp chứng chỉ DC.pfx| Attacker
+    Attacker --&gt;|5. Chiếm quyền Domain| Victim</code></pre>
+<hr />
+<h2 id="kiến-trúc-phòng-thủ-đa-tầng-defense-in-depth-for-pki">3. Kiến
+trúc Phòng thủ Đa tầng (Defense in Depth for PKI)</h2>
+<pre class="mermaid"><code>graph TD
+    Defense[&quot;PHÒNG THỦ HẠ TẦNG PKI ĐA TẦNG&quot;]
+
+    Defense --&gt; Layer1[&quot;1. Củng cố Mẫu Chứng thư (Hardening)&lt;br/&gt;- Bỏ cờ Enrollee Supplies Subject&lt;br/&gt;- Bắt buộc phê duyệt thủ công (Manager Approval)&quot;]
+    
+    Defense --&gt; Layer2[&quot;2. An toàn Giao thức Xác thực&lt;br/&gt;- Vô hiệu hóa NTLM toàn mạng&lt;br/&gt;- Kích hoạt EPA (Extended Protection) trên cổng CA&quot;]
+    
+    Defense --&gt; Layer3[&quot;3. Giám sát Liên tục (Observability)&lt;br/&gt;- Kiểm tra CT Logs định kỳ phát hiện chứng chỉ giả mạo&lt;br/&gt;- Phân tích log sự kiện Event ID 4886 / 4887 trên CA&quot;]</code></pre>
+<hr />
+<h2 id="tài-liệu-tham-khảo-chuẩn-quốc-tế">4. Tài liệu Tham khảo Chuẩn
+Quốc tế</h2>
+<ol type="1">
+<li><strong>Will Schroeder &amp; Lee Christensen:</strong> <em>Certified
+Pre-Owned: Abusing Active Directory Certificate Services</em>,
+SpecterOps Whitepaper, 2021.</li>
+<li><strong>CISA Alert AA22-321A:</strong> <em>Stop Ransomware:
+Misconfigured Active Directory Certificate Services</em>, Cybersecurity
+and Infrastructure Security Agency, 2022.</li>
+<li><strong>MITRE ATT&amp;CK:</strong> <em>Technique T1649: Steal or
+Forge Authentication Certificates</em>. <a
+href="https://attack.mitre.org/techniques/T1649">attack.mitre.org/techniques/T1649</a></li>
+</ol>
+</body>
+</html>

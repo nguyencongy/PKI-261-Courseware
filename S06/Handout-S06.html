@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Handout S06</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 30px auto; padding: 0 20px; color: #24292e; background: #fff; }
+  h1, h2, h3, h4 { color: #0a2540; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; margin-top: 1.5em; }
+  h1 { font-size: 2em; border-bottom: 2px solid #0066cc; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.95em; }
+  th, td { border: 1px solid #dfe2e5; padding: 8px 12px; }
+  th { background-color: #f6f8fa; font-weight: 600; text-align: left; }
+  tr:nth-child(2n) { background-color: #fbfcfd; }
+  code { background: #f3f4f4; padding: 0.2em 0.4em; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 85%; }
+  pre { background: #0a2540; color: #f8f8f2; padding: 14px; border-radius: 6px; overflow-x: auto; }
+  pre code { background: none; color: inherit; padding: 0; font-size: 0.9em; }
+  blockquote { border-left: 4px solid #0066cc; margin: 0; padding-left: 16px; color: #57606a; background: #f8fbfd; padding: 8px 16px; border-radius: 0 6px 6px 0; }
+  a { color: #0066cc; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Handout S06</h1>
+</header>
+<h1
+id="handout-s06-kiến-trúc-zero-trust-mtls-gateway-trong-hạ-tầng-microservices">Handout
+S06: Kiến trúc Zero Trust &amp; mTLS Gateway trong Hạ tầng
+Microservices</h1>
+<p><strong>Học phần:</strong> Cơ sở hạ tầng khóa công khai (ATHK 512) ·
+Lớp CHAT4P<br />
+<strong>Đơn vị:</strong> Khoa An toàn Thông tin — Phân hiệu Học viện Kỹ
+thuật Mật mã tại TP.HCM<br />
+<strong>Giảng viên:</strong> Nguyễn An Khương (Khoa Khoa học &amp; Kỹ
+thuật Máy tính, Trường ĐHBK Tp. HCM)<br />
+<strong>Trợ giảng:</strong> Nguyễn Hữu Hoàng Huy</p>
+<hr />
+<h2 id="nguyên-lý-kiến-trúc-zero-trust-nist-sp-800-207">1. Nguyên lý
+Kiến trúc Zero Trust (NIST SP 800-207)</h2>
+<p>Mô hình an ninh truyền thống dựa trên ranh giới mạng (“bên ngoài
+không tin cậy, bên trong mạng LAN tin cậy hoàn toàn”) đã lỗi thời. Kiến
+trúc <strong>Zero Trust</strong> tuân thủ nguyên lý: * <strong>Không bao
+giờ tin tưởng, luôn luôn xác thực (Never Trust, Always Verify):</strong>
+Mọi yêu cầu kết nối, dù đến từ bên trong hay bên ngoài trung tâm dữ
+liệu, đều phải được xác thực danh tính và kiểm soát quyền hạn. *
+<strong>Định danh Số là Ranh giới An ninh Mới:</strong> Mỗi dịch vụ
+(Service Account, Microservice, Pod) phải có một danh tính mật mã duy
+nhất thể hiện qua chứng chỉ số X.509.</p>
+<hr />
+<h2 id="xác-thực-hai-chiều-mutual-tls-mtls-trong-microservices">2. Xác
+thực Hai chiều Mutual TLS (mTLS) trong Microservices</h2>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    participant Client as Frontend Service (Client)
+    participant Gateway as Envoy / Nginx mTLS Gateway
+    participant Backend as Payment Service (Backend)
+
+    Client-&gt;&gt;Gateway: Bắt tay TLS 1.3 (ClientHello)
+    Gateway--&gt;&gt;Client: ServerHello + Server Certificate (X.509)
+    Gateway--&gt;&gt;Client: CertificateRequest (Yêu cầu Client xuất trình chứng chỉ)
+    Client--&gt;&gt;Gateway: Client Certificate + CertificateVerify (Ký số bằng Private Key)
+    Note over Gateway: Thẩm tra chuỗi chứng chỉ Client đối chiếu Trust Store nội bộ&lt;br/&gt;Trích xuất định danh SAN URI (SPIFFE ID)
+    Gateway--&gt;&gt;Client: Hoàn tất bắt tay (Handshake Finished)
+    Client-&gt;&gt;Gateway: Gửi API Request (/api/v1/pay)
+    Note over Gateway: Kiểm tra chính sách RBAC dựa trên SPIFFE ID
+    Gateway-&gt;&gt;Backend: Chuyển tiếp yêu cầu hợp lệ</code></pre>
+<hr />
+<h2 id="chuẩn-định-danh-spiffe-spire">3. Chuẩn Định danh SPIFFE /
+SPIRE</h2>
+<p>Chuẩn <strong>SPIFFE (Secure Production Identity Framework for
+Everyone)</strong> định nghĩa định dạng định danh tiêu chuẩn cho các
+dịch vụ đám mây: * <strong>SPIFFE ID:</strong> Định dạng URI chuẩn mực:
+<code>spiffe://&lt;trust-domain&gt;/ns/&lt;namespace&gt;/sa/&lt;service-account&gt;</code>.
+* Ví dụ:
+<code>spiffe://kma.edu.vn/ns/production/sa/payment-worker</code>. *
+<strong>X.509 SVID (SPIFFE Verifiable Identity Document):</strong> Chứng
+chỉ số X.509 chứa SPIFFE ID nhúng trực tiếp trong trường mở rộng
+<code>Subject Alternative Name (SAN)</code> kiểu URI.</p>
+<hr />
+<h2 id="tài-liệu-tham-khảo-chuẩn-quốc-tế">4. Tài liệu Tham khảo Chuẩn
+Quốc tế</h2>
+<ol type="1">
+<li><strong>NIST SP 800-207:</strong> <em>Zero Trust Architecture</em>,
+National Institute of Standards and Technology, 2020. <a
+href="https://doi.org/10.6028/NIST.SP.800-207">doi.org/10.6028/NIST.SP.800-207</a></li>
+<li><strong>SPIFFE Standard:</strong> <em>The SPIFFE Identity and
+Verifiable Identity Document Specification</em>, Cloud Native Computing
+Foundation (CNCF), 2023. <a href="https://spiffe.io">spiffe.io</a></li>
+<li><strong>IETF RFC 8446:</strong> <em>The Transport Layer Security
+(TLS) Protocol Version 1.3</em>, 2018.</li>
+</ol>
+</body>
+</html>

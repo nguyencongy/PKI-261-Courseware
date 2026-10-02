@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Form dang ky thong tin hoc vien</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 30px auto; padding: 0 20px; color: #24292e; background: #fff; }
+  h1, h2, h3, h4 { color: #0a2540; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; margin-top: 1.5em; }
+  h1 { font-size: 2em; border-bottom: 2px solid #0066cc; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.95em; }
+  th, td { border: 1px solid #dfe2e5; padding: 8px 12px; }
+  th { background-color: #f6f8fa; font-weight: 600; text-align: left; }
+  tr:nth-child(2n) { background-color: #fbfcfd; }
+  code { background: #f3f4f4; padding: 0.2em 0.4em; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 85%; }
+  pre { background: #0a2540; color: #f8f8f2; padding: 14px; border-radius: 6px; overflow-x: auto; }
+  pre code { background: none; color: inherit; padding: 0; font-size: 0.9em; }
+  blockquote { border-left: 4px solid #0066cc; margin: 0; padding-left: 16px; color: #57606a; background: #f8fbfd; padding: 8px 16px; border-radius: 0 6px 6px 0; }
+  a { color: #0066cc; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Form dang ky thong tin hoc vien</h1>
+</header>
+<h1
+id="phiếu-thu-thập-thông-tin-học-viên-đăng-ký-nguyện-vọng-đồ-án-kma-chat4p">Phiếu
+Thu thập Thông tin Học viên &amp; Đăng ký Nguyện vọng Đồ án (KMA ·
+CHAT4P)</h1>
+<p>Học phần: <strong>Cơ sở hạ tầng khóa công khai (ATHK
+512)</strong><br />
+Lớp: <strong>CHAT4P</strong> (Chất lượng cao An toàn thông tin, Phân
+hiệu Học viện KTMM tại TP.HCM)<br />
+Đối tượng: <strong>17 học viên</strong><br />
+Hạn chót hoàn thành: <strong>23:59 Chủ Nhật, ngày
+04/10/2026</strong></p>
+<hr />
+<h2 id="mục-đích-thu-thập">1. Mục đích thu thập</h2>
+<ol type="1">
+<li>Cấp phát kho mã nguồn cá nhân trên tổ chức GitHub:
+<code>https://github.com/KMA-PKI-261/PKI-261-&lt;MSHV&gt;</code>.</li>
+<li>Thiết lập khóa SSH Public Key để học viên đẩy bài thực hành Lab bảo
+mật.</li>
+<li>Ghi nhận nguyện vọng chọn 1 trong 5 chủ đề Đồ án chuyên đề nhóm (ưu
+tiên nguyện vọng 1, 2, 3).</li>
+<li>Phân chia nhóm đồ án chính thức (5 nhóm, 3–4 học viên/nhóm).</li>
+</ol>
+<hr />
+<h2 id="cấu-trúc-câu-hỏi-của-google-form">2. Cấu trúc câu hỏi của Google
+Form</h2>
+<h3 id="phần-i-thông-tin-định-danh-công-tác">Phần I: Thông tin Định danh
+&amp; Công tác</h3>
+<ul>
+<li><strong>Câu 1 (Bắt buộc - Menu thả xuống):</strong> Mã số học viên
+(MSHV)
+<ul>
+<li><em>Danh sách 17 MSHV:</em> <code>CHAT4P001</code>,
+<code>CHAT4P002</code>, <code>CHAT4P003</code>, <code>CHAT4P005</code>,
+<code>CHAT4P006</code>, <code>CHAT4P009</code>, <code>CHAT4P010</code>,
+<code>CHAT4P011</code>, <code>CHAT4P012</code>, <code>CHAT4P013</code>,
+<code>CHAT4P014</code>, <code>CHAT4P015</code>, <code>CHAT4P016</code>,
+<code>CHAT4P017</code>, <code>CHAT4P018</code>, <code>CHAT4P020</code>,
+<code>CHAT12234</code>.</li>
+</ul></li>
+<li><strong>Câu 2 (Bắt buộc - Trả lời ngắn):</strong> Họ và tên học
+viên.</li>
+<li><strong>Câu 3 (Bắt buộc - Trả lời ngắn):</strong> Địa chỉ Email
+chính (để nhận thư mời vào tổ chức GitHub).</li>
+<li><strong>Câu 4 (Bắt buộc - Trả lời ngắn):</strong> Số điện thoại liên
+hệ (Zalo).</li>
+<li><strong>Câu 5 (Bắt buộc - Trả lời ngắn):</strong> Cơ quan công tác
+&amp; Vị trí chuyên môn hiện tại <em>(Ví dụ: Công ty Opswat - Malware
+Analyst, Trung tâm 286 - Kỹ sư ATTT…)</em>.</li>
+</ul>
+<h3 id="phần-ii-thông-tin-kỹ-thuật-tài-khoản-github">Phần II: Thông tin
+Kỹ thuật &amp; Tài khoản GitHub</h3>
+<ul>
+<li><strong>Câu 6 (Bắt buộc - Trả lời ngắn):</strong> GitHub Username
+<em>(Ví dụ: <code>triennguyen</code> - đảm bảo đã tạo tài khoản trên
+github.com)</em>.</li>
+<li><strong>Câu 7 (Bắt buộc - Đoạn):</strong> SSH Public Key <em>(Dán
+toàn bộ nội dung tệp <code>~/.ssh/id_ed25519.pub</code> hoặc
+<code>~/.ssh/id_rsa.pub</code>, bắt đầu bằng
+<code>ssh-ed25519 AAAAC3Nza...</code>)</em>.</li>
+<li><strong>Câu 8 (Bắt buộc - Trắc nghiệm):</strong> Tình trạng chuẩn bị
+môi trường Docker &amp; OpenSSL 3.5:
+<ul class="task-list">
+<li><label><input type="checkbox" />Đã cài đặt Docker và chạy thử thành
+công.</label></li>
+<li><label><input type="checkbox" />Đã cài đặt nhưng chưa thử
+nghiệm.</label></li>
+<li><label><input type="checkbox" />Gặp khó khăn kỹ thuật, cần TA
+(Mr. Huy) hỗ trợ.</label></li>
+</ul></li>
+</ul>
+<h3 id="phần-iii-đăng-ký-nhóm-nguyện-vọng-đề-tài-preferences">Phần III:
+Đăng ký Nhóm &amp; Nguyện vọng Đề tài (Preferences)</h3>
+<p><em>Danh mục 5 chủ đề đồ án chuyên đề:</em> 1. <strong>Chủ đề
+1:</strong> Hạ tầng CA 2 tầng tự động hóa quy mô lớn với Step-CA, ACME
+và kiểm toán chính sách CP/CPS (RFC 3647, RFC 8555). 2. <strong>Chủ đề
+2:</strong> Kiến trúc Zero Trust &amp; mTLS Gateway cho hệ thống
+Microservices bảo vệ bởi SoftHSMv2 / PKCS#11. 3. <strong>Chủ đề
+3:</strong> Thử nghiệm chuyển đổi Hậu lượng tử (PQC Migration) cho Web
+PKI: Đo lường hiệu năng chuỗi chứng thư ML-DSA (RFC 9881) và ML-KEM
+(FIPS 203/204). 4. <strong>Chủ đề 4:</strong> Hệ thống kiểm tra và giám
+sát vòng đời chứng thư số tự động (ZLint, OCSP Stapling, CT Log
+Monitor). 5. <strong>Chủ đề 5:</strong> Mô phỏng tấn công và phòng thủ
+hạ tầng PKI: Khóa CA bị xâm phạm, thu hồi khẩn cấp CRL/OCSP và cơ chế
+ứng phó sự cố.</p>
+<ul>
+<li><strong>Câu 9 (Bắt buộc - Trắc nghiệm):</strong> Nguyện vọng 1 (Ưu
+tiên cao nhất) <em>(Chọn 1 trong 5 chủ đề)</em>.</li>
+<li><strong>Câu 10 (Bắt buộc - Trắc nghiệm):</strong> Nguyện vọng 2 (Ưu
+tiên thứ hai) <em>(Chọn 1 trong 5 chủ đề)</em>.</li>
+<li><strong>Câu 11 (Bắt buộc - Trắc nghiệm):</strong> Nguyện vọng 3 (Dự
+phòng) <em>(Chọn 1 trong 5 chủ đề)</em>.</li>
+<li><strong>Câu 12 (Tùy chọn - Trả lời ngắn):</strong> Thành viên nhóm
+dự kiến <em>(Nếu bạn đã thảo luận trước với 1–2 bạn trong lớp, hãy ghi
+tên các bạn vào đây. Nếu chưa có nhóm, ghi “Nhờ Thầy/TA ghép nhóm ngẫu
+nhiên”)</em>.</li>
+<li><strong>Câu 13 (Tùy chọn - Đoạn):</strong> Đề xuất điều chỉnh hoặc ý
+kiến chuyên môn riêng gửi Thầy Khương và TA.</li>
+</ul>
+<blockquote>
+<p><strong>Cơ chế xử lý trùng đề tài (Conflict
+Resolution):</strong><br />
+Mỗi chủ đề đồ án phân bổ từ 1 đến 2 nhóm phụ trách. Trong trường hợp có
+nhiều nhóm/học viên cùng chọn một chủ đề ở Nguyện vọng 1 vượt quá chỉ
+tiêu, Giảng viên sẽ căn cứ vào: 1. Tính liên đới với lĩnh vực công tác
+thực tế của học viên tại cơ quan; 2. Thứ tự ưu tiên đăng ký (thời gian
+gửi form); 3. Điều phối sang Nguyện vọng 2 hoặc bốc thăm công khai tại
+lớp Buổi 2.</p>
+</blockquote>
+<hr />
+<h2 id="mã-google-apps-script-tạo-form-tự-động-trong-5-giây">3. Mã
+Google Apps Script (Tạo Form Tự Động Trong 5 Giây)</h2>
+<p>Thầy hoặc TA có thể tạo biểu mẫu tự động bằng cách: 1. Mở trang <a
+href="https://script.google.com">script.google.com</a> và tạo dự án mới
+(New Project). 2. Dán đoạn mã bên dưới vào tệp <code>Code.gs</code>. 3.
+Bấm <strong>Run</strong> (<code>taoGoogleFormPKI</code>). Toàn bộ Google
+Form với đầy đủ 13 câu hỏi, danh sách 17 học viên và 5 chủ đề sẽ được
+sinh tự động. Link biên tập và link gửi học viên sẽ in tại thanh
+Execution log!</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">taoGoogleFormPKI</span>() {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> form <span class="op">=</span> FormApp<span class="op">.</span><span class="fu">create</span>(<span class="st">&#39;[KMA - CHAT4P] Phiếu Thu thập Thông tin Học viên &amp; Nguyện vọng Đồ án · PKI (HK261)&#39;</span>)<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  form<span class="op">.</span><span class="fu">setDescription</span>(</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;Học phần: Cơ sở hạ tầng khóa công khai (ATHK 512)</span><span class="sc">\n</span><span class="st">&#39;</span> <span class="op">+</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;Lớp: CHAT4P (Chất lượng cao An toàn thông tin, Phân hiệu Học viện KTMM tại TP.HCM)</span><span class="sc">\n\n</span><span class="st">&#39;</span> <span class="op">+</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;Mục đích: Thu thập tài khoản GitHub cá nhân, khóa SSH để cấp phát kho bài tập, &#39;</span> <span class="op">+</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;và đăng ký nguyện vọng chủ đề Đồ án chuyên đề nhóm.</span><span class="sc">\n</span><span class="st">&#39;</span> <span class="op">+</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;Hạn hoàn tất: 23:59 Chủ Nhật, ngày 04/10/2026.&#39;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  form<span class="op">.</span><span class="fu">setAllowResponseEdits</span>(<span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="co">// --- PHẦN I: THÔNG TIN ĐỊNH DANH ---</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  form<span class="op">.</span><span class="fu">addSectionHeaderItem</span>()<span class="op">.</span><span class="fu">setTitle</span>(<span class="st">&#39;Phần I: Thông tin Định danh &amp; Công tác&#39;</span>)<span class="op">;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Câu 1: MSHV</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> dsMSHV <span class="op">=</span> [</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;CHAT4P001 - Vũ Thị Diệu Anh&#39;</span><span class="op">,</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;CHAT4P002 - Nguyễn Tuấn Anh&#39;</span><span class="op">,</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;CHAT4P003 - Diệp Kim Chi&#39;</span><span class="op">,</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;CHAT4P005 - Nguyễn Vĩnh Hiển&#39;</span><span class="op">,</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;CHAT4P006 - Nguyễn Ngọc Hoài&#39;</span><span class="op">,</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;CHAT4P009 - Nguyễn Trần Hoàng Long&#39;</span><span class="op">,</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;CHAT4P010 - Võ Thông Minh&#39;</span><span class="op">,</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;CHAT4P011 - Huỳnh Trần Trọng Nghĩa&#39;</span><span class="op">,</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;CHAT4P012 - Tăng Triển Nguyên (Lớp trưởng)&#39;</span><span class="op">,</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;CHAT4P013 - Võ Minh Nhật&#39;</span><span class="op">,</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;CHAT4P014 - Nguyễn Trường Phú&#39;</span><span class="op">,</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;CHAT4P015 - Nguyễn Đình Quân&#39;</span><span class="op">,</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;CHAT4P016 - Nguyễn Ngọc Sơn&#39;</span><span class="op">,</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;CHAT4P017 - Hồ Quốc Thái&#39;</span><span class="op">,</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;CHAT4P018 - Trần Minh Triết&#39;</span><span class="op">,</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;CHAT4P020 - Nguyễn Công Ý&#39;</span><span class="op">,</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;CHAT12234 - Đoàn Quang Phúc&#39;</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">;</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> mshvItem <span class="op">=</span> form<span class="op">.</span><span class="fu">addListItem</span>()<span class="op">;</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  mshvItem<span class="op">.</span><span class="fu">setTitle</span>(<span class="st">&#39;1. Mã số và Họ tên học viên (MSHV)&#39;</span>)<span class="op">.</span><span class="fu">setChoiceValues</span>(dsMSHV)<span class="op">.</span><span class="fu">setRequired</span>(<span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Câu 2: Email</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>  form<span class="op">.</span><span class="fu">addTextItem</span>()<span class="op">.</span><span class="fu">setTitle</span>(<span class="st">&#39;2. Địa chỉ Email chính (dùng cho GitHub và thông báo)&#39;</span>)<span class="op">.</span><span class="fu">setRequired</span>(<span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Câu 3: Số điện thoại</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  form<span class="op">.</span><span class="fu">addTextItem</span>()<span class="op">.</span><span class="fu">setTitle</span>(<span class="st">&#39;3. Số điện thoại liên hệ (Zalo)&#39;</span>)<span class="op">.</span><span class="fu">setRequired</span>(<span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Câu 4: Đơn vị công tác</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  form<span class="op">.</span><span class="fu">addTextItem</span>()<span class="op">.</span><span class="fu">setTitle</span>(<span class="st">&#39;4. Đơn vị công tác &amp; Vị trí chuyên môn hiện tại (Ví dụ: Opswat - Malware Analyst, Imexpharm - Helpdesk &amp; Security...)&#39;</span>)<span class="op">.</span><span class="fu">setRequired</span>(<span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>  <span class="co">// --- PHẦN II: THIẾT LẬP KỸ THUẬT &amp; GITHUB ---</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>  form<span class="op">.</span><span class="fu">addSectionHeaderItem</span>()<span class="op">.</span><span class="fu">setTitle</span>(<span class="st">&#39;Phần II: Thiết lập Kỹ thuật &amp; Kho GitHub&#39;</span>)<span class="op">;</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Câu 5: GitHub Username</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  form<span class="op">.</span><span class="fu">addTextItem</span>()<span class="op">.</span><span class="fu">setTitle</span>(<span class="st">&#39;5. GitHub Username (Ví dụ: triennguyen - chính xác tài khoản trên github.com)&#39;</span>)<span class="op">.</span><span class="fu">setRequired</span>(<span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Câu 6: SSH Public Key</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>  form<span class="op">.</span><span class="fu">addParagraphTextItem</span>()<span class="op">.</span><span class="fu">setTitle</span>(<span class="st">&#39;6. Khóa công khai SSH (SSH Public Key)&#39;</span>)<span class="op">.</span><span class="fu">setHelpText</span>(<span class="st">&#39;Dán toàn bộ nội dung tệp ~/.ssh/id_ed25519.pub hoặc id_rsa.pub (bắt đầu bằng ssh-ed25519 hoặc ssh-rsa)&#39;</span>)<span class="op">.</span><span class="fu">setRequired</span>(<span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Câu 7: Trạng thái Docker</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> dockerItem <span class="op">=</span> form<span class="op">.</span><span class="fu">addMultipleChoiceItem</span>()<span class="op">;</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  dockerItem<span class="op">.</span><span class="fu">setTitle</span>(<span class="st">&#39;7. Tình trạng chuẩn bị môi trường Docker &amp; OpenSSL 3.5&#39;</span>)</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">setChoiceValues</span>([</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>      <span class="st">&#39;Đã cài đặt Docker và chạy thử thành công&#39;</span><span class="op">,</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>      <span class="st">&#39;Đã cài đặt nhưng chưa thử nghiệm&#39;</span><span class="op">,</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>      <span class="st">&#39;Gặp khó khăn kỹ thuật, cần TA hỗ trợ&#39;</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    ])</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">setRequired</span>(<span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>  <span class="co">// --- PHẦN III: NGUYỆN VỌNG ĐỀ TÀI &amp; NHÓM ---</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>  form<span class="op">.</span><span class="fu">addSectionHeaderItem</span>()<span class="op">.</span><span class="fu">setTitle</span>(<span class="st">&#39;Phần III: Đăng ký Nguyện vọng Đồ án Chuyên đề&#39;</span>)<span class="op">;</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> deTaiOptions <span class="op">=</span> [</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;Chủ đề 1: Hạ tầng CA 2 tầng tự động hóa với Step-CA, ACME và kiểm toán CP/CPS (RFC 3647, RFC 8555)&#39;</span><span class="op">,</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;Chủ đề 2: Kiến trúc Zero Trust &amp; mTLS Gateway cho Microservices bảo vệ bởi SoftHSMv2/PKCS#11&#39;</span><span class="op">,</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;Chủ đề 3: Chuyển đổi Hậu lượng tử (PQC Migration) cho Web PKI: Benchmark ML-DSA &amp; ML-KEM&#39;</span><span class="op">,</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;Chủ đề 4: Hệ thống kiểm tra &amp; giám sát vòng đời chứng thư số tự động (ZLint, OCSP Stapling, CT Logs)&#39;</span><span class="op">,</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;Chủ đề 5: Mô phỏng tấn công &amp; phòng thủ PKI: Khóa CA bị xâm phạm, thu hồi khẩn cấp CRL/OCSP&#39;</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">;</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Câu 8: Nguyện vọng 1</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>  form<span class="op">.</span><span class="fu">addMultipleChoiceItem</span>()<span class="op">.</span><span class="fu">setTitle</span>(<span class="st">&#39;8. Nguyện vọng 1 (Ưu tiên cao nhất)&#39;</span>)<span class="op">.</span><span class="fu">setChoiceValues</span>(deTaiOptions)<span class="op">.</span><span class="fu">setRequired</span>(<span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Câu 9: Nguyện vọng 2</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>  form<span class="op">.</span><span class="fu">addMultipleChoiceItem</span>()<span class="op">.</span><span class="fu">setTitle</span>(<span class="st">&#39;9. Nguyện vọng 2 (Ưu tiên thứ hai)&#39;</span>)<span class="op">.</span><span class="fu">setChoiceValues</span>(deTaiOptions)<span class="op">.</span><span class="fu">setRequired</span>(<span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Câu 10: Nguyện vọng 3</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>  form<span class="op">.</span><span class="fu">addMultipleChoiceItem</span>()<span class="op">.</span><span class="fu">setTitle</span>(<span class="st">&#39;10. Nguyện vọng 3 (Dự phòng)&#39;</span>)<span class="op">.</span><span class="fu">setChoiceValues</span>(deTaiOptions)<span class="op">.</span><span class="fu">setRequired</span>(<span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Câu 11: Thành viên nhóm dự kiến</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>  form<span class="op">.</span><span class="fu">addTextItem</span>()<span class="op">.</span><span class="fu">setTitle</span>(<span class="st">&#39;11. Thành viên nhóm dự kiến (Ghi tên 2-3 bạn nếu đã bàn trước; hoặc ghi &quot;Nhờ Thầy/TA ghép nhóm ngẫu nhiên&quot;)&#39;</span>)<span class="op">.</span><span class="fu">setRequired</span>(<span class="kw">false</span>)<span class="op">;</span></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Câu 12: Ghi chú</span></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>  form<span class="op">.</span><span class="fu">addParagraphTextItem</span>()<span class="op">.</span><span class="fu">setTitle</span>(<span class="st">&#39;12. Đề xuất điều chỉnh hoặc ý kiến chuyên môn gửi Giảng viên &amp; TA&#39;</span>)<span class="op">.</span><span class="fu">setRequired</span>(<span class="kw">false</span>)<span class="op">;</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>  Logger<span class="op">.</span><span class="fu">log</span>(<span class="st">&#39;Đã tạo Google Form thành công!&#39;</span>)<span class="op">;</span></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>  Logger<span class="op">.</span><span class="fu">log</span>(<span class="st">&#39;Link biên tập (Edit URL): &#39;</span> <span class="op">+</span> form<span class="op">.</span><span class="fu">getEditUrl</span>())<span class="op">;</span></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>  Logger<span class="op">.</span><span class="fu">log</span>(<span class="st">&#39;Link gửi học viên (Published URL): &#39;</span> <span class="op">+</span> form<span class="op">.</span><span class="fu">getPublishedUrl</span>())<span class="op">;</span></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+</body>
+</html>

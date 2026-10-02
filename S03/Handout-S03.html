@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Handout S03</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 30px auto; padding: 0 20px; color: #24292e; background: #fff; }
+  h1, h2, h3, h4 { color: #0a2540; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; margin-top: 1.5em; }
+  h1 { font-size: 2em; border-bottom: 2px solid #0066cc; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.95em; }
+  th, td { border: 1px solid #dfe2e5; padding: 8px 12px; }
+  th { background-color: #f6f8fa; font-weight: 600; text-align: left; }
+  tr:nth-child(2n) { background-color: #fbfcfd; }
+  code { background: #f3f4f4; padding: 0.2em 0.4em; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 85%; }
+  pre { background: #0a2540; color: #f8f8f2; padding: 14px; border-radius: 6px; overflow-x: auto; }
+  pre code { background: none; color: inherit; padding: 0; font-size: 0.9em; }
+  blockquote { border-left: 4px solid #0066cc; margin: 0; padding-left: 16px; color: #57606a; background: #f8fbfd; padding: 8px 16px; border-radius: 0 6px 6px 0; }
+  a { color: #0066cc; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Handout S03</h1>
+</header>
+<h1
+id="handout-s03-hạ-tầng-ca-phân-tầng-quy-chế-cpcps-cấp-phát-tự-động-acme">Handout
+S03: Hạ tầng CA Phân tầng, Quy chế CP/CPS &amp; Cấp phát Tự động
+ACME</h1>
+<p><strong>Học phần:</strong> Cơ sở hạ tầng khóa công khai (ATHK 512) ·
+Lớp CHAT4P<br />
+<strong>Đơn vị:</strong> Khoa An toàn Thông tin — Phân hiệu Học viện Kỹ
+thuật Mật mã tại TP.HCM<br />
+<strong>Giảng viên:</strong> Nguyễn An Khương (Khoa Khoa học &amp; Kỹ
+thuật Máy tính, Trường ĐHBK Tp. HCM)<br />
+<strong>Trợ giảng:</strong> Nguyễn Hữu Hoàng Huy</p>
+<hr />
+<h2 id="kiến-trúc-phân-tầng-ca-đa-cấp-multi-tier-ca-hierarchy">1. Kiến
+trúc Phân tầng CA Đa cấp (Multi-tier CA Hierarchy)</h2>
+<p>Mô hình phân tầng bảo đảm phân tách rủi ro giữa việc duy trì gốc tin
+cậy lâu dài và hoạt động cấp phát thường nhật:</p>
+<pre class="mermaid"><code>graph TD
+    Root[&quot;&lt;b&gt;Root CA (Gốc)&lt;/b&gt;&lt;br/&gt;Lưu trữ: Offline / Air-gapped (Két sắt, USB cách ly)&lt;br/&gt;Thời hạn: 10 - 20 năm&lt;br/&gt;Nhiệm vụ: Chỉ ký cấp Intermediate CA &amp; CRL gốc&quot;]
+    
+    Int1[&quot;&lt;b&gt;Issuing CA 01 (Public Web TLS)&lt;/b&gt;&lt;br/&gt;Lưu trữ: Online HSM mạng&lt;br/&gt;Thời hạn: 3 - 5 năm&lt;br/&gt;Nhiệm vụ: Cấp phát chứng chỉ HTTPS qua ACME&quot;]
+    
+    Int2[&quot;&lt;b&gt;Issuing CA 02 (Zero Trust mTLS)&lt;/b&gt;&lt;br/&gt;Lưu trữ: Online HSM nội bộ&lt;br/&gt;Thời hạn: 3 - 5 năm&lt;br/&gt;Nhiệm vụ: Cấp phát định danh Microservices&quot;]
+
+    Server1[&quot;Web Server (End-Entity)&lt;br/&gt;Thời hạn: 90 ngày&quot;]
+    Server2[&quot;Microservice API&lt;br/&gt;Thời hạn: 24 giờ&quot;]
+
+    Root --&gt;|Ký ủy quyền| Int1
+    Root --&gt;|Ký ủy quyền| Int2
+    Int1 --&gt;|Cấp phát tự động| Server1
+    Int2 --&gt;|Cấp phát định kỳ| Server2</code></pre>
+<hr />
+<h2 id="quy-chế-cpcps-theo-chuẩn-ietf-rfc-3647">2. Quy chế CP/CPS theo
+Chuẩn IETF RFC 3647</h2>
+<p>Mọi hệ thống CA chuyên nghiệp bắt buộc phải vận hành dựa trên 2 bộ
+tài liệu pháp lý kỹ thuật: 1. <strong>Certificate Policy (CP):</strong>
+Bản tuyên ngôn quy định chứng chỉ được cấp cho ai, nhằm mục đích gì và
+mức độ tin cậy tương ứng. 2. <strong>Certification Practice Statement
+(CPS):</strong> Bản đặc tả chi tiết quy trình kỹ thuật vận hành để hiện
+thực hóa CP (cách sinh khóa, quy trình lưu trữ, nhân sự tham gia, biện
+pháp phục hồi thảm họa).</p>
+<pre class="mermaid"><code>graph LR
+    CP[&quot;&lt;b&gt;Certificate Policy (CP)&lt;/b&gt;&lt;br/&gt;Mục đích: Định nghĩa mức độ tin cậy&lt;br/&gt;Đối tượng: Khách hàng, Bên tin cậy, Thanh tra&quot;]
+    CPS[&quot;&lt;b&gt;Certification Practice Statement (CPS)&lt;/b&gt;&lt;br/&gt;Mục đích: Hướng dẫn kỹ thuật vận hành&lt;br/&gt;Đối tượng: Đội ngũ Kỹ sư Vận hành CA&quot;]
+    
+    CP --&gt;|Quy định &#39;Cái gì&#39;| System[&quot;Hạ tầng Vận hành CA&quot;]
+    CPS --&gt;|Quy định &#39;Làm như thế nào&#39;| System</code></pre>
+<hr />
+<h2 id="giao-thức-quản-lý-chứng-chỉ-tự-động-acme-rfc-8555">3. Giao thức
+Quản lý Chứng chỉ Tự động ACME (RFC 8555)</h2>
+<p>ACME (Automated Certificate Management Environment) giải quyết bài
+toán sai sót con người và chứng chỉ hết hạn bất ngờ:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    actor Admin as Kỹ sư DevOps
+    participant Client as ACME Client (Certbot / Step-CLI)
+    participant Server as ACME Server (Step-CA / Boulder)
+    participant DNS as DNS / Web Server
+
+    Admin-&gt;&gt;Client: Khởi tạo yêu cầu cấp phát chứng chỉ
+    Client-&gt;&gt;Server: Tạo tài khoản &amp; Gửi yêu cầu (New Order)
+    Server--&gt;&gt;Client: Trả về Thử thách Xác thực (HTTP-01 / DNS-01 Challenge)
+    Client-&gt;&gt;DNS: Cấu hình bản ghi TXT hoặc tệp HTTP Token
+    Client-&gt;&gt;Server: Thông báo đã sẵn sàng kiểm tra (Respond Challenge)
+    Server-&gt;&gt;DNS: Xác minh quyền sở hữu tên miền
+    Server--&gt;&gt;Client: Xác minh thành công (Valid)
+    Client-&gt;&gt;Server: Gửi CSR ký số (Finalize Order)
+    Server--&gt;&gt;Client: Cấp phát và trả về Chứng chỉ X.509</code></pre>
+<hr />
+<h2 id="tài-liệu-tham-khảo-chuẩn-quốc-tế">4. Tài liệu Tham khảo Chuẩn
+Quốc tế</h2>
+<ol type="1">
+<li><strong>IETF RFC 3647:</strong> <em>Internet X.509 Public Key
+Infrastructure Certificate Policy and Certification Practices
+Framework</em>, RFC Editor, 2003. <a
+href="https://www.rfc-editor.org/rfc/rfc3647">rfc-editor.org/rfc/rfc3647</a></li>
+<li><strong>IETF RFC 8555:</strong> <em>Automatic Certificate Management
+Environment (ACME)</em>, RFC Editor, 2019. <a
+href="https://www.rfc-editor.org/rfc/rfc8555">rfc-editor.org/rfc/rfc8555</a></li>
+<li><strong>Smallstep Labs:</strong> <em>Production PKI Architecture and
+Practical Step-CA Deployments</em>, 2024. <a
+href="https://smallstep.com/docs">smallstep.com/docs</a></li>
+</ol>
+</body>
+</html>

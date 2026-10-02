@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Handout S01</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 30px auto; padding: 0 20px; color: #24292e; background: #fff; }
+  h1, h2, h3, h4 { color: #0a2540; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; margin-top: 1.5em; }
+  h1 { font-size: 2em; border-bottom: 2px solid #0066cc; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.95em; }
+  th, td { border: 1px solid #dfe2e5; padding: 8px 12px; }
+  th { background-color: #f6f8fa; font-weight: 600; text-align: left; }
+  tr:nth-child(2n) { background-color: #fbfcfd; }
+  code { background: #f3f4f4; padding: 0.2em 0.4em; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 85%; }
+  pre { background: #0a2540; color: #f8f8f2; padding: 14px; border-radius: 6px; overflow-x: auto; }
+  pre code { background: none; color: inherit; padding: 0; font-size: 0.9em; }
+  blockquote { border-left: 4px solid #0066cc; margin: 0; padding-left: 16px; color: #57606a; background: #f8fbfd; padding: 8px 16px; border-radius: 0 6px 6px 0; }
+  a { color: #0066cc; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Handout S01</h1>
+</header>
+<h1
+id="handout-s01-khung-kiến-trúc-pki-an-toàn-hệ-thống-tin-cậy">Handout
+S01: Khung Kiến trúc PKI &amp; An toàn Hệ thống Tin cậy</h1>
+<p><strong>Học phần:</strong> Cơ sở hạ tầng khóa công khai (ATHK 512) ·
+Lớp CHAT4P<br />
+<strong>Đơn vị:</strong> Khoa An toàn Thông tin — Phân hiệu Học viện Kỹ
+thuật Mật mã tại TP.HCM<br />
+<strong>Giảng viên:</strong> Nguyễn An Khương (Khoa Khoa học &amp; Kỹ
+thuật Máy tính, Trường ĐHBK Tp. HCM)<br />
+<strong>Trợ giảng:</strong> Nguyễn Hữu Hoàng Huy</p>
+<hr />
+<h2 id="bối-cảnh-thể-chế-cơ-sở-pháp-lý-quốc-gia">1. Bối cảnh Thể chế
+&amp; Cơ sở Pháp lý Quốc gia</h2>
+<p>Hạ tầng khóa công khai (PKI) đóng vai trò là nền tảng xác thực định
+danh và bảo đảm tính toàn vẹn cho không gian số quốc gia:</p>
+<ol type="1">
+<li><strong>Quyết định 1875/QĐ-TTg (Khung kiến trúc an ninh mạng quốc
+gia):</strong>
+<ul>
+<li><strong>Điều 2, Khoản 3:</strong> Xác định trách nhiệm của Ban Cơ
+yếu Chính phủ trong việc ban hành tiêu chuẩn mật mã cơ yếu, quy chuẩn kỹ
+thuật chứng thực chữ ký số chuyên dùng công vụ.</li>
+<li><strong>Quản lý Vòng đời Khóa:</strong> Khẳng định quản trị khóa và
+chứng thư số là thành phần bảo vệ trọng yếu trước các nguy cơ tấn công
+chuỗi cung ứng và giả mạo định danh cấp nhà nước.</li>
+</ul></li>
+<li><strong>Luật Giao dịch Điện tử năm 2023 (Hiệu lực
+01/07/2024):</strong>
+<ul>
+<li>Quy định phân định rõ ràng giữa Chữ ký số công cộng (Public PKI) và
+Chữ ký số chuyên dùng công vụ (Government PKI).</li>
+<li>Giá trị pháp lý của thông điệp dữ liệu ký số phụ thuộc tuyệt đối vào
+độ tin cậy của chuỗi chứng thư điện tử xác thực người ký.</li>
+</ul></li>
+</ol>
+<hr />
+<h2 id="phân-loại-3-mô-hình-pki-thực-tế">2. Phân loại 3 Mô hình PKI Thực
+tế</h2>
+<pre class="mermaid"><code>graph TD
+    PKI[&quot;HẠ TẦNG KHÓA CÔNG KHAI (PKI)&quot;]
+    
+    PKI --&gt; WebPKI[&quot;1. Web PKI (Public Trust)&quot;]
+    PKI --&gt; EntPKI[&quot;2. Enterprise PKI (Private Trust)&quot;]
+    PKI --&gt; GovPKI[&quot;3. PKI Chuyên Dùng Công Vụ&quot;]
+
+    WebPKI --&gt; W1[&quot;Quản trị: CA/Browser Forum&lt;br/&gt;Trust Store: Apple, Mozilla, Google, Microsoft&lt;br/&gt;Vòng đời: Tối đa 398 ngày (xu hướng giảm 90 ngày)&lt;br/&gt;Cấp phát: ACME tự động hóa (Let&#39;s Encrypt, DigiCert)&quot;]
+    
+    EntPKI --&gt; E1[&quot;Quản trị: Tổ chức / Doanh nghiệp tự chủ CP/CPS&lt;br/&gt;Trust Store: Triển khai qua GPO, MDM, Ansible&lt;br/&gt;Ứng dụng: Zero Trust mTLS, VPN, DevOps, Mesh&lt;br/&gt;Công cụ: Step-CA, HashiCorp Vault, Active Directory CS&quot;]
+    
+    GovPKI --&gt; G1[&quot;Quản trị: Ban Cơ yếu Chính phủ&lt;br/&gt;Tiêu chuẩn: Mật mã cơ yếu quốc gia&lt;br/&gt;Mục đích: Văn bản điện tử, tài liệu mật nhà nước&lt;br/&gt;Thiết bị: Token/SmartCard đạt kiểm định an toàn&quot;]</code></pre>
+<hr />
+<h2 id="bề-mặt-tấn-công-chuỗi-phân-rã-tin-cậy-trust-decomposition">3. Bề
+mặt Tấn công &amp; Chuỗi Phân rã Tin cậy (Trust Decomposition)</h2>
+<p>Một hệ thống PKI bị phá vỡ khi một trong các mắt xích sau đây bị tổn
+thương:</p>
+<pre class="mermaid"><code>flowchart LR
+    subgraph ATK[&quot;BỀ MẶT TẤN CÔNG PKI&quot;]
+        A1[&quot;Thỏa hiệp Khóa CA&lt;br/&gt;(Key Compromise)&quot;]
+        A2[&quot;Cấp phát Sai lệch&lt;br/&gt;(Mis-issuance)&quot;]
+        A3[&quot;Giả mạo Xác thực&lt;br/&gt;(Validation Bypass)&quot;]
+        A4[&quot;Tấn công Thu hồi&lt;br/&gt;(Revocation DoS)&quot;]
+    end
+
+    subgraph IMPACT[&quot;HẬU QUẢ TOÀN HỆ THỐNG&quot;]
+        I1[&quot;Ký chứng thư giả mạo bất kỳ&quot;]
+        I2[&quot;Nghe lén &amp; Bẻ gãy TLS Gateway&quot;]
+        I3[&quot;Vượt qua kiểm soát Zero Trust&quot;]
+    end
+
+    A1 --&gt; I1
+    A2 --&gt; I1
+    A3 --&gt; I2
+    A4 --&gt; I3</code></pre>
+<hr />
+<h2 id="ba-nguyên-tắc-thiết-kế-bất-biến">4. Ba Nguyên tắc Thiết kế Bất
+biến</h2>
+<ul>
+<li><strong>Nguyên tắc 1: Phân tách Miền tin cậy (Air-gapped Root
+Isolation):</strong> Root CA luôn được lưu trữ ngoại tuyến (offline),
+ngắt kết nối mạng vật lý. Mọi hoạt động phát hành chứng thư cho thực thể
+đầu cuối đều phải ủy quyền cho Intermediate CA.</li>
+<li><strong>Nguyên tắc 2: Tự động hóa Vòng đời (Automated Lifecycle
+Management):</strong> Áp dụng chứng chỉ thời hạn ngắn (short-lived) kết
+hợp giao thức ACME để loại bỏ sai sót thủ công và giảm thiểu cửa sổ lộ
+khóa.</li>
+<li><strong>Nguyên tắc 3: Sẵn sàng Chuyển dịch Hậu lượng tử
+(Crypto-Agility &amp; PQC Readiness):</strong> Kiến trúc hệ thống phải
+hỗ trợ thay thế linh hoạt thuật toán sang ML-DSA (FIPS 204) và ML-KEM
+(FIPS 203) mà không cần viết lại toàn bộ hạ tầng.</li>
+</ul>
+<hr />
+<h2 id="tài-liệu-tham-khảo-chuẩn-quốc-tế">5. Tài liệu Tham khảo Chuẩn
+Quốc tế</h2>
+<ol type="1">
+<li><strong>Thủ tướng Chính phủ:</strong> <em>Quyết định số 1875/QĐ-TTg
+về Phê duyệt Khung kiến trúc an ninh mạng quốc gia</em>, Hà Nội,
+2023.</li>
+<li><strong>IETF RFC 5280:</strong> <em>Internet X.509 Public Key
+Infrastructure Certificate and Certificate Revocation List (CRL)
+Profile</em>, RFC Editor, 2008. <a
+href="https://www.rfc-editor.org/rfc/rfc5280">rfc-editor.org/rfc/rfc5280</a></li>
+<li><strong>NIST SP 800-57 Part 1 Rev. 5:</strong> <em>Recommendation
+for Key Management: General</em>, National Institute of Standards and
+Technology, 2020. <a
+href="https://doi.org/10.6028/NIST.SP.800-57pt1r5">doi.org/10.6028/NIST.SP.800-57pt1r5</a></li>
+<li><strong>CA/Browser Forum:</strong> <em>Baseline Requirements for the
+Issuance and Management of Publicly-Trusted Certificates</em>, Version
+2.0.8, 2024. <a href="https://cabforum.org">cabforum.org</a></li>
+</ol>
+</body>
+</html>

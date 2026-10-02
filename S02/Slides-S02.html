@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Slides S02</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 30px auto; padding: 0 20px; color: #24292e; background: #fff; }
+  h1, h2, h3, h4 { color: #0a2540; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; margin-top: 1.5em; }
+  h1 { font-size: 2em; border-bottom: 2px solid #0066cc; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.95em; }
+  th, td { border: 1px solid #dfe2e5; padding: 8px 12px; }
+  th { background-color: #f6f8fa; font-weight: 600; text-align: left; }
+  tr:nth-child(2n) { background-color: #fbfcfd; }
+  code { background: #f3f4f4; padding: 0.2em 0.4em; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 85%; }
+  pre { background: #0a2540; color: #f8f8f2; padding: 14px; border-radius: 6px; overflow-x: auto; }
+  pre code { background: none; color: inherit; padding: 0; font-size: 0.9em; }
+  blockquote { border-left: 4px solid #0066cc; margin: 0; padding-left: 16px; color: #57606a; background: #f8fbfd; padding: 8px 16px; border-radius: 0 6px 6px 0; }
+  a { color: #0066cc; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Slides S02</h1>
+</header>
+<h1
+id="slides-s02-cấu-trúc-dữ-liệu-x.509-v3-mở-rộng-asn.1-phân-tích-nhị-phân">Slides
+S02: Cấu trúc Dữ liệu X.509 v3, Mở rộng ASN.1 &amp; Phân tích Nhị
+phân</h1>
+<p><strong>Học phần:</strong> Cơ sở hạ tầng khóa công khai (ATHK 512) ·
+Lớp CHAT4P<br />
+<strong>Giảng viên:</strong> Nguyễn An Khương (Khoa Khoa học &amp; Kỹ
+thuật Máy tính, Trường ĐHBK Tp. HCM)<br />
+<strong>Trợ giảng:</strong> Nguyễn Hữu Hoàng Huy</p>
+<hr />
+<h2 id="slide-1-từ-khái-niệm-trừu-tượng-đến-dòng-byte-nhị-phân">Slide 1:
+Từ Khái niệm Trừu tượng đến Dòng Byte Nhị phân</h2>
+<ul>
+<li>Bài toán: Làm thế nào để các hệ thống khác nhau (Linux, Windows,
+Router, IoT) hiểu thống nhất cùng một cấu trúc chứng chỉ?</li>
+<li><strong>ASN.1:</strong> Ngôn ngữ đặc tả kiểu dữ liệu mức cao.</li>
+<li><strong>DER:</strong> Quy tắc mã hóa nhị phân bất biến
+(Deterministic Encoding).</li>
+<li>Một byte sai khác trong cấu trúc DER sẽ làm hỏng chữ ký số toàn
+vẹn!</li>
+</ul>
+<hr />
+<h2 id="slide-2-sơ-đồ-mã-hóa-tag---length---value-tlv">Slide 2: Sơ đồ Mã
+hóa Tag - Length - Value (TLV)</h2>
+<pre class="mermaid"><code>graph LR
+    Tag[&quot;Tag (1 Byte)&lt;br/&gt;0x30 = SEQUENCE&lt;br/&gt;0x02 = INTEGER&lt;br/&gt;0x06 = OID&quot;]
+    Length[&quot;Length (1-4 Bytes)&lt;br/&gt;Độ dài byte nội dung&lt;br/&gt;Dạng ngắn hoặc dài&quot;]
+    Value[&quot;Value (Dữ liệu)&lt;br/&gt;Chuỗi nhị phân nguyên thủy&lt;br/&gt;hoặc các TLV lồng nhau&quot;]
+
+    Tag --&gt; Length --&gt; Value</code></pre>
+<hr />
+<h2 id="slide-3-phần-mở-rộng-quyết-định-an-toàn-basic-constraints">Slide
+3: Phần Mở rộng Quyết định An toàn: Basic Constraints</h2>
+<ul>
+<li><strong>Kịch bản Tấn công:</strong> Nếu CA cấp chứng chỉ máy chủ cho
+Hacker mà quên không cấu hình
+<code>basicConstraints = critical, CA:FALSE</code>.</li>
+<li><strong>Hậu quả:</strong> Kẻ tấn công có thể dùng chính khóa riêng
+tư của máy chủ đó để ký tạo ra các chứng chỉ giả mạo cho
+<code>google.com</code>, <code>bank.internal</code> mà trình duyệt vẫn
+chấp nhận là hợp lệ!</li>
+<li><strong>Nguyên tắc:</strong> Mọi chứng chỉ End-Entity bắt buộc phải
+cấu hình <code>CA:FALSE</code> hoặc vắng mặt khả năng cấp phát.</li>
+</ul>
+<hr />
+<h2 id="slide-4-subject-alternative-name-san-thay-thế-common-name">Slide
+4: Subject Alternative Name (SAN) thay thế Common Name</h2>
+<ul>
+<li>Trình duyệt hiện đại (Chrome từ v58, Firefox) đã bãi bỏ việc đọc
+Common Name (CN) trong Subject.</li>
+<li>Bắt buộc khai báo định danh trong phần mở rộng <strong>Subject
+Alternative Name (SAN)</strong>:
+<ul>
+<li><code>DNS:api.kma.internal</code></li>
+<li><code>DNS:*.kma.internal</code> (Wildcard)</li>
+<li><code>IP:192.168.1.100</code></li>
+<li><code>URI:spiffe://kma.edu.vn/sa/payment</code></li>
+</ul></li>
+</ul>
+</body>
+</html>

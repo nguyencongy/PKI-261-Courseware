@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Slides S01</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 30px auto; padding: 0 20px; color: #24292e; background: #fff; }
+  h1, h2, h3, h4 { color: #0a2540; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; margin-top: 1.5em; }
+  h1 { font-size: 2em; border-bottom: 2px solid #0066cc; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.95em; }
+  th, td { border: 1px solid #dfe2e5; padding: 8px 12px; }
+  th { background-color: #f6f8fa; font-weight: 600; text-align: left; }
+  tr:nth-child(2n) { background-color: #fbfcfd; }
+  code { background: #f3f4f4; padding: 0.2em 0.4em; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 85%; }
+  pre { background: #0a2540; color: #f8f8f2; padding: 14px; border-radius: 6px; overflow-x: auto; }
+  pre code { background: none; color: inherit; padding: 0; font-size: 0.9em; }
+  blockquote { border-left: 4px solid #0066cc; margin: 0; padding-left: 16px; color: #57606a; background: #f8fbfd; padding: 8px 16px; border-radius: 0 6px 6px 0; }
+  a { color: #0066cc; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Slides S01</h1>
+</header>
+<h1 id="slides-s01-khung-kiến-trúc-pki-an-toàn-hệ-thống-tin-cậy">Slides
+S01: Khung Kiến trúc PKI &amp; An toàn Hệ thống Tin cậy</h1>
+<p><strong>Học phần:</strong> Cơ sở hạ tầng khóa công khai (ATHK 512) ·
+Lớp CHAT4P<br />
+<strong>Giảng viên:</strong> Nguyễn An Khương (Khoa Khoa học &amp; Kỹ
+thuật Máy tính, Trường ĐHBK Tp. HCM)<br />
+<strong>Trợ giảng:</strong> Nguyễn Hữu Hoàng Huy</p>
+<hr />
+<h2 id="slide-1-chào-mừng-đến-với-học-phần-pki-pqc">Slide 1: Chào mừng
+đến với Học phần PKI &amp; PQC</h2>
+<ul>
+<li><strong>Mã môn học:</strong> ATHK 512 (2 tín chỉ lý thuyết + thực
+hành phòng lab)</li>
+<li><strong>Đối tượng:</strong> Học viên Cao học An toàn Thông tin (Khóa
+4P - Phân hiệu TP.HCM)</li>
+<li><strong>Triết lý đào tạo:</strong> <em>Systems Cryptographic
+Engineering &amp; Lab-First</em></li>
+<li><strong>Mục tiêu kép:</strong> Làm chủ hạ tầng PKI hiện đại và sẵn
+sàng cho kỷ nguyên hậu lượng tử (PQC).</li>
+</ul>
+<hr />
+<h2 id="slide-2-vấn-đề-cốt-lõi-của-mật-mã-bất-đối-xứng">Slide 2: Vấn đề
+Cốt lõi của Mật mã Bất đối xứng</h2>
+<p>Làm thế nào Bob biết chắc chắn rằng khóa công khai
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><msub><mi>K</mi><mi>A</mi></msub></mrow><annotation encoding="application/x-tex">PK_A</annotation></semantics></math>
+thực sự thuộc về Alice, chứ không phải của kẻ tấn công Mallory đang đứng
+ở giữa?</p>
+<pre class="mermaid"><code>graph LR
+    Alice[&quot;Alice&lt;br/&gt;(Chủ thể)&quot;] -- &quot;Tạo cặp khóa&quot; --&gt; Key[&quot;(SK_A, PK_A)&quot;]
+    Key -- &quot;Gửi PK_A&quot; --&gt; Mallory[&quot;Mallory (Kẻ tấn công)&lt;br/&gt;Tráo đổi bằng PK_M&quot;]
+    Mallory -- &quot;Gửi PK_M&quot; --&gt; Bob[&quot;Bob (Bên nhận)&lt;br/&gt;Bị lừa mã hóa bằng PK_M!&quot;]</code></pre>
+<p><strong>Giải pháp:</strong> Cần một bên thứ ba đáng tin cậy (Trusted
+Third Party - CA) chứng thực mối liên kết giữa danh tính của Alice và
+khóa công khai
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><msub><mi>K</mi><mi>A</mi></msub></mrow><annotation encoding="application/x-tex">PK_A</annotation></semantics></math>.</p>
+<hr />
+<h2 id="slide-3-kiến-trúc-phân-tầng-2-cấp-two-tier-ca-hierarchy">Slide
+3: Kiến trúc Phân tầng 2 Cấp (Two-tier CA Hierarchy)</h2>
+<pre class="mermaid"><code>graph TD
+    Root[&quot;&lt;b&gt;Root CA (Gốc)&lt;/b&gt;&lt;br/&gt;Lưu trữ: Offline / Air-gapped&lt;br/&gt;Khóa: 4096-bit RSA hoặc P-384 / ML-DSA-87&lt;br/&gt;Nhiệm vụ: Chỉ ký cấp Intermediate CA&quot;]
+    
+    Sub1[&quot;&lt;b&gt;Issuing CA 01 (Web TLS)&lt;/b&gt;&lt;br/&gt;Lưu trữ: Online HSM&lt;br/&gt;Cấp chứng chỉ cho Web Server&quot;]
+    Sub2[&quot;&lt;b&gt;Issuing CA 02 (mTLS Zero Trust)&lt;/b&gt;&lt;br/&gt;Lưu trữ: Online HSM&lt;br/&gt;Cấp chứng chỉ Service Account&quot;]
+
+    Root --&gt;|Ký ủy quyền| Sub1
+    Root --&gt;|Ký ủy quyền| Sub2</code></pre>
+<hr />
+<h2 id="slide-4-yêu-cầu-nghiên-cứu-chuẩn-mực">Slide 4: Yêu cầu Nghiên
+cứu Chuẩn mực</h2>
+<p>Mỗi học viên cần nắm vững các văn bản tiêu chuẩn sau trong suốt học
+phần: * <strong>IETF RFC 5280:</strong> Tiêu chuẩn nền tảng về cấu trúc
+chứng thư X.509 v3 và CRL v2. * <strong>IETF RFC 8555:</strong> Giao
+thức quản lý và tự động hóa cấp chứng thư ACME. * <strong>IETF RFC
+6962:</strong> Cơ chế minh bạch hóa chứng chỉ Certificate Transparency.
+* <strong>NIST FIPS 203 &amp; 204:</strong> Chuẩn mật mã hậu lượng tử
+ML-KEM và ML-DSA.</p>
+</body>
+</html>

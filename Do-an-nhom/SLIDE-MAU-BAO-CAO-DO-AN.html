@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>SLIDE MAU BAO CAO DO AN</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 30px auto; padding: 0 20px; color: #24292e; background: #fff; }
+  h1, h2, h3, h4 { color: #0a2540; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; margin-top: 1.5em; }
+  h1 { font-size: 2em; border-bottom: 2px solid #0066cc; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.95em; }
+  th, td { border: 1px solid #dfe2e5; padding: 8px 12px; }
+  th { background-color: #f6f8fa; font-weight: 600; text-align: left; }
+  tr:nth-child(2n) { background-color: #fbfcfd; }
+  code { background: #f3f4f4; padding: 0.2em 0.4em; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 85%; }
+  pre { background: #0a2540; color: #f8f8f2; padding: 14px; border-radius: 6px; overflow-x: auto; }
+  pre code { background: none; color: inherit; padding: 0; font-size: 0.9em; }
+  blockquote { border-left: 4px solid #0066cc; margin: 0; padding-left: 16px; color: #57606a; background: #f8fbfd; padding: 8px 16px; border-radius: 0 6px 6px 0; }
+  a { color: #0066cc; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">SLIDE MAU BAO CAO DO AN</h1>
+</header>
+<h1 id="báo-cáo-đồ-án-chuyên-đề-pki">BÁO CÁO ĐỒ ÁN CHUYÊN ĐỀ PKI</h1>
+<h2 id="đề-tài-tên-đề-tài-của-nhóm">Đề tài: [TÊN ĐỀ TÀI CỦA NHÓM]</h2>
+<p><strong>Nhóm thực hiện:</strong> Nhóm [X]<br />
+<strong>Thành viên:</strong> 1. [Họ và tên thành viên 1] - Trưởng nhóm
+2. [Họ và tên thành viên 2] - Thành viên 3. [Họ và tên thành viên 3] -
+Thành viên</p>
+<hr />
+<h1 id="đặt-vấn-đề-bối-cảnh-thực-tiễn">1. Đặt Vấn Đề &amp; Bối Cảnh Thực
+Tiễn</h1>
+<ul>
+<li><strong>Thực trạng tại doanh nghiệp / hạ tầng hiện nay:</strong>
+<ul>
+<li>Thách thức quản lý khóa, chu kỳ chứng chỉ hoặc nguy cơ mất an
+toàn.</li>
+<li>Yêu cầu tự động hóa và tuân thủ các tiêu chuẩn quốc tế.</li>
+</ul></li>
+<li><strong>Mục tiêu nghiên cứu và triển khai:</strong>
+<ul>
+<li>Xây dựng hệ thống giải quyết triệt để bài toán.</li>
+<li>Đo lường hiệu năng và đánh giá an toàn.</li>
+</ul></li>
+</ul>
+<hr />
+<h1 id="kiến-trúc-hệ-thống-tổng-thể">2. Kiến Trúc Hệ Thống Tổng Thể</h1>
+<ul>
+<li><strong>Sơ đồ phân tầng chuỗi tin cậy (Trust Hierarchy):</strong>
+<ul>
+<li>Root CA (Offline / HSM).</li>
+<li>Intermediate CA / Issuing CA.</li>
+<li>End-Entity Services (mTLS / Web / Workload Identity).</li>
+</ul></li>
+<li><strong>Các giao thức &amp; Tiêu chuẩn áp dụng:</strong>
+<ul>
+<li>IETF RFCs / NIST FIPS tương ứng.</li>
+</ul></li>
+</ul>
+<hr />
+<h1 id="thiết-kế-kỹ-thuật-tự-động-hóa">3. Thiết Kế Kỹ Thuật &amp; Tự
+Động Hóa</h1>
+<ul>
+<li><strong>Container hóa &amp; Triển khai:</strong>
+<ul>
+<li>Kiến trúc Docker Compose / Kubernetes.</li>
+</ul></li>
+<li><strong>Tự động hóa qua Makefile &amp; Shell scripts:</strong>
+<ul>
+<li><code>make up</code>, <code>make test</code>,
+<code>make bench</code>.</li>
+</ul></li>
+<li><strong>Cơ chế bảo vệ Khóa riêng tư (Private Key Security):</strong>
+<ul>
+<li>Không lưu trữ plain-text trên đĩa.</li>
+<li>Phân quyền truy cập theo nguyên tắc Least Privilege.</li>
+</ul></li>
+</ul>
+<hr />
+<h1 id="kịch-bản-trình-diễn-thực-tế-live-demo">4. Kịch Bản Trình Diễn
+Thực Tế (Live Demo)</h1>
+<ul>
+<li><strong>Kịch bản 1: Cấp phát chứng chỉ thành công</strong>
+<ul>
+<li>Luồng yêu cầu, phê duyệt và cấp phát.</li>
+</ul></li>
+<li><strong>Kịch bản 2: Bắt tay bảo mật / Xác thực dịch vụ</strong>
+<ul>
+<li>Phân tích gói tin bắt tay TLS / mTLS.</li>
+</ul></li>
+<li><strong>Kịch bản 3: Xử lý sự cố / Thu hồi / Phòng thủ</strong>
+<ul>
+<li>Chứng minh khả năng phát hiện lỗi hoặc từ chối chứng chỉ không hợp
+lệ.</li>
+</ul></li>
+</ul>
+<hr />
+<h1 id="kết-quả-đo-lường-so-sánh-benchmarks">5. Kết Quả Đo Lường &amp;
+So Sánh (Benchmarks)</h1>
+<ul>
+<li><strong>Hiệu năng &amp; Độ trễ (Latency / Overhead):</strong>
+<ul>
+<li>Thời gian sinh khóa, cấp chứng chỉ.</li>
+<li>Kích thước chứng chỉ và gói tin bắt tay mạng.</li>
+</ul></li>
+<li><strong>Bảng so sánh định lượng:</strong>
+<ul>
+<li>Đánh giá trước và sau khi tối ưu hóa.</li>
+</ul></li>
+</ul>
+<hr />
+<h1 id="kết-luận-hướng-phát-triển">6. Kết Luận &amp; Hướng Phát
+Triển</h1>
+<ul>
+<li><strong>Kết quả đạt được:</strong>
+<ul>
+<li>Làm chủ công nghệ và triển khai thành công hệ thống.</li>
+<li>Đáp ứng đầy đủ các yêu cầu an toàn theo chuẩn quốc tế.</li>
+</ul></li>
+<li><strong>Khả năng ứng dụng thực tế:</strong>
+<ul>
+<li>Ứng dụng tại doanh nghiệp, ngân hàng, cơ quan chủ quản.</li>
+</ul></li>
+<li><strong>Xin trân trọng cảm ơn Thầy và các bạn đã lắng
+nghe!</strong></li>
+</ul>
+</body>
+</html>

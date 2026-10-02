@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>PKI 261_MASTER DIEU PHOI HOC PHAN</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 30px auto; padding: 0 20px; color: #24292e; background: #fff; }
+  h1, h2, h3, h4 { color: #0a2540; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; margin-top: 1.5em; }
+  h1 { font-size: 2em; border-bottom: 2px solid #0066cc; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.95em; }
+  th, td { border: 1px solid #dfe2e5; padding: 8px 12px; }
+  th { background-color: #f6f8fa; font-weight: 600; text-align: left; }
+  tr:nth-child(2n) { background-color: #fbfcfd; }
+  code { background: #f3f4f4; padding: 0.2em 0.4em; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 85%; }
+  pre { background: #0a2540; color: #f8f8f2; padding: 14px; border-radius: 6px; overflow-x: auto; }
+  pre code { background: none; color: inherit; padding: 0; font-size: 0.9em; }
+  blockquote { border-left: 4px solid #0066cc; margin: 0; padding-left: 16px; color: #57606a; background: #f8fbfd; padding: 8px 16px; border-radius: 0 6px 6px 0; }
+  a { color: #0066cc; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">PKI 261_MASTER DIEU PHOI HOC PHAN</h1>
+</header>
+<h1 id="bảng-điều-phối-học-phần-cơ-sở-hạ-tầng-khóa-công-khai-pki">BẢNG
+ĐIỀU PHỐI HỌC PHẦN CƠ SỞ HẠ TẦNG KHÓA CÔNG KHAI (PKI)</h1>
+<p><strong>Mã học phần:</strong> ATHK 512 · <strong>Lớp:</strong> CHAT4P
+(Chất lượng cao An toàn thông tin) · <strong>Học kỳ:</strong> HK1, Năm
+học 2026–2027<br />
+<strong>Đơn vị:</strong> Phân hiệu Học viện Kỹ thuật Mật mã tại TP. Hồ
+Chí Minh<br />
+<strong>Thời gian:</strong> 13h30 Thứ Bảy hàng tuần (Khởi động:
+03/10/2026) · <strong>Địa điểm:</strong> Phòng 201/202/203, Cơ sở Nam
+Thành phố</p>
+<hr />
+<h2 id="thông-số-vận-hành-học-phần">1. THÔNG SỐ VẬN HÀNH HỌC PHẦN</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Chỉ số</th>
+<th style="text-align: left;">Giá trị</th>
+<th style="text-align: left;">Ghi chú vận hành</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Tổng số buổi học</strong></td>
+<td style="text-align: left;">9 buổi (5 giờ/buổi)</td>
+<td style="text-align: left;">1 buổi định hướng, 5 buổi lý thuyết kết
+hợp Lab, 3 buổi bảo vệ đồ án nhóm</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Số bài thực hành Lab</strong></td>
+<td style="text-align: left;">5 bài chuyên sâu</td>
+<td style="text-align: left;">OpenSSL 3.5, Step-CA, SoftHSMv2, Envoy
+mTLS, PQC (FIPS 203/204/205)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Đồ án chuyên đề nhóm</strong></td>
+<td style="text-align: left;">5 nhóm chính thức</td>
+<td style="text-align: left;">5 nhóm kỹ thuật chuẩn hóa (3 học
+viên/nhóm), bảo vệ trực tiếp và chấm chéo</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Cơ cấu điểm thi KMA</strong></td>
+<td style="text-align: left;">QT 30% / KTHP 70%</td>
+<td style="text-align: left;">Công thức: TP1 (70% QT), TP2 (30% QT),
+KTHP (70% HP), DHP = ROUND(QT<em>0.3 + KTHP</em>0.7, 1)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Quy mô lớp học chính
+thức</strong></td>
+<td style="text-align: left;"><strong>15 học viên</strong></td>
+<td style="text-align: left;">Đúng 15 học viên tham gia học tập (2 học
+viên khác trong danh sách gốc được miễn môn học này)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="đội-ngũ-điều-phối-liên-lạc">2. ĐỘI NGŨ ĐIỀU PHỐI &amp; LIÊN
+LẠC</h2>
+<ul>
+<li><strong>Giảng viên phụ trách học phần:</strong> Nguyễn An Khương
+<ul>
+<li><em>Đơn vị:</em> Khoa Khoa học &amp; Kỹ thuật Máy tính, Trường ĐHBK
+Tp. HCM</li>
+<li><em>Email công vụ:</em> nakhuong@hcmut.edu.vn</li>
+</ul></li>
+<li><strong>Trợ giảng học phần (Teaching Assistant - TA):</strong>
+Mr. Nguyễn Hữu Hoàng Huy
+<ul>
+<li><em>Hồ sơ chuyên môn:</em> Cựu học viên lớp CHAT3P, KMA TP.HCM (<a
+href="https://www.linkedin.com/in/nguyen-huu-hoang-huy-abb138366/">LinkedIn
+Profile</a>)</li>
+<li><em>Nhiệm vụ:</em> Điều phối hạ tầng Docker, hỗ trợ kỹ thuật OpenSSL
+3.5 / Step-CA / SoftHSM, kiểm tra Pull Request và phúc khảo bài
+Lab.</li>
+</ul></li>
+<li><strong>Lớp trưởng Lớp CHAT4P:</strong> Học viên Tăng Triển Nguyên
+(Nhóm 3)
+<ul>
+<li><em>Email liên hệ:</em> triennguyen1911@gmail.com</li>
+<li><em>Nhiệm vụ:</em> Đầu mối thông báo lớp, tổng hợp danh sách nhóm
+chuyên đề và tiếp nhận kiến nghị học vụ.</li>
+</ul></li>
+</ul>
+<hr />
+<h2
+id="mô-hình-vận-hành-lớp-học-đảo-ngược-flipped-classroom-lab-first">3.
+MÔ HÌNH VẬN HÀNH: LỚP HỌC ĐẢO NGƯỢC (FLIPPED CLASSROOM &amp;
+LAB-FIRST)</h2>
+<p>Học phần áp dụng phương thức đào tạo sau đại học tiên tiến nhằm tối
+đa hóa năng lực thực chiến của học viên:</p>
+<ol type="1">
+<li><strong>Giai đoạn Tiền buổi học (Pre-session):</strong>
+<ul>
+<li>Trước mỗi buổi học tối thiểu 3 ngày, Ban giảng dạy phát hành toàn bộ
+Slide bài giảng, Handout tóm tắt lý thuyết, Lecture Notes và đề bài Lab
+lên Evidence Repository.</li>
+<li>Học viên có trách nhiệm đọc trước tài liệu, chuẩn bị môi trường
+Docker và hoàn thành các câu hỏi trinh sát (Reconnaissance
+Questions).</li>
+</ul></li>
+<li><strong>Giai đoạn Tại lớp (In-session - 5 giờ):</strong>
+<ul>
+<li><strong>45–60 phút đầu:</strong> Giảng viên tóm lược các nguyên lý
+mật mã lõi, phân tích lỗi thiết kế hệ thống thực tế và giải đáp các vấn
+đề học viên gặp phải khi đọc trước.</li>
+<li><strong>180–200 phút tiếp theo:</strong> Toàn bộ lớp học chuyển sang
+chế độ Lab thực chiến. Giảng viên và Trợ giảng trực tiếp quan sát, hỗ
+trợ giải quyết xung đột cấu hình và kiểm tra cơ chế phòng vệ của học
+viên.</li>
+<li><strong>30–45 phút cuối:</strong> Phân tích ca điển hình
+(Debriefing), công bố kết quả nghiệm thu tại lớp và giao nhiệm vụ buổi
+tiếp theo.</li>
+</ul></li>
+<li><strong>Giai đoạn Hậu buổi học (Post-session):</strong>
+<ul>
+<li>Học viên đẩy mã nguồn và báo cáo kết quả lên repository cá nhân dưới
+dạng Pull Request.</li>
+<li>Hệ thống tự động kiểm thử và đối soát kết quả trước hạn chót.</li>
+</ul></li>
+</ol>
+<hr />
+<h2 id="lộ-trình-chi-tiết-9-buổi-học">4. LỘ TRÌNH CHI TIẾT 9 BUỔI
+HỌC</h2>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 18%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 14%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">Buổi</th>
+<th style="text-align: center;">Ngày</th>
+<th style="text-align: left;">Chủ đề Bài giảng</th>
+<th style="text-align: left;">Trọng tâm Thực hành Lab</th>
+<th style="text-align: left;">Tiêu chuẩn &amp; Công cụ</th>
+<th style="text-align: center;">Trạng thái</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>S01</strong></td>
+<td style="text-align: center;">03/10</td>
+<td style="text-align: left;">Khung kiến trúc PKI &amp; An toàn hệ thống
+tin cậy</td>
+<td style="text-align: left;">Lab 0: Onboarding, Git/Docker, Thiết lập
+Evidence Repo &amp; Giao nhiệm vụ 5 nhóm</td>
+<td style="text-align: left;">QĐ 1875/QĐ-TTg, RFC 5280, Docker</td>
+<td style="text-align: center;">Sẵn sàng</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S02</strong></td>
+<td style="text-align: center;">10/10</td>
+<td style="text-align: left;">X.509, Cấu trúc ASN.1 &amp; Chuỗi tin
+cậy</td>
+<td style="text-align: left;">Lab 1: Mổ xẻ ASN.1, Khai thác lỗ hổng
+chuỗi &amp; Nghiệm thu ZLint</td>
+<td style="text-align: left;">RFC 5280, OpenSSL 3.5, dumpasn1,
+ZLint</td>
+<td style="text-align: center;">Kế hoạch</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S03</strong></td>
+<td style="text-align: center;">17/10</td>
+<td style="text-align: left;">Quản trị CA &amp; Vòng đời chứng thư
+số</td>
+<td style="text-align: left;">Lab 2: Thiết kế CA 2 tầng (Root/Sub), Cấp
+phát tự động ACME</td>
+<td style="text-align: left;">RFC 3647 (CP/CPS), RFC 8555 (ACME),
+step-ca</td>
+<td style="text-align: center;">Kế hoạch</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S04</strong></td>
+<td style="text-align: center;">24/10</td>
+<td style="text-align: left;">Thu hồi chứng thư &amp; Quản lý khóa với
+HSM</td>
+<td style="text-align: left;">Lab 3: Thu hồi CRL/OCSP Stapling, Bảo vệ
+khóa ký bằng SoftHSMv2</td>
+<td style="text-align: left;">RFC 6960 (OCSP), PKCS#11, SoftHSMv2</td>
+<td style="text-align: center;">Kế hoạch</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S05</strong></td>
+<td style="text-align: center;">31/10</td>
+<td style="text-align: left;">Giao thức an toàn: TLS 1.3 &amp; mTLS
+Gateway</td>
+<td style="text-align: left;">Lab 4: Kiến trúc mTLS Gateway bảo vệ
+Microservices &amp; SPIFFE/SPIRE</td>
+<td style="text-align: left;">RFC 8446 (TLS 1.3), Envoy Proxy,
+Nginx</td>
+<td style="text-align: center;">Kế hoạch</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S06</strong></td>
+<td style="text-align: center;">07/11</td>
+<td style="text-align: left;">Mật mã Hậu lượng tử (PQC) &amp; Lộ trình
+chuyển dịch</td>
+<td style="text-align: left;">Lab 5: Benchmark hiệu năng chuỗi chứng thư
+ML-DSA &amp; ML-KEM</td>
+<td style="text-align: left;">NIST FIPS 203/204/205, RFC 9881, OpenSSL
+3.5 PQC</td>
+<td style="text-align: center;">Kế hoạch</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S07</strong></td>
+<td style="text-align: center;">14/11</td>
+<td style="text-align: left;">Bảo vệ Đồ án Chuyên đề Nhóm (Đợt 1)</td>
+<td style="text-align: left;">Thuyết trình &amp; Live Demo: <strong>Nhóm
+1 (VAULT)</strong> &amp; <strong>Nhóm 2 (RootCA)</strong></td>
+<td style="text-align: left;">Phản biện: Nhóm 3 (TMN) &amp; Nhóm 4
+(CAP)</td>
+<td style="text-align: center;">Kế hoạch</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S08</strong></td>
+<td style="text-align: center;">21/11</td>
+<td style="text-align: left;">Bảo vệ Đồ án Chuyên đề Nhóm (Đợt 2)</td>
+<td style="text-align: left;">Thuyết trình &amp; Live Demo: <strong>Nhóm
+3 (TMN)</strong> &amp; <strong>Nhóm 4 (CAP)</strong></td>
+<td style="text-align: left;">Phản biện: Nhóm 5 (TYN) &amp; Nhóm 1
+(VAULT)</td>
+<td style="text-align: center;">Kế hoạch</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S09</strong></td>
+<td style="text-align: center;">28/11</td>
+<td style="text-align: left;">Bảo vệ Đồ án (Đợt 3) &amp; Đối soát Điểm
+tổng kết</td>
+<td style="text-align: left;">Thuyết trình: <strong>Nhóm 5
+(TYN)</strong> (Nhóm 2 phản biện) &amp; Đối soát bảng điểm</td>
+<td style="text-align: left;">Toàn thể lớp đối soát và ký biên bản
+KMA</td>
+<td style="text-align: center;">Kế hoạch</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="danh-sách-5-nhóm-kỹ-thuật-chính-thức-chuẩn-hóa-15-học-viên">5.
+DANH SÁCH 5 NHÓM KỸ THUẬT CHÍNH THỨC (CHUẨN HÓA 15 HỌC VIÊN)</h2>
+<p>Dữ liệu chính thức từ tệp <a
+href="file:///Users/nakhuong/Library/CloudStorage/GoogleDrive-nakhuong@gmail.com/My%20Drive/0-TEACHING%20and%20GUIDING/KMA/PKI/HK261%20%28CHAT4P%29/DS_Nhom_CHAT_4P_PKI.xlsx"><code>DS_Nhom_CHAT_4P_PKI.xlsx</code></a>:</p>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 15%" />
+<col style="width: 12%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">Nhóm</th>
+<th style="text-align: center;">Tên Nhóm</th>
+<th style="text-align: left;">Trưởng nhóm</th>
+<th style="text-align: left;">Thành viên nhóm</th>
+<th style="text-align: center;">Ngành</th>
+<th style="text-align: left;">Đơn vị công tác &amp; Lĩnh vực</th>
+<th style="text-align: center;">Buổi bảo vệ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>Nhóm 1</strong></td>
+<td style="text-align: center;"><strong>VAULT</strong></td>
+<td style="text-align: left;"><strong>Nguyễn Ngọc Hoài</strong></td>
+<td style="text-align: left;">Nguyễn Trần Hoàng Long<br>Nguyễn Đình
+Quân</td>
+<td style="text-align: center;">ATTT<br>ATTT<br>ATTT</td>
+<td style="text-align: left;">Công ty AgileOps (DevOps Engineer)<br>Công
+ty CP An ninh mạng THD<br>Trường Đại học Nguyễn Tất Thành</td>
+<td style="text-align: center;"><strong>Buổi
+S07</strong><br>(14/11)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Nhóm 2</strong></td>
+<td style="text-align: center;"><strong>RootCA</strong></td>
+<td style="text-align: left;"><strong>Nguyễn Vĩnh Hiển</strong></td>
+<td style="text-align: left;">Nguyễn Ngọc Sơn<br>Nguyễn Trường Phú</td>
+<td style="text-align: center;">CNTT<br>CNTT<br>CNTT</td>
+<td style="text-align: left;">Dược phẩm Imexpharm (Sec &amp;
+Helpdesk)<br>VinSmart Future (Data Engineer)<br>Cố vấn An ninh mạng tự
+do (OWASP)</td>
+<td style="text-align: center;"><strong>Buổi
+S07</strong><br>(14/11)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Nhóm 3</strong></td>
+<td style="text-align: center;"><strong>TMN Root of Trust</strong></td>
+<td style="text-align: left;"><strong>Võ Thông Minh</strong></td>
+<td style="text-align: left;">Tăng Triển Nguyên<br>Trần Minh Triết</td>
+<td style="text-align: center;">ATTT<br>CNTT<br>ATTT</td>
+<td style="text-align: left;">Ngân hàng Nam Á<br>VPDD Getz Pharma (Lớp
+trưởng CHAT4P)<br>OPSWAT Việt Nam (Malware Analyst)</td>
+<td style="text-align: center;"><strong>Buổi
+S08</strong><br>(21/11)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Nhóm 4</strong></td>
+<td style="text-align: center;"><strong>CAP</strong></td>
+<td style="text-align: left;"><strong>Vũ Thị Diệu Anh</strong></td>
+<td style="text-align: left;">Diệp Kim Chi<br>Đoàn Quang Phúc</td>
+<td style="text-align: center;">CNTT<br>CNTT<br>THƯD</td>
+<td style="text-align: left;">Công ty TMA Solutions (Manual QA)<br>Công
+ty Digityze Asia (PHP Dev)<br>Trung tâm 286 - Bộ Tư lệnh 86</td>
+<td style="text-align: center;"><strong>Buổi
+S08</strong><br>(21/11)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Nhóm 5</strong></td>
+<td style="text-align: center;"><strong>TYN</strong></td>
+<td style="text-align: left;"><strong>Võ Minh Nhật</strong></td>
+<td style="text-align: left;">Hồ Quốc Thái<br>Nguyễn Công Ý</td>
+<td style="text-align: center;">CNTT<br>CNTT<br>CNTT</td>
+<td style="text-align: left;">Đi học chuyên sâu<br>Hitachi Digital
+Service Việt Nam<br>Ngân hàng TMCP Á Châu (ACB)</td>
+<td style="text-align: center;"><strong>Buổi
+S09</strong><br>(28/11)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>[!NOTE] <strong>Học viên được miễn học phần này:</strong><br />
+1. <strong>Nguyễn Tuấn Anh</strong> (CHAT4P002)<br />
+2. <strong>Huỳnh Trần Trọng Nghĩa</strong> (CHAT4P011)<br />
+<em>Hai học viên này được miễn học phần ATHK 512 theo quy định đào tạo
+sau đại học của Học viện Kỹ thuật Mật mã, không tính vào sĩ số thực học
+(15 HV).</em></p>
+</blockquote>
+<hr />
+<h2 id="ma-trận-bảo-vệ-chấm-chéo-đối-kháng-tại-các-buổi-s07-s08-s09">6.
+MA TRẬN BẢO VỆ &amp; CHẤM CHÉO ĐỐI KHÁNG TẠI CÁC BUỔI S07, S08, S09</h2>
+<pre class="mermaid"><code>graph TD
+    subgraph S07[&quot;Buổi S07 (14/11/2026) - Đợt 1&quot;]
+        N1[&quot;Nhóm 1: VAULT (Báo cáo)&quot;] &lt;--&gt;|Chấm chéo &amp; Phản biện| N3[&quot;Nhóm 3: TMN Root of Trust&quot;]
+        N2[&quot;Nhóm 2: RootCA (Báo cáo)&quot;] &lt;--&gt;|Chấm chéo &amp; Phản biện| N4[&quot;Nhóm 4: CAP&quot;]
+    end
+    subgraph S08[&quot;Buổi S08 (21/11/2026) - Đợt 2&quot;]
+        N3b[&quot;Nhóm 3: TMN Root of Trust (Báo cáo)&quot;] &lt;--&gt;|Chấm chéo &amp; Phản biện| N5[&quot;Nhóm 5: TYN&quot;]
+        N4b[&quot;Nhóm 4: CAP (Báo cáo)&quot;] &lt;--&gt;|Chấm chéo &amp; Phản biện| N1b[&quot;Nhóm 1: VAULT&quot;]
+    end
+    subgraph S09[&quot;Buổi S09 (28/11/2026) - Đợt 3 &amp; Tổng kết&quot;]
+        N5b[&quot;Nhóm 5: TYN (Báo cáo)&quot;] &lt;--&gt;|Chấm chéo &amp; Phản biện| N2b[&quot;Nhóm 2: RootCA&quot;]
+        TongKet[&quot;Hội đồng Giảng viên &amp; Toàn thể Học viên: Đối soát, Thống nhất &amp; Ký Biên bản Bảng điểm KMA&quot;]
+    end</code></pre>
+<ul>
+<li><strong>Nguyên tắc chấm chéo:</strong> Nhóm phản biện đặt tối thiểu
+3 câu hỏi kỹ thuật chuyên sâu về kiến trúc, kiểm thử tải hoặc mô hình đe
+dọa, sau đó cho điểm vào Phiếu chấm chéo. Điểm chấm chéo đóng góp 15%
+tổng điểm KTHP của nhóm được chấm.</li>
+<li>Điểm chấm chéo có độ lệch lớn hơn 2.0 điểm so với điểm trung bình
+của Hội đồng Giảng viên sẽ được Hội đồng xem xét và thẩm định lại.</li>
+</ul>
+<hr />
+<h2 id="quy-chế-đánh-giá-công-thức-tính-điểm-kma-chuẩn">7. QUY CHẾ ĐÁNH
+GIÁ &amp; CÔNG THỨC TÍNH ĐIỂM KMA CHUẨN</h2>
+<p>Cơ cấu điểm số tuân thủ nghiêm ngặt định dạng của Ban Khảo thí &amp;
+Đảm bảo chất lượng đào tạo (tệp
+<code>Bang diem lop CHAT4P.xlsx</code>):</p>
+<ul>
+<li><strong>Điểm Học phần (Cột Q - DHP):</strong>
+<code>ROUND(DQT*0.3 + KTHP*0.7, 1)</code></li>
+<li><strong>Điểm Quá trình (Cột G &amp; O - DQT):</strong>
+<code>ROUND(TP1*0.7 + TP2*0.3, 1)</code></li>
+<li><strong>Điểm Thành phần 1 (Cột E - TP1, trọng số 70% Điểm Quá trình
+= 21% Điểm Học phần):</strong> Điểm trung bình cộng của 5 bài thực hành
+Lab cá nhân (S02 đến S06).</li>
+<li><strong>Điểm Thành phần 2 (Cột F - TP2, trọng số 30% Điểm Quá trình
+= 9% Điểm Học phần):</strong> Đánh giá mức độ chuyên cần tham gia đủ 9
+buổi học tại giảng đường (kết hợp dữ liệu điểm danh thực tế và kết quả
+các bài Mini-Quiz đầu giờ).</li>
+<li><strong>Điểm Thi Kết thúc Học phần (Cột P - KTHP, trọng số 70% Điểm
+Học phần):</strong> Đồ án Chuyên đề Kỹ thuật theo nhóm, bảo vệ trực tiếp
+tại hội đồng trong các buổi S07, S08, S09:
+<ul>
+<li>Mã nguồn &amp; Demo hệ thống: 35%</li>
+<li>Báo cáo Kỹ thuật Chuyên đề: 25%</li>
+<li>Bảo vệ &amp; Phản biện trực tiếp: 25%</li>
+<li>Đánh giá Chấm chéo giữa các nhóm: 15%</li>
+</ul></li>
+</ul>
+<hr />
+<h2
+id="bộ-công-cụ-điều-hành-học-thuật-dành-cho-giảng-viên-cli-toolchain">8.
+BỘ CÔNG CỤ ĐIỀU HÀNH HỌC THUẬT DÀNH CHO GIẢNG VIÊN (CLI TOOLCHAIN)</h2>
+<ul>
+<li><code>bash PKI.sh cong</code>: Kiểm tra chất lượng học liệu (Session
+Gate S01–S09).</li>
+<li><code>bash PKI.sh giong</code>: Kiểm tra phong cách học thuật (Voice
+Check), loại bỏ từ ngữ cấm và xưng hô không chuẩn.</li>
+<li><code>bash PKI.sh scrub</code>: Quét bảo mật và ngăn ngừa rò rỉ khóa
+bí mật ra môi trường chia sẻ.</li>
+<li><code>bash PKI.sh diem</code>: Mở giao diện nhập và đồng bộ bảng
+điểm lớp học <code>Bang diem lop CHAT4P.xlsx</code>.</li>
+<li><code>bash PKI.sh biendich</code>: Biên dịch đồng bộ toàn bộ học
+liệu ra mọi định dạng (.md, .docx, .html, .pdf, .xlsx).</li>
+</ul>
+<hr />
+<h2
+id="ma-trận-ánh-xạ-giữa-9-buổi-học-và-5-chủ-đề-đồ-án-mapping-infographic">4.
+MA TRẬN ÁNH XẠ GIỮA 9 BUỔI HỌC VÀ 5 CHỦ ĐỀ ĐỒ ÁN (MAPPING
+INFOGRAPHIC)</h2>
+<p>Để học viên hình dung rõ ràng lộ trình học tập, từng buổi học lý
+thuyết và thực hành đều được thiết kế để trực tiếp cung cấp khối kiến
+thức và thành phần công nghệ cho 5 đề tài đồ án chuyên sâu:</p>
+<pre class="mermaid"><code>graph LR
+    subgraph SESSIONS[&quot;9 BUỔI HỌC LÝ THUYẾT &amp; PHÒNG LAB&quot;]
+        S1[&quot;S01: Khung Kiến trúc PKI &amp; Bề mặt Tấn công&quot;]
+        S2[&quot;S02: Cấu trúc X.509 v3, ASN.1 &amp; Mở rộng SAN&quot;]
+        S3[&quot;S03: CA Phân tầng, CP/CPS &amp; Step-CA ACME&quot;]
+        S4[&quot;S04: Thu hồi CRL, OCSP Stapling, CT Logs, ZLint&quot;]
+        S5[&quot;S05: Bảo vệ Khóa với SoftHSMv2 &amp; Chuyển dịch PQC&quot;]
+        S6[&quot;S06: Kiến trúc Zero Trust &amp; mTLS Gateway&quot;]
+        S7[&quot;S07: Đánh giá Giữa kỳ &amp; Thẩm định STRIDE&quot;]
+        S8[&quot;S08: Mô phỏng Tấn công AD CS &amp; Phòng thủ&quot;]
+        S9[&quot;S09: Bảo vệ Đồ án Cuối kỳ &amp; Nghiệm thu KMA&quot;]
+    end
+
+    subgraph TOPICS[&quot;5 CHỦ ĐỀ ĐỒ ÁN NHÓM CHUYÊN SÂU&quot;]
+        T1[&quot;&lt;b&gt;Chủ đề 1 (Nhóm 4 - CAP):&lt;/b&gt;&lt;br/&gt;Hạ tầng CA 2 tầng Step-CA &amp; ACME, CP/CPS&quot;]
+        T2[&quot;&lt;b&gt;Chủ đề 2 (Nhóm 1 - VAULT):&lt;/b&gt;&lt;br/&gt;Zero Trust &amp; mTLS Gateway với SoftHSMv2&quot;]
+        T3[&quot;&lt;b&gt;Chủ đề 3 (Nhóm 3 - TMN):&lt;/b&gt;&lt;br/&gt;Chuyển dịch PQC cho Web PKI (ML-DSA, ML-KEM)&quot;]
+        T4[&quot;&lt;b&gt;Chủ đề 4 (Nhóm 5 - TYN):&lt;/b&gt;&lt;br/&gt;Kiểm định ZLint, OCSP Stapling &amp; CT Logs&quot;]
+        T5[&quot;&lt;b&gt;Chủ đề 5 (Nhóm 2 - RootCA):&lt;/b&gt;&lt;br/&gt;Mô phỏng Tấn công &amp; Phòng thủ Hạ tầng PKI&quot;]
+    end
+
+    S1 --&gt; T1 &amp; T2 &amp; T3 &amp; T4 &amp; T5
+    S2 --&gt; T1 &amp; T3 &amp; T4
+    S3 --&gt; T1 &amp; T2
+    S4 --&gt; T4 &amp; T5
+    S5 --&gt; T2 &amp; T3
+    S6 --&gt; T2
+    S7 --&gt; T1 &amp; T2 &amp; T3 &amp; T4 &amp; T5
+    S8 --&gt; T5 &amp; T4
+    S9 --&gt; T1 &amp; T2 &amp; T3 &amp; T4 &amp; T5</code></pre>
+<h3 id="bảng-phân-tích-ma-trận-kế-thừa-tri-thức">Bảng Phân Tích Ma Trận
+Kế Thừa Tri Thức:</h3>
+<table>
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 27%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">Buổi học</th>
+<th>Nội dung Trọng tâm Buổi học</th>
+<th>Đóng góp Trực tiếp cho 5 Chủ đề Đồ án Nhóm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>S01</strong></td>
+<td>Bối cảnh thể chế (QĐ 1875), 3 mô hình PKI, nguyên tắc Root CA
+offline</td>
+<td><strong>Cả 5 Nhóm:</strong> Nền tảng thiết kế kiến trúc phân tầng,
+xác định ranh giới niềm tin và bề mặt tấn công.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S02</strong></td>
+<td>Giải phẫu ASN.1 DER, Basic Constraints, Key Usage, SAN</td>
+<td><strong>Nhóm 1, 3, 4, 5:</strong> Cấu hình chính xác tệp mở rộng
+OpenSSL, tạo chứng chỉ máy chủ có SAN, kiểm soát cờ CA.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S03</strong></td>
+<td>Khởi tạo CA 2 tầng, CP/CPS RFC 3647, Step-CA &amp; ACME RFC
+8555</td>
+<td><strong>Nhóm 4 (Trọng tâm) &amp; Nhóm 1:</strong> Xây dựng máy chủ
+Step-CA ACME tự động hóa; hoàn thiện bộ quy chế CP/CPS 9 mục.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S04</strong></td>
+<td>Thu hồi CRL v2, OCSP Responder, OCSP Stapling, CT Logs, ZLint</td>
+<td><strong>Nhóm 5 (Trọng tâm) &amp; Nhóm 2:</strong> Triển khai OCSP
+Responder thời gian thực, tích hợp linter ZLint vào CI/CD.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S05</strong></td>
+<td>Cryptoki API PKCS#11, Token SoftHSMv2, Bộ chuẩn PQC NIST (FIPS
+203/204)</td>
+<td><strong>Nhóm 3 (Trọng tâm) &amp; Nhóm 1:</strong> Nhóm 3 làm chủ
+OpenSSL 3.5 + liboqs; Nhóm 1 tích hợp SoftHSMv2 lưu khóa CA.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S06</strong></td>
+<td>Zero Trust (NIST SP 800-207), mTLS 2 chiều, định danh SPIFFE/SPIRE,
+Envoy Gateway</td>
+<td><strong>Nhóm 1 (Trọng tâm):</strong> Dựng cổng mTLS Gateway xác thực
+danh tính client dựa trên SAN URI SPIFFE ID.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S07</strong></td>
+<td>Đánh giá tiến độ giữa kỳ, mô hình đe dọa STRIDE, chấm chéo ngang
+hàng</td>
+<td><strong>Cả 5 Nhóm:</strong> Thẩm định thiết kế kỹ thuật, rà soát mô
+hình STRIDE và hoàn thành 50% khối lượng mã nguồn.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S08</strong></td>
+<td>Khai thác lỗ hổng cấu hình AD CS (ESC1/ESC8), Rogue CA, Phòng thủ đa
+tầng</td>
+<td><strong>Nhóm 2 (Trọng tâm) &amp; Nhóm 5:</strong> Mô phỏng chuỗi tấn
+công chiếm quyền quản trị và xây dựng bộ lọc phòng ngự.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S09</strong></td>
+<td>Demo hệ thống trực tiếp trên Docker, vấn đáp chuyên sâu, đối soát
+bảng điểm KMA</td>
+<td><strong>Cả 5 Nhóm:</strong> Báo cáo tổng kết đồ án, bàn giao mã
+nguồn hoàn chỉnh và nghiệm thu kết quả học tập.</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

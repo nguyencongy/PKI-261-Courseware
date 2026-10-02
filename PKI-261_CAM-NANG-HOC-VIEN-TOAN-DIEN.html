@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>PKI 261_CAM NANG HOC VIEN TOAN DIEN</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 30px auto; padding: 0 20px; color: #24292e; background: #fff; }
+  h1, h2, h3, h4 { color: #0a2540; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; margin-top: 1.5em; }
+  h1 { font-size: 2em; border-bottom: 2px solid #0066cc; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.95em; }
+  th, td { border: 1px solid #dfe2e5; padding: 8px 12px; }
+  th { background-color: #f6f8fa; font-weight: 600; text-align: left; }
+  tr:nth-child(2n) { background-color: #fbfcfd; }
+  code { background: #f3f4f4; padding: 0.2em 0.4em; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 85%; }
+  pre { background: #0a2540; color: #f8f8f2; padding: 14px; border-radius: 6px; overflow-x: auto; }
+  pre code { background: none; color: inherit; padding: 0; font-size: 0.9em; }
+  blockquote { border-left: 4px solid #0066cc; margin: 0; padding-left: 16px; color: #57606a; background: #f8fbfd; padding: 8px 16px; border-radius: 0 6px 6px 0; }
+  a { color: #0066cc; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">PKI 261_CAM NANG HOC VIEN TOAN DIEN</h1>
+</header>
+<h1 id="cẩm-nang-học-viên-toàn-diện-student-master-handbook">CẨM NANG
+HỌC VIÊN TOÀN DIỆN (STUDENT MASTER HANDBOOK)</h1>
+<h2 id="học-phần-cơ-sở-hạ-tầng-khóa-công-khai-pki---athk-512">HỌC PHẦN:
+CƠ SỞ HẠ TẦNG KHÓA CÔNG KHAI (PKI - ATHK 512)</h2>
+<p><strong>Lớp:</strong> CHAT4P (Chương trình Chất lượng cao An toàn
+thông tin) · <strong>Học kỳ:</strong> HK1, Năm học 2026–2027<br />
+<strong>Cơ sở đào tạo:</strong> Phân hiệu Học viện Kỹ thuật Mật mã tại
+TP. Hồ Chí Minh<br />
+<strong>Thời gian học:</strong> 13h30 – 18h30 Thứ Bảy hàng tuần (9 buổi,
+bắt đầu từ 03/10/2026)<br />
+<strong>Địa điểm:</strong> Tầng 2, Phòng 201/202/203, Cơ sở Nam Thành
+phố, Đường 15A, xã Bình Hưng, TP.HCM<br />
+<strong>Tổ chức GitHub học phần:</strong> <a
+href="https://github.com/KMA-PKI-261">KMA-PKI-261</a></p>
+<hr />
+<h2 id="lời-mở-đầu-dành-cho-học-viên-chat4p">LỜI MỞ ĐẦU DÀNH CHO HỌC
+VIÊN CHAT4P</h2>
+<p>Chào mừng toàn thể 15 học viên chính thức lớp Cao học An toàn thông
+tin CHAT4P đến với học phần <strong>Cơ sở hạ tầng khóa công khai (Public
+Key Infrastructure - PKI)</strong>.</p>
+<p>Học phần này được thiết kế theo chuẩn đào tạo sau đại học tiên tiến,
+định hướng ứng dụng thực chiến chuyên sâu dành cho các kỹ sư, chuyên gia
+an ninh mạng đang công tác tại các tập đoàn công nghệ, viện nghiên cứu,
+trung tâm SOC, ngân hàng và cơ quan an ninh. Mục tiêu tối thượng của học
+phần không chỉ dừng lại ở lý thuyết mật mã trừu tượng, mà tập trung vào
+việc <strong>làm chủ kiến trúc PKI cấp doanh nghiệp và quốc
+gia</strong>, tự động hóa vòng đời chứng thư số (ACME/Step-CA), tích hợp
+mô-đun phần cứng bảo mật (HSM/PKCS#11), triển khai mTLS Gateway trong mô
+hình Zero Trust, và sẵn sàng lộ trình chuyển dịch sang <strong>Mật mã
+Hậu lượng tử (Post-Quantum Cryptography - PQC)</strong> theo các đạo
+luật và tiêu chuẩn mới nhất (NIST FIPS 203/204/205, Quyết định
+1875/QĐ-TTg).</p>
+<p>Tài liệu này là <strong>Cẩm nang duy nhất</strong> tổng hợp toàn bộ
+thông tin học vụ, quy chế, lộ trình, hướng dẫn kỹ thuật và tiêu chí đánh
+giá mà học viên cần nắm vững trong suốt 9 tuần học.</p>
+<hr />
+<h2 id="đội-ngũ-điều-phối-kênh-liên-lạc-học-vụ">1. ĐỘI NGŨ ĐIỀU PHỐI
+&amp; KÊNH LIÊN LẠC HỌC VỤ</h2>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Vai trò</th>
+<th style="text-align: left;">Nhân sự</th>
+<th style="text-align: left;">Đơn vị / Chuyên môn</th>
+<th style="text-align: left;">Kênh liên hệ</th>
+<th style="text-align: left;">Nhiệm vụ chính</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Giảng viên phụ trách</strong></td>
+<td style="text-align: left;"><strong>Nguyễn An Khương</strong></td>
+<td style="text-align: left;">Khoa Khoa học &amp; Kỹ thuật Máy tính,
+Trường ĐHBK Tp. HCM</td>
+<td style="text-align: left;">nakhuong@hcmut.edu.vn</td>
+<td style="text-align: left;">Phụ trách toàn diện nội dung học thuật,
+giảng dạy, định hướng đề tài và đánh giá tổng kết</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Trợ giảng học phần
+(TA)</strong></td>
+<td style="text-align: left;"><strong>Mr. Nguyễn Hữu Hoàng
+Huy</strong></td>
+<td style="text-align: left;">Cựu học viên CHAT3P, KMA TP.HCM</td>
+<td style="text-align: left;"><a
+href="https://www.linkedin.com/in/nguyen-huu-hoang-huy-abb138366/">LinkedIn
+Profile</a></td>
+<td style="text-align: left;">Hỗ trợ hạ tầng Docker/OpenSSL, giải đáp kỹ
+thuật Lab, kiểm tra Pull Request và chấm chéo</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Lớp trưởng CHAT4P</strong></td>
+<td style="text-align: left;"><strong>HV Tăng Triển Nguyên</strong></td>
+<td style="text-align: left;">Lớp CHAT4P</td>
+<td style="text-align: left;">triennguyen1911@gmail.com</td>
+<td style="text-align: left;">Điều phối thông báo lớp, tổng hợp danh
+sách nhóm chuyên đề, cầu nối giữa lớp và Ban giảng dạy</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="chuẩn-đầu-ra-học-phần-course-learning-outcomes---clo">2. CHUẨN
+ĐẦU RA HỌC PHẦN (COURSE LEARNING OUTCOMES - CLO)</h2>
+<p>Hoàn thành học phần này, học viên đạt được các năng lực sau theo
+thang đo Bloom:</p>
+<ul>
+<li><strong>CLO 1 (Hiểu &amp; Phân tích - Bloom 4):</strong> Phân tích
+sâu sắc cấu trúc ASN.1 DER, thẩm định tính hợp lệ của chuỗi chứng thư số
+X.509v3 theo RFC 5280, nhận diện các điểm yếu logic trong quá trình xác
+thực chuỗi (path validation vulnerabilities).</li>
+<li><strong>CLO 2 (Thiết kế &amp; Tích hợp - Bloom 5):</strong> Thiết kế
+kiến trúc CA phân tầng (Two-Tier PKI: Root CA ngoại tuyến, Intermediate
+CA trực tuyến) đáp ứng yêu cầu bảo mật doanh nghiệp; tự động hóa cấp
+phát qua giao thức ACME (RFC 8555).</li>
+<li><strong>CLO 3 (Ứng dụng &amp; Vận hành - Bloom 4):</strong> Triển
+khai cơ chế kiểm tra trạng thái thu hồi chứng thư hiệu năng cao (CRL,
+OCSP, OCSP Stapling theo RFC 6960); tích hợp thiết bị phần cứng bảo mật
+qua chuẩn PKCS#11 (SoftHSMv2).</li>
+<li><strong>CLO 4 (Triển khai Hệ thống - Bloom 5):</strong> Xây dựng hệ
+thống mTLS Gateway bảo vệ kiến trúc Microservices theo mô hình Zero
+Trust, thiết lập kiểm tra định danh dịch vụ nghiêm ngặt.</li>
+<li><strong>CLO 5 (Nghiên cứu &amp; Chuyển dịch - Bloom 6):</strong>
+Thực nghiệm đo lường hiệu năng và đánh giá lộ trình chuyển đổi Web PKI
+sang Mật mã Hậu lượng tử với các thuật toán chữ ký ML-DSA (RFC 9881) và
+trao đổi khóa ML-KEM theo FIPS 203/204/205.</li>
+<li><strong>CLO 6 (Làm việc nhóm &amp; Phản biện - Bloom 5):</strong>
+Làm việc nhóm chuyên môn cao, thực hiện phản biện kỹ thuật đối kháng,
+bảo vệ giải pháp trước hội đồng và tuân thủ liêm chính học thuật.</li>
+</ul>
+<hr />
+<h2 id="mô-hình-lớp-học-đảo-ngược-flipped-classroom-lab-first">3. MÔ
+HÌNH LỚP HỌC ĐẢO NGƯỢC (FLIPPED CLASSROOM &amp; LAB-FIRST)</h2>
+<p>Học phần triển khai mô hình <strong>Flipped Classroom &amp;
+Lab-First</strong> với nhịp độ vận hành chặt chẽ:</p>
+<ol type="1">
+<li><strong>Giai đoạn Tiền buổi học (Tại nhà / Cơ quan):</strong>
+<ul>
+<li>Nghiên cứu Slide, Handout &amp; Lecture Notes được phát hành trước
+tối thiểu 3 ngày.</li>
+<li>Kéo môi trường Docker của bài Lab mới và hoàn thành câu hỏi trinh
+sát (Reconnaissance Questions).</li>
+</ul></li>
+<li><strong>Giai đoạn Tại lớp học (5 giờ thực chiến):</strong>
+<ul>
+<li><strong>45–60 phút đầu:</strong> Tóm lược nguyên lý lõi, phân tích
+ca thực tế &amp; giải đáp thắc mắc.</li>
+<li><strong>180–200 phút tiếp theo:</strong> Toàn bộ lớp làm Lab thực
+hành. Giảng viên &amp; TA kiểm tra, hỗ trợ trực tiếp.</li>
+<li><strong>30–45 phút cuối:</strong> Debriefing ca điển hình &amp; đánh
+giá kết quả nghiệm thu tại lớp.</li>
+</ul></li>
+<li><strong>Giai đoạn Hậu buổi học (GitHub Evidence
+Repository):</strong>
+<ul>
+<li>Hoàn thiện mã nguồn &amp; báo cáo kỹ thuật.</li>
+<li>Mở Pull Request trên repo cá nhân để hệ thống CI tự động chạy kiểm
+thử.</li>
+</ul></li>
+</ol>
+<hr />
+<h2 id="lộ-trình-9-buổi-học-và-ma-trận-yêu-cầu">4. LỘ TRÌNH 9 BUỔI HỌC
+VÀ MA TRẬN YÊU CẦU</h2>
+<table>
+<colgroup>
+<col style="width: 19%" />
+<col style="width: 19%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">Buổi</th>
+<th style="text-align: center;">Ngày</th>
+<th style="text-align: left;">Chủ đề Lý thuyết</th>
+<th style="text-align: left;">Trọng tâm Thực hành Lab</th>
+<th style="text-align: left;">Tiêu chuẩn &amp; Công cụ</th>
+<th style="text-align: left;">Sản phẩm nộp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>S01</strong></td>
+<td style="text-align: center;">03/10</td>
+<td style="text-align: left;">Tổng quan PKI, Mô hình đe dọa &amp; Khung
+pháp lý</td>
+<td style="text-align: left;"><strong>Lab 0:</strong> Khởi tạo Evidence
+Repo, Docker Compose, Git signing</td>
+<td style="text-align: left;">QĐ 1875/QĐ-TTg, RFC 5280, Docker</td>
+<td style="text-align: left;">PR Lab 0, Form HV</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S02</strong></td>
+<td style="text-align: center;">10/10</td>
+<td style="text-align: left;">X.509, Cấu trúc ASN.1 &amp; Chuỗi tin
+cậy</td>
+<td style="text-align: left;"><strong>Lab 1:</strong> Mổ xẻ ASN.1, Khai
+thác lỗi chuỗi &amp; ZLint Audit</td>
+<td style="text-align: left;">RFC 5280, OpenSSL 3.5, dumpasn1,
+ZLint</td>
+<td style="text-align: left;">PR Lab 1 + Log ZLint</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S03</strong></td>
+<td style="text-align: center;">17/10</td>
+<td style="text-align: left;">Quản trị CA &amp; Vòng đời chứng thư</td>
+<td style="text-align: left;"><strong>Lab 2:</strong> Xây dựng CA 2 tầng
+&amp; Cấp phát tự động ACME</td>
+<td style="text-align: left;">RFC 3647 (CP/CPS), RFC 8555, Step-CA</td>
+<td style="text-align: left;">PR Lab 2 + Script ACME</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S04</strong></td>
+<td style="text-align: center;">24/10</td>
+<td style="text-align: left;">Thu hồi chứng thư &amp; Quản lý khóa
+HSM</td>
+<td style="text-align: left;"><strong>Lab 3:</strong> Thu hồi CRL/OCSP
+&amp; Ký khóa qua SoftHSMv2</td>
+<td style="text-align: left;">RFC 6960 (OCSP), PKCS#11, SoftHSMv2</td>
+<td style="text-align: left;">PR Lab 3 + Log HSM</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S05</strong></td>
+<td style="text-align: center;">31/10</td>
+<td style="text-align: left;">Giao thức an toàn: TLS 1.3 &amp; mTLS
+Gateway</td>
+<td style="text-align: left;"><strong>Lab 4:</strong> Triển khai mTLS
+Gateway bảo vệ Microservices</td>
+<td style="text-align: left;">RFC 8446 (TLS 1.3), Envoy Proxy,
+Nginx</td>
+<td style="text-align: left;">PR Lab 4 + PCAP TLS</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S06</strong></td>
+<td style="text-align: center;">07/11</td>
+<td style="text-align: left;">Mật mã Hậu lượng tử &amp; Lộ trình chuyển
+đổi</td>
+<td style="text-align: left;"><strong>Lab 5:</strong> Benchmark ML-DSA
+(RFC 9881) &amp; ML-KEM vs RSA</td>
+<td style="text-align: left;">FIPS 203/204/205, OpenSSL 3.5 PQC</td>
+<td style="text-align: left;">PR Lab 5 + Báo cáo PQC</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S07</strong></td>
+<td style="text-align: center;">14/11</td>
+<td style="text-align: left;">Bảo vệ Đồ án Chuyên đề Nhóm (Đợt 1)</td>
+<td style="text-align: left;">Thuyết trình &amp; Phản biện kỹ thuật:
+Nhóm 1 &amp; Nhóm 2</td>
+<td style="text-align: left;">Tiêu chí Rubric KTHP, Phiếu chấm S07</td>
+<td style="text-align: left;">Repo Đồ án + Phiếu S07</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S08</strong></td>
+<td style="text-align: center;">21/11</td>
+<td style="text-align: left;">Bảo vệ Đồ án Chuyên đề Nhóm (Đợt 2)</td>
+<td style="text-align: left;">Thuyết trình &amp; Phản biện kỹ thuật:
+Nhóm 3 &amp; Nhóm 4</td>
+<td style="text-align: left;">Tiêu chí Rubric KTHP, Phiếu chấm S08</td>
+<td style="text-align: left;">Repo Đồ án + Phiếu S08</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S09</strong></td>
+<td style="text-align: center;">28/11</td>
+<td style="text-align: left;">Bảo vệ Đồ án (Đợt 3) &amp; Đối soát Điểm
+tổng kết</td>
+<td style="text-align: left;">Thuyết trình Nhóm 5, Chấm chéo chéo cánh
+&amp; Ký bảng điểm</td>
+<td style="text-align: left;">Quy chế khảo thí KMA, Biên bản kết
+thúc</td>
+<td style="text-align: left;">Bảng đối soát điểm S09</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="quy-chế-đánh-giá-công-thức-điểm-kma-chuẩn">5. QUY CHẾ ĐÁNH GIÁ
+&amp; CÔNG THỨC ĐIỂM KMA CHUẨN</h2>
+<p>Cơ cấu điểm số tuân thủ nghiêm ngặt quy chế của Học viện Kỹ thuật Mật
+mã (khớp 100% với tệp <code>Bang diem lop CHAT4P.xlsx</code>):</p>
+<ul>
+<li><strong>Điểm Học phần (Cột Q - DHP):</strong>
+<code>ROUND(DQT*0.3 + KTHP*0.7, 1)</code></li>
+<li><strong>Điểm Quá trình (Cột G &amp; O - DQT):</strong>
+<code>ROUND(TP1*0.7 + TP2*0.3, 1)</code></li>
+<li><strong>Điểm Thành phần 1 (Cột E - TP1, trọng số 70% Điểm Quá trình
+= 21% Điểm Học phần):</strong>
+<ul>
+<li>Điểm trung bình cộng của 5 bài thực hành Lab cá nhân (S02 đến S06):
+<code>TP1 = (Lab1 + Lab2 + Lab3 + Lab4 + Lab5) / 5</code>.</li>
+<li>Mỗi bài Lab chấm theo thang điểm 10 dựa trên kịch bản kiểm thử tự
+động <code>verify.sh</code> (80%) và phần trả lời phản biện trực tiếp
+tại lớp (20%).</li>
+</ul></li>
+<li><strong>Điểm Thành phần 2 (Cột F - TP2, trọng số 30% Điểm Quá trình
+= 9% Điểm Học phần):</strong>
+<ul>
+<li>Đánh giá mức độ chuyên cần tham gia đủ 9 buổi học tại giảng đường
+(kết hợp dữ liệu điểm danh thực tế và kết quả các bài Mini-Quiz đầu
+giờ).</li>
+</ul></li>
+<li><strong>Điểm Thi Kết thúc Học phần (Cột P - KTHP, trọng số 70% Điểm
+Học phần):</strong>
+<ul>
+<li>Đánh giá Đồ án Chuyên đề Kỹ thuật theo nhóm, bảo vệ trực tiếp trước
+Hội đồng trong các buổi S07, S08, S09.</li>
+<li>Cơ cấu thành phần KTHP:
+<ul>
+<li><strong>Mã nguồn &amp; Demo vận hành hệ thống (35%):</strong> Hệ
+thống chạy thực tế, đúng chuẩn kiến trúc bảo mật, có kịch bản chạy thử
+tự động qua Docker.</li>
+<li><strong>Báo cáo Kỹ thuật Chuyên đề (25%):</strong> Trình bày rõ ràng
+bài toán, mô hình đe dọa, thiết kế kiến trúc, phân tích mã nguồn và thảo
+luận kết quả thực nghiệm.</li>
+<li><strong>Thuyết trình &amp; Đối đáp Phản biện (25%):</strong> Khả
+năng trình bày giải pháp tự tin, trả lời chính xác các câu hỏi chất vấn
+của Hội đồng.</li>
+<li><strong>Điểm Đánh giá Chấm chéo giữa các Nhóm (15%):</strong> Điểm
+số từ phiếu đánh giá khách quan của các nhóm phản biện đối kháng.</li>
+</ul></li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="hướng-dẫn-thiết-lập-môi-trường-kỹ-thuật">6. HƯỚNG DẪN THIẾT LẬP
+MÔI TRƯỜNG KỸ THUẬT</h2>
+<p>Để đảm bảo đồng bộ 100% môi trường thực hành và tránh lỗi phụ thuộc
+hệ điều hành máy trạm, học viên bắt buộc sử dụng hạ tầng Docker chuẩn do
+Ban giảng dạy cung cấp:</p>
+<h3 id="yêu-cầu-cấu-hình-máy-trạm">6.1. Yêu cầu cấu hình máy trạm</h3>
+<ul>
+<li>Hệ điều hành: Linux (Ubuntu 22.04+), macOS (Apple Silicon / Intel),
+hoặc Windows 11 với WSL2.</li>
+<li>Phần mềm bắt buộc:
+<ul>
+<li>Git 2.30+</li>
+<li>Docker Desktop 4.20+ hoặc Docker Engine 24.0+ &amp; Docker Compose
+v2.20+</li>
+</ul></li>
+<li>Bộ nhớ RAM: Khuyến nghị tối thiểu 8GB RAM (16GB cho bài Lab 4 và Lab
+5).</li>
+<li>Dung lượng đĩa trống: Tối thiểu 20GB.</li>
+</ul>
+<h3 id="các-bước-khởi-tạo-nhanh">6.2. Các bước khởi tạo nhanh</h3>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Clone repository học liệu chung</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/KMA-PKI-261/PKI-261-Courseware.git</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> PKI-261-Courseware</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Khởi tạo môi trường Docker chuẩn hóa</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> 1_NGUON-HOC-LIEU/labs/lab0-onboarding</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose build</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up <span class="at">-d</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Kiểm tra các công cụ cốt lõi bên trong container</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose exec pki-box openssl version</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Kết quả yêu cầu: OpenSSL 3.5.0 hoặc mới hơn có hỗ trợ PQC</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose exec pki-box dumpasn1 <span class="at">-v</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose exec pki-box zlint <span class="at">-v</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose exec pki-box softhsm2-util <span class="at">-v</span></span></code></pre></div>
+<hr />
+<h2 id="đặc-tả-chi-tiết-5-bài-thực-hành-lab-cá-nhân">7. ĐẶC TẢ CHI TIẾT
+5 BÀI THỰC HÀNH LAB CÁ NHÂN</h2>
+<h3
+id="lab-1-mổ-xẻ-asn.1-thẩm-định-chuỗi-chứng-thư-số-x.509-buổi-s02">Lab
+1: Mổ xẻ ASN.1 &amp; Thẩm định Chuỗi Chứng thư số X.509 (Buổi S02)</h3>
+<ul>
+<li><strong>Mục tiêu:</strong> Nắm vững cấu trúc nhị phân ASN.1 DER, mổ
+xẻ các trường mở rộng X.509v3 (Basic Constraints, Key Usage, Extended
+Key Usage, SAN, AIA), khai thác các lỗi logic trong quá trình thẩm định
+chuỗi và kiểm toán tuân thủ bằng ZLint.</li>
+<li><strong>Yêu cầu kỹ thuật:</strong>
+<ol type="1">
+<li>Phân tích tệp chứng chỉ nhị phân bị hỏng trường mở rộng và sửa lại
+bằng ASN.1 parser.</li>
+<li>Dựng chuỗi chứng thực gồm Root CA, Intermediate CA và Server
+Certificate; mô phỏng lỗi thiếu cờ isCA=true tại Intermediate CA và
+chứng minh lỗi Path Validation.</li>
+<li>Chạy công cụ ZLint kiểm toán chứng chỉ phát hành, đạt kết quả: 0 Lỗi
+nghiêm trọng (Errors), 0 Cảnh báo vi phạm RFC 5280.</li>
+</ol></li>
+<li><strong>Lệnh kiểm thử:</strong> <code>bash verify.sh</code> -&gt;
+Tất cả các test cases đạt [PASS].</li>
+</ul>
+<h3
+id="lab-2-thiết-kế-tự-động-hóa-hạ-tầng-ca-2-tầng-với-step-ca-acme-buổi-s03">Lab
+2: Thiết kế &amp; Tự động hóa Hạ tầng CA 2 Tầng với Step-CA &amp; ACME
+(Buổi S03)</h3>
+<ul>
+<li><strong>Mục tiêu:</strong> Thiết lập kiến trúc CA 2 tầng đạt chuẩn
+doanh nghiệp (Root CA ngoại tuyến và Subordinate CA trực tuyến), tự động
+hóa cấp phát chứng thư qua giao thức ACME (RFC 8555).</li>
+<li><strong>Yêu cầu kỹ thuật:</strong>
+<ol type="1">
+<li>Khởi tạo Root CA tự ký với thuật toán ECDSA P-384, thời hạn 10 năm,
+cấu hình lưu trữ cách ly.</li>
+<li>Khởi tạo Intermediate CA do Root ký, nạp vào dịch vụ step-ca.</li>
+<li>Kích hoạt ACME Provisioner trên cổng 9000. Cấu hình Certbot hoặc
+step acme tự động yêu cầu cấp phát chứng thư cho domain nội bộ
+api.kma.internal với xác thực HTTP-01 / DNS-01.</li>
+<li>Viết kịch bản tự động gia hạn (Auto-renewal) trước khi chứng thư hết
+hạn.</li>
+</ol></li>
+<li><strong>Lệnh kiểm thử:</strong> <code>bash verify.sh</code> -&gt;
+Kiểm tra chuỗi cấp phát và dịch vụ ACME đạt [PASS].</li>
+</ul>
+<h3
+id="lab-3-cơ-chế-thu-hồi-chứng-thư-crlocsp-tích-hợp-softhsmv2-buổi-s04">Lab
+3: Cơ chế Thu hồi Chứng thư (CRL/OCSP) &amp; Tích hợp SoftHSMv2 (Buổi
+S04)</h3>
+<ul>
+<li><strong>Mục tiêu:</strong> Triển khai hạ tầng thu hồi chứng chỉ số
+(CRL phân tán và OCSP Responder theo RFC 6960), cấu hình OCSP Stapling
+trên Reverse Proxy và bảo vệ khóa riêng CA bằng mô-đun HSM ảo (SoftHSMv2
+qua PKCS#11).</li>
+<li><strong>Yêu cầu kỹ thuật:</strong>
+<ol type="1">
+<li>Cấu hình SoftHSMv2 với SO PIN và User PIN an toàn. Tạo cặp khóa ký
+CA trực tiếp bên trong Hardware Security Module.</li>
+<li>Cấu hình OpenSSL PKCS#11 engine (libpkcs11.so) để thực hiện thao tác
+ký số chứng chỉ mà không bao giờ trích xuất khóa riêng ra bộ nhớ hệ
+thống.</li>
+<li>Phát hành danh sách thu hồi CRL và khởi chạy dịch vụ OCSP Responder
+trực tuyến.</li>
+<li>Thực hiện thu hồi chứng thư nghi vấn (Compromised); kiểm chứng
+client từ chối kết nối bằng truy vấn OCSP trực tiếp và kiểm tra OCSP
+Stapling cache.</li>
+</ol></li>
+<li><strong>Lệnh kiểm thử:</strong> <code>bash verify.sh</code> -&gt;
+SoftHSM token signing và OCSP Revoked status đạt [PASS].</li>
+</ul>
+<h3 id="lab-4-kiến-trúc-mtls-gateway-cho-microservices-buổi-s05">Lab 4:
+Kiến trúc mTLS Gateway cho Microservices (Buổi S05)</h3>
+<ul>
+<li><strong>Mục tiêu:</strong> Triển khai mô hình bảo mật Zero Trust cho
+hệ thống phân tán sử dụng Mutual TLS (mTLS) trên nền tảng Envoy Proxy /
+Nginx, phân quyền truy cập dịch vụ dựa trên chứng thư định danh.</li>
+<li><strong>Yêu cầu kỹ thuật:</strong>
+<ol type="1">
+<li>Thiết lập cụm 3 microservices (Frontend, Order Service, Payment
+Service).</li>
+<li>Triển khai Envoy Proxy làm Ingress/Sidecar Gateway thực thi mTLS bắt
+buộc giữa các dịch vụ.</li>
+<li>Cấu hình kiểm tra chứng thực client nghiêm ngặt: Xác thực chuỗi CA,
+kiểm tra trường SAN URI (SPIFFE ID), và từ chối mọi kết nối không có
+chứng thư hợp lệ.</li>
+<li>Bắt gói tin mạng bằng tcpdump và phân tích trên Wireshark, chứng
+minh toàn bộ dữ liệu trao đổi được mã hóa TLS 1.3 và định danh hai chiều
+an toàn.</li>
+</ol></li>
+<li><strong>Lệnh kiểm thử:</strong> <code>bash verify.sh</code> -&gt;
+Kết nối mTLS thành công, kết nối thiếu cert bị từ chối 403
+Forbidden.</li>
+</ul>
+<h3
+id="lab-5-mật-mã-hậu-lượng-tử-pqc---benchmark-ml-dsa-ml-kem-buổi-s06">Lab
+5: Mật mã Hậu lượng tử (PQC) - Benchmark ML-DSA &amp; ML-KEM (Buổi
+S06)</h3>
+<ul>
+<li><strong>Mục tiêu:</strong> Triển khai thực nghiệm các thuật toán mật
+mã hậu lượng tử mới nhất theo tiêu chuẩn NIST FIPS 203/204/205 và RFC
+9881, đánh giá độ trễ và kích thước chuỗi chứng thư số PQC so với
+RSA/ECC cổ điển.</li>
+<li><strong>Yêu cầu kỹ thuật:</strong>
+<ol type="1">
+<li>Sử dụng OpenSSL 3.5 biên dịch kèm thư viện liboqs để sinh cặp khóa
+và chứng chỉ số X.509 sử dụng thuật toán ML-DSA-44, ML-DSA-65, và
+ML-DSA-87.</li>
+<li>Thiết lập máy chủ thử nghiệm hỗ trợ cơ chế trao đổi khóa lai (Hybrid
+Key Exchange X25519 + ML-KEM-768).</li>
+<li>Viết kịch bản tự động đo lường và lập bảng so sánh hiệu năng 4 tiêu
+chí: (1) Kích thước khóa công khai/khóa riêng, (2) Kích thước chứng thư
+X.509, (3) Thời gian bắt tay TLS Handshake, (4) Tải CPU khi thực hiện
+1.000 kết nối đồng thời.</li>
+</ol></li>
+<li><strong>Lệnh kiểm thử:</strong> <code>bash verify.sh</code> -&gt;
+Toàn bộ chuỗi chứng thực PQC hợp lệ và báo cáo số liệu benchmark xuất
+thành công.</li>
+</ul>
+<hr />
+<h2 id="hướng-dẫn-đồ-án-chuyên-đề-nhóm-kết-thúc-học-phần---70">8. HƯỚNG
+DẪN ĐỒ ÁN CHUYÊN ĐỀ NHÓM (KẾT THÚC HỌC PHẦN - 70%)</h2>
+<h3 id="danh-sách-5-nhóm-kỹ-thuật-đã-đăng-ký-chính-thức">8.1. Danh sách
+5 Nhóm Kỹ thuật Đã Đăng ký Chính thức</h3>
+<p>Theo dữ liệu từ tệp đăng ký chính thức của lớp
+(<code>DS_Nhom_CHAT_4P_PKI.xlsx</code>), 15 học viên đã phân bổ vào 5
+nhóm (mỗi nhóm 3 thành viên):</p>
+<table>
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 15%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 15%" />
+<col style="width: 12%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">Nhóm</th>
+<th style="text-align: center;">Tên Nhóm</th>
+<th style="text-align: left;">Trưởng nhóm</th>
+<th style="text-align: left;">Thành viên nhóm</th>
+<th style="text-align: center;">Ngành</th>
+<th style="text-align: left;">Đơn vị công tác &amp; Lĩnh vực</th>
+<th style="text-align: center;">Buổi bảo vệ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>Nhóm 1</strong></td>
+<td style="text-align: center;"><strong>VAULT</strong></td>
+<td style="text-align: left;"><strong>Nguyễn Ngọc Hoài</strong></td>
+<td style="text-align: left;">Nguyễn Trần Hoàng Long<br>Nguyễn Đình
+Quân</td>
+<td style="text-align: center;">ATTT</td>
+<td style="text-align: left;">AgileOps (DevOps) / An ninh mạng THD / ĐH
+Nguyễn Tất Thành</td>
+<td style="text-align: center;"><strong>Buổi S07</strong> (14/11)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Nhóm 2</strong></td>
+<td style="text-align: center;"><strong>RootCA</strong></td>
+<td style="text-align: left;"><strong>Nguyễn Vĩnh Hiển</strong></td>
+<td style="text-align: left;">Nguyễn Ngọc Sơn<br>Nguyễn Trường Phú</td>
+<td style="text-align: center;">CNTT</td>
+<td style="text-align: left;">Dược Imexpharm / VinSmart Future / Cố vấn
+OWASP</td>
+<td style="text-align: center;"><strong>Buổi S07</strong> (14/11)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Nhóm 3</strong></td>
+<td style="text-align: center;"><strong>TMN Root of Trust</strong></td>
+<td style="text-align: left;"><strong>Võ Thông Minh</strong></td>
+<td style="text-align: left;">Tăng Triển Nguyên<br>Trần Minh Triết</td>
+<td style="text-align: center;">ATTT<br>CNTT</td>
+<td style="text-align: left;">Ngân hàng Nam Á / Getz Pharma (Lớp trưởng)
+/ OPSWAT</td>
+<td style="text-align: center;"><strong>Buổi S08</strong> (21/11)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Nhóm 4</strong></td>
+<td style="text-align: center;"><strong>CAP</strong></td>
+<td style="text-align: left;"><strong>Vũ Thị Diệu Anh</strong></td>
+<td style="text-align: left;">Diệp Kim Chi<br>Đoàn Quang Phúc</td>
+<td style="text-align: center;">CNTT<br>THƯD</td>
+<td style="text-align: left;">TMA Solutions / Digityze Asia / Trung tâm
+286 - Bộ Tư lệnh 86</td>
+<td style="text-align: center;"><strong>Buổi S08</strong> (21/11)</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>Nhóm 5</strong></td>
+<td style="text-align: center;"><strong>TYN</strong></td>
+<td style="text-align: left;"><strong>Võ Minh Nhật</strong></td>
+<td style="text-align: left;">Hồ Quốc Thái<br>Nguyễn Công Ý</td>
+<td style="text-align: center;">CNTT</td>
+<td style="text-align: left;">Đi học / Hitachi Digital Services / Ngân
+hàng ACB</td>
+<td style="text-align: center;"><strong>Buổi S09</strong> (28/11)</td>
+</tr>
+</tbody>
+</table>
+<p><em>Ghi chú:</em> Học viên Nguyễn Tuấn Anh (CHAT4P002) và Huỳnh Trần
+Trọng Nghĩa (CHAT4P011) được miễn học phần này theo quy định của Học
+viện, do đó lớp chính thức gồm 15 học viên chia đều vào đúng 5 nhóm
+chuyên đề (3 thành viên/nhóm).</p>
+<h3 id="danh-mục-5-chủ-đề-chuyên-sâu-đề-xuất">8.2. Danh mục 5 chủ đề
+chuyên sâu đề xuất</h3>
+<h3 id="quy-cách-hồ-sơ-nghiệm-thu-đồ-án">8.3. Quy cách hồ sơ nghiệm thu
+đồ án</h3>
+<p>Trước ngày bảo vệ tối thiểu 48 giờ, mỗi nhóm phải gửi Pull Request
+vào repository chính của tổ chức <code>KMA-PKI-261</code> chứa đầy đủ
+các thành phần: - Thư mục <code>/docs</code>: Báo cáo kỹ thuật định dạng
+Markdown và PDF (từ 25 đến 40 trang), chứa sơ đồ kiến trúc hệ thống,
+phân tích nguy cơ STRIDE, lược đồ thực thi và bảng đánh giá số liệu thực
+nghiệm. - Thư mục <code>/src</code>: Toàn bộ mã nguồn, cấu hình hệ
+thống, Docker Compose và file cấu hình bảo mật. - Tệp
+<code>README.md</code>: Hướng dẫn triển khai hệ thống One-Click Deploy
+với <code>docker compose up -d</code>. - Tệp
+<code>demo_script.sh</code>: Kịch bản trình diễn trực tiếp các tính năng
+an toàn cốt lõi.</p>
+<h3 id="ma-trận-chấm-chéo-đối-kháng">8.3. Ma trận chấm chéo đối
+kháng</h3>
+<p>Trong các buổi bảo vệ S07, S08, S09, nhóm phản biện đối kháng có
+nhiệm vụ lắng nghe, đặt tối thiểu 3 câu hỏi kỹ thuật hóc búa và đánh giá
+vào <strong>Phiếu chấm chéo nhóm</strong>. Điểm chấm chéo đóng góp 15%
+vào điểm KTHP của nhóm báo cáo.</p>
+<hr />
+<h2 id="quy-định-nộp-bài-github-liêm-chính-học-thuật">9. QUY ĐỊNH NỘP
+BÀI GITHUB &amp; LIÊM CHÍNH HỌC THUẬT</h2>
+<h3 id="quy-ước-đặt-tên-repository-và-nhánh">9.1. Quy ước đặt tên
+Repository và Nhánh</h3>
+<ul>
+<li>Mỗi học viên được cấp một repository cá nhân theo định dạng:
+<code>KMA-PKI-261/PKI-261-&lt;MSHV&gt;</code> (Ví dụ:
+<code>KMA-PKI-261/PKI-261-2601001</code>).</li>
+<li>Quy ước nhánh phát triển:
+<ul>
+<li>Nhánh <code>main</code>: Nhánh ổn định, chỉ chứa các phiên bản đã
+nghiệm thu.</li>
+<li>Nhánh bài Lab: <code>lab-1</code>, <code>lab-2</code>,
+<code>lab-3</code>, <code>lab-4</code>, <code>lab-5</code>.</li>
+</ul></li>
+<li>Nộp bài bằng cách tạo Pull Request từ nhánh <code>lab-x</code> vào
+<code>main</code>.</li>
+</ul>
+<h3 id="ký-số-git-commit-gpg-ssh-commit-signing">9.2. Ký số Git Commit
+(GPG / SSH Commit Signing)</h3>
+<p>Nhằm rèn luyện văn hóa an toàn thông tin chuyên nghiệp, toàn bộ
+commit nộp bài bắt buộc phải được ký số điện tử (Verified commit). Học
+viên cấu hình theo hướng dẫn:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cấu hình ký commit bằng SSH Key cá nhân</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.name <span class="st">&quot;Họ và Tên Học Viên&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.email <span class="st">&quot;email-hoc-vien@domain.com&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> gpg.format ssh</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> user.signingkey ~/.ssh/id_ed25519.pub</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> config <span class="at">--global</span> commit.gpgsign true</span></code></pre></div>
+<h3 id="liêm-chính-học-thuật-academic-integrity">9.3. Liêm chính học
+thuật (Academic Integrity)</h3>
+<ul>
+<li>Tuyệt đối nghiêm cấm sao chép nguyên văn mã nguồn, cấu hình hoặc báo
+cáo của người khác mà không trích dẫn nguồn rõ ràng.</li>
+<li>Mọi trường hợp gian lận hoặc nộp bài trùng lặp sẽ nhận điểm 0 cho
+bài thực hành tương ứng và bị ghi nhận biên bản học vụ.</li>
+<li>Học viên được khuyến khích sử dụng các công cụ trợ lý AI (như
+Claude, ChatGPT, Gemini) để hỗ trợ tìm kiếm tài liệu, giải thích cú pháp
+mã lệnh và hỗ trợ gỡ lỗi cú pháp, nhưng <strong>tuyệt đối không để AI
+làm thay tư duy kiến trúc và phải tự giải thích được từng dòng lệnh
+trước Giảng viên và Trợ giảng</strong>.</li>
+</ul>
+<hr />
+<h2 id="sổ-tay-gỡ-lỗi-kỹ-thuật-thực-chiến-troubleshooting-faqs">10. SỔ
+TAY GỠ LỖI KỸ THUẬT THỰC CHIẾN (TROUBLESHOOTING &amp; FAQS)</h2>
+<h3 id="faq-1-phiên-bản-openssl-trên-máy-chủ-không-hỗ-trợ-pqc">FAQ 1:
+Phiên bản OpenSSL trên máy chủ không hỗ trợ PQC?</h3>
+<ul>
+<li><strong>Nguyên nhân:</strong> Các bản phân phối Linux thông thường
+(như Ubuntu 22.04 LTS) mặc định đi kèm OpenSSL 3.0.x chưa tích hợp bộ
+thuật toán PQC (FIPS 203/204/205).</li>
+<li><strong>Khắc phục:</strong> Sử dụng container <code>pki-box</code>
+đi kèm trong thư mục <code>1_NGUON-HOC-LIEU/labs/</code> đã được cài đặt
+sẵn OpenSSL 3.5.0 kèm module liboqs.</li>
+</ul>
+<h3 id="faq-2-lỗi-cổng-mạng-docker-bị-chiếm-dụng-port-binding-error">FAQ
+2: Lỗi cổng mạng Docker bị chiếm dụng (Port Binding Error)?</h3>
+<ul>
+<li><strong>Hiện tượng:</strong>
+<code>Error response from daemon: driver failed programming external connectivity: bind: address already in use: 0.0.0.0:9000</code></li>
+<li><strong>Khắc phục:</strong> Kiểm tra tiến trình đang chiếm cổng bằng
+<code>lsof -i :9000</code> (macOS/Linux) hoặc
+<code>netstat -ano | findstr :9000</code> (Windows), sau đó dừng dịch vụ
+xung đột hoặc đổi cổng ánh xạ trong tệp
+<code>docker-compose.yml</code>.</li>
+</ul>
+<h3 id="faq-3-token-softhsm-bị-khóa-pin-do-nhập-sai-quá-nhiều-lần">FAQ
+3: Token SoftHSM bị khóa PIN do nhập sai quá nhiều lần?</h3>
+<ul>
+<li><p><strong>Hiện tượng:</strong> <code>CKR_PIN_LOCKED</code> khi gọi
+OpenSSL PKCS#11 engine.</p></li>
+<li><p><strong>Khắc phục:</strong> Xóa và khởi tạo lại token slot bằng
+lệnh:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">softhsm2-util</span> <span class="at">--delete-token</span> <span class="at">--token</span> <span class="st">&quot;KMA-PKI-Token&quot;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">softhsm2-util</span> <span class="at">--init-token</span> <span class="at">--slot</span> 0 <span class="at">--label</span> <span class="st">&quot;KMA-PKI-Token&quot;</span> <span class="at">--so-pin</span> 12345678 <span class="at">--pin</span> 1234</span></code></pre></div></li>
+</ul>
+<h3
+id="faq-4-trình-duyệt-từ-chối-kết-nối-mtls-với-lỗi-err_bad_ssl_client_auth_cert">FAQ
+4: Trình duyệt từ chối kết nối mTLS với lỗi
+<code>ERR_BAD_SSL_CLIENT_AUTH_CERT</code>?</h3>
+<ul>
+<li><p><strong>Nguyên nhân:</strong> File chứng thư cá nhân chưa được
+nhập vào Keychain của OS hoặc chưa export ra định dạng PKCS#12
+(<code>.p12</code> hoặc <code>.pfx</code>).</p></li>
+<li><p><strong>Khắc phục:</strong> Chuyển đổi chứng chỉ và khóa riêng
+sang định dạng PKCS#12:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> pkcs12 <span class="at">-export</span> <span class="at">-out</span> client.p12 <span class="at">-inkey</span> client.key <span class="at">-in</span> client.crt <span class="at">-certfile</span> ca.crt</span></code></pre></div>
+<p>Sau đó import file <code>client.p12</code> vào trình duyệt hoặc
+Keychain của hệ điều hành.</p></li>
+</ul>
+<hr />
+<hr />
+<h2
+id="ma-trận-ánh-xạ-giữa-9-buổi-học-và-5-chủ-đề-đồ-án-mapping-infographic">4.
+MA TRẬN ÁNH XẠ GIỮA 9 BUỔI HỌC VÀ 5 CHỦ ĐỀ ĐỒ ÁN (MAPPING
+INFOGRAPHIC)</h2>
+<p>Để học viên hình dung rõ ràng lộ trình học tập, từng buổi học lý
+thuyết và thực hành đều được thiết kế để trực tiếp cung cấp khối kiến
+thức và thành phần công nghệ cho 5 đề tài đồ án chuyên sâu:</p>
+<pre class="mermaid"><code>graph LR
+    subgraph SESSIONS[&quot;9 BUỔI HỌC LÝ THUYẾT &amp; PHÒNG LAB&quot;]
+        S1[&quot;S01: Khung Kiến trúc PKI &amp; Bề mặt Tấn công&quot;]
+        S2[&quot;S02: Cấu trúc X.509 v3, ASN.1 &amp; Mở rộng SAN&quot;]
+        S3[&quot;S03: CA Phân tầng, CP/CPS &amp; Step-CA ACME&quot;]
+        S4[&quot;S04: Thu hồi CRL, OCSP Stapling, CT Logs, ZLint&quot;]
+        S5[&quot;S05: Bảo vệ Khóa với SoftHSMv2 &amp; Chuyển dịch PQC&quot;]
+        S6[&quot;S06: Kiến trúc Zero Trust &amp; mTLS Gateway&quot;]
+        S7[&quot;S07: Đánh giá Giữa kỳ &amp; Thẩm định STRIDE&quot;]
+        S8[&quot;S08: Mô phỏng Tấn công AD CS &amp; Phòng thủ&quot;]
+        S9[&quot;S09: Bảo vệ Đồ án Cuối kỳ &amp; Nghiệm thu KMA&quot;]
+    end
+
+    subgraph TOPICS[&quot;5 CHỦ ĐỀ ĐỒ ÁN NHÓM CHUYÊN SÂU&quot;]
+        T1[&quot;&lt;b&gt;Chủ đề 1 (Nhóm 4 - CAP):&lt;/b&gt;&lt;br/&gt;Hạ tầng CA 2 tầng Step-CA &amp; ACME, CP/CPS&quot;]
+        T2[&quot;&lt;b&gt;Chủ đề 2 (Nhóm 1 - VAULT):&lt;/b&gt;&lt;br/&gt;Zero Trust &amp; mTLS Gateway với SoftHSMv2&quot;]
+        T3[&quot;&lt;b&gt;Chủ đề 3 (Nhóm 3 - TMN):&lt;/b&gt;&lt;br/&gt;Chuyển dịch PQC cho Web PKI (ML-DSA, ML-KEM)&quot;]
+        T4[&quot;&lt;b&gt;Chủ đề 4 (Nhóm 5 - TYN):&lt;/b&gt;&lt;br/&gt;Kiểm định ZLint, OCSP Stapling &amp; CT Logs&quot;]
+        T5[&quot;&lt;b&gt;Chủ đề 5 (Nhóm 2 - RootCA):&lt;/b&gt;&lt;br/&gt;Mô phỏng Tấn công &amp; Phòng thủ Hạ tầng PKI&quot;]
+    end
+
+    S1 --&gt; T1 &amp; T2 &amp; T3 &amp; T4 &amp; T5
+    S2 --&gt; T1 &amp; T3 &amp; T4
+    S3 --&gt; T1 &amp; T2
+    S4 --&gt; T4 &amp; T5
+    S5 --&gt; T2 &amp; T3
+    S6 --&gt; T2
+    S7 --&gt; T1 &amp; T2 &amp; T3 &amp; T4 &amp; T5
+    S8 --&gt; T5 &amp; T4
+    S9 --&gt; T1 &amp; T2 &amp; T3 &amp; T4 &amp; T5</code></pre>
+<h3 id="bảng-phân-tích-ma-trận-kế-thừa-tri-thức">Bảng Phân Tích Ma Trận
+Kế Thừa Tri Thức:</h3>
+<table>
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 27%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">Buổi học</th>
+<th>Nội dung Trọng tâm Buổi học</th>
+<th>Đóng góp Trực tiếp cho 5 Chủ đề Đồ án Nhóm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>S01</strong></td>
+<td>Bối cảnh thể chế (QĐ 1875), 3 mô hình PKI, nguyên tắc Root CA
+offline</td>
+<td><strong>Cả 5 Nhóm:</strong> Nền tảng thiết kế kiến trúc phân tầng,
+xác định ranh giới niềm tin và bề mặt tấn công.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S02</strong></td>
+<td>Giải phẫu ASN.1 DER, Basic Constraints, Key Usage, SAN</td>
+<td><strong>Nhóm 1, 3, 4, 5:</strong> Cấu hình chính xác tệp mở rộng
+OpenSSL, tạo chứng chỉ máy chủ có SAN, kiểm soát cờ CA.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S03</strong></td>
+<td>Khởi tạo CA 2 tầng, CP/CPS RFC 3647, Step-CA &amp; ACME RFC
+8555</td>
+<td><strong>Nhóm 4 (Trọng tâm) &amp; Nhóm 1:</strong> Xây dựng máy chủ
+Step-CA ACME tự động hóa; hoàn thiện bộ quy chế CP/CPS 9 mục.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S04</strong></td>
+<td>Thu hồi CRL v2, OCSP Responder, OCSP Stapling, CT Logs, ZLint</td>
+<td><strong>Nhóm 5 (Trọng tâm) &amp; Nhóm 2:</strong> Triển khai OCSP
+Responder thời gian thực, tích hợp linter ZLint vào CI/CD.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S05</strong></td>
+<td>Cryptoki API PKCS#11, Token SoftHSMv2, Bộ chuẩn PQC NIST (FIPS
+203/204)</td>
+<td><strong>Nhóm 3 (Trọng tâm) &amp; Nhóm 1:</strong> Nhóm 3 làm chủ
+OpenSSL 3.5 + liboqs; Nhóm 1 tích hợp SoftHSMv2 lưu khóa CA.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S06</strong></td>
+<td>Zero Trust (NIST SP 800-207), mTLS 2 chiều, định danh SPIFFE/SPIRE,
+Envoy Gateway</td>
+<td><strong>Nhóm 1 (Trọng tâm):</strong> Dựng cổng mTLS Gateway xác thực
+danh tính client dựa trên SAN URI SPIFFE ID.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S07</strong></td>
+<td>Đánh giá tiến độ giữa kỳ, mô hình đe dọa STRIDE, chấm chéo ngang
+hàng</td>
+<td><strong>Cả 5 Nhóm:</strong> Thẩm định thiết kế kỹ thuật, rà soát mô
+hình STRIDE và hoàn thành 50% khối lượng mã nguồn.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S08</strong></td>
+<td>Khai thác lỗ hổng cấu hình AD CS (ESC1/ESC8), Rogue CA, Phòng thủ đa
+tầng</td>
+<td><strong>Nhóm 2 (Trọng tâm) &amp; Nhóm 5:</strong> Mô phỏng chuỗi tấn
+công chiếm quyền quản trị và xây dựng bộ lọc phòng ngự.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S09</strong></td>
+<td>Demo hệ thống trực tiếp trên Docker, vấn đáp chuyên sâu, đối soát
+bảng điểm KMA</td>
+<td><strong>Cả 5 Nhóm:</strong> Báo cáo tổng kết đồ án, bàn giao mã
+nguồn hoàn chỉnh và nghiệm thu kết quả học tập.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2
+id="ý-nghĩa-khóa-ssh-public-key-tư-duy---năng-lực-cốt-lõi-của-môn-học">5.
+Ý NGHĨA KHÓA SSH PUBLIC KEY &amp; TƯ DUY - NĂNG LỰC CỐT LÕI CỦA MÔN
+HỌC</h2>
+<h3 id="khóa-ssh-public-key-dùng-để-làm-gì">5.1. Khóa SSH Public Key
+Dùng để Làm Gì?</h3>
+<p>Trong học phần này, cặp khóa SSH (khuyến nghị thuật toán
+<strong>Ed25519</strong>) không chỉ là một công cụ tiện ích mà là hiện
+thân trực quan của mật mã bất đối xứng trong môi trường vận hành thực
+tế: 1. <strong>Xác thực Không Cần Mật khẩu (Asymmetric
+Authentication):</strong> Thay vì gửi mật khẩu dạng văn bản rõ qua mạng,
+SSH sử dụng giao thức bắt tay thử thách - đáp ứng (Challenge-Response):
+Máy chủ gửi một thông điệp ngẫu nhiên, máy trạm dùng khóa bí mật
+(<code>id_ed25519</code>) để ký số và máy chủ dùng khóa công khai
+(<code>id_ed25519.pub</code>) trên GitHub để xác minh. Mật khẩu không
+bao giờ rời khỏi máy của học viên. 2. <strong>Ký Số Commit Bảo đảm Tính
+Toàn vẹn (Cryptographic Non-Repudiation):</strong> Học viên cấu hình Git
+để ký số lên từng commit (<code>git commit -S</code>). GitHub sẽ hiển
+thị huy hiệu xanh <strong>Verified</strong>, chứng minh toán học rằng
+commit đó đích thực do chính học viên tạo ra, ngăn chặn hoàn toàn việc
+một người mạo danh email của người khác để commit mã nguồn bừa bãi. 3.
+<strong>Quản trị Máy chủ Phân tán &amp; Zero Trust Bastion
+Host:</strong> Cặp khóa SSH là tấm thẻ định danh tối thượng để kỹ sư
+truy cập an toàn vào máy chủ CA ngoại tuyến, container kiểm thử và cổng
+quản trị hạ tầng mật mã.</p>
+<h3 id="môn-học-này-huấn-luyện-tư-duy-kỹ-năng-gì">5.2. Môn Học Này Huấn
+Luyện Tư Duy &amp; Kỹ Năng Gì?</h3>
+<p>Học phần hướng tới việc đào tạo học viên trở thành những <strong>Kỹ
+sư Hạ tầng Mật mã Thực chiến (Systems Cryptographic Engineers)</strong>
+với 4 trụ cột năng lực:</p>
+<pre class="mermaid"><code>graph TD
+    Core[&quot;4 TRỤ CỘT TƯ DUY &amp; NĂNG LỰC MÔN HỌC&quot;]
+
+    Core --&gt; P1[&quot;1. Kỹ nghệ Mật mã Tầng Hệ thống&lt;br/&gt;(Systems Cryptographic Engineering)&lt;br/&gt;Không chỉ học công thức toán trên bảng, mà lập trình, biên dịch thư viện C,&lt;br/&gt;cấu hình engine OpenSSL, tương tác thiết bị HSM và vận hành container.&quot;]
+    
+    Core --&gt; P2[&quot;2. Tư duy Chuỗi Tin cậy &amp; Không Tin tưởng Mù quáng&lt;br/&gt;(Root-of-Trust &amp; Zero-Trust Thinking)&lt;br/&gt;Mọi thực thể, kết nối đều phải xác thực qua chuỗi chứng thư hợp lệ.&lt;br/&gt;Hiểu sâu sắc cách phân rã niềm tin và phòng ngự trước sự thỏa hiệp CA.&quot;]
+    
+    Core --&gt; P3[&quot;3. Khả năng Chuyển dịch &amp; Thích ứng Mật mã&lt;br/&gt;(Crypto-Agility &amp; Post-Quantum Readiness)&lt;br/&gt;Tư duy thiết kế hệ thống có tính module hóa cao, sẵn sàng chuyển đổi&lt;br/&gt;sang thuật toán kháng lượng tử (PQC) mà không làm sụp đổ hạ tầng đang chạy.&quot;]
+    
+    Core --&gt; P4[&quot;4. Tính Minh bạch Kiểm toán &amp; Chống Chối bỏ&lt;br/&gt;(Formal Auditability &amp; Compliance Mindset)&lt;br/&gt;Mọi hành vi cấp phát, thu hồi đều phải để lại bằng chứng mật mã (CT Logs, SCT).&lt;br/&gt;Kỹ năng soạn thảo văn bản CP/CPS và kiểm định chuẩn mực quốc tế.&quot;]</code></pre>
+<hr />
+<h2
+id="danh-mục-kho-tham-khảo-chuẩn-quốc-tế-gold-standard-repositories">6.
+DANH MỤC KHO THAM KHẢO CHUẨN QUỐC TẾ (GOLD STANDARD REPOSITORIES)</h2>
+<p>Để hoàn thiện đồ án đạt chất lượng xuất sắc, học viên từng nhóm cần
+chủ động nghiên cứu cấu trúc mã nguồn của các dự án nguồn mở chuẩn mực
+thế giới:</p>
+<ul>
+<li><strong>Chủ đề 1 (CA Hierarchy, Step-CA &amp; ACME):</strong>
+<ul>
+<li><code>smallstep/certificates</code>: <a
+href="https://github.com/smallstep/certificates">github.com/smallstep/certificates</a>
+— Máy chủ CA chuẩn mực phục vụ Zero Trust và ACME.</li>
+<li><code>certbot/certbot</code>: <a
+href="https://github.com/certbot/certbot">github.com/certbot/certbot</a>
+— Client ACME chính thức của tổ chức Electronic Frontier Foundation
+(EFF).</li>
+<li><code>letsencrypt/boulder</code>: <a
+href="https://github.com/letsencrypt/boulder">github.com/letsencrypt/boulder</a>
+— Hệ thống máy chủ ACME backend quy mô toàn cầu của Let’s Encrypt.</li>
+</ul></li>
+<li><strong>Chủ đề 2 (Zero Trust, mTLS Gateway &amp; SoftHSM):</strong>
+<ul>
+<li><code>opendnssec/SoftHSMv2</code>: <a
+href="https://github.com/opendnssec/SoftHSMv2">github.com/opendnssec/SoftHSMv2</a>
+— Hiện thực HSM mềm chuẩn PKCS#11 quốc tế.</li>
+<li><code>envoyproxy/envoy</code>: <a
+href="https://github.com/envoyproxy/envoy">github.com/envoyproxy/envoy</a>
+— Edge &amp; Service Proxy hàng đầu về mTLS, RBAC và định danh
+SPIFFE.</li>
+<li><code>hashicorp/vault</code>: <a
+href="https://github.com/hashicorp/vault">github.com/hashicorp/vault</a>
+— Hệ thống quản trị bí mật mật mã và PKI nội bộ doanh nghiệp.</li>
+</ul></li>
+<li><strong>Chủ đề 3 (PQC Migration for Web PKI):</strong>
+<ul>
+<li><code>open-quantum-safe/oqs-provider</code>: <a
+href="https://github.com/open-quantum-safe/oqs-provider">github.com/open-quantum-safe/oqs-provider</a>
+— Provider OpenSSL 3 cho thuật toán hậu lượng tử.</li>
+<li><code>open-quantum-safe/liboqs</code>: <a
+href="https://github.com/open-quantum-safe/liboqs">github.com/open-quantum-safe/liboqs</a>
+— Thư viện C nền tảng của Open Quantum Safe.</li>
+<li><code>open-quantum-safe/openssl</code>: <a
+href="https://github.com/open-quantum-safe/openssl">github.com/open-quantum-safe/openssl</a>
+— Nhánh fork OpenSSL hỗ trợ thử nghiệm PQC.</li>
+</ul></li>
+<li><strong>Chủ đề 4 (ZLint, OCSP Stapling &amp; CT Logs):</strong>
+<ul>
+<li><code>zmap/zlint</code>: <a
+href="https://github.com/zmap/zlint">github.com/zmap/zlint</a> — Công cụ
+kiểm định tuân thủ tiêu chuẩn X.509 hàng đầu thế giới.</li>
+<li><code>google/certificate-transparency-go</code>: <a
+href="https://github.com/google/certificate-transparency-go">github.com/google/certificate-transparency-go</a>
+— Thư viện CT Logs chuẩn của Google.</li>
+<li><code>cloudflare/cfssl</code>: <a
+href="https://github.com/cloudflare/cfssl">github.com/cloudflare/cfssl</a>
+— Bộ công cụ PKI và thẩm định chứng thư của Cloudflare.</li>
+</ul></li>
+<li><strong>Chủ đề 5 (Tấn công &amp; Phòng thủ Hạ tầng PKI):</strong>
+<ul>
+<li><code>GhostPack/Certify</code>: <a
+href="https://github.com/GhostPack/Certify">github.com/GhostPack/Certify</a>
+— Công cụ kiểm toán và khai thác lỗ hổng cấu hình AD CS kinh điển.</li>
+<li><code>ly4k/Certipy</code>: <a
+href="https://github.com/ly4k/Certipy">github.com/ly4k/Certipy</a> — Bộ
+công cụ tấn công và phân tích hạ tầng Active Directory Certificate
+Services.</li>
+<li><code>dirkjanm/mitm6</code>: <a
+href="https://github.com/dirkjanm/mitm6">github.com/dirkjanm/mitm6</a> —
+Công cụ khai thác DHCPv6 và NTLM relay tấn công xác thực CA.</li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="quy-chuẩn-đóng-góp-git-liêm-chính-khế-ước-bảo-vệ-nhánh">7. QUY
+CHUẨN ĐÓNG GÓP GIT, LIÊM CHÍNH &amp; KHẾ ƯỚC BẢO VỆ NHÁNH</h2>
+<h3 id="cam-kết-đóng-góp-cá-nhân-hàng-tuần-individual-commitment">7.1.
+Cam kết Đóng góp Cá nhân Hàng tuần (Individual Commitment)</h3>
+<ul>
+<li><strong>Nghiêm cấm hiện tượng “dồn bài một commit cuối kỳ”:</strong>
+Mỗi thành viên trong nhóm phải commit đều đặn hàng tuần tương ứng với
+phân công công việc.</li>
+<li><strong>Quy chuẩn Thông điệp Commit (Conventional Commits):</strong>
+<ul>
+<li><code>feat: ...</code> (Tính năng kỹ thuật mới: sinh khóa, thêm
+route ACME)</li>
+<li><code>fix: ...</code> (Sửa lỗi cấu hình, vá phần mở rộng SAN)</li>
+<li><code>docs: ...</code> (Cập nhật báo cáo kỹ thuật, vẽ sơ đồ
+Mermaid)</li>
+<li><code>test: ...</code> (Thêm kịch bản kiểm thử, chạy lệnh
+verify)</li>
+<li><code>bench: ...</code> (Số liệu đo lường định lượng, benchmark hiệu
+năng)</li>
+</ul></li>
+<li><strong>Quy trình Pull Request &amp; Review Chéo Nội bộ:</strong>
+<ul>
+<li>Mỗi tính năng phải được phát triển trên nhánh riêng:
+<code>feat/&lt;tên-tính-năng&gt;</code>.</li>
+<li>Sau khi hoàn tất, mở Pull Request vào nhánh chính
+<code>main</code>.</li>
+<li>Bắt buộc phải có <strong>ít nhất 1 thành viên khác trong nhóm review
+và approve</strong> mới được gộp mã nguồn (merge).</li>
+</ul></li>
+</ul>
+<h3
+id="khế-ước-xã-hội-bảo-vệ-toàn-vẹn-nhánh-anti-force-push-social-contract">7.2.
+Khế ước Xã hội Bảo vệ Toàn vẹn Nhánh (Anti-Force-Push Social
+Contract)</h3>
+<p>Trong trường hợp tài khoản người dùng không có quyền quản trị cấp
+Enterprise để thiết lập chính sách khóa nhánh cứng (Branch Protection
+Rules), toàn thể học viên các nhóm cam kết tuân thủ <strong>Khế ước Toàn
+vẹn Mã nguồn</strong>: 1. <strong>Tuyệt đối không sử dụng
+<code>git push --force</code> hoặc
+<code>--force-with-lease</code></strong> lên nhánh
+<code>main</code>/<code>master</code>. Hành vi force push sẽ phá hủy
+lịch sử commit và làm sai lệch dữ liệu đánh giá đóng góp cá nhân. 2.
+<strong>Duy trì Lịch sử Tuyến tính (Linear Git History):</strong> Ưu
+tiên gộp nhánh bằng <code>Squash and Merge</code> hoặc
+<code>Rebase and Merge</code> kèm thông điệp rõ ràng. 3. <strong>Đánh
+Dấu Thẻ Phiên bản (Release Tags):</strong> Mỗi mốc tiến độ phải được gắn
+tag minh bạch: *
+<code>git tag -a v0.1-s03 -m "Hoàn thành khởi tạo CA 2 tầng"</code> *
+<code>git tag -a v0.5-midterm -m "Mốc đánh giá tiến độ giữa kỳ S07"</code>
+*
+<code>git tag -a v1.0-final -m "Bản phát hành chính thức nghiệm thu cuối kỳ"</code>
+* <code>git push origin --tags</code> 4. <strong>Kiểm toán Dữ liệu Tự
+động:</strong> Công cụ thu bài tự động của Giảng viên
+(<code>3_CONG-CU/thu-bai.py</code>) sẽ quét toàn bộ nhật ký commit (tác
+giả, email, thời gian và số lượng dòng thay đổi) để chấm điểm công bằng
+cho từng cá nhân.</p>
+<hr />
+<h2
+id="ma-trận-ánh-xạ-giữa-9-buổi-học-và-5-chủ-đề-đồ-án-mapping-infographic-1">4.
+MA TRẬN ÁNH XẠ GIỮA 9 BUỔI HỌC VÀ 5 CHỦ ĐỀ ĐỒ ÁN (MAPPING
+INFOGRAPHIC)</h2>
+<p>Để học viên hình dung rõ ràng lộ trình học tập, từng buổi học lý
+thuyết và thực hành đều được thiết kế để trực tiếp cung cấp khối kiến
+thức và thành phần công nghệ cho 5 đề tài đồ án chuyên sâu:</p>
+<pre class="mermaid"><code>graph LR
+    subgraph SESSIONS[&quot;9 BUỔI HỌC LÝ THUYẾT &amp; PHÒNG LAB&quot;]
+        S1[&quot;S01: Khung Kiến trúc PKI &amp; Bề mặt Tấn công&quot;]
+        S2[&quot;S02: Cấu trúc X.509 v3, ASN.1 &amp; Mở rộng SAN&quot;]
+        S3[&quot;S03: CA Phân tầng, CP/CPS &amp; Step-CA ACME&quot;]
+        S4[&quot;S04: Thu hồi CRL, OCSP Stapling, CT Logs, ZLint&quot;]
+        S5[&quot;S05: Bảo vệ Khóa với SoftHSMv2 &amp; Chuyển dịch PQC&quot;]
+        S6[&quot;S06: Kiến trúc Zero Trust &amp; mTLS Gateway&quot;]
+        S7[&quot;S07: Đánh giá Giữa kỳ &amp; Thẩm định STRIDE&quot;]
+        S8[&quot;S08: Mô phỏng Tấn công AD CS &amp; Phòng thủ&quot;]
+        S9[&quot;S09: Bảo vệ Đồ án Cuối kỳ &amp; Nghiệm thu KMA&quot;]
+    end
+
+    subgraph TOPICS[&quot;5 CHỦ ĐỀ ĐỒ ÁN NHÓM CHUYÊN SÂU&quot;]
+        T1[&quot;&lt;b&gt;Chủ đề 1 (Nhóm 4 - CAP):&lt;/b&gt;&lt;br/&gt;Hạ tầng CA 2 tầng Step-CA &amp; ACME, CP/CPS&quot;]
+        T2[&quot;&lt;b&gt;Chủ đề 2 (Nhóm 1 - VAULT):&lt;/b&gt;&lt;br/&gt;Zero Trust &amp; mTLS Gateway với SoftHSMv2&quot;]
+        T3[&quot;&lt;b&gt;Chủ đề 3 (Nhóm 3 - TMN):&lt;/b&gt;&lt;br/&gt;Chuyển dịch PQC cho Web PKI (ML-DSA, ML-KEM)&quot;]
+        T4[&quot;&lt;b&gt;Chủ đề 4 (Nhóm 5 - TYN):&lt;/b&gt;&lt;br/&gt;Kiểm định ZLint, OCSP Stapling &amp; CT Logs&quot;]
+        T5[&quot;&lt;b&gt;Chủ đề 5 (Nhóm 2 - RootCA):&lt;/b&gt;&lt;br/&gt;Mô phỏng Tấn công &amp; Phòng thủ Hạ tầng PKI&quot;]
+    end
+
+    S1 --&gt; T1 &amp; T2 &amp; T3 &amp; T4 &amp; T5
+    S2 --&gt; T1 &amp; T3 &amp; T4
+    S3 --&gt; T1 &amp; T2
+    S4 --&gt; T4 &amp; T5
+    S5 --&gt; T2 &amp; T3
+    S6 --&gt; T2
+    S7 --&gt; T1 &amp; T2 &amp; T3 &amp; T4 &amp; T5
+    S8 --&gt; T5 &amp; T4
+    S9 --&gt; T1 &amp; T2 &amp; T3 &amp; T4 &amp; T5</code></pre>
+<h3 id="bảng-phân-tích-ma-trận-kế-thừa-tri-thức-1">Bảng Phân Tích Ma
+Trận Kế Thừa Tri Thức:</h3>
+<table>
+<colgroup>
+<col style="width: 45%" />
+<col style="width: 27%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">Buổi học</th>
+<th>Nội dung Trọng tâm Buổi học</th>
+<th>Đóng góp Trực tiếp cho 5 Chủ đề Đồ án Nhóm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><strong>S01</strong></td>
+<td>Bối cảnh thể chế (QĐ 1875), 3 mô hình PKI, nguyên tắc Root CA
+offline</td>
+<td><strong>Cả 5 Nhóm:</strong> Nền tảng thiết kế kiến trúc phân tầng,
+xác định ranh giới niềm tin và bề mặt tấn công.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S02</strong></td>
+<td>Giải phẫu ASN.1 DER, Basic Constraints, Key Usage, SAN</td>
+<td><strong>Nhóm 1, 3, 4, 5:</strong> Cấu hình chính xác tệp mở rộng
+OpenSSL, tạo chứng chỉ máy chủ có SAN, kiểm soát cờ CA.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S03</strong></td>
+<td>Khởi tạo CA 2 tầng, CP/CPS RFC 3647, Step-CA &amp; ACME RFC
+8555</td>
+<td><strong>Nhóm 4 (Trọng tâm) &amp; Nhóm 1:</strong> Xây dựng máy chủ
+Step-CA ACME tự động hóa; hoàn thiện bộ quy chế CP/CPS 9 mục.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S04</strong></td>
+<td>Thu hồi CRL v2, OCSP Responder, OCSP Stapling, CT Logs, ZLint</td>
+<td><strong>Nhóm 5 (Trọng tâm) &amp; Nhóm 2:</strong> Triển khai OCSP
+Responder thời gian thực, tích hợp linter ZLint vào CI/CD.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S05</strong></td>
+<td>Cryptoki API PKCS#11, Token SoftHSMv2, Bộ chuẩn PQC NIST (FIPS
+203/204)</td>
+<td><strong>Nhóm 3 (Trọng tâm) &amp; Nhóm 1:</strong> Nhóm 3 làm chủ
+OpenSSL 3.5 + liboqs; Nhóm 1 tích hợp SoftHSMv2 lưu khóa CA.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S06</strong></td>
+<td>Zero Trust (NIST SP 800-207), mTLS 2 chiều, định danh SPIFFE/SPIRE,
+Envoy Gateway</td>
+<td><strong>Nhóm 1 (Trọng tâm):</strong> Dựng cổng mTLS Gateway xác thực
+danh tính client dựa trên SAN URI SPIFFE ID.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S07</strong></td>
+<td>Đánh giá tiến độ giữa kỳ, mô hình đe dọa STRIDE, chấm chéo ngang
+hàng</td>
+<td><strong>Cả 5 Nhóm:</strong> Thẩm định thiết kế kỹ thuật, rà soát mô
+hình STRIDE và hoàn thành 50% khối lượng mã nguồn.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S08</strong></td>
+<td>Khai thác lỗ hổng cấu hình AD CS (ESC1/ESC8), Rogue CA, Phòng thủ đa
+tầng</td>
+<td><strong>Nhóm 2 (Trọng tâm) &amp; Nhóm 5:</strong> Mô phỏng chuỗi tấn
+công chiếm quyền quản trị và xây dựng bộ lọc phòng ngự.</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>S09</strong></td>
+<td>Demo hệ thống trực tiếp trên Docker, vấn đáp chuyên sâu, đối soát
+bảng điểm KMA</td>
+<td><strong>Cả 5 Nhóm:</strong> Báo cáo tổng kết đồ án, bàn giao mã
+nguồn hoàn chỉnh và nghiệm thu kết quả học tập.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2
+id="ý-nghĩa-khóa-ssh-public-key-tư-duy---năng-lực-cốt-lõi-của-môn-học-1">5.
+Ý NGHĨA KHÓA SSH PUBLIC KEY &amp; TƯ DUY - NĂNG LỰC CỐT LÕI CỦA MÔN
+HỌC</h2>
+<h3 id="khóa-ssh-public-key-dùng-để-làm-gì-1">5.1. Khóa SSH Public Key
+Dùng để Làm Gì?</h3>
+<p>Trong học phần này, cặp khóa SSH (khuyến nghị thuật toán
+<strong>Ed25519</strong>) không chỉ là một công cụ tiện ích mà là hiện
+thân trực quan của mật mã bất đối xứng trong môi trường vận hành thực
+tế: 1. <strong>Xác thực Không Cần Mật khẩu (Asymmetric
+Authentication):</strong> Thay vì gửi mật khẩu dạng văn bản rõ qua mạng,
+SSH sử dụng giao thức bắt tay thử thách - đáp ứng (Challenge-Response):
+Máy chủ gửi một thông điệp ngẫu nhiên, máy trạm dùng khóa bí mật
+(<code>id_ed25519</code>) để ký số và máy chủ dùng khóa công khai
+(<code>id_ed25519.pub</code>) trên GitHub để xác minh. Mật khẩu không
+bao giờ rời khỏi máy của học viên. 2. <strong>Ký Số Commit Bảo đảm Tính
+Toàn vẹn (Cryptographic Non-Repudiation):</strong> Học viên cấu hình Git
+để ký số lên từng commit (<code>git commit -S</code>). GitHub sẽ hiển
+thị huy hiệu xanh <strong>Verified</strong>, chứng minh toán học rằng
+commit đó đích thực do chính học viên tạo ra, ngăn chặn hoàn toàn việc
+một người mạo danh email của người khác để commit mã nguồn bừa bãi. 3.
+<strong>Quản trị Máy chủ Phân tán &amp; Zero Trust Bastion
+Host:</strong> Cặp khóa SSH là tấm thẻ định danh tối thượng để kỹ sư
+truy cập an toàn vào máy chủ CA ngoại tuyến, container kiểm thử và cổng
+quản trị hạ tầng mật mã.</p>
+<h3 id="môn-học-này-huấn-luyện-tư-duy-kỹ-năng-gì-1">5.2. Môn Học Này
+Huấn Luyện Tư Duy &amp; Kỹ Năng Gì?</h3>
+<p>Học phần hướng tới việc đào tạo học viên trở thành những <strong>Kỹ
+sư Hạ tầng Mật mã Thực chiến (Systems Cryptographic Engineers)</strong>
+với 4 trụ cột năng lực:</p>
+<pre class="mermaid"><code>graph TD
+    Core[&quot;4 TRỤ CỘT TƯ DUY &amp; NĂNG LỰC MÔN HỌC&quot;]
+
+    Core --&gt; P1[&quot;1. Kỹ nghệ Mật mã Tầng Hệ thống&lt;br/&gt;(Systems Cryptographic Engineering)&lt;br/&gt;Không chỉ học công thức toán trên bảng, mà lập trình, biên dịch thư viện C,&lt;br/&gt;cấu hình engine OpenSSL, tương tác thiết bị HSM và vận hành container.&quot;]
+    
+    Core --&gt; P2[&quot;2. Tư duy Chuỗi Tin cậy &amp; Không Tin tưởng Mù quáng&lt;br/&gt;(Root-of-Trust &amp; Zero-Trust Thinking)&lt;br/&gt;Mọi thực thể, kết nối đều phải xác thực qua chuỗi chứng thư hợp lệ.&lt;br/&gt;Hiểu sâu sắc cách phân rã niềm tin và phòng ngự trước sự thỏa hiệp CA.&quot;]
+    
+    Core --&gt; P3[&quot;3. Khả năng Chuyển dịch &amp; Thích ứng Mật mã&lt;br/&gt;(Crypto-Agility &amp; Post-Quantum Readiness)&lt;br/&gt;Tư duy thiết kế hệ thống có tính module hóa cao, sẵn sàng chuyển đổi&lt;br/&gt;sang thuật toán kháng lượng tử (PQC) mà không làm sụp đổ hạ tầng đang chạy.&quot;]
+    
+    Core --&gt; P4[&quot;4. Tính Minh bạch Kiểm toán &amp; Chống Chối bỏ&lt;br/&gt;(Formal Auditability &amp; Compliance Mindset)&lt;br/&gt;Mọi hành vi cấp phát, thu hồi đều phải để lại bằng chứng mật mã (CT Logs, SCT).&lt;br/&gt;Kỹ năng soạn thảo văn bản CP/CPS và kiểm định chuẩn mực quốc tế.&quot;]</code></pre>
+<hr />
+<h2
+id="danh-mục-kho-tham-khảo-chuẩn-quốc-tế-gold-standard-repositories-1">6.
+DANH MỤC KHO THAM KHẢO CHUẨN QUỐC TẾ (GOLD STANDARD REPOSITORIES)</h2>
+<p>Để hoàn thiện đồ án đạt chất lượng xuất sắc, học viên từng nhóm cần
+chủ động nghiên cứu cấu trúc mã nguồn của các dự án nguồn mở chuẩn mực
+thế giới:</p>
+<ul>
+<li><strong>Chủ đề 1 (CA Hierarchy, Step-CA &amp; ACME):</strong>
+<ul>
+<li><code>smallstep/certificates</code>: <a
+href="https://github.com/smallstep/certificates">github.com/smallstep/certificates</a>
+— Máy chủ CA chuẩn mực phục vụ Zero Trust và ACME.</li>
+<li><code>certbot/certbot</code>: <a
+href="https://github.com/certbot/certbot">github.com/certbot/certbot</a>
+— Client ACME chính thức của tổ chức Electronic Frontier Foundation
+(EFF).</li>
+<li><code>letsencrypt/boulder</code>: <a
+href="https://github.com/letsencrypt/boulder">github.com/letsencrypt/boulder</a>
+— Hệ thống máy chủ ACME backend quy mô toàn cầu của Let’s Encrypt.</li>
+</ul></li>
+<li><strong>Chủ đề 2 (Zero Trust, mTLS Gateway &amp; SoftHSM):</strong>
+<ul>
+<li><code>opendnssec/SoftHSMv2</code>: <a
+href="https://github.com/opendnssec/SoftHSMv2">github.com/opendnssec/SoftHSMv2</a>
+— Hiện thực HSM mềm chuẩn PKCS#11 quốc tế.</li>
+<li><code>envoyproxy/envoy</code>: <a
+href="https://github.com/envoyproxy/envoy">github.com/envoyproxy/envoy</a>
+— Edge &amp; Service Proxy hàng đầu về mTLS, RBAC và định danh
+SPIFFE.</li>
+<li><code>hashicorp/vault</code>: <a
+href="https://github.com/hashicorp/vault">github.com/hashicorp/vault</a>
+— Hệ thống quản trị bí mật mật mã và PKI nội bộ doanh nghiệp.</li>
+</ul></li>
+<li><strong>Chủ đề 3 (PQC Migration for Web PKI):</strong>
+<ul>
+<li><code>open-quantum-safe/oqs-provider</code>: <a
+href="https://github.com/open-quantum-safe/oqs-provider">github.com/open-quantum-safe/oqs-provider</a>
+— Provider OpenSSL 3 cho thuật toán hậu lượng tử.</li>
+<li><code>open-quantum-safe/liboqs</code>: <a
+href="https://github.com/open-quantum-safe/liboqs">github.com/open-quantum-safe/liboqs</a>
+— Thư viện C nền tảng của Open Quantum Safe.</li>
+<li><code>open-quantum-safe/openssl</code>: <a
+href="https://github.com/open-quantum-safe/openssl">github.com/open-quantum-safe/openssl</a>
+— Nhánh fork OpenSSL hỗ trợ thử nghiệm PQC.</li>
+</ul></li>
+<li><strong>Chủ đề 4 (ZLint, OCSP Stapling &amp; CT Logs):</strong>
+<ul>
+<li><code>zmap/zlint</code>: <a
+href="https://github.com/zmap/zlint">github.com/zmap/zlint</a> — Công cụ
+kiểm định tuân thủ tiêu chuẩn X.509 hàng đầu thế giới.</li>
+<li><code>google/certificate-transparency-go</code>: <a
+href="https://github.com/google/certificate-transparency-go">github.com/google/certificate-transparency-go</a>
+— Thư viện CT Logs chuẩn của Google.</li>
+<li><code>cloudflare/cfssl</code>: <a
+href="https://github.com/cloudflare/cfssl">github.com/cloudflare/cfssl</a>
+— Bộ công cụ PKI và thẩm định chứng thư của Cloudflare.</li>
+</ul></li>
+<li><strong>Chủ đề 5 (Tấn công &amp; Phòng thủ Hạ tầng PKI):</strong>
+<ul>
+<li><code>GhostPack/Certify</code>: <a
+href="https://github.com/GhostPack/Certify">github.com/GhostPack/Certify</a>
+— Công cụ kiểm toán và khai thác lỗ hổng cấu hình AD CS kinh điển.</li>
+<li><code>ly4k/Certipy</code>: <a
+href="https://github.com/ly4k/Certipy">github.com/ly4k/Certipy</a> — Bộ
+công cụ tấn công và phân tích hạ tầng Active Directory Certificate
+Services.</li>
+<li><code>dirkjanm/mitm6</code>: <a
+href="https://github.com/dirkjanm/mitm6">github.com/dirkjanm/mitm6</a> —
+Công cụ khai thác DHCPv6 và NTLM relay tấn công xác thực CA.</li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="quy-chuẩn-đóng-góp-git-liêm-chính-khế-ước-bảo-vệ-nhánh-1">7. QUY
+CHUẨN ĐÓNG GÓP GIT, LIÊM CHÍNH &amp; KHẾ ƯỚC BẢO VỆ NHÁNH</h2>
+<h3 id="cam-kết-đóng-góp-cá-nhân-hàng-tuần-individual-commitment-1">7.1.
+Cam kết Đóng góp Cá nhân Hàng tuần (Individual Commitment)</h3>
+<ul>
+<li><strong>Nghiêm cấm hiện tượng “dồn bài một commit cuối kỳ”:</strong>
+Mỗi thành viên trong nhóm phải commit đều đặn hàng tuần tương ứng với
+phân công công việc.</li>
+<li><strong>Quy chuẩn Thông điệp Commit (Conventional Commits):</strong>
+<ul>
+<li><code>feat: ...</code> (Tính năng kỹ thuật mới: sinh khóa, thêm
+route ACME)</li>
+<li><code>fix: ...</code> (Sửa lỗi cấu hình, vá phần mở rộng SAN)</li>
+<li><code>docs: ...</code> (Cập nhật báo cáo kỹ thuật, vẽ sơ đồ
+Mermaid)</li>
+<li><code>test: ...</code> (Thêm kịch bản kiểm thử, chạy lệnh
+verify)</li>
+<li><code>bench: ...</code> (Số liệu đo lường định lượng, benchmark hiệu
+năng)</li>
+</ul></li>
+<li><strong>Quy trình Pull Request &amp; Review Chéo Nội bộ:</strong>
+<ul>
+<li>Mỗi tính năng phải được phát triển trên nhánh riêng:
+<code>feat/&lt;tên-tính-năng&gt;</code>.</li>
+<li>Sau khi hoàn tất, mở Pull Request vào nhánh chính
+<code>main</code>.</li>
+<li>Bắt buộc phải có <strong>ít nhất 1 thành viên khác trong nhóm review
+và approve</strong> mới được gộp mã nguồn (merge).</li>
+</ul></li>
+</ul>
+<h3
+id="khế-ước-xã-hội-bảo-vệ-toàn-vẹn-nhánh-anti-force-push-social-contract-1">7.2.
+Khế ước Xã hội Bảo vệ Toàn vẹn Nhánh (Anti-Force-Push Social
+Contract)</h3>
+<p>Trong trường hợp tài khoản người dùng không có quyền quản trị cấp
+Enterprise để thiết lập chính sách khóa nhánh cứng (Branch Protection
+Rules), toàn thể học viên các nhóm cam kết tuân thủ <strong>Khế ước Toàn
+vẹn Mã nguồn</strong>: 1. <strong>Tuyệt đối không sử dụng
+<code>git push --force</code> hoặc
+<code>--force-with-lease</code></strong> lên nhánh
+<code>main</code>/<code>master</code>. Hành vi force push sẽ phá hủy
+lịch sử commit và làm sai lệch dữ liệu đánh giá đóng góp cá nhân. 2.
+<strong>Duy trì Lịch sử Tuyến tính (Linear Git History):</strong> Ưu
+tiên gộp nhánh bằng <code>Squash and Merge</code> hoặc
+<code>Rebase and Merge</code> kèm thông điệp rõ ràng. 3. <strong>Đánh
+Dấu Thẻ Phiên bản (Release Tags):</strong> Mỗi mốc tiến độ phải được gắn
+tag minh bạch: *
+<code>git tag -a v0.1-s03 -m "Hoàn thành khởi tạo CA 2 tầng"</code> *
+<code>git tag -a v0.5-midterm -m "Mốc đánh giá tiến độ giữa kỳ S07"</code>
+*
+<code>git tag -a v1.0-final -m "Bản phát hành chính thức nghiệm thu cuối kỳ"</code>
+* <code>git push origin --tags</code> 4. <strong>Kiểm toán Dữ liệu Tự
+động:</strong> Công cụ thu bài tự động của Giảng viên
+(<code>3_CONG-CU/thu-bai.py</code>) sẽ quét toàn bộ nhật ký commit (tác
+giả, email, thời gian và số lượng dòng thay đổi) để chấm điểm công bằng
+cho từng cá nhân.</p>
+<hr />
+<hr />
+<h2
+id="lộ-trình-tăng-tốc-theo-chân-dung-kỹ-sư-role-based-fast-tracks">8. LỘ
+TRÌNH TĂNG TỐC THEO CHÂN DUNG KỸ SƯ (ROLE-BASED FAST TRACKS)</h2>
+<p>Lớp CHAT4P quy tụ 15 học viên đến từ các vị trí công tác đa dạng: từ
+kỹ sư an ninh ngân hàng, chuyên viên phân tích mã độc, lập trình viên
+ứng dụng đến kỹ sư vận hành hạ tầng DevOps và chuyên viên kiểm thử QA.
+Học phần thiết kế 4 nhánh tiếp cận chuyên biệt để từng học viên phát huy
+tối đa sở trường:</p>
+<pre class="mermaid"><code>graph TD
+    Cohorts[&quot;15 HỌC VIÊN CHAT4P - NỀN TẢNG ĐA DẠNG&quot;]
+
+    Cohorts --&gt; Track1[&quot;&lt;b&gt;Track 1: Lập trình Ứng dụng &amp; Dịch vụ&lt;/b&gt;&lt;br/&gt;(Developers: Python / Go / PHP)&lt;br/&gt;Trọng tâm: Tích hợp PKI vào mã nguồn, thư viện mật mã, tự động hóa ACME&quot;]
+    
+    Cohorts --&gt; Track2[&quot;&lt;b&gt;Track 2: Hạ tầng &amp; Vận hành An toàn&lt;/b&gt;&lt;br/&gt;(DevOps, SysAdmin, SRE)&lt;br/&gt;Trọng tâm: Docker container, mTLS Gateway, Envoy/Nginx, xoay vòng khóa SoftHSM&quot;]
+    
+    Cohorts --&gt; Track3[&quot;&lt;b&gt;Track 3: Tác chiến &amp; Phân tích An ninh&lt;/b&gt;&lt;br/&gt;(Malware Analyst, SOC, Pentest)&lt;br/&gt;Trọng tâm: Giải phẫu chứng chỉ độc hại, Wireshark TLS, khai thác &amp; phòng ngự AD CS&quot;]
+    
+    Cohorts --&gt; Track4[&quot;&lt;b&gt;Track 4: Kiểm thử, Quản trị &amp; Tuân thủ&lt;/b&gt;&lt;br/&gt;(QA/Tester, Banking Security, GRC)&lt;br/&gt;Trọng tâm: Pipeline kiểm thử ZLint, soạn thảo CP/CPS RFC 3647, đánh giá PQC ngân hàng&quot;]</code></pre>
+<h3 id="track-1-dành-cho-kỹ-sư-phát-triển-phần-mềm-developers">8.1.
+Track 1: Dành cho Kỹ sư Phát triển Phần mềm (Developers)</h3>
+<ul>
+<li><p><strong>Kỹ năng mục tiêu:</strong> Sử dụng thành thạo thư viện
+mật mã mức cao (<code>cryptography</code> trong Python,
+<code>crypto/tls</code> và <code>crypto/x509</code> trong Go).</p></li>
+<li><p><strong>Mã nguồn mẫu Python:</strong> Trích xuất và kiểm tra phần
+mở rộng SAN từ chứng chỉ X.509:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cryptography <span class="im">import</span> x509</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cryptography.x509.oid <span class="im">import</span> ExtensionOID</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&quot;certs/server.crt&quot;</span>, <span class="st">&quot;rb&quot;</span>) <span class="im">as</span> f:</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    cert <span class="op">=</span> x509.load_pem_x509_certificate(f.read())</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Trích xuất Subject Alternative Name (SAN)</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>san_ext <span class="op">=</span> cert.extensions.get_extension_for_oid(ExtensionOID.SUBJECT_ALTERNATIVE_NAME)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>dns_names <span class="op">=</span> san_ext.value.get_values_for_type(x509.DNSName)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;Danh sách DNS hợp lệ: </span><span class="sc">{</span>dns_names<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div></li>
+</ul>
+<h3 id="track-2-dành-cho-kỹ-sư-vận-hành-hạ-tầng-devops">8.2. Track 2:
+Dành cho Kỹ sư Vận hành Hạ tầng &amp; DevOps</h3>
+<ul>
+<li><p><strong>Kỹ năng mục tiêu:</strong> Đóng gói máy chủ CA vào
+container Docker, ánh xạ khe cắm token PKCS#11 an toàn và cấu hình tự
+động tải lại dịch vụ (Hot Reload) khi chứng chỉ gia hạn.</p></li>
+<li><p><strong>Mẹo thực chiến:</strong> Cấu hình Nginx nạp chứng chỉ mới
+mà không ngắt kết nối người dùng hiện hữu:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Kiểm tra tính hợp lệ của tệp cấu hình trước khi tải lại</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">nginx</span> <span class="at">-t</span> <span class="kw">&amp;&amp;</span> <span class="ex">nginx</span> <span class="at">-s</span> reload</span></code></pre></div></li>
+</ul>
+<h3 id="track-3-dành-cho-chuyên-viên-tác-chiến-phân-tích-mã-độc">8.3.
+Track 3: Dành cho Chuyên viên Tác chiến &amp; Phân tích Mã độc</h3>
+<ul>
+<li><strong>Kỹ năng mục tiêu:</strong> Đọc hiểu mã ASN.1 DER để phát
+hiện các chứng chỉ giả mạo mượn danh hợp pháp, sử dụng bộ lọc Wireshark
+phân tích gói tin bắt tay mạng.</li>
+<li><strong>Bộ lọc Wireshark Bắt tay TLS 1.3 Thực chiến:</strong>
+<ul>
+<li><code>tls.handshake.type == 1</code>: Lọc bản tin ClientHello (phân
+tích danh sách Cipher Suites và nhóm Key Share).</li>
+<li><code>tls.handshake.type == 11</code>: Lọc bản tin Certificate
+(trích xuất toàn bộ chuỗi chứng chỉ được truyền qua mạng).</li>
+<li><code>tls.handshake.extension.type == 51</code>: Lọc phần mở rộng
+Key Share phục vụ kiểm tra bắt tay lai PQC.</li>
+</ul></li>
+</ul>
+<h3 id="track-4-dành-cho-chuyên-viên-kiểm-thử-ngân-hàng-tuân-thủ">8.4.
+Track 4: Dành cho Chuyên viên Kiểm thử, Ngân hàng &amp; Tuân thủ</h3>
+<ul>
+<li><strong>Kỹ năng mục tiêu:</strong> Xây dựng bộ kịch bản kiểm thử tự
+động hóa (Automated Compliance Test Suites), tích hợp công cụ linter
+ZLint vào CI/CD pipeline, thẩm tra quy chế CP/CPS theo RFC 3647 đối
+chiếu Thông tư Ngân hàng Nhà nước về chữ ký số an toàn.</li>
+</ul>
+<hr />
+<h2
+id="sổ-tay-khắc-phục-sự-cố-thực-chiến-pki-enterprise-troubleshooting-runbook">9.
+SỔ TAY KHẮC PHỤC SỰ CỐ THỰC CHIẾN PKI (ENTERPRISE TROUBLESHOOTING
+RUNBOOK)</h2>
+<p>Hạ tầng PKI khi gặp sự cố thường gây tê liệt toàn bộ hệ thống dịch
+vụ. Bảng dưới đây tổng hợp 10 sự cố kinh điển nhất trong môi trường thực
+tế cùng phương pháp chẩn đoán và khắc phục dứt điểm:</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Mã Sự Cố / Thông Điệp Lỗi</th>
+<th>Nguyên Nhân Gốc Rễ (Root Cause)</th>
+<th>Lệnh Chẩn Đoán Thực Chiến</th>
+<th>Biện Pháp Khắc Phục Dứt Điểm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. <code>SSL_ERROR_RX_RECORD_TOO_LONG</code></strong></td>
+<td>Máy khách gửi yêu cầu HTTPS tới cổng dịch vụ đang cấu hình HTTP
+thuần (hoặc ngược lại).</td>
+<td><code>curl -v http://localhost:&lt;port&gt;</code> và
+<code>curl -vk https://localhost:&lt;port&gt;</code></td>
+<td>Đảm bảo máy chủ lắng nghe đúng chỉ thị <code>ssl</code> trên cổng
+443 hoặc 8443 (ví dụ: <code>listen 8443 ssl;</code>).</td>
+</tr>
+<tr>
+<td><strong>2.
+<code>x509: certificate signed by unknown authority</code></strong></td>
+<td>Tệp chứng chỉ máy chủ thiếu chuỗi CA trung gian (Incomplete Chain
+Bundle).</td>
+<td><code>openssl s_client -connect &lt;host&gt;:&lt;port&gt; -showcerts</code></td>
+<td>Gộp đầy đủ chuỗi vào một tệp:
+<code>cat server.crt intermediate.crt &gt; fullchain.crt</code> và nạp
+vào máy chủ.</td>
+</tr>
+<tr>
+<td><strong>3. <code>SEC_ERROR_INADEQUATE_KEY_USAGE</code></strong></td>
+<td>Cấu hình sai cờ <code>keyUsage</code> hoặc
+<code>extendedKeyUsage</code> (ví dụ: thiếu cờ
+<code>digitalSignature</code> hoặc <code>serverAuth</code>).</td>
+<td><code>openssl x509 -in cert.crt -noout -text \| grep -A 2 -E "Key Usage"</code></td>
+<td>Bổ sung đúng trường mở rộng trong tệp <code>.cnf</code> và tái phát
+hành chứng chỉ.</td>
+</tr>
+<tr>
+<td><strong>4. <code>ERR_CERT_COMMON_NAME_INVALID</code></strong></td>
+<td>Chứng chỉ chỉ khai báo Common Name (CN) mà thiếu trường mở rộng
+Subject Alternative Name (SAN).</td>
+<td><code>openssl x509 -in cert.crt -noout -ext subjectAltName</code></td>
+<td>Bắt buộc khai báo danh sách tên miền trong phần mở rộng
+<code>[alt_names]</code> (DNS.1 = …). Trình duyệt hiện đại đã bãi bỏ
+CN.</td>
+</tr>
+<tr>
+<td><strong>5.
+<code>OCSP Responder Timeout / Soft-fail</code></strong></td>
+<td>Máy chủ OCSP phản hồi chậm hoặc bị nghẽn mạng làm chậm quá trình bắt
+tay TLS của người dùng.</td>
+<td><code>openssl ocsp -issuer ca.crt -cert server.crt -url &lt;ocsp_url&gt;</code></td>
+<td>Bật tính năng <strong>OCSP Stapling</strong> trên máy chủ Web
+(<code>ssl_stapling on; ssl_stapling_verify on;</code>) để lưu bộ đệm
+phản hồi.</td>
+</tr>
+<tr>
+<td><strong>6. <code>SoftHSM CKR_PIN_LOCKED</code></strong></td>
+<td>Nhập sai mã User PIN quá số lần cho phép khiến khe cắm token bị khóa
+an toàn.</td>
+<td><code>softhsm2-util --show-slots</code></td>
+<td>Khởi tạo lại token bằng mã Security Officer PIN
+(<code>--so-pin</code>) hoặc cấu hình lại slot mới trong phòng lab.</td>
+</tr>
+<tr>
+<td><strong>7.
+<code>TCP Segmentation trong Bắt tay PQC</code></strong></td>
+<td>Kích thước chữ ký ML-DSA lớn (~3.3 KB) vượt kích thước MTU chuẩn
+(1.500 B) gây phân mảnh gói tin TCP.</td>
+<td><code>tcpdump -i any port 8443 -nn -vv</code></td>
+<td>Kiểm tra thông số TCP MSS trên mạng; cấu hình bộ đệm bắt tay TLS hợp
+lý trong ứng dụng mạng.</td>
+</tr>
+<tr>
+<td><strong>8.
+<code>ACME Validation Timeout (DNS-01)</code></strong></td>
+<td>Bản ghi TXT xác thực chưa được truyền bá đầy đủ tới tất cả máy chủ
+DNS công cộng.</td>
+<td><code>dig TXT _acme-challenge.&lt;domain&gt; @8.8.8.8</code></td>
+<td>Thiết lập thời gian chờ (propagation delay) tối thiểu 60 giây trong
+cấu hình client ACME trước khi gửi tín hiệu kiểm tra.</td>
+</tr>
+<tr>
+<td><strong>9.
+<code>mTLS 403 Forbidden on Envoy Gateway</code></strong></td>
+<td>Chứng chỉ client hợp lệ về mặt mật mã nhưng giá trị SAN URI (SPIFFE
+ID) không khớp quy tắc RBAC.</td>
+<td>Kiểm tra log của Envoy:
+<code>kubectl logs &lt;envoy_pod&gt; \| grep rbac</code></td>
+<td>Điều chỉnh biểu thức chính quy (Regex) trong chính sách RBAC của
+Envoy cho phép đúng SPIFFE ID mong muốn.</td>
+</tr>
+<tr>
+<td><strong>10.
+<code>ZLint ER: Serial Not Sufficiently Random</code></strong></td>
+<td>Số Serial của chứng chỉ có độ ngẫu nhiên dưới 64 bit (vi phạm RFC
+5280 và CA/B Forum).</td>
+<td><code>openssl x509 -in cert.crt -noout -serial</code></td>
+<td>Khi phát hành chứng chỉ qua OpenSSL, sử dụng cờ
+<code>-rand_serial</code> để bảo đảm độ dài ngẫu nhiên tối thiểu 64
+bit.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="sổ-tay-tra-cứu-lệnh-mật-mã-openssl-3.5-asn.1-siêu-tốc">10. SỔ
+TAY TRA CỨU LỆNH MẬT MÃ OPENSSL 3.5 &amp; ASN.1 SIÊU TỐC</h2>
+<p>Bảng tra cứu các dòng lệnh OpenSSL 3.5 tiêu chuẩn công nghiệp:</p>
+<h3 id="sinh-cặp-khóa-key-generation">10.1. Sinh Cặp Khóa (Key
+Generation)</h3>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Khóa Cổ điển RSA-3072</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> genpkey <span class="at">-algorithm</span> RSA <span class="at">-pkeyopt</span> rsa_keygen_bits:3072 <span class="at">-out</span> rsa3072.key</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Khóa Đường cong Elip ECDSA P-256 (Khuyến nghị chuẩn)</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> genpkey <span class="at">-algorithm</span> EC <span class="at">-pkeyopt</span> ec_paramgen_curve:P-256 <span class="at">-out</span> ecdsa_p256.key</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Khóa Kháng Lượng tử ML-DSA-65 (NIST FIPS 204 / OpenSSL 3.5)</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> genpkey <span class="at">-algorithm</span> mldsa65 <span class="at">-out</span> mldsa65.key</span></code></pre></div>
+<h3 id="tạo-csr-và-chứng-thư-số">10.2. Tạo CSR và Chứng thư Số</h3>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Tạo CSR kèm Subject Alternative Name (SAN) trực tiếp trên dòng lệnh</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> req <span class="at">-new</span> <span class="at">-key</span> server.key <span class="at">-out</span> server.csr <span class="dt">\</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">-subj</span> <span class="st">&quot;/C=VN/ST=Ho Chi Minh/O=KMA/CN=api.kma.internal&quot;</span> <span class="dt">\</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">-addext</span> <span class="st">&quot;subjectAltName = DNS:api.kma.internal,DNS:localhost,IP:127.0.0.1&quot;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. CA ký phát hành chứng thư từ CSR (Thời hạn 365 ngày)</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> x509 <span class="at">-req</span> <span class="at">-in</span> server.csr <span class="at">-CA</span> ca.crt <span class="at">-CAkey</span> ca.key <span class="at">-CAcreateserial</span> <span class="dt">\</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">-out</span> server.crt <span class="at">-days</span> 365 <span class="at">-copy_extensions</span> copy</span></code></pre></div>
+<h3 id="mổ-xẻ-và-phân-tích-nhị-phân-asn.1">10.3. Mổ xẻ và Phân Tích Nhị
+Phân ASN.1</h3>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Xem cấu trúc cây nhị phân ASN.1 DER (Thụt lề phân cấp)</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> asn1parse <span class="at">-in</span> server.crt <span class="at">-inform</span> PEM <span class="at">-i</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Trích xuất băm Subject Key Identifier (SKID)</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> x509 <span class="at">-in</span> server.crt <span class="at">-noout</span> <span class="at">-pubkey</span> <span class="kw">|</span> <span class="ex">openssl</span> pkey <span class="at">-pubin</span> <span class="at">-outform</span> DER <span class="kw">|</span> <span class="ex">openssl</span> dgst <span class="at">-sha256</span></span></code></pre></div>
+<h3 id="đóng-gói-định-dạng-pkcs12-.p12-.pfx">10.4. Đóng Gói Định Dạng
+PKCS#12 (<code>.p12</code> / <code>.pfx</code>)</h3>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Đóng gói chứng chỉ, khóa riêng và chuỗi CA để nạp vào trình duyệt hoặc VPN Client</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> pkcs12 <span class="at">-export</span> <span class="at">-out</span> user_bundle.p12 <span class="dt">\</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">-inkey</span> user.key <span class="at">-in</span> user.crt <span class="at">-certfile</span> ca-chain.crt <span class="dt">\</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">-name</span> <span class="st">&quot;KMA User Identity&quot;</span></span></code></pre></div>
+<h3 id="kiểm-thử-bắt-tay-tls-1.3">10.5. Kiểm Thử Bắt Tay TLS 1.3</h3>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Kết nối kiểm tra chứng chỉ máy chủ và in toàn bộ chuỗi xác thực</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> s_client <span class="at">-connect</span> api.kma.internal:8443 <span class="at">-CAfile</span> ca.crt <span class="at">-tls1_3</span> <span class="at">-showcerts</span></span></code></pre></div>
+<hr />
+<hr />
+<h2 id="chuẩn-mực-kỹ-thuật-đồ-án-công-cụ-tự-động-hóa-chuyên-nghiệp">11.
+CHUẨN MỰC KỸ THUẬT ĐỒ ÁN &amp; CÔNG CỤ TỰ ĐỘNG HÓA CHUYÊN NGHIỆP</h2>
+<p>Để đảm bảo các đồ án chuyên đề đạt chuẩn kỹ thuật quốc tế và thuận
+tiện cho học viên với background đa dạng (Dev, DevOps, SysAdmin, SOC,
+Compliance), toàn bộ các kho mã nguồn nhóm đồ án đã được trang bị sẵn
+khung chuẩn mực kỹ thuật (Engineering Scaffolding):</p>
+<h3
+id="khung-vận-hành-đơn-giản-hóa-qua-makefile-zero-friction-devsecops">11.1.
+Khung Vận Hành Đơn Giản Hóa Qua Makefile (Zero-Friction DevSecOps)</h3>
+<p>Mỗi nhóm đồ án đều được trang bị tệp <code>Makefile</code> chuẩn hóa.
+Học viên không cần ghi nhớ các chuỗi lệnh Docker phức tạp, chỉ cần thực
+thi các lệnh ngắn gọn:</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Khởi động toàn bộ container và dịch vụ ngầm</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> up</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Chạy kịch bản kiểm thử toàn trình tự động (E2E Test)</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> verify</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Đo lường hiệu năng hoặc quét kiểm định</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> bench      <span class="co"># (Áp dụng cho Nhóm 3 - PQC)</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> audit      <span class="co"># (Áp dụng cho Nhóm 2 - AD CS &amp; Nhóm 5 - ZLint)</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Dọn dẹp tài nguyên và làm sạch môi trường</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> clean</span></code></pre></div>
+<h3
+id="đường-ống-cicd-tự-động-chính-sách-chống-rò-rỉ-khóa-riêng-secret-scanning">11.2.
+Đường Ống CI/CD Tự Động &amp; Chính Sách Chống Rò Rỉ Khóa Riêng (Secret
+Scanning)</h3>
+<p>Trong thư mục <code>.github/workflows/ci.yml</code> của từng nhóm, hệ
+thống kiểm thử liên tục (CI) được tích hợp sẵn 3 tầng kiểm soát: 1.
+<strong>Quét rò rỉ khóa riêng (Secret Scanning):</strong> Tự động phát
+hiện và chặn đứng mọi commit có chứa tệp khóa bí mật
+(<code>BEGIN PRIVATE KEY</code>, <code>.key</code>, <code>.p12</code>).
+Mọi hành vi commit khóa thật lên kho công cộng sẽ bị hủy build ngay lập
+tức. 2. <strong>Kiểm định cú pháp (Linting):</strong> Tự động kiểm tra
+tính hợp lệ của <code>docker-compose.yml</code>, shell scripts
+(<code>shellcheck</code>) và mã nguồn. 3. <strong>Kiểm tra tích hợp
+(Integration Test):</strong> Tự động thực thi <code>make verify</code>
+để đảm bảo mã nguồn luôn ở trạng thái hoạt động tốt.</p>
+<h3 id="bộ-công-cụ-tự-động-hóa-mật-mã-python-toolspki_toolkit.py">11.3.
+Bộ Công Cụ Tự Động Hóa Mật Mã Python
+(<code>tools/pki_toolkit.py</code>)</h3>
+<p>Ngoài các công cụ dòng lệnh OpenSSL, học phần cung cấp sẵn bộ công cụ
+Python chuẩn doanh nghiệp tại <code>tools/pki_toolkit.py</code> hỗ trợ
+học viên xây dựng các pipeline kiểm tra chứng chỉ:</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Phân tích nhanh cấu trúc tệp chứng chỉ PEM</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tools/pki_toolkit.py certs/server.crt</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Chạy kiểm định tuân thủ tiêu chuẩn CA/B Forum Baseline Requirements</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> tools/pki_toolkit.py certs/server.crt <span class="at">--audit</span></span></code></pre></div>
+<h3 id="barem-chấm-điểm-100-điểm-mẫu-slide-thuyết-trình-marp">11.4.
+Barem Chấm Điểm 100 Điểm &amp; Mẫu Slide Thuyết Trình Marp</h3>
+<p>Học viên tải và tham khảo trực tiếp tại thư mục
+<code>Do-an-nhom/</code>: *
+<strong><code>RUBRIC-DANH-GIA-DO-AN-CHUYEN-DE.md</code>:</strong> Barem
+chấm điểm chi tiết 4 trụ cột (Kiến trúc 25%, Cài đặt &amp; Demo 35%, Báo
+cáo &amp; Phản biện 20%, Kỷ luật Git &amp; Phối hợp nhóm 20%). *
+<strong><code>SLIDE-MAU-BAO-CAO-DO-AN.md</code>:</strong> Khung slide
+chuẩn mực khoa học (định dạng Marp Markdown) giúp các nhóm chuẩn bị bài
+thuyết trình 15 phút chuyên nghiệp và súc tích.</p>
+<hr />
+<p><em>Bản quyền học liệu thuộc về Giảng viên Nguyễn An Khương (Khoa
+Khoa học &amp; Kỹ thuật Máy tính, Trường ĐHBK Tp. HCM) &amp; Ban Đào tạo
+Sau đại học, Phân hiệu Học viện Kỹ thuật Mật mã tại TP.HCM.</em></p>
+</body>
+</html>

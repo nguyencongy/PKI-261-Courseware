@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Handout S04</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 30px auto; padding: 0 20px; color: #24292e; background: #fff; }
+  h1, h2, h3, h4 { color: #0a2540; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; margin-top: 1.5em; }
+  h1 { font-size: 2em; border-bottom: 2px solid #0066cc; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.95em; }
+  th, td { border: 1px solid #dfe2e5; padding: 8px 12px; }
+  th { background-color: #f6f8fa; font-weight: 600; text-align: left; }
+  tr:nth-child(2n) { background-color: #fbfcfd; }
+  code { background: #f3f4f4; padding: 0.2em 0.4em; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 85%; }
+  pre { background: #0a2540; color: #f8f8f2; padding: 14px; border-radius: 6px; overflow-x: auto; }
+  pre code { background: none; color: inherit; padding: 0; font-size: 0.9em; }
+  blockquote { border-left: 4px solid #0066cc; margin: 0; padding-left: 16px; color: #57606a; background: #f8fbfd; padding: 8px 16px; border-radius: 0 6px 6px 0; }
+  a { color: #0066cc; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Handout S04</h1>
+</header>
+<h1
+id="handout-s04-cơ-chế-thu-hồi-chứng-chỉ-crl-ocsp-stapling-certificate-transparency">Handout
+S04: Cơ chế Thu hồi Chứng chỉ: CRL, OCSP Stapling &amp; Certificate
+Transparency</h1>
+<p><strong>Học phần:</strong> Cơ sở hạ tầng khóa công khai (ATHK 512) ·
+Lớp CHAT4P<br />
+<strong>Đơn vị:</strong> Khoa An toàn Thông tin — Phân hiệu Học viện Kỹ
+thuật Mật mã tại TP.HCM<br />
+<strong>Giảng viên:</strong> Nguyễn An Khương (Khoa Khoa học &amp; Kỹ
+thuật Máy tính, Trường ĐHBK Tp. HCM)<br />
+<strong>Trợ giảng:</strong> Nguyễn Hữu Hoàng Huy</p>
+<hr />
+<h2 id="nhu-cầu-thu-hồi-chứng-chỉ-trước-thời-hạn">1. Nhu cầu Thu hồi
+Chứng chỉ Trước Thời hạn</h2>
+<p>Chứng chỉ số cần được thu hồi khẩn cấp khi: * Khóa riêng tư bị lộ
+hoặc nghi ngờ bị lộ (Key Compromise). * Thông tin định danh của chủ thể
+bị thay đổi (tên miền chuyển nhượng, nhân viên nghỉ việc). * CA phát
+hiện chứng chỉ bị cấp phát sai lệch quy định kỹ thuật
+(Mis-issuance).</p>
+<hr />
+<h2 id="so-sánh-3-cơ-chế-kiểm-tra-trạng-thái-thu-hồi">2. So sánh 3 Cơ
+chế Kiểm tra Trạng thái Thu hồi</h2>
+<pre class="mermaid"><code>graph TD
+    RevCheck[&quot;KIỂM TRA TRẠNG THÁI THU HỒI&quot;]
+
+    RevCheck --&gt; CRL[&quot;1. CRL (RFC 5280)&lt;br/&gt;Tải danh sách thu hồi định kỳ&lt;br/&gt;Nhược điểm: Tệp rất nặng, cập nhật trễ&quot;]
+    RevCheck --&gt; OCSP[&quot;2. OCSP (RFC 6960)&lt;br/&gt;Hỏi trực tiếp máy chủ OCSP Responder&lt;br/&gt;Nhược điểm: Lộ quyền riêng tư, chậm bắt tay&quot;]
+    RevCheck --&gt; Stapling[&quot;3. OCSP Stapling (RFC 6066)&lt;br/&gt;Máy chủ ghim sẵn phản hồi OCSP đã ký&lt;br/&gt;Ưu điểm: Tối ưu mạng, bảo vệ quyền riêng tư&quot;]</code></pre>
+<hr />
+<h2 id="certificate-transparency-rfc-6962-cây-băm-merkle">3. Certificate
+Transparency (RFC 6962) &amp; Cây Băm Merkle</h2>
+<p>Certificate Transparency bắt buộc mọi chứng chỉ Web công cộng phải
+được ghi nhận vào nhật ký kiểm toán công khai (Append-only Merkle Tree)
+trước khi phát hành:</p>
+<pre class="mermaid"><code>graph TD
+    subgraph MerkleTree[&quot;CÂY BĂM MERKLE (CT LOG)&quot;]
+        RootHash[&quot;Root Hash (Signed Tree Head - STH)&quot;]
+        Node1[&quot;Hash Node 1&quot;]
+        Node2[&quot;Hash Node 2&quot;]
+        Leaf1[&quot;Leaf 1: Cert A&quot;]
+        Leaf2[&quot;Leaf 2: Cert B&quot;]
+        Leaf3[&quot;Leaf 3: Cert C&quot;]
+        Leaf4[&quot;Leaf 4: Cert D&quot;]
+
+        Leaf1 &amp; Leaf2 --&gt; Node1
+        Leaf3 &amp; Leaf4 --&gt; Node2
+        Node1 &amp; Node2 --&gt; RootHash
+    end
+
+    CA[&quot;Certificate Authority&quot;] --&gt;|Gửi chứng chỉ vào Log| LogServer[&quot;CT Log Server&quot;]
+    LogServer -- &quot;Trả về SCT (Signed Certificate Timestamp)&quot; --&gt; CA
+    CA --&gt;|Nhúng SCT vào chứng chỉ| EndEntity[&quot;Chứng chỉ X.509 Phát hành&quot;]</code></pre>
+<hr />
+<h2 id="tài-liệu-tham-khảo-chuẩn-quốc-tế">4. Tài liệu Tham khảo Chuẩn
+Quốc tế</h2>
+<ol type="1">
+<li><strong>IETF RFC 6960:</strong> <em>X.509 Internet Public Key
+Infrastructure Online Certificate Status Protocol - OCSP</em>, 2013. <a
+href="https://www.rfc-editor.org/rfc/rfc6960">rfc-editor.org/rfc/rfc6960</a></li>
+<li><strong>IETF RFC 6066:</strong> <em>Transport Layer Security (TLS)
+Extensions: Extension Definitions (§8: Certificate Status Request)</em>,
+2011. <a
+href="https://www.rfc-editor.org/rfc/rfc6066">rfc-editor.org/rfc/rfc6066</a></li>
+<li><strong>IETF RFC 6962:</strong> <em>Certificate Transparency</em>,
+RFC Editor, 2013. <a
+href="https://www.rfc-editor.org/rfc/rfc6962">rfc-editor.org/rfc/rfc6962</a></li>
+<li><strong>Zakir Durumeric et al.:</strong> <em>ZLint: Automated
+Compliance Testing for Public PKI</em>, ACM Conference on Computer and
+Communications Security (CCS), 2017.</li>
+</ol>
+</body>
+</html>

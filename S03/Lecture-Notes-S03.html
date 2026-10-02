@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Lecture Notes S03</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 30px auto; padding: 0 20px; color: #24292e; background: #fff; }
+  h1, h2, h3, h4 { color: #0a2540; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; margin-top: 1.5em; }
+  h1 { font-size: 2em; border-bottom: 2px solid #0066cc; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.95em; }
+  th, td { border: 1px solid #dfe2e5; padding: 8px 12px; }
+  th { background-color: #f6f8fa; font-weight: 600; text-align: left; }
+  tr:nth-child(2n) { background-color: #fbfcfd; }
+  code { background: #f3f4f4; padding: 0.2em 0.4em; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 85%; }
+  pre { background: #0a2540; color: #f8f8f2; padding: 14px; border-radius: 6px; overflow-x: auto; }
+  pre code { background: none; color: inherit; padding: 0; font-size: 0.9em; }
+  blockquote { border-left: 4px solid #0066cc; margin: 0; padding-left: 16px; color: #57606a; background: #f8fbfd; padding: 8px 16px; border-radius: 0 6px 6px 0; }
+  a { color: #0066cc; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Lecture Notes S03</h1>
+</header>
+<h1
+id="lecture-notes-s03-hạ-tầng-ca-phân-tầng-quy-chế-cpcps-cấp-phát-tự-động-acme">Lecture
+Notes S03: Hạ tầng CA Phân tầng, Quy chế CP/CPS &amp; Cấp phát Tự động
+ACME</h1>
+<p><strong>Học phần:</strong> Cơ sở hạ tầng khóa công khai (ATHK 512) ·
+Lớp CHAT4P<br />
+<strong>Giảng viên:</strong> Nguyễn An Khương (Khoa Khoa học &amp; Kỹ
+thuật Máy tính, Trường ĐHBK Tp. HCM)<br />
+<strong>Trợ giảng:</strong> Nguyễn Hữu Hoàng Huy</p>
+<hr />
+<h2
+id="thiết-kế-phân-tầng-ca-và-giới-hạn-đường-dẫn-path-length-constraint">1.
+Thiết kế Phân tầng CA và Giới hạn Đường dẫn (Path Length
+Constraint)</h2>
+<p>Khi xây dựng CA trung gian, cờ <code>basicConstraints</code> có tham
+số <code>pathlen</code> xác định số cấp CA con được phép tồn tại phía
+dưới: * <code>basicConstraints = critical, CA:TRUE, pathlen:0</code>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mi>g</mi><mi>h</mi><mi>t</mi><mi>a</mi><mi>r</mi><mi>r</mi><mi>o</mi><mi>w</mi></mrow><annotation encoding="application/x-tex">ightarrow</annotation></semantics></math>
+Intermediate CA này chỉ được phép ký cấp phát cho thực thể đầu cuối
+(End-Entity), tuyệt đối không thể ký tạo thêm một CA con nào khác. * Kỹ
+thuật này ngăn chặn hoàn toàn rủi ro một CA trung gian bị lạm quyền để
+tạo ra các CA con không kiểm soát được.</p>
+<hr />
+<h2 id="so-sánh-các-phương-thức-thử-thách-xác-thực-trong-acme">2. So
+sánh Các Phương thức Thử thách Xác thực trong ACME</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Loại Thử thách</th>
+<th>Cơ chế Hoạt động</th>
+<th>Ưu điểm Kỹ thuật</th>
+<th>Nhược điểm &amp; Hạn chế</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>HTTP-01</strong></td>
+<td>Máy chủ ACME truy vấn tệp ngẫu nhiên tại
+<code>http://&lt;domain&gt;/.well-known/acme-challenge/&lt;token&gt;</code></td>
+<td>Dễ triển khai, chỉ cần cấu hình máy chủ Web</td>
+<td>Cần mở cổng 80 công khai; không hỗ trợ cấp phát chứng chỉ Wildcard
+(<code>*.kma.internal</code>)</td>
+</tr>
+<tr>
+<td><strong>DNS-01</strong></td>
+<td>Tạo bản ghi TXT tại <code>_acme-challenge.&lt;domain&gt;</code> chứa
+mã băm xác thực</td>
+<td>Hỗ trợ cấp chứng chỉ Wildcard; không cần máy chủ mở cổng mạng công
+khai</td>
+<td>Cần cấp quyền truy cập API DNS; độ trễ cập nhật truyền bá bản ghi
+DNS</td>
+</tr>
+<tr>
+<td><strong>TLS-ALPN-01</strong></td>
+<td>Bắt tay TLS sử dụng giao thức ALPN riêng biệt
+<code>acme-tls/1</code> trên cổng 443</td>
+<td>Hoạt động trực tiếp trên cổng HTTPS; phù hợp thiết bị cân bằng
+tải</td>
+<td>Cấu hình phức tạp hơn; cần can thiệp tầng xử lý bắt tay TLS</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="khung-cấu-trúc-9-phần-của-cpcps-theo-rfc-3647">3. Khung Cấu trúc
+9 Phần của CP/CPS theo RFC 3647</h2>
+<p>Một tài liệu CP/CPS chuẩn quốc tế bao gồm đúng 9 mục chuẩn mực: 1.
+<em>Introduction:</em> Định danh tài liệu, phạm vi áp dụng, thông tin
+liên hệ. 2. <em>Publication and Repository Responsibilities:</em> Trách
+nhiệm công bố chứng thư và danh sách thu hồi. 3. <em>Identification and
+Authentication:</em> Quy trình xác minh nhân thân cá nhân / máy chủ. 4.
+<em>Certificate Life-Cycle Operational Requirements:</em> Vòng đời yêu
+cầu, cấp phát, gia hạn, thu hồi. 5. <em>Facility, Management, and
+Operational Controls:</em> An ninh vật lý, quản lý nhân sự, lưu trữ nhật
+ký. 6. <em>Technical Security Controls:</em> Quản lý khóa mật mã (Key
+Pair Generation and Installation). 7. <em>Certificate, CRL, and OCSP
+Profiles:</em> Đặc tả định dạng chứng thư, các trường mở rộng OID. 8.
+<em>Compliance Audit and Other Assessments:</em> Quy trình thanh tra,
+kiểm toán định kỳ. 9. <em>Other Business and Legal Matters:</em> Trách
+nhiệm pháp lý, quyền riêng tư, giải quyết tranh chấp.</p>
+<hr />
+<h2 id="tài-liệu-tham-khảo-mở-rộng">4. Tài liệu Tham khảo Mở rộng</h2>
+<ol type="1">
+<li><strong>RFC 3647:</strong> <em>CP/CPS Framework</em>. <a
+href="https://www.rfc-editor.org/rfc/rfc3647">rfc-editor.org/rfc/rfc3647</a></li>
+<li><strong>RFC 8555:</strong> <em>ACME Protocol</em>. <a
+href="https://www.rfc-editor.org/rfc/rfc8555">rfc-editor.org/rfc/rfc8555</a></li>
+<li><strong>CA/Browser Forum Baseline Requirements v2.0.</strong></li>
+</ol>
+</body>
+</html>
