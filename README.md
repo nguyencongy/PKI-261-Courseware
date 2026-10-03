@@ -24,7 +24,7 @@
 
 0. **Đề Cương Chi Tiết Học Phần Chính Thức (ATHK 512 - KMA):**
    * [Bản văn bản Markdown chuẩn hóa](PKI-261_DE-CUONG-CHI-TIET-HOC-PHAN-KMA.md) — Chi tiết 45 tiết (15 LT, 30 TH), mục tiêu, 3 chương nội dung, 5 tài liệu tham khảo và hình thức thi.
-   * [Bản gốc PDF ban hành của KMA](PKI-261_DE-CUONG-CHI-TIET-HOC-PHAN-KMA.pdf) — Đề cương chi tiết học phần chính thức do Học viện Kỹ thuật Mật mã ban hành.
+   * [Bản gốc PDF ban hành của KMA](PKI-261_DE-CUONG-CHI-TIET-HOC-PHAN-KMA.pdf) (Tên file gốc: [`Syllabus - Ha tang co so khoa cong khai (PKI).pdf`](Syllabus%20-%20Ha%20tang%20co%20so%20khoa%20cong%20khai%20%28PKI%29.pdf)) — Đề cương chi tiết học phần chính thức do Học viện Kỹ thuật Mật mã ban hành.
    * [Bản Web HTML](PKI-261_DE-CUONG-CHI-TIET-HOC-PHAN-KMA.html) · [Bản Word DOCX](PKI-261_DE-CUONG-CHI-TIET-HOC-PHAN-KMA.docx)
 
 1. **Tài Liệu Học Tập Chính Thức (Master Textbook - 46 Trang):**
