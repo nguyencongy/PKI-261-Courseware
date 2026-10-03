@@ -22,6 +22,11 @@
 
 ## Tài Liệu Học Tập & Hướng Dẫn Trọng Tâm
 
+0. **Đề Cương Chi Tiết Học Phần Chính Thức (ATHK 512 - KMA):**
+   * [Bản văn bản Markdown chuẩn hóa](PKI-261_DE-CUONG-CHI-TIET-HOC-PHAN-KMA.md) — Chi tiết 45 tiết (15 LT, 30 TH), mục tiêu, 3 chương nội dung, 5 tài liệu tham khảo và hình thức thi.
+   * [Bản gốc PDF ban hành của KMA](PKI-261_DE-CUONG-CHI-TIET-HOC-PHAN-KMA.pdf) — Đề cương chi tiết học phần chính thức do Học viện Kỹ thuật Mật mã ban hành.
+   * [Bản Web HTML](PKI-261_DE-CUONG-CHI-TIET-HOC-PHAN-KMA.html) · [Bản Word DOCX](PKI-261_DE-CUONG-CHI-TIET-HOC-PHAN-KMA.docx)
+
 1. **Tài Liệu Học Tập Chính Thức (Master Textbook - 46 Trang):**
    * [Bản in ấn PDF Chất lượng cao](PKI-261_TAI-LIEU-HOC-TAP-CO-SO-HA-TANG-KHOA-CONG-KHAI.pdf) — Soạn thảo chuẩn lớp `hcmut-textbook.cls`, bìa vector tỉ lệ vàng $\varphi \approx 1.618$, hệ màu `#032B91`, font Schola.
    * [Bản đọc Web HTML Tương tác](PKI-261_TAI-LIEU-HOC-TAP-CO-SO-HA-TANG-KHOA-CONG-KHAI.html) — Hỗ trợ đọc trên trình duyệt di động, công thức toán MathJax sắc nét.
