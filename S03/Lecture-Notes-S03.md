@@ -1,7 +1,7 @@
 # Lecture Notes S03: Hạ tầng CA Phân tầng, Quy chế CP/CPS & Cấp phát Tự động ACME
 
 **Học phần:** Cơ sở hạ tầng khóa công khai (ATHK 512) · Lớp CHAT4P  
-**Giảng viên:** Nguyễn An Khương (Khoa Khoa học & Kỹ thuật Máy tính, Trường ĐHBK Tp. HCM)  
+**Giảng viên:** Nguyễn An Khương (Khoa Khoa học & Kỹ thuật Máy tính, Trường ĐHBK Tp. HCM · [ORCID: 0000-0002-9910-6387](https://orcid.org/0000-0002-9910-6387))  
 **Trợ giảng:** Nguyễn Hữu Hoàng Huy  
 
 ---
@@ -9,7 +9,8 @@
 ## 1. Thiết kế Phân tầng CA và Giới hạn Đường dẫn (Path Length Constraint)
 
 Khi xây dựng CA trung gian, cờ `basicConstraints` có tham số `pathlen` xác định số cấp CA con được phép tồn tại phía dưới:
-* `basicConstraints = critical, CA:TRUE, pathlen:0` $ightarrow$ Intermediate CA này chỉ được phép ký cấp phát cho thực thể đầu cuối (End-Entity), tuyệt đối không thể ký tạo thêm một CA con nào khác.
+* `basicConstraints = critical, CA:TRUE, pathlen:0` $
+ightarrow$ Intermediate CA này chỉ được phép ký cấp phát cho thực thể đầu cuối (End-Entity), tuyệt đối không thể ký tạo thêm một CA con nào khác.
 * Kỹ thuật này ngăn chặn hoàn toàn rủi ro một CA trung gian bị lạm quyền để tạo ra các CA con không kiểm soát được.
 
 ---

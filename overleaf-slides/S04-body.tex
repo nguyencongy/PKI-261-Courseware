@@ -1,0 +1,149 @@
+% =====================================================================
+%  PKI Session 4: Revocation (CRL/OCSP) & Hardware HSM
+%  Author: Nguyen An Khuong (CSE-HCMUT · ORCID: 0000-0002-9910-6387)
+%  Teaching Assistant: Nguyen Huu Hoang Huy (LinkedIn)
+%  Master of Science in Information Security (CHAT4P) · HK261
+% =====================================================================
+
+\title{\color{hcmutblue}\textbf{\LARGE PUBLIC KEY INFRASTRUCTURE}\\[0.25em]
+       \color{hcmutblue}\textbf{\large S04: Thu hồi Chứng chỉ \& Quản lý Khóa bằng Phần cứng HSM}}
+\date{\footnotesize Session 4 of 9 $\cdot$ ATHK 512 (KMA CHAT4P, HK261)\\
+      Class: Sat 24/10/2026 $\cdot$ 13h30--18h30\\
+      \textit{Standards: IETF RFC 5280, RFC 6960 (OCSP), FIPS 140-3, PKCS\#11}}
+
+\begin{document}
+\PKItitleframe
+
+\section{Tổng quan \& Lộ trình Buổi S04}
+
+\begin{frame}{Lộ Trình Học Phần (Buổi 4/9)}
+  \centering
+  \makebox[\linewidth][c]{\PKIcoursemap{4}}
+  \vspace{0.4em}
+  \raggedright\small
+  Buổi học giải quyết bài toán xử lý rủi ro khi khóa bí mật bị thỏa hiệp: cơ chế thu hồi tức thì và giải pháp bảo vệ khóa bí mật ở cấp độ phần cứng bằng thiết bị HSM chuyên dụng.
+  \gvnote{[~2 phút | 13h30--13h32] Giới thiệu Buổi 4: Hai chuyên đề quan trọng là Thu hồi chứng chỉ (Revocation) và Thiết bị phần cứng bảo mật HSM.}
+\end{frame}
+
+\begin{frame}{Chuẩn Đầu Ra Buổi Học S04 (Learning Objectives)}
+  \small
+  Sau buổi học S04, học viên làm chủ các năng lực:
+  \begin{enumerate}
+    \item \textbf{So sánh} ưu nhược điểm kỹ thuật giữa CRL tĩnh, máy chủ OCSP và công nghệ OCSP Stapling.
+    \item \textbf{Phân tích} cơ chế tấn công Soft-fail và biện pháp phòng vệ bằng chuẩn OCSP Must-Staple (RFC 7633).
+    \item \textbf{Đánh giá} tiêu chuẩn an ninh phần cứng HSM theo NIST FIPS 140-3 từ Level 1 đến Level 4.
+    \item \textbf{Cấu hình} môi trường phần mềm trung gian PKCS\#11 và tích hợp SoftHSMv2 với OpenSSL 3.5.
+  \end{enumerate}
+
+  \begin{keybox}[Nguyên Tắc Bất Đối Xứng Của Rủi Ro]
+    Cấp chứng chỉ thì dễ, nhưng thu hồi chứng chỉ một cách an toàn, nhanh chóng và bảo đảm quyền riêng tư người dùng lại là một trong những bài toán phức tạp nhất của ngành mạng!
+  \end{keybox}
+  \gvnote{[~3 phút | 13h32--13h35] Nhấn mạnh độ khó của bài toán Revocation trong thực tế: Cân bằng giữa hiệu năng, độ trễ và quyền riêng tư.}
+\end{frame}
+
+\section{Cơ chế Thu hồi: CRL vs OCSP vs OCSP Stapling}
+
+\begin{frame}{So Sánh Kỹ Thuật 3 Cơ Chế Kiểm Tra Thu Hồi}
+  \begin{table}[h]
+    \centering\scriptsize
+    \begin{tabularx}{\linewidth}{@{}p{0.22\linewidth} p{0.24\linewidth} p{0.25\linewidth} X@{}}
+      \toprule
+      \textbf{Tiêu Chí} & \textbf{CRL (RFC 5280)} & \textbf{OCSP (RFC 6960)} & \textbf{OCSP Stapling (RFC 6066)} \\
+      \midrule
+      \textbf{Phương thức} & File nhị phân tĩnh HTTP & Truy vấn nhị phân HTTP & Kẹp kèm trong TLS Handshake \\
+      \textbf{Kích thước} & Rất nặng (hàng chục MB) & Nhẹ (vài trăm bytes) & Không tốn thêm kết nối ngoài \\
+      \textbf{Riêng tư} & Tốt (CA không biết ai tải) & \textbf{Kém} (CA biết IP \& site) & \textbf{Bảo mật tuyệt đối} \\
+      \textbf{Độ trễ} & Tải file định kỳ & Tăng 1 RTT mạng & \textbf{0 RTT (Tức thì)} \\
+      \textbf{Xử lý sự cố} & Soft-fail & Soft-fail (Rủi ro MitM) & \textbf{Hard-fail} (Must-Staple) \\
+      \bottomrule
+    \end{tabularx}
+  \end{table}
+
+  \begin{alertblock}{Hiểm Họa Của Chế Độ Soft-fail}
+    Khi máy chủ OCSP không phản hồi, trình duyệt mặc định coi chứng chỉ vẫn hợp lệ (Soft-fail). Kẻ tấn công MitM chỉ cần chặn kết nối tới OCSP Responder là vô hiệu hóa hoàn toàn cơ chế thu hồi!
+  \end{alertblock}
+  \gvnote{[~3 phút | 13h35--13h38] Phân tích điểm yếu Soft-fail của OCSP truyền thống và lý do OCSP Stapling trở thành tiêu chuẩn bắt buộc.}
+\end{frame}
+
+\begin{frame}{OCSP Stapling \& Chuẩn OCSP Must-Staple (RFC 7633)}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Nguyên lý OCSP Stapling:}
+      \begin{itemize}\small
+        \item Máy chủ Web định kỳ tự truy vấn CA để lấy bản phản hồi OCSP có chữ ký hợp lệ.
+        \item Kẹp bản phản hồi này trực tiếp vào gói tin \texttt{Certificate} trong quá trình bắt tay TLS.
+        \item Trình duyệt không cần gửi request ra ngoài, tiết kiệm 100\% độ trễ RTT.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Cờ OCSP Must-Staple:}
+      \begin{itemize}\small
+        \item Phần mở rộng X.509 v3 thông báo: \emph{"Chứng chỉ này bắt buộc phải có phản hồi OCSP kẹp kèm"}.
+        \item Nếu kết nối TLS không có bản Staple, trình duyệt lập tức chuyển sang chế độ \textbf{Hard-fail} và ngắt kết nối!
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \begin{keybox}[Khuyến Nghị Vận Hành]
+    Luôn bật cờ Must-Staple trên các dịch vụ thanh toán ngân hàng trực tuyến để khóa chặt hoàn toàn lỗ hổng Soft-fail.
+  \end{keybox}
+  \gvnote{[~3 phút | 13h38--13h41] Hướng dẫn cách thức hoạt động của Must-Staple: Chuyển Soft-fail thành Hard-fail một cách an toàn.}
+\end{frame}
+
+\section{Bảo vệ Khóa Bí mật Bằng Thiết bị Phần cứng HSM}
+
+\begin{frame}{Bốn Cấp Độ An Toàn Của Chuẩn NIST FIPS 140-3}
+  \begin{table}[h]
+    \centering\scriptsize
+    \begin{tabularx}{\linewidth}{@{}c p{0.26\linewidth} X@{}}
+      \toprule
+      \textbf{Cấp Độ} & \textbf{Yêu Cầu Cơ Bản} & \textbf{Cơ Chế Bảo Vệ Vật Lý} \\
+      \midrule
+      \textbf{Level 1} & Mật mã phần mềm tiêu chuẩn & Không yêu cầu cơ chế chống can thiệp phần cứng đặc thù. \\
+      \textbf{Level 2} & Bằng chứng can thiệp (Tamper Evidence) & Vỏ bọc niêm phong (Tem niêm phong vỡ khi bị bóc mở). \\
+      \textbf{Level 3} & Chống can thiệp (Tamper Resistance) & Mạch cảm biến phát hiện cạy mở; tự xóa khóa nhạy cảm. \\
+      \textbf{Level 4} & Phong tỏa môi trường (Tamper Detection) & Cảm biến nhiệt độ, điện áp, tia X; kích hoạt \textbf{Zeroization} tức thì! \\
+      \bottomrule
+    \end{tabularx}
+  \end{table}
+
+  \begin{beyond}{pitfall}
+    Không bao giờ lưu khóa bí mật của Root CA hoặc Issuing CA dưới dạng tệp tin \texttt{.key} không mã hóa trên ổ cứng máy chủ thông thường. Bắt buộc phải lưu trong thiết bị HSM đạt tối thiểu FIPS 140-3 Level 3!
+  \end{beyond}
+  \gvnote{[~3 phút | 13h41--13h44] Phân tích 4 cấp độ FIPS 140-3. Nhấn mạnh cơ chế Zeroization của Level 4: mạch điện tự hủy khóa khi bị khoan nắp hoặc chiếu tia X.}
+\end{frame}
+
+\begin{frame}[fragile]{Chuẩn Giao Tiếp PKCS\#11 \& Thực Hành Với SoftHSMv2}
+  \begin{lstlisting}[language=bash]
+# 1. Khoi tao Token trong SoftHSMv2 gia lap HSM phan cung
+softhsm2-util --init-token --slot 0 --label "KMA-Root-Token" \
+  --so-pin 12345678 --pin 1234
+
+# 2. Sinh cap khoa RSA-4096 truc tiep ben trong HSM qua OpenSSL engine
+openssl genpkey -engine pkcs11 -algorithm RSA \
+  -pkeyopt rsa_keygen_bits:4096 \
+  -out "pkcs11:token=KMA-Root-Token;object=root-key;type=private"
+
+# 3. Kiem tra: Khoa rieng bi mat KHONG BAO GIO roi khoi HSM!
+pkcs11-tool --module /usr/lib/softhsm/libsofthsm2.so -l --pin 1234 -O
+  \end{lstlisting}
+
+  \begin{keybox}[Nguyên Lý Bất Xuất Khóa]
+    Phần cứng HSM chỉ tiếp nhận dữ liệu hash từ máy chủ gửi vào, thực hiện phép tính ký số bằng bộ vi xử lý mật mã nội bộ và trả về chữ ký $\sigma$. Khóa bí mật không bao giờ có thể bị copy hay đọc ra ngoài!
+  \end{keybox}
+  \gvnote{[~3 phút | 13h44--13h47] Hướng dẫn học viên làm bài Lab 3: Sử dụng SoftHSMv2 giả lập thiết bị HSM chuẩn PKCS\#11.}
+\end{frame}
+
+\begin{frame}{Bài Tập Tự Kiểm Tra Buổi S04}
+  \begin{quizbox}[Câu Hỏi Thẩm Định Năng Lực]
+    \begin{enumerate}\footnotesize
+      \item \textbf{Câu 1:} Một cuộc tấn công Man-in-the-Middle có thể ép trình duyệt chấp nhận chứng chỉ đã bị thu hồi bằng cách nào nếu website không bật Must-Staple?
+      \answer{\\\textbf{Giải đáp:} Kẻ tấn công chặn các gói tin DNS và HTTP gửi tới máy chủ OCSP Responder của CA. Trình duyệt không kết nối được OCSP sẽ tự động chuyển sang chế độ Soft-fail và chấp nhận chứng chỉ giả!}
+      \item \textbf{Câu 2:} Tính năng Zeroization trong thiết bị HSM hoạt động thế nào khi bị kẻ trộm tháo rời bo mạch?
+      \answer{\\\textbf{Giải đáp:} Mạch cảm biến điện dung và cảm biến áp suất phát hiện nắp vỏ bị tháo sẽ lập tức phóng điện xóa sạch toàn bộ khóa bí mật trong bộ nhớ RAM không khả biến trước khi kẻ trộm kịp đọc dữ liệu.}
+    \end{enumerate}
+  \end{quizbox}
+  \gvnote{[~2 phút | 13h47--13h50] Tổng kết kiến thức Buổi 4 và chuẩn bị sang Buổi 5 về TLS 1.3 và mTLS Gateway.}
+\end{frame}
+
+\end{document}

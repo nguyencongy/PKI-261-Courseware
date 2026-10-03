@@ -1,0 +1,166 @@
+% =====================================================================
+%  PKI Session 6: Certificate Transparency & AD CS Exploitation
+%  Author: Nguyen An Khuong (CSE-HCMUT · ORCID: 0000-0002-9910-6387)
+%  Teaching Assistant: Nguyen Huu Hoang Huy (LinkedIn)
+%  Master of Science in Information Security (CHAT4P) · HK261
+% =====================================================================
+
+\title{\color{hcmutblue}\textbf{\LARGE PUBLIC KEY INFRASTRUCTURE}\\[0.25em]
+       \color{hcmutblue}\textbf{\large S06: Certificate Transparency (CT) \& Ma Trận Tấn Công AD CS}}
+\date{\footnotesize Session 6 of 9 $\cdot$ ATHK 512 (KMA CHAT4P, HK261)\\
+      Class: Sat 07/11/2026 $\cdot$ 13h30--18h30\\
+      \textit{Standards: IETF RFC 6962, SpecterOps ESC1--ESC8, Sigma Rules}}
+
+\begin{document}
+\PKItitleframe
+
+\section{Tổng quan \& Lộ trình Buổi S06}
+
+\begin{frame}{Lộ Trình Học Phần (Buổi 6/9)}
+  \centering
+  \makebox[\linewidth][c]{\PKIcoursemap{6}}
+  \vspace{0.4em}
+  \raggedright\small
+  Buổi học kết hợp giữa cơ chế giám sát toàn cầu (Certificate Transparency) và kỹ thuật tấn công leo thang đặc quyền doanh nghiệp nghiêm trọng nhất hiện nay (AD CS Exploitation).
+  \gvnote{[~2 phút | 13h30--13h32] Giới thiệu chủ đề Buổi 6: Khép lại phần kiến trúc cơ bản để chuẩn bị cho giai đoạn bảo vệ đồ án.}
+\end{frame}
+
+\begin{frame}{Chuẩn Đầu Ra Buổi Học S06 (Learning Objectives)}
+  \small
+  Sau buổi học S06, học viên làm chủ các năng lực:
+  \begin{enumerate}
+    \item \textbf{Phân tích} kiến trúc cây Merkle Tree và bằng chứng thành viên (Inclusion Proof) trong RFC 6962.
+    \item \textbf{Giải mã} cấu trúc Signed Certificate Timestamp (SCT) nhúng trong chứng chỉ X.509.
+    \item \textbf{Khai thác} và \textbf{phòng ngự} các kỹ thuật tấn công AD CS kinh điển: ESC1, ESC8.
+    \item \textbf{Xây dựng} luật giám sát Sigma Rules phát hiện hành vi lạm dụng chứng chỉ trên Active Directory.
+  \end{enumerate}
+
+  \begin{keybox}[Nguyên Tắc Minh Bạch Tuyệt Đối]
+    "Ánh sáng mặt trời là chất khử trùng tốt nhất." Certificate Transparency biến việc phát hành chứng chỉ số từ hoạt động đóng kín thành sổ cái công khai mà toàn cầu có thể cùng giám sát.
+  \end{keybox}
+  \gvnote{[~3 phút | 13h32--13h35] Nhấn mạnh tầm quan trọng của CT Logs: Không một chứng chỉ SSL công khai nào có thể tồn tại nếu không ghi vào CT Logs.}
+\end{frame}
+
+\section{Sổ Cái Công Khai Certificate Transparency (RFC 6962)}
+
+\begin{frame}{Kiến Trúc Cây Merkle Tree Trong CT Logs}
+  \centering
+  \begin{tikzpicture}[
+    scale=0.84, every node/.style={transform shape},
+    node distance=1.2cm and 1.8cm,
+    leaf/.style={rectangle, draw=solgreen, fill=solgreen!15, thick, rounded corners=3pt, font=\scriptsize\bfseries, minimum width=2.0cm},
+    node/.style={rectangle, draw=hcmutblue, fill=keybg, thick, rounded corners=3pt, font=\scriptsize\bfseries, minimum width=2.4cm},
+    root/.style={rectangle, draw=warnred, fill=warnred!15, thick, rounded corners=3pt, font=\small\bfseries, minimum width=3.0cm, align=center}
+  ]
+    \node[root] (root) {Merkle Root Hash\\{\tiny (Ký bởi CT Log Server)}};
+
+    \node[node, below left=0.8cm and 1.2cm of root] (h01) {$H_{01} = \text{Hash}(H_0 || H_1)$};
+    \node[node, below right=0.8cm and 1.2cm of root] (h23) {$H_{23} = \text{Hash}(H_2 || H_3)$};
+
+    \node[leaf, below left=0.8cm and 0.4cm of h01] (l0) {Cert 0 ($H_0$)};
+    \node[leaf, below right=0.8cm and 0.4cm of h01] (l1) {Cert 1 ($H_1$)};
+    \node[leaf, below left=0.8cm and 0.4cm of h23] (l2) {Cert 2 ($H_2$)};
+    \node[leaf, below right=0.8cm and 0.4cm of h23] (l3) {Cert 3 ($H_3$)};
+
+    \draw[thick, color=hcmutblue] (root) -- (h01);
+    \draw[thick, color=hcmutblue] (root) -- (h23);
+    \draw[thick, color=solgreen] (h01) -- (l0);
+    \draw[thick, color=solgreen] (h01) -- (l1);
+    \draw[thick, color=solgreen] (h23) -- (l2);
+    \draw[thick, color=solgreen] (h23) -- (l3);
+
+    \node[draw=hcmutblue!60, fill=gray!5, rounded corners=3pt, below=1.8cm of root, text width=11.5cm, font=\scriptsize, align=left] {
+      \textbf{Tính chất ưu việt của cấu trúc Merkle Tree:}\\
+      $\bullet$ \textbf{Append-only:} Không thể xóa hoặc sửa bất kỳ bản ghi nào trong quá khứ.\\
+      $\bullet$ \textbf{Inclusion Proof siêu nhanh:} Chỉ cần $\mathcal{O}(\log N)$ bước hash để chứng minh một chứng chỉ đã nằm trong sổ cái!
+    };
+  \end{tikzpicture}
+  \gvnote{[~3 phút | 13h35--13h38] Mổ xẻ cấu trúc cây Merkle trong CT Logs. Giải thích bằng chứng thành viên (Inclusion Proof) và Signed Certificate Timestamp (SCT).}
+\end{frame}
+
+\begin{frame}{Signed Certificate Timestamp (SCT) \& Quy Chuẩn Trình Duyệt}
+  \begin{itemize}\small
+    \item \textbf{Cơ chế cấp phát SCT:} Khi nhận yêu cầu cấp chứng chỉ, CA gửi Pre-certificate lên ít nhất 2--3 máy chủ CT Logs độc lập (Google, Cloudflare, DigiCert).
+    \item CT Log trả về biên nhận có chữ ký số gọi là \textbf{SCT (Signed Certificate Timestamp)}, cam kết chứng chỉ sẽ được đưa vào sổ cái trong vòng 24 giờ.
+    \item CA nhúng SCT này vào phần mở rộng X.509 v3 của chứng chỉ chính thức.
+  \end{itemize}
+
+  \begin{alertblock}{Yêu Cầu Tuân Thủ Tuyệt Đối Của Trình Duyệt Web}
+    Kể từ năm 2018, Google Chrome, Apple Safari và Mozilla Firefox \textbf{từ chối kết nối ngay lập tức} nếu chứng chỉ SSL thiếu bằng chứng SCT hợp lệ!
+  \end{alertblock}
+  \gvnote{[~3 phút | 13h38--13h41] Nhấn mạnh vai trò của SCT: Đây là tấm vé thông hành bắt buộc để chứng chỉ được hiển thị an toàn trên trình duyệt.}
+\end{frame}
+
+\section{Ma trận Tấn công Active Directory CS (AD CS)}
+
+\begin{frame}{Khai Thác Lỗ Hổng Mẫu Chứng Chỉ AD CS: ESC1}
+  Nghiên cứu đột phá của SpecterOps (2021) chỉ ra kỹ thuật chiếm quyền Domain Controller:
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Cấu hình sai trên Mẫu (Template):}
+      \begin{itemize}\small
+        \item Cấp cờ \path{CT_FLAG_ENROLLEE_SUPPLIES_SUBJECT}.
+        \item Cấp quyền EKU \texttt{Client Authentication}.
+        \item Cho phép nhóm \texttt{Authenticated Users} xin cấp chứng chỉ.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Chuỗi khai thác của Hacker:}
+      \begin{itemize}\small
+        \item Dùng công cụ \texttt{Certipy} yêu cầu cấp chứng chỉ nhưng điền tên chủ thể là \texttt{Administrator}.
+        \item Nhận chứng chỉ máy tính mang danh tính Quản trị viên tối cao.
+        \item Dùng kỹ thuật PKINIT Kerberos đổi vé TGT và chiếm toàn bộ mạng!
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \begin{quizbox}[Phòng Ngự Kỹ Thuật (Đề tài Đồ án Nhóm 2)]
+    Vô hiệu hóa ngay cờ \path{ENROLLEE_SUPPLIES_SUBJECT} trên các mẫu chứng chỉ cấp quyền đăng nhập người dùng.
+  \end{quizbox}
+  \gvnote{[~3 phút | 13h41--13h44] Phân tích lỗ hổng ESC1. Đây là nội dung trọng tâm báo cáo của Đồ án Nhóm 2 (Hiển, Sơn, Phú).}
+\end{frame}
+
+\begin{frame}{Tấn Công NTLM Relay Tới Cổng Web Enrollment: ESC8}
+  \begin{beyond}{pitfall}
+    \textbf{Điểm yếu cố hữu của giao diện web AD CS (\texttt{/certsrv}):}
+    Mặc định cổng này hỗ trợ xác thực NTLM và không bật tính năng chống chuyển tiếp ký số (NTLM Signing / EPA), đồng thời thường chạy trên HTTP không có mã hóa TLS!
+  \end{beyond}
+
+  \begin{itemize}\small
+    \item Kẻ tấn công kích hoạt tấn công \texttt{PetitPotam} hoặc ép máy Domain Controller xác thực NTLM sang máy của hacker.
+    \item Hacker chuyển tiếp gói xác thực NTLM này tới cổng web của CA (\texttt{/certsrv}).
+    \item CA chấp nhận xác thực và cấp chứng chỉ máy chủ hợp lệ cho Domain Controller.
+    \item Hacker dùng chứng chỉ vừa nhận để mạo danh Domain Controller, chiếm đoạt toàn bộ mật khẩu trong cơ sở dữ liệu \texttt{ntds.dit}!
+  \end{itemize}
+  \gvnote{[~3 phút | 13h44--13h47] Minh họa cuộc tấn công NTLM Relay sang AD CS Web Enrollment (ESC8).}
+\end{frame}
+
+\begin{frame}[fragile]{Chiến Lược Phòng Ngự \& Giám Sát Bằng Sigma Rules}
+  \begin{block}{Quy Tắc Hardening Hạ Tầng AD CS Doanh Nghiệp}
+    \begin{enumerate}\footnotesize
+      \item Gỡ bỏ hoàn toàn dịch vụ Web Enrollment (\texttt{/certsrv}) nếu không thực sự sử dụng.
+      \item Bắt buộc bật Extended Protection for Authentication (EPA) và SSL trên IIS.
+      \item Giám sát Windows Event Log ID \texttt{4886} (Yêu cầu cấp) và \texttt{4887} (Đã cấp chứng chỉ).
+    \end{enumerate}
+  \end{block}
+
+  \begin{lstlisting}[language=bash]
+# Kiem tra cac template AD CS de bi tan cong bang Certipy
+certipy find -u user@kma.local -p Password123 -dc-ip 192.168.1.10 -vulnerable
+  \end{lstlisting}
+  \gvnote{[~2 phút | 13h47--13h50] Hướng dẫn các giải pháp phòng ngừa và lệnh kiểm tra lỗ hổng tự động bằng công cụ Certipy.}
+\end{frame}
+
+\begin{frame}{Bài Tập Tự Kiểm Tra Buổi S06}
+  \begin{quizbox}[Câu Hỏi Thẩm Định Năng Lực]
+    \begin{enumerate}\footnotesize
+      \item \textbf{Câu 1:} Tại sao hacker sở hữu chứng chỉ giả mạo có chữ ký của CA hợp lệ vẫn bị phát hiện nếu chứng chỉ đó không được ghi vào CT Logs?
+      \answer{\\\textbf{Giải đáp:} Vì trình duyệt hiện đại bắt buộc phải có biên nhận SCT từ các CT Log công khai. Không có SCT, trình duyệt sẽ báo lỗi an ninh ngay lập tức và chặn truy cập!}
+      \item \textbf{Câu 2:} Trong cuộc tấn công ESC8, biện pháp khắc phục triệt để nhất ở mức cấu hình máy chủ web IIS là gì?
+      \answer{\\\textbf{Giải đáp:} Bật tính năng Extended Protection for Authentication (EPA) sang chế độ Required và kích hoạt cơ chế gán kênh truyền (Channel Binding) trên IIS.}
+    \end{enumerate}
+  \end{quizbox}
+  \gvnote{[~2 phút | 13h50--13h52] Tổng kết buổi học S06 và dặn dò các nhóm chuẩn bị thuyết trình đồ án tại S07.}
+\end{frame}
+
+\end{document}

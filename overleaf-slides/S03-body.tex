@@ -1,0 +1,171 @@
+% =====================================================================
+%  PKI Session 3: CA Lifecycle, CP/CPS & ACME Protocol
+%  Author: Nguyen An Khuong (CSE-HCMUT · ORCID: 0000-0002-9910-6387)
+%  Teaching Assistant: Nguyen Huu Hoang Huy (LinkedIn)
+%  Master of Science in Information Security (CHAT4P) · HK261
+% =====================================================================
+
+\title{\color{hcmutblue}\textbf{\LARGE PUBLIC KEY INFRASTRUCTURE}\\[0.25em]
+       \color{hcmutblue}\textbf{\large S03: Quản trị CA, Chính sách CP/CPS \& Tự động hóa ACME}}
+\date{\footnotesize Session 3 of 9 $\cdot$ ATHK 512 (KMA CHAT4P, HK261)\\
+      Class: Sat 17/10/2026 $\cdot$ 13h30--18h30\\
+      \textit{Standards: IETF RFC 3647, RFC 8555 (ACME), Step-CA}}
+
+\begin{document}
+\PKItitleframe
+
+\section{Tổng quan \& Lộ trình Buổi S03}
+
+\begin{frame}{Lộ Trình Học Phần (Buổi 3/9)}
+  \centering
+  \makebox[\linewidth][c]{\PKIcoursemap{3}}
+  \vspace{0.4em}
+  \raggedright\small
+  Buổi học chuyển dịch từ cấu trúc tĩnh sang vận hành động: cách thiết kế hệ thống CA cấp doanh nghiệp, chính sách pháp lý CP/CPS và giao thức cấp phát tự động ACME.
+  \gvnote{[~2 phút | 13h30--13h32] Giới thiệu chủ đề Buổi 3: Quản trị vòng đời CA và giao thức tự động hóa ACME RFC 8555.}
+\end{frame}
+
+\begin{frame}{Chuẩn Đầu Ra Buổi Học S03 (Learning Objectives)}
+  \small
+  Sau buổi học S03, học viên làm chủ các kỹ năng:
+  \begin{enumerate}
+    \item \textbf{Phân định} vai trò và trách nhiệm giữa Certificate Policy (CP) và Certification Practice Statement (CPS) theo RFC 3647.
+    \item \textbf{Thiết kế} quy trình Lễ sinh khóa (Key Ceremony) và quản trị khóa bằng thuật toán Shamir $M$-of-$N$.
+    \item \textbf{Phân tích} luồng thông điệp giao thức ACME (RFC 8555) và 3 cơ chế thử thách định danh (HTTP-01, DNS-01, TLS-ALPN-01).
+    \item \textbf{Vận hành} máy chủ Step-CA nội bộ hỗ trợ cấp chứng chỉ tự động cho hạ tầng DevOps/Kubernetes.
+  \end{enumerate}
+
+  \begin{keybox}[Nguyên Lý Vận Hành Hiện Đại]
+    Chứng chỉ số ngắn hạn (90 ngày hoặc vài giờ) kết hợp tự động hóa 100\% qua ACME là giải pháp hữu hiệu nhất để triệt tiêu lỗi vận hành và nâng cao tính an toàn của toàn hệ thống.
+  \end{keybox}
+  \gvnote{[~3 phút | 13h32--13h35] Nhấn mạnh xu hướng chứng chỉ ngắn hạn: Google đề xuất giảm thời hạn SSL xuống 45 ngày.}
+\end{frame}
+
+\section{Khung Pháp lý \& Kỹ thuật: RFC 3647 CP/CPS}
+
+\begin{frame}{So Sánh Certificate Policy (CP) \& Practice Statement (CPS)}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Certificate Policy (CP):}
+      \begin{itemize}\small
+        \item Văn bản cấp cao tuyên ngôn về \textbf{nguyên tắc và chính sách}.
+        \item Quy định: Đối tượng được cấp, mức độ tin cậy và trách nhiệm pháp lý.
+        \item Trả lời câu hỏi: \emph{"Hệ thống này cam kết bảo đảm điều gì?"}
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Certification Practice Statement (CPS):}
+      \begin{itemize}\small
+        \item Tài liệu kỹ thuật chi tiết mô tả \textbf{quy trình vận hành thực tế}.
+        \item Mô tả: Cách sinh khóa, bảo vệ phòng máy, thẩm tra danh tính và xử lý sự cố.
+        \item Trả lời câu hỏi: \emph{"Hệ thống này thực hiện cam kết đó như thế nào?"}
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \begin{beyond}{why}
+    Một CA thương mại không thể được đưa vào Trust Store của Microsoft, Apple hay Mozilla nếu không vượt qua kỳ kiểm toán WebTrust dựa trên văn bản CP/CPS được công bố minh bạch!
+  \end{beyond}
+  \gvnote{[~3 phút | 13h35--13h38] Phân biệt rõ CP và CPS. Đây là cơ sở pháp lý và kỹ thuật ràng buộc trách nhiệm của tổ chức CA.}
+\end{frame}
+
+\begin{frame}{Cấu Trúc 9 Phần Tiêu Chuẩn Của CP/CPS (RFC 3647)}
+  \begin{enumerate}\footnotesize
+    \item \textbf{Giới thiệu chung (Introduction):} Phạm vi áp dụng, đối tượng tham gia và mã định danh OID của chính sách.
+    \item \textbf{Trách nhiệm công bố và kho lưu trữ (Publication \& Repository):} Cam kết cập nhật CRL, URL chứng chỉ.
+    \item \textbf{Quy trình định danh và xác thực (Identification \& Authentication):} Thẩm tra cá nhân, doanh nghiệp, tên miền.
+    \item \textbf{Yêu cầu nghiệp vụ vòng đời chứng chỉ (Certificate Life-Cycle Operations):} Nộp đơn, cấp phát, gia hạn, thu hồi.
+    \item \textbf{Kiểm soát an ninh cơ sở vật chất \& nhân sự (Facility, Management Controls):} Phòng Faraday, camera, lý lịch quản trị.
+    \item \textbf{Kiểm soát an ninh kỹ thuật \& mật mã (Technical Security Controls):} Chuẩn HSM, sinh số ngẫu nhiên TRNG.
+    \item \textbf{Hồ sơ cấu trúc chứng chỉ \& CRL (Certificate, CRL Profiles):} Các trường ASN.1, thuật toán mã hóa.
+    \item \textbf{Đánh giá tuân thủ và kiểm toán độc lập (Compliance Audit):} Kiểm toán viên bên ngoài định kỳ hàng năm.
+    \item \textbf{Điều khoản pháp lý và kinh doanh (Other Business \& Legal Matters):} Bồi thường thiệt hại, bảo mật thông tin.
+  \end{enumerate}
+  \gvnote{[~3 phút | 13h38--13h41] Giới thiệu 9 phần của RFC 3647. Mọi sinh viên làm đề tài Đồ án Nhóm 4 (Enterprise ACME) cần tham chiếu khung này.}
+\end{frame}
+
+\section{Tự Động Hóa Cấp Phát: Giao Thức ACME (RFC 8555)}
+
+\begin{frame}{Kiến Trúc Giao Thức ACME (Automated Certificate Management)}
+  \centering
+  \begin{tikzpicture}[
+    scale=0.84, every node/.style={transform shape},
+    node distance=2.2cm and 3.5cm,
+    cl/.style={rectangle, draw=hcmutblue, fill=keybg, thick, rounded corners=3pt, minimum width=3.0cm, minimum height=1.1cm, align=center, font=\small\bfseries},
+    sv/.style={rectangle, draw=solgreen, fill=solgreen!15, thick, rounded corners=3pt, minimum width=3.2cm, minimum height=1.1cm, align=center, font=\small\bfseries},
+    msg/.style={-{Stealth[scale=1.1]}, thick}
+  ]
+    \node[cl] (client) {ACME Client\\{\scriptsize (Certbot / Step-CLI)}};
+    \node[sv] (server) [right=of client] {ACME Server (CA)\\{\scriptsize (Let's Encrypt / Step-CA)}};
+
+    \draw[msg, color=hcmutblue] (client.north east) -- node[above, font=\scriptsize] {1. New Order (Yêu cầu cấp chứng chỉ)} (server.north west);
+    \draw[msg, color=solgreen] (server.west) -- node[above, font=\scriptsize] {2. Thử thách xác thực quyền sở hữu} (client.east);
+    \draw[msg, color=hcmutblue] (client.south east) -- node[below, font=\scriptsize] {3. Hoàn thành thử thách \& Gửi CSR} (server.south west);
+    \draw[msg, color=solgreen] (server.south) to[bend left=30] node[below, font=\scriptsize] {4. Ký và trả về chứng chỉ X.509} (client.south);
+
+    \node[draw=hcmutblue!60, fill=gray!5, rounded corners=3pt, below=1.2cm of client, text width=11.5cm, font=\scriptsize, align=left] {
+      \textbf{Lợi ích đột phá của ACME:}\\
+      $\bullet$ Cắt giảm thời gian cấp phát từ 3--5 ngày làm việc xuống dưới 10 giây.\\
+      $\bullet$ Tự động xoay vòng khóa bí mật và chứng chỉ mà không cần con người can thiệp thủ công.\\
+      $\bullet$ Triệt tiêu hoàn toàn rủi ro sập dịch vụ do quên gia hạn chứng chỉ SSL.
+    };
+  \end{tikzpicture}
+  \gvnote{[~3 phút | 13h41--13h44] Trình bày quy trình 4 bước của giao thức ACME theo chuẩn IETF RFC 8555.}
+\end{frame}
+
+\begin{frame}{So Sánh 3 Phương Thức Thử Thách Của ACME}
+  \begin{table}[h]
+    \centering\scriptsize
+    \begin{tabularx}{\linewidth}{@{}p{0.18\linewidth} p{0.34\linewidth} X@{}}
+      \toprule
+      \textbf{Thử Thách} & \textbf{Cơ Chế Kỹ Thuật} & \textbf{Phạm Vi \& Ứng Dụng} \\
+      \midrule
+      \textbf{HTTP-01} & Server CA gửi request HTTP \path{/.well-known/acme-challenge/} tới cổng 80 & Đơn giản nhất cho web thông thường. \textbf{Không hỗ trợ} Wildcard. \\
+      \textbf{DNS-01} & Client tự tạo bản ghi \texttt{TXT} tại \path{_acme-challenge.domain.com} & \textbf{Bắt buộc cho Wildcard} (\texttt{*.domain.com}). Đòi hỏi quyền ghi DNS API. \\
+      \textbf{TLS-ALPN-01} & Bắt tay TLS với giao thức ALPN riêng \texttt{acme-tls/1} tại cổng 443 & Phù hợp cho load balancer / reverse proxy không mở cổng 80. \\
+      \bottomrule
+    \end{tabularx}
+  \end{table}
+
+  \begin{quizbox}[Câu Hỏi Tư Duy Thực Tế]
+    Tại sao thử thách HTTP-01 lại không thể dùng để cấp chứng chỉ Wildcard?
+    \answer{\\\textbf{Giải đáp:} Vì một bản ghi HTTP-01 chỉ chứng minh quyền kiểm soát trên 1 máy chủ IP đơn lẻ, không chứng minh được quyền quản trị toàn bộ không gian tên miền con của domain!}
+  \end{quizbox}
+  \gvnote{[~3 phút | 13h44--13h47] So sánh 3 challenge của ACME. Lưu ý sinh viên: Khi xin chứng chỉ Wildcard, bắt buộc phải dùng DNS-01.}
+\end{frame}
+
+\section{Thực hành Triển khai Step-CA Nội bộ}
+
+\begin{frame}[fragile]{Triển Khai Máy Chủ ACME Nội Bộ Bằng Step-CA}
+  \begin{lstlisting}[language=bash]
+# 1. Khoi dong Step-CA server ho tro ACME protocol
+docker run -d --name step-ca -p 9000:9000 \
+  -e "DOCKER_STEPCA_INIT_NAME=KMA Enterprise PKI" \
+  -e "DOCKER_STEPCA_INIT_DNS_NAMES=localhost,step-ca.kma.local" \
+  smallstep/step-ca
+
+# 2. Cau hinh client lay chung chi tu dong bang Certbot
+certbot certonly --standalone \
+  --server https://step-ca.kma.local:9000/acme/acme/directory \
+  -d api.kma.internal
+  \end{lstlisting}
+
+  \begin{keybox}[Ứng Dụng Trong Doanh Nghiệp]
+    Step-CA cho phép mọi tổ chức xây dựng một "Let's Encrypt nội bộ" hoàn toàn miễn phí, độc lập, bảo mật cho hệ thống microservices và mạng LAN riêng tư.
+  \end{keybox}
+  \gvnote{[~3 phút | 13h47--13h50] Hướng dẫn thực hành Lab 2: Khởi động Step-CA bằng Docker và dùng Certbot cấp phát chứng chỉ tự động.}
+\end{frame}
+
+\begin{frame}{Bài Tập Tự Kiểm Tra Buổi S03}
+  \begin{quizbox}[Câu Hỏi Thẩm Định Năng Lực]
+    \begin{enumerate}\footnotesize
+      \item \textbf{Câu 1:} Một doanh nghiệp có 500 microservices chạy trong Kubernetes. Vì sao họ nên dùng ACME thay vì sinh chứng chỉ tĩnh bằng OpenSSL?
+      \answer{\\\textbf{Giải đáp:} Với 500 dịch vụ, việc tạo khóa và gia hạn thủ công sẽ gây quá tải vận hành và chắc chắn xảy ra sự cố quên gia hạn làm sập hệ thống. ACME tự động hóa 100\% việc cấp và xoay vòng chứng chỉ.}
+      \item \textbf{Câu 2:} Trong lễ sinh khóa Root CA, nếu 1 trong số $M$ người nắm giữ thẻ Shamir bị mất thẻ, hệ thống có mở khóa được không?
+      \answer{\\\textbf{Giải đáp:} Có, miễn là còn đủ $M$ người trong số $N$ người ($M \le N$). Đó chính là ưu việt của thuật toán chia sẻ bí mật Shamir so với khóa đơn lẻ.}
+    \end{enumerate}
+  \end{quizbox}
+  \gvnote{[~2 phút | 13h50--13h52] Tổng kết buổi học S03 và giao bài tập Lab 2.}
+\end{frame}
+
+\end{document}

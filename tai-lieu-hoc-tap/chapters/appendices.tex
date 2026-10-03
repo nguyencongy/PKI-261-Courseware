@@ -1,0 +1,130 @@
+\appendix
+
+\chapter{Cẩm Nang 50 Lệnh OpenSSL 3.5 Thực Chiến}
+
+\section{Quản Trị Khóa \& Tham Số Mật Mã}
+
+\begin{lstlisting}[language=bash]
+# 1. Sinh khoa bi mat RSA 4096-bit co ma hoa AES-256
+openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:4096 -aes256 -out rsa4096.key
+
+# 2. Trich xuat khoa cong khai tu khoa bi mat RSA
+openssl pkey -in rsa4096.key -pubout -out rsa4096.pub
+
+# 3. Kiem tra tinh toan ven toan hoc cua khoa RSA
+openssl rsa -in rsa4096.key -check -noout
+
+# 4. Sinh khoa bi mat ECC P-256 (prime256v1)
+openssl genpkey -algorithm EC -pkeyopt ec_paramgen_curve:P-256 -out ec256.key
+
+# 5. Sinh khoa bi mat ECC Ed25519 sieu nhe
+openssl genpkey -algorithm ED25519 -out ed25519.key
+
+# 6. Sinh khoa bi mat Post-Quantum ML-DSA-65 (NIST FIPS 204)
+openssl genpkey -algorithm mldsa65 -out mldsa65.key
+\end{lstlisting}
+
+\section{Yêu Cầu Ký Chứng Chỉ (CSR) \& Cấu Hình SAN}
+
+\begin{lstlisting}[language=bash]
+# 7. Sinh CSR voi Subject Alternative Name (SAN) 1 dong lenh duy nhat
+openssl req -new -key rsa4096.key -out srv.csr \
+  -subj "/CN=kma.edu.vn/O=KMA/C=VN" \
+  -addext "subjectAltName=DNS:kma.edu.vn,DNS:*.kma.edu.vn,IP:192.168.1.10"
+
+# 8. Kiem tra noi dung va xac thuc chu ky ben trong file CSR
+openssl req -in srv.csr -text -noout -verify
+\end{lstlisting}
+
+\section{Ký Phát Hành \& Thẩm Tra Chuỗi X.509}
+
+\begin{lstlisting}[language=bash]
+# 9. Intermediate CA ky cap chung chi may chu thoi han 90 ngay
+openssl x509 -req -in srv.csr -CA intermediate-ca.crt -CAkey intermediate-ca.key \
+  -CAcreateserial -out srv.crt -days 90 -sha256 \
+  -extfile <(echo -e "basicConstraints=critical,CA:FALSE\nkeyUsage=critical,digitalSignature,keyEncipherment\nextendedKeyUsage=serverAuth\nsubjectAltName=DNS:kma.edu.vn,DNS:*.kma.edu.vn")
+
+# 10. Tham tra toan bo chuoi chung chi ve Root CA (Path Validation)
+openssl verify -CAfile root-ca.crt -untrusted intermediate-ca.crt srv.crt
+\end{lstlisting}
+
+\section{Kiểm Tra Thu Hồi \& Giao Thức OCSP}
+
+\begin{lstlisting}[language=bash]
+# 11. Khoi tao may chu OCSP Responder noi bo tren cong 8888
+openssl ocsp -index index.txt -port 8888 -rsigner ocsp.crt -rkey ocsp.key \
+  -CA intermediate-ca.crt -text
+
+# 12. Gui truy van OCSP kiem tra trang thai thu hoi truc tiep
+openssl ocsp -CAfile intermediate-ca.crt -issuer intermediate-ca.crt \
+  -cert srv.crt -url http://127.0.0.1:8888
+\end{lstlisting}
+
+\chapter{Bộ Công Cụ Python Cryptography Kiểm Định X.509}
+
+\begin{lstlisting}[language=Python,caption={Script Python kiem tra va boc tach chi tiet cac truong X.509}]
+from cryptography import x509
+from cryptography.hazmat.backends import default_backend
+from cryptography.x509.oid import ExtensionOID
+import datetime
+
+def audit_certificate(pem_path: str):
+    with open(pem_path, "rb") as f:
+        cert = x509.load_pem_x509_certificate(f.read(), default_backend())
+    
+    print(f"[*] Subject: {cert.subject.rfc4514_string()}")
+    print(f"[*] Issuer:  {cert.issuer.rfc4514_string()}")
+    print(f"[*] Serial:  {hex(cert.serial_number)}")
+    print(f"[*] Validity: {cert.not_valid_before_utc} to {cert.not_valid_after_utc}")
+    
+    # Kiem tra thoi han
+    now = datetime.datetime.now(datetime.timezone.utc)
+    if not (cert.not_valid_before_utc <= now <= cert.not_valid_after_utc):
+        print("[!] CANH BAO: Chung chi het han hoac chua co hieu luc!")
+        
+    # Kiem tra SAN
+    try:
+        san = cert.extensions.get_extension_for_oid(ExtensionOID.SUBJECT_ALTERNATIVE_NAME)
+        dns_names = san.value.get_values_for_type(x509.DNSName)
+        print(f"[+] SAN DNS: {dns_names}")
+    except x509.ExtensionNotFound:
+        print("[!] LOI NGHIEP VU: Chung chi thieu phan mo rong SAN!")
+
+if __name__ == "__main__":
+    audit_certificate("srv.crt")
+\end{lstlisting}
+
+\chapter{Danh Mục Tài Liệu Tham Khảo Hàn Lâm \& Video OCW Quốc Tế}
+
+\section{Tiêu Chuẩn Quốc Tế IETF RFC \& CA/B Forum}
+\begin{enumerate}
+  \item IETF RFC 5280: \emph{Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile}, May 2008.
+  \item IETF RFC 6960: \emph{X.509 Internet Public Key Infrastructure Online Certificate Status Protocol -- OCSP}, June 2013.
+  \item IETF RFC 6962: \emph{Certificate Transparency}, June 2013.
+  \item IETF RFC 8555: \emph{Automatic Certificate Management Environment (ACME)}, March 2019.
+  \item IETF RFC 9673: \emph{Composite Public Keys and Signatures for Use in Internet PKI}, 2024.
+  \item CA/Browser Forum: \emph{Baseline Requirements for the Issuance and Management of Publicly-Trusted Certificates}, v2.0.8, 2024.
+\end{enumerate}
+
+\section{Tiêu Chuẩn Viện Tiêu Chuẩn \& Công Nghệ Quốc Gia Hoa Kỳ (NIST)}
+\begin{enumerate}
+  \item NIST FIPS 203: \emph{Module-Lattice-Based Key-Encapsulation Mechanism Standard (ML-KEM)}, August 2024.
+  \item NIST FIPS 204: \emph{Module-Lattice-Based Digital Signature Standard (ML-DSA)}, August 2024.
+  \item NIST FIPS 205: \emph{Stateless Hash-Based Digital Signature Standard (SLH-DSA)}, August 2024.
+  \item NIST SP 800-57 Part 1 Rev. 5: \emph{Recommendation for Key Management}, May 2020.
+\end{enumerate}
+
+\section{Sách Chuyên Khảo Kinh Điển}
+\begin{enumerate}
+  \item Carlisle Adams and Steve Lloyd, \emph{Understanding PKI: Concepts, Standards, and Deployment Considerations}, 2nd Edition, Addison-Wesley, 2003.
+  \item Christof Paar and Jan Pelzl, \emph{Understanding Cryptography: A Textbook for Students and Practitioners}, Springer, 2010.
+  \item Ivan Ristić, \emph{Bulletproof TLS and PKI}, 2nd Edition, Feisty Duck, 2022.
+\end{enumerate}
+
+\section{Khóa Học Mở Quốc Tế (OpenCourseWare -- OCW)}
+\begin{enumerate}
+  \item \textbf{Stanford University CS 255:} \emph{Cryptography}, Prof. Dan Boneh. URL: \url{https://crypto.stanford.edu/~dabo/cs255/}
+  \item \textbf{MIT 6.857:} \emph{Computer and Network Security}, Prof. Ronald L. Rivest. URL: \url{https://courses.csail.mit.edu/6.857/}
+  \item \textbf{Carnegie Mellon University 18-730:} \emph{Introduction to Computer Security}, Prof. Virgil Gligor.
+  \item \textbf{University of Cambridge:} \emph{Security and Cryptography Lecture Series}, Computer Laboratory.
+\end{enumerate}

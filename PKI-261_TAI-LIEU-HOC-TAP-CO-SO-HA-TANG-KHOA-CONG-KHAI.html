@@ -1,0 +1,1897 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.11" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>PKI 261_TAI LIEU HOC TAP CO SO HA TANG KHOA CONG KHAI</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      white-space: pre-wrap;
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 900px; margin: 30px auto; padding: 0 20px; color: #24292e; background: #fff; }
+  h1, h2, h3, h4 { color: #0a2540; border-bottom: 1px solid #eaecef; padding-bottom: 0.3em; margin-top: 1.5em; }
+  h1 { font-size: 2em; border-bottom: 2px solid #0066cc; }
+  table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 0.95em; }
+  th, td { border: 1px solid #dfe2e5; padding: 8px 12px; }
+  th { background-color: #f6f8fa; font-weight: 600; text-align: left; }
+  tr:nth-child(2n) { background-color: #fbfcfd; }
+  code { background: #f3f4f4; padding: 0.2em 0.4em; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 85%; }
+  pre { background: #0a2540; color: #f8f8f2; padding: 14px; border-radius: 6px; overflow-x: auto; }
+  pre code { background: none; color: inherit; padding: 0; font-size: 0.9em; }
+  blockquote { border-left: 4px solid #0066cc; margin: 0; padding-left: 16px; color: #57606a; background: #f8fbfd; padding: 8px 16px; border-radius: 0 6px 6px 0; }
+  a { color: #0066cc; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">PKI 261_TAI LIEU HOC TAP CO SO HA TANG KHOA CONG
+KHAI</h1>
+</header>
+<h1 id="tài-liệu-học-tập">TÀI LIỆU HỌC TẬP</h1>
+<h1
+id="cơ-sở-hạ-tầng-khóa-công-khai-pki-chuyển-dịch-mật-mã-hậu-lượng-tử-pqc">CƠ
+SỞ HẠ TẦNG KHÓA CÔNG KHAI (PKI) &amp; CHUYỂN DỊCH MẬT MÃ HẬU LƯỢNG TỬ
+(PQC)</h1>
+<p><strong>Mã học phần:</strong> ATHK 512 · <strong>Khóa đào
+tạo:</strong> Cao học An toàn Thông tin (CHAT4P)<br />
+<strong>Học kỳ:</strong> HK261 · <strong>Năm học:</strong> 2026 –
+2027<br />
+<strong>Cơ sở đào tạo:</strong> Khoa An toàn Thông tin — Học viện Kỹ
+thuật Mật mã (Phân hiệu TP.HCM)<br />
+<strong>Đơn vị phối hợp chuyên môn:</strong> Khoa Khoa học &amp; Kỹ
+thuật Máy tính, Trường Đại học Bách khoa — ĐHQG TP.HCM</p>
+<hr />
+<h3 id="thông-tin-đội-ngũ-giảng-dạy-hỗ-trợ-học-thuật">THÔNG TIN ĐỘI NGŨ
+GIẢNG DẠY &amp; HỖ TRỢ HỌC THUẬT</h3>
+<ul>
+<li><p><strong>Chủ biên &amp; Giảng viên phụ trách:</strong><br />
+<strong>Nguyễn An Khương</strong><br />
+<em>Đơn vị công tác:</em> Khoa Khoa học &amp; Kỹ thuật Máy tính, Trường
+Đại học Bách khoa — ĐHQG TP.HCM<br />
+<em>Mã định danh học thuật toàn cầu:</em> <a
+href="https://orcid.org/0000-0002-9910-6387">ORCID:
+0000-0002-9910-6387</a><br />
+<em>Email công vụ:</em> <code>nakhuong@gmail.com</code> /
+<code>nakhuong@hcmut.edu.vn</code></p></li>
+<li><p><strong>Trợ giảng học phần (Teaching Assistant):</strong><br />
+<strong>Nguyễn Hữu Hoàng Huy</strong><br />
+<em>Hồ sơ chuyên môn:</em> <a
+href="https://www.linkedin.com/in/nguyen-huu-hoang-huy-abb138366/">LinkedIn
+Profile</a><br />
+<em>GitHub:</em> <code>@HuyLHP</code> (Quyền quản trị kỹ thuật:
+Collaborator <code>write</code>)</p></li>
+</ul>
+<hr />
+<h3 id="bản-quyền-và-giấy-phép-phát-hành">BẢN QUYỀN VÀ GIẤY PHÉP PHÁT
+HÀNH</h3>
+<ul>
+<li><strong>Bản quyền Nội dung &amp; Học liệu:</strong> Bản quyền thuộc
+về Giảng viên <strong>Nguyễn An Khương</strong>. Tác phẩm này được phát
+hành dưới Giấy phép Quốc tế <a
+href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative
+Commons Attribution-NonCommercial-NoDerivatives 4.0 (CC BY-NC-ND
+4.0)</a>. Người học được phép sao chép, phân phối tài liệu cho mục đích
+học tập cá nhân phi thương mại, không được phép chỉnh sửa hoặc cắt ghép
+nội dung khi chưa có văn bản chấp thuận của tác giả.</li>
+<li><strong>Bản quyền Mã nguồn &amp; Thực nghiệm:</strong> Toàn bộ mã
+nguồn, kịch bản tự động hóa, cấu hình container Docker và test suites
+trong học liệu được phát hành theo <a
+href="https://opensource.org/licenses/MIT">Giấy phép Nguồn mở MIT (MIT
+License)</a>.</li>
+</ul>
+<hr />
+<h2 id="lời-nói-đầu">LỜI NÓI ĐẦU</h2>
+<p>Hạ tầng Khóa Công khai (Public Key Infrastructure - PKI) từ lâu đã
+trở thành “xương sống vô hình” bảo đảm tính bảo mật, toàn vẹn, xác thực
+và chống chối bỏ cho toàn bộ thế giới số hiện đại. Từ giao thức bắt tay
+TLS bảo vệ hàng tỷ phiên duyệt web an toàn mỗi ngày, chữ ký số trên các
+chứng từ tài chính - ngân hàng, đến các định danh thiết bị IoT và cơ chế
+khởi động an toàn (Secure Boot) trong hệ điều hành máy tính — tất cả đều
+vận hành dựa trên các nguyên lý cốt lõi của PKI.</p>
+<p>Tuy nhiên, kỷ nguyên số đang bước vào một khúc quanh lịch sử với hai
+chuyển biến mang tính cách mạng: 1. <strong>Kiến trúc Zero Trust &amp;
+Điện toán Đám mây Phân tán:</strong> Mô hình chu vi mạng truyền thống bị
+xóa bỏ hoàn toàn. Các hệ thống hiện đại đòi hỏi hàng triệu kết nối mTLS
+giữa các microservices được mã hóa với chứng chỉ có thời hạn sống biểu
+kiến (ephemeral certificates tính bằng giờ hoặc phút), kéo theo yêu cầu
+tự động hóa tuyệt đối thông qua giao thức ACME (RFC 8555) và kiểm định
+tuân thủ tự động (ZLint). 2. <strong>Nguy cơ Hiện hữu từ Điện toán Lượng
+tử (Post-Quantum Transition):</strong> Thuật toán lượng tử Shor đã chứng
+minh khả năng bẻ gãy hoàn toàn các hệ mật mã khóa công khai kinh điển
+dựa trên bài toán phân tích thừa số nguyên tố (RSA) và logarit rời rạc
+(DSA, ECDSA, ECDH) trong thời gian đa thức. Tháng 8/2024, Viện Tiêu
+chuẩn và Công nghệ Quốc gia Hoa Kỳ (NIST) đã chính thức ban hành bộ tiêu
+chuẩn FIPS 203 (ML-KEM), FIPS 204 (ML-DSA) và FIPS 205 (SLH-DSA), mở ra
+một cuộc đại di chuyển mật mã (cryptographic migration) quy mô toàn cầu
+chưa từng có trong lịch sử nhân loại.</p>
+<p>Bộ <strong>Tài liệu học tập: Cơ sở Hạ tầng Khóa công khai &amp; Mật
+mã Hậu lượng tử</strong> này được biên soạn dành riêng cho học viên cao
+học ngành An toàn Thông tin (CHAT4P) nhằm trang bị một góc nhìn sâu sắc,
+toàn diện và hiện đại: kết hợp chặt chẽ giữa <strong>nền tảng toán học
+hàn lâm chuẩn mực</strong>, <strong>chuẩn giao thức kỹ thuật quốc tế
+(IETF RFCs, CA/B Forum, NIST FIPS)</strong> và <strong>năng lực thực
+chiến công nghiệp (DevSecOps, Docker, OpenSSL 3.5, liboqs,
+HSM)</strong>.</p>
+<p>Tài liệu được kết cấu thành 8 chương chuyên sâu kèm theo hệ thống phụ
+lục thực nghiệm phong phú, đóng vai trò là kim chỉ nam xuyên suốt 9 buổi
+học lý thuyết, thực hành phòng lab và 5 đề tài đồ án chuyên đề lớn của
+học phần.</p>
+<hr />
+<h2 id="mục-lục-tổng-quan">MỤC LỤC TỔNG QUAN</h2>
+<ul>
+<li><strong>Chương 1:</strong> Nền Tảng Lý Thuyết Số &amp; Cơ Sở Toán
+Học Mật Mã Khóa Công Khai</li>
+<li><strong>Chương 2:</strong> Cấu Trúc Dữ Liệu Chứng Chỉ X.509 v3 &amp;
+Quy Cách Mã Hóa ASN.1 DER</li>
+<li><strong>Chương 3:</strong> Kiến Trúc Phân Tầng CA, Vòng Đời Khóa
+&amp; Quy Chế CP/CPS (RFC 3647)</li>
+<li><strong>Chương 4:</strong> Thuật Toán Xác Thực Đường Dẫn Tin Cậy
+&amp; Cơ Chế Thu Hồi Chứng Chỉ</li>
+<li><strong>Chương 5:</strong> Giao Thức Quản Trị Tự Động ACME (RFC
+8555) &amp; Hạ Tầng Zero Trust PKI</li>
+<li><strong>Chương 6:</strong> Các Kịch Bản Tấn Công Hạ Tầng PKI &amp;
+Chiến Lược Phòng Thủ Toàn Diện</li>
+<li><strong>Chương 7:</strong> Chuyển Dịch Hệ Thống Sang Mật Mã Hậu
+Lượng Tử (PQC Migration)</li>
+<li><strong>Chương 8:</strong> Khung Pháp Lý, Quy Chuẩn Kỹ Thuật &amp;
+Hạ Tầng Chữ Ký Số Quốc Gia</li>
+<li><strong>Phụ lục A:</strong> Cẩm Nang 50 Lệnh OpenSSL 3.5 Thực Chiến
+Cho Chuyên Gia ATTT</li>
+<li><strong>Phụ lục B:</strong> Bộ Công Cụ Python Cryptography Phân Tích
+&amp; Kiểm Định Chứng Chỉ</li>
+<li><strong>Phụ lục C:</strong> Danh Mục Tài Liệu Tham Khảo Hàn Lâm
+&amp; Khóa Học Quốc Tế (OCW)</li>
+</ul>
+<hr />
+<h1
+id="chương-1-nền-tảng-lý-thuyết-số-cơ-sở-toán-học-mật-mã-khóa-công-khai">CHƯƠNG
+1: NỀN TẢNG LÝ THUYẾT SỐ &amp; CƠ SỞ TOÁN HỌC MẬT MÃ KHÓA CÔNG KHAI</h1>
+<h2 id="cấu-trúc-đại-số-trừu-tượng-các-phép-toán-số-học">1.1. Cấu Trúc
+Đại Số Trừu Tượng &amp; Các Phép Toán Số Học</h2>
+<p>Mật mã khóa công khai không thể tồn tại nếu thiếu nền tảng vững chắc
+của đại số trừu tượng. Thay vì hoạt động trên tập số thực liên tục
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="double-struck">ℝ</mi><annotation encoding="application/x-tex">\mathbb{R}</annotation></semantics></math>,
+mật mã học hiện đại vận hành trên các cấu trúc rời rạc hữu hạn nhằm bảo
+đảm tính chính xác tuyệt đối và ngăn chặn triệt để hiện tượng sai số làm
+tròn số học.</p>
+<h3 id="nhóm-groups-vành-rings-và-trường-hữu-hạn-finite-fields">1.1.1.
+Nhóm (Groups), Vành (Rings) và Trường Hữu Hạn (Finite Fields)</h3>
+<ol type="1">
+<li><p><strong>Nhóm (Group):</strong> Một tập hợp
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>
+cùng với phép toán hai ngôi
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>⋆</mi><annotation encoding="application/x-tex">\star</annotation></semantics></math>
+được gọi là một nhóm
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>G</mi><mo>,</mo><mi>⋆</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(G, \star)</annotation></semantics></math>
+nếu thỏa mãn 4 tiên đề:</p>
+<ul>
+<li><strong>Tính đóng (Closure):</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∀</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>∈</mo><mi>G</mi><mo>⟹</mo><mi>a</mi><mo>⋆</mo><mi>b</mi><mo>∈</mo><mi>G</mi></mrow><annotation encoding="application/x-tex">\forall a, b \in G \implies a \star b \in G</annotation></semantics></math>.</li>
+<li><strong>Tính kết hợp (Associativity):</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∀</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi><mo>∈</mo><mi>G</mi><mo>⟹</mo><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>⋆</mo><mi>b</mi><mo stretchy="false" form="postfix">)</mo><mo>⋆</mo><mi>c</mi><mo>=</mo><mi>a</mi><mo>⋆</mo><mo stretchy="false" form="prefix">(</mo><mi>b</mi><mo>⋆</mo><mi>c</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\forall a, b, c \in G \implies (a \star b) \star c = a \star (b \star c)</annotation></semantics></math>.</li>
+<li><strong>Phần tử trung hòa (Identity):</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∃</mo><mi>e</mi><mo>∈</mo><mi>G</mi><mo>,</mo><mo>∀</mo><mi>a</mi><mo>∈</mo><mi>G</mi><mo>⟹</mo><mi>a</mi><mo>⋆</mo><mi>e</mi><mo>=</mo><mi>e</mi><mo>⋆</mo><mi>a</mi><mo>=</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">\exists e \in G, \forall a \in G \implies a \star e = e \star a = a</annotation></semantics></math>.</li>
+<li><strong>Phần tử nghịch đảo (Inverse):</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∀</mo><mi>a</mi><mo>∈</mo><mi>G</mi><mo>,</mo><mo>∃</mo><msup><mi>a</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo>∈</mo><mi>G</mi><mo>⟹</mo><mi>a</mi><mo>⋆</mo><msup><mi>a</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo>=</mo><msup><mi>a</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo>⋆</mo><mi>a</mi><mo>=</mo><mi>e</mi></mrow><annotation encoding="application/x-tex">\forall a \in G, \exists a^{-1} \in G \implies a \star a^{-1} = a^{-1} \star a = e</annotation></semantics></math>.</li>
+<li>Nếu
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>⋆</mo><mi>b</mi><mo>=</mo><mi>b</mi><mo>⋆</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">a \star b = b \star a</annotation></semantics></math>,
+nhóm được gọi là <strong>nhóm giao hoán (nhóm Abel)</strong>.</li>
+</ul></li>
+<li><p><strong>Vành (Ring):</strong> Một tập hợp
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>
+cùng hai phép toán cộng
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>+</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(+)</annotation></semantics></math>
+và nhân
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>⋅</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(\cdot)</annotation></semantics></math>
+được gọi là một vành nếu
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><mi>R</mi><mo>,</mo><mi>+</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">(R, +)</annotation></semantics></math>
+là một nhóm Abel, phép nhân có tính kết hợp và phân phối đối với phép
+cộng. Vành số dư
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="double-struck">ℤ</mi><mi>n</mi></msub><mo>=</mo><mo stretchy="false" form="prefix">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\mathbb{Z}_n = \{0, 1, \dots, n-1\}</annotation></semantics></math>
+là vành cơ bản của hệ mật RSA.</p></li>
+<li><p><strong>Trường (Field):</strong> Một vành giao hoán có đơn vị mà
+trong đó mọi phần tử khác 0 đều khả nghịch dưới phép nhân. Trường hữu
+hạn Galois
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi mathvariant="double-struck">𝔽</mi><mi>q</mi></msub><annotation encoding="application/x-tex">\mathbb{F}_q</annotation></semantics></math>
+chỉ tồn tại khi số phần tử
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi><mo>=</mo><msup><mi>p</mi><mi>m</mi></msup></mrow><annotation encoding="application/x-tex">q = p^m</annotation></semantics></math>
+(với
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>
+là số nguyên tố và
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>≥</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m \ge 1</annotation></semantics></math>):</p>
+<ul>
+<li>Khi
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m = 1</annotation></semantics></math>,
+ta có trường số nguyên tố
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi mathvariant="double-struck">𝔽</mi><mi>p</mi></msub><mo>=</mo><msub><mi mathvariant="double-struck">ℤ</mi><mi>p</mi></msub></mrow><annotation encoding="application/x-tex">\mathbb{F}_p = \mathbb{Z}_p</annotation></semantics></math>,
+nơi các phép toán modulo
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>
+diễn ra.</li>
+<li>Khi
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>&gt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">m &gt; 1</annotation></semantics></math>,
+ta có trường mở rộng
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi mathvariant="double-struck">𝔽</mi><msup><mn>2</mn><mi>m</mi></msup></msub><annotation encoding="application/x-tex">\mathbb{F}_{2^m}</annotation></semantics></math>,
+đặc biệt quan trọng trong phần cứng mật mã vi mạch.</li>
+</ul></li>
+</ol>
+<h3 id="các-định-lý-số-học-cốt-lõi">1.1.2. Các Định Lý Số Học Cốt
+Lõi</h3>
+<ul>
+<li><p><strong>Bổ đề Bézout &amp; Thuật toán Euclid mở rộng:</strong>
+Với hai số nguyên
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">a, b</annotation></semantics></math>,
+luôn tồn tại hai số nguyên
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>,</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">x, y</annotation></semantics></math>
+sao cho:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>⋅</mo><mi>x</mi><mo>+</mo><mi>b</mi><mo>⋅</mo><mi>y</mi><mo>=</mo><mrow><mi mathvariant="normal">gcd</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">a \cdot x + b \cdot y = \gcd(a, b)</annotation></semantics></math>
+Khi
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">gcd</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\gcd(a, n) = 1</annotation></semantics></math>,
+ta có
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>⋅</mo><mi>x</mi><mo>≡</mo><mn>1</mn><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">a \cdot x \equiv 1 \pmod n</annotation></semantics></math>,
+tức
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><msup><mi>a</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">x = a^{-1} \pmod n</annotation></semantics></math>.
+Thuật toán Euclid mở rộng tính toán phần tử nghịch đảo này trong độ phức
+tạp thời gian cực nhanh
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">log</mi><mo>&#8289;</mo></mrow><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\log n)</annotation></semantics></math>.</p></li>
+<li><p><strong>Định lý Fermat nhỏ &amp; Định lý Euler:</strong></p>
+<ul>
+<li>Nếu
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>
+nguyên tố và
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">gcd</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\gcd(a, p) = 1</annotation></semantics></math>,
+thì
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>a</mi><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>≡</mo><mn>1</mn><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>p</mi><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">a^{p-1} \equiv 1 \pmod p</annotation></semantics></math>.</li>
+<li>Tổng quát hóa bởi Leonhard Euler: Với số nguyên dương
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>,
+hàm phi Euler
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϕ</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\phi(n)</annotation></semantics></math>
+đếm số lượng các số nguyên dương nhỏ hơn
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+và nguyên tố cùng nhau với
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>.
+Nếu
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mi>p</mi><mo>⋅</mo><mi>q</mi></mrow><annotation encoding="application/x-tex">n = p \cdot q</annotation></semantics></math>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>,</mo><mi>q</mi></mrow><annotation encoding="application/x-tex">p, q</annotation></semantics></math>
+nguyên tố), thì:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϕ</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>p</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mi>q</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\phi(n) = (p - 1)(q - 1)</annotation></semantics></math></li>
+<li>Khi đó, với mọi
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>
+nguyên tố cùng nhau với
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>a</mi><mrow><mi>ϕ</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup><mo>≡</mo><mn>1</mn><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">a^{\phi(n)} \equiv 1 \pmod n</annotation></semantics></math></li>
+</ul></li>
+<li><p><strong>Định lý Phần dư Trung Hoa (Chinese Remainder Theorem -
+CRT):</strong> Cho các số nguyên dương
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mn>1</mn></msub><mo>,</mo><msub><mi>m</mi><mn>2</mn></msub><mo>,</mo><mi>…</mi><mo>,</mo><msub><mi>m</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">m_1, m_2, \dots, m_k</annotation></semantics></math>
+đôi một nguyên tố cùng nhau. Hệ phương trình đồng dư:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>≡</mo><msub><mi>a</mi><mi>i</mi></msub><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><msub><mi>m</mi><mi>i</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><mspace width="1.0em"></mspace><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo>=</mo><mn>1</mn><mo>,</mo><mi>…</mi><mo>,</mo><mi>k</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">x \equiv a_i \pmod{m_i} \quad (i = 1, \dots, k)</annotation></semantics></math>
+luôn có nghiệm duy nhất modulo
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mo>=</mo><msubsup><mo>∏</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>k</mi></msubsup><msub><mi>m</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">M = \prod_{i=1}^k m_i</annotation></semantics></math>.
+Trong cài đặt thực tế của RSA, kỹ thuật RSA-CRT phân rã phép tính lũy
+thừa trên module 2048-bit thành hai phép tính trên hai module
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>
+và
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>
+1024-bit, giúp tăng tốc độ giải mã và ký số lên <strong>4
+lần</strong>.</p></li>
+</ul>
+<hr />
+<h2 id="khái-niệm-hàm-một-chiều-cửa-sập-trapdoor-one-way-functions">1.2.
+Khái Niệm Hàm Một Chiều &amp; Cửa Sập (Trapdoor One-Way Functions)</h2>
+<p>Mọi hệ thống mật mã khóa công khai đều được xây dựng trên nền tảng
+của <strong>Hàm một chiều có cửa sập (Trapdoor One-Way Function -
+TOWF)</strong>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">f: X \to Y</annotation></semantics></math></p>
+<p>Hàm
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>
+phải thỏa mãn ba đặc trưng toán học nghiêm ngặt: 1. <strong>Dễ tính toán
+theo chiều xuôi:</strong> Cho trước
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>∈</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">x \in X</annotation></semantics></math>,
+việc tính
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">y = f(x)</annotation></semantics></math>
+là một bài toán thời gian đa thức
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>O</mi><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="normal">poly</mtext><mo stretchy="false" form="prefix">(</mo><mo stretchy="false" form="prefix">|</mo><mi>x</mi><mo stretchy="false" form="prefix">|</mo><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">O(\text{poly}(|x|))</annotation></semantics></math>.
+2. <strong>Bất khả thi theo chiều ngược (Hard to Invert):</strong> Cho
+trước
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>∈</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">y \in Y</annotation></semantics></math>,
+việc tìm
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
+sao cho
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">f(x) = y</annotation></semantics></math>
+là bài toán bất khả thi về mặt độ phức tạp tính toán đối với bất kỳ
+thuật toán cổ điển nào (thời gian tính toán vượt xa tuổi thọ vũ trụ). 3.
+<strong>Cửa sập bí mật (Trapdoor Key):</strong> Tồn tại một thông tin bổ
+trợ đặc biệt
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>K</mi><mtext mathvariant="normal">priv</mtext></msub><annotation encoding="application/x-tex">K_{\text{priv}}</annotation></semantics></math>
+(khóa bí mật). Khi biết
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>K</mi><mtext mathvariant="normal">priv</mtext></msub><annotation encoding="application/x-tex">K_{\text{priv}}</annotation></semantics></math>,
+việc tính ngược
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>=</mo><msup><mi>f</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mo stretchy="false" form="prefix">(</mo><mi>y</mi><mo>,</mo><msub><mi>K</mi><mtext mathvariant="normal">priv</mtext></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">x = f^{-1}(y, K_{\text{priv}})</annotation></semantics></math>
+trở thành một bài toán đa thức tường minh và hiệu quả.</p>
+<pre><code>                  +-----------------------------------+
+                  |          Đầu vào x                |
+                  +-----------------------------------+
+                                    |
+                                    | Chiều xuôi: Dễ (Đa thức)
+                                    v
+                  +-----------------------------------+
+                  |          Đầu ra y = f(x)          |
+                  +-----------------------------------+
+                                    |
+       Không có Cửa sập             |             Có Cửa sập (K_priv)
+  ---------------------------       |       -------------------------------
+  Nghịch đảo: BẤT KHẢ THI           |       Nghịch đảo: DỄ DÀNG (Đa thức)
+  (Chi phí hàm mũ hoặc cận hàm mũ)  v       x = f^-1(y, K_priv)</code></pre>
+<p>Hiện nay, toán học thế giới công nhận ba bài toán khó kinh điển được
+dùng làm nền tảng cho các hàm cửa sập trong PKI cổ điển: 1. <strong>Bài
+toán Phân tích Thừa số Nguyên tố (Integer Factorization Problem -
+IFP)</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>⟹</mo><annotation encoding="application/x-tex">\implies</annotation></semantics></math>
+Hệ mật RSA. 2. <strong>Bài toán Logarit Rời rạc (Discrete Logarithm
+Problem - DLP)</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>⟹</mo><annotation encoding="application/x-tex">\implies</annotation></semantics></math>
+Giao thức Diffie-Hellman, ElGamal, DSA. 3. <strong>Bài toán Logarit Rời
+rạc trên Đường cong Elliptic (ECDLP)</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>⟹</mo><annotation encoding="application/x-tex">\implies</annotation></semantics></math>
+ECDH, ECDSA, Ed25519.</p>
+<hr />
+<h2 id="bài-toán-phân-tích-thừa-số-nguyên-tố-hệ-mật-mã-rsa">1.3. Bài
+Toán Phân Tích Thừa Số Nguyên Tố &amp; Hệ Mật Mã RSA</h2>
+<h3 id="thuật-toán-sinh-khóa-mã-hóa-và-ký-số-rsa">1.3.1. Thuật Toán Sinh
+Khóa, Mã Hóa và Ký Số RSA</h3>
+<p>Được phát minh bởi Ron Rivest, Adi Shamir và Leonard Adleman năm 1977
+tại MIT: 1. <strong>Sinh khóa:</strong> - Chọn ngẫu nhiên hai số nguyên
+tố rất lớn
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>
+và
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>
+(mỗi số 1024-bit hoặc 2048-bit). - Tính module công khai
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mi>p</mi><mo>⋅</mo><mi>q</mi></mrow><annotation encoding="application/x-tex">n = p \cdot q</annotation></semantics></math>.
+Kích thước
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+thường là 2048-bit hoặc 4096-bit. - Tính hàm Euler:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϕ</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>p</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mi>q</mi><mo>−</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\phi(n) = (p - 1)(q - 1)</annotation></semantics></math>.
+- Chọn số mũ công khai
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>e</mi><annotation encoding="application/x-tex">e</annotation></semantics></math>
+thỏa mãn
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>&lt;</mo><mi>e</mi><mo>&lt;</mo><mi>ϕ</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">1 &lt; e &lt; \phi(n)</annotation></semantics></math>
+và
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mi mathvariant="normal">gcd</mi><mo>&#8289;</mo></mrow><mo stretchy="false" form="prefix">(</mo><mi>e</mi><mo>,</mo><mi>ϕ</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\gcd(e, \phi(n)) = 1</annotation></semantics></math>.
+Giá trị chuẩn công nghiệp luôn chọn
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mo>=</mo><mn>65537</mn><mo>=</mo><msup><mn>2</mn><mn>16</mn></msup><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">e = 65537 = 2^{16} + 1</annotation></semantics></math>
+(số nguyên tố Fermat
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>F</mi><mn>4</mn></msub><annotation encoding="application/x-tex">F_4</annotation></semantics></math>)
+nhằm tối ưu hóa phép lũy thừa nhị phân (chỉ có đúng hai bit 1). - Tính
+số mũ bí mật
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>
+bằng thuật toán Euclid mở rộng:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mo>≡</mo><msup><mi>e</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mrow><mi>ϕ</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">d \equiv e^{-1} \pmod{\phi(n)}</annotation></semantics></math>,
+tức
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mo>⋅</mo><mi>d</mi><mo>≡</mo><mn>1</mn><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mrow><mi>ϕ</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">e \cdot d \equiv 1 \pmod{\phi(n)}</annotation></semantics></math>.
+- <strong>Khóa công khai:</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mtext mathvariant="normal">pub</mtext></msub><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo>,</mo><mi>e</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">K_{\text{pub}} = (n, e)</annotation></semantics></math>.
+- <strong>Khóa bí mật:</strong>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>K</mi><mtext mathvariant="normal">priv</mtext></msub><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>d</mi><mo>,</mo><mi>p</mi><mo>,</mo><mi>q</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">K_{\text{priv}} = (d, p, q)</annotation></semantics></math>.</p>
+<ol start="2" type="1">
+<li><strong>Mã hóa &amp; Giải mã:</strong>
+<ul>
+<li>Mã hóa bản rõ
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>&lt;</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">m &lt; n</annotation></semantics></math>:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><mo>=</mo><msup><mi>m</mi><mi>e</mi></msup><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">c = m^e \pmod n</annotation></semantics></math>.</li>
+<li>Giải mã bản mã
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math>:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo>=</mo><msup><mi>c</mi><mi>d</mi></msup><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">m = c^d \pmod n</annotation></semantics></math>.</li>
+<li>Tính đúng đắn xuất phát từ Định lý Euler:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>c</mi><mi>d</mi></msup><mo>≡</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>m</mi><mi>e</mi></msup><msup><mo stretchy="false" form="postfix">)</mo><mi>d</mi></msup><mo>≡</mo><msup><mi>m</mi><mrow><mi>e</mi><mo>⋅</mo><mi>d</mi></mrow></msup><mo>≡</mo><msup><mi>m</mi><mrow><mn>1</mn><mo>+</mo><mi>k</mi><mo>⋅</mo><mi>ϕ</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup><mo>≡</mo><mi>m</mi><mo>⋅</mo><mo stretchy="false" form="prefix">(</mo><msup><mi>m</mi><mrow><mi>ϕ</mi><mo stretchy="false" form="prefix">(</mo><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup><msup><mo stretchy="false" form="postfix">)</mo><mi>k</mi></msup><mo>≡</mo><mi>m</mi><mo>⋅</mo><msup><mn>1</mn><mi>k</mi></msup><mo>≡</mo><mi>m</mi><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">c^d \equiv (m^e)^d \equiv m^{e \cdot d} \equiv m^{1 + k \cdot \phi(n)} \equiv m \cdot (m^{\phi(n)})^k \equiv m \cdot 1^k \equiv m \pmod n</annotation></semantics></math>.</li>
+</ul></li>
+<li><strong>Chữ ký số RSA:</strong>
+<ul>
+<li>Người ký tính hàm băm thông điệp
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>=</mo><mi>H</mi><mo stretchy="false" form="prefix">(</mo><mi>M</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">h = H(M)</annotation></semantics></math>.</li>
+<li>Chữ ký số:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>σ</mi><mo>=</mo><msup><mi>h</mi><mi>d</mi></msup><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\sigma = h^d \pmod n</annotation></semantics></math>.</li>
+<li>Người kiểm tra tính:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>h</mi><mo>′</mo></msup><mo>=</mo><msup><mi>σ</mi><mi>e</mi></msup><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">h&#39; = \sigma^e \pmod n</annotation></semantics></math>.
+Nếu
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>h</mi><mo>′</mo></msup><mo>=</mo><mo>=</mo><mi>H</mi><mo stretchy="false" form="prefix">(</mo><mi>M</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">h&#39; == H(M)</annotation></semantics></math>,
+chữ ký hợp lệ.</li>
+</ul></li>
+</ol>
+<h3 id="cơ-chế-đệm-an-toàn-padding-schemes-các-nguy-cơ-tấn-công">1.3.2.
+Cơ Chế Đệm An Toàn (Padding Schemes) &amp; Các Nguy Cơ Tấn Công</h3>
+<p>RSA “thô” (Textbook RSA) hoàn toàn không an toàn do tính chất
+<strong>đồng cấu nhân</strong>:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">(</mo><msub><mi>m</mi><mn>1</mn></msub><msup><mo stretchy="false" form="postfix">)</mo><mi>e</mi></msup><mo>⋅</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>m</mi><mn>2</mn></msub><msup><mo stretchy="false" form="postfix">)</mo><mi>e</mi></msup><mo>≡</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>m</mi><mn>1</mn></msub><mo>⋅</mo><msub><mi>m</mi><mn>2</mn></msub><msup><mo stretchy="false" form="postfix">)</mo><mi>e</mi></msup><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>n</mi><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">(m_1)^e \cdot (m_2)^e \equiv (m_1 \cdot m_2)^e \pmod n</annotation></semantics></math>
+Kẻ tấn công có thể giả mạo chữ ký trên thông điệp mới từ tích của hai
+chữ ký đã biết. Do đó, chuẩn mã hóa PKI bắt buộc áp dụng cơ chế đệm ngẫu
+nhiên: * <strong>PKCS#1 v1.5:</strong> Thêm chuỗi padding ngẫu nhiên có
+định dạng cố định. Tuy nhiên, PKCS#1 v1.5 dễ bị tổn thương trước tấn
+công Bleichenbacher (Million Message Attack) trên các máy chủ SSL/TLS
+nếu trả về lỗi giải mã không đồng nhất. * <strong>RSA-OAEP (Optimal
+Asymmetric Encryption Padding):</strong> Dùng cho mã hóa, bảo đảm tính
+an toàn IND-CCA2 (kháng tấn công bản mã chọn lọc thích nghi). *
+<strong>RSA-PSS (Probabilistic Signature Scheme):</strong> Được chuẩn
+hóa trong RFC 8017 / FIPS 186-5. Sử dụng muối ngẫu nhiên (salt) trước
+khi băm, chứng minh an toàn tuyệt đối trong mô hình Random Oracle Model.
+Các hệ thống PKI hiện đại được khuyến nghị chuyển dịch toàn bộ từ RSA
+PKCS#1 v1.5 sang RSA-PSS.</p>
+<hr />
+<h2 id="bài-toán-logarit-rời-rạc-mật-mã-đường-cong-elliptic-ecc">1.4.
+Bài Toán Logarit Rời Rạc &amp; Mật Mã Đường Cong Elliptic (ECC)</h2>
+<h3 id="bài-toán-logarit-rời-rạc-dlp">1.4.1. Bài Toán Logarit Rời Rạc
+(DLP)</h3>
+<p>Cho nhóm cyclic
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>G</mi><annotation encoding="application/x-tex">G</annotation></semantics></math>
+cấp
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math>
+sinh bởi phần tử
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math>.
+- <strong>Bài toán chiều xuôi:</strong> Cho
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>∈</mo><msub><mi mathvariant="double-struck">ℤ</mi><mi>q</mi></msub></mrow><annotation encoding="application/x-tex">x \in \mathbb{Z}_q</annotation></semantics></math>,
+tính
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><msup><mi>g</mi><mi>x</mi></msup><mo>∈</mo><mi>G</mi></mrow><annotation encoding="application/x-tex">y = g^x \in G</annotation></semantics></math>
+(dễ dàng bằng thuật toán nhân đôi lũy thừa). - <strong>Bài toán Logarit
+Rời rạc (DLP):</strong> Cho
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>∈</mo><mi>G</mi></mrow><annotation encoding="application/x-tex">y \in G</annotation></semantics></math>,
+tìm
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi><mo>∈</mo><msub><mi mathvariant="double-struck">ℤ</mi><mi>q</mi></msub></mrow><annotation encoding="application/x-tex">x \in \mathbb{Z}_q</annotation></semantics></math>
+sao cho
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mi>x</mi></msup><mo>=</mo><mi>y</mi></mrow><annotation encoding="application/x-tex">g^x = y</annotation></semantics></math>.
+- Trên nhóm nhân
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi mathvariant="double-struck">ℤ</mi><mi>p</mi><mo>*</mo></msubsup><annotation encoding="application/x-tex">\mathbb{Z}_p^*</annotation></semantics></math>,
+các thuật toán Sàng trường số tổng quát (General Number Field Sieve -
+GNFS) và Index Calculus giải quyết DLP trong thời gian cận hàm mũ:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mi>p</mi></msub><mrow><mo stretchy="true" form="prefix">[</mo><mfrac><mn>1</mn><mn>3</mn></mfrac><mo>,</mo><mi>c</mi><mo stretchy="true" form="postfix">]</mo></mrow><mo>=</mo><mrow><mi mathvariant="normal">exp</mi><mo>&#8289;</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mo stretchy="false" form="prefix">(</mo><mi>c</mi><mo>+</mo><mi>o</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">(</mo><mi mathvariant="normal">ln</mi><mi>p</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mn>1</mn><mi>/</mi><mn>3</mn></mrow></msup><mo stretchy="false" form="prefix">(</mo><mi mathvariant="normal">ln</mi><mi mathvariant="normal">ln</mi><mi>p</mi><msup><mo stretchy="false" form="postfix">)</mo><mrow><mn>2</mn><mi>/</mi><mn>3</mn></mrow></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">L_p\left[\frac{1}{3}, c\right] = \exp\left((c + o(1)) (\ln p)^{1/3} (\ln \ln p)^{2/3}\right)</annotation></semantics></math>
+Do đó, để đạt mức an toàn 128-bit, module số nguyên tố
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>
+phải có độ dài ít nhất <strong>3072 bits</strong>.</p>
+<h3
+id="mật-mã-đường-cong-elliptic-elliptic-curve-cryptography---ecc">1.4.2.
+Mật Mã Đường Cong Elliptic (Elliptic Curve Cryptography - ECC)</h3>
+<p>Nhận định thiên tài của Neal Koblitz và Victor Miller năm 1985: Nếu
+thay thế nhóm nhân
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msubsup><mi mathvariant="double-struck">ℤ</mi><mi>p</mi><mo>*</mo></msubsup><annotation encoding="application/x-tex">\mathbb{Z}_p^*</annotation></semantics></math>
+bằng nhóm các điểm trên đường cong Elliptic, các thuật toán Index
+Calculus hoàn toàn bị vô hiệu hóa!</p>
+<ol type="1">
+<li><p><strong>Phương trình Đường cong Elliptic:</strong> Trên trường
+hữu hạn
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi mathvariant="double-struck">𝔽</mi><mi>p</mi></msub><annotation encoding="application/x-tex">\mathbb{F}_p</annotation></semantics></math>
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo>&gt;</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">p &gt; 3</annotation></semantics></math>),
+đường cong Weierstrass không suy biến có phương trình:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo>:</mo><msup><mi>y</mi><mn>2</mn></msup><mo>≡</mo><msup><mi>x</mi><mn>3</mn></msup><mo>+</mo><mi>a</mi><mo>⋅</mo><mi>x</mi><mo>+</mo><mi>b</mi><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>p</mi><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">E: y^2 \equiv x^3 + a \cdot x + b \pmod p</annotation></semantics></math>
+với điều kiện biệt thức
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">Δ</mi><mo>=</mo><mn>4</mn><msup><mi>a</mi><mn>3</mn></msup><mo>+</mo><mn>27</mn><msup><mi>b</mi><mn>2</mn></msup><mo>≢</mo><mn>0</mn><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>p</mi><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Delta = 4a^3 + 27b^2 \not\equiv 0 \pmod p</annotation></semantics></math>.</p></li>
+<li><p><strong>Luật Cộng Điểm Hình Học &amp; Đại Số:</strong> Tập hợp
+các điểm
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false" form="postfix">)</mo><mo>∈</mo><mi>E</mi><mo stretchy="false" form="prefix">(</mo><msub><mi mathvariant="double-struck">𝔽</mi><mi>p</mi></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P = (x, y) \in E(\mathbb{F}_p)</annotation></semantics></math>
+cùng với <strong>Điểm ở vô cực
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="script">𝒪</mi><annotation encoding="application/x-tex">\mathcal{O}</annotation></semantics></math></strong>
+(phần tử trung hòa) tạo thành một nhóm Abel:</p>
+<ul>
+<li>Với hai điểm
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><msub><mi>y</mi><mn>1</mn></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">P = (x_1, y_1)</annotation></semantics></math>
+và
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>Q</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo><msub><mi>y</mi><mn>2</mn></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Q = (x_2, y_2)</annotation></semantics></math>:
+Nếu
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>≠</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">P \neq Q</annotation></semantics></math>,
+hệ số góc đường cát tuyến:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mfrac><mrow><msub><mi>y</mi><mn>2</mn></msub><mo>−</mo><msub><mi>y</mi><mn>1</mn></msub></mrow><mrow><msub><mi>x</mi><mn>2</mn></msub><mo>−</mo><msub><mi>x</mi><mn>1</mn></msub></mrow></mfrac><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>p</mi><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\lambda = \frac{y_2 - y_1}{x_2 - x_1} \pmod p</annotation></semantics></math>.
+Nếu
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mo>=</mo><mi>Q</mi></mrow><annotation encoding="application/x-tex">P = Q</annotation></semantics></math>
+(nhân đôi điểm), hệ số góc tiếp tuyến:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>=</mo><mfrac><mrow><mn>3</mn><msubsup><mi>x</mi><mn>1</mn><mn>2</mn></msubsup><mo>+</mo><mi>a</mi></mrow><mrow><mn>2</mn><msub><mi>y</mi><mn>1</mn></msub></mrow></mfrac><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>p</mi><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\lambda = \frac{3x_1^2 + a}{2y_1} \pmod p</annotation></semantics></math>.</li>
+<li>Tọa độ điểm tổng
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>=</mo><mi>P</mi><mo>+</mo><mi>Q</mi><mo>=</mo><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mn>3</mn></msub><mo>,</mo><msub><mi>y</mi><mn>3</mn></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">R = P + Q = (x_3, y_3)</annotation></semantics></math>:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mn>3</mn></msub><mo>=</mo><msup><mi>λ</mi><mn>2</mn></msup><mo>−</mo><msub><mi>x</mi><mn>1</mn></msub><mo>−</mo><msub><mi>x</mi><mn>2</mn></msub><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>p</mi><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">x_3 = \lambda^2 - x_1 - x_2 \pmod p</annotation></semantics></math>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>y</mi><mn>3</mn></msub><mo>=</mo><mi>λ</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>−</mo><msub><mi>x</mi><mn>3</mn></msub><mo stretchy="false" form="postfix">)</mo><mo>−</mo><msub><mi>y</mi><mn>1</mn></msub><mrow><mspace width="0.222em"></mspace><mo stretchy="false" form="prefix">(</mo><mrow><mi mathvariant="normal">mod</mi><mo>&#8289;</mo></mrow><mspace width="0.222em"></mspace><mi>p</mi><mo stretchy="false" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">y_3 = \lambda(x_1 - x_3) - y_1 \pmod p</annotation></semantics></math></li>
+</ul></li>
+<li><p><strong>Ưu thế Vượt Trội Của ECC Trong Hạ Tầng PKI:</strong>
+Thuật toán mạnh nhất hiện nay giải bài toán ECDLP trên các đường cong
+chuẩn (NIST P-256, Curve25519) chỉ là Pollard’s Rho với độ phức tạp hàm
+mũ đầy đủ:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">𝒪</mi><mo stretchy="false" form="prefix">(</mo><msqrt><mrow><mi>π</mi><mo>⋅</mo><mi>n</mi><mi>/</mi><mn>2</mn></mrow></msqrt><mo stretchy="false" form="postfix">)</mo><mo>≈</mo><msup><mn>2</mn><mn>128</mn></msup><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> phép tính đối với khóa 256-bit</mtext></mrow></mrow><annotation encoding="application/x-tex">\mathcal{O}(\sqrt{\pi \cdot n / 2}) \approx 2^{128} \text{ phép tính đối với khóa 256-bit}</annotation></semantics></math></p></li>
+</ol>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: center;">Mức Độ An Toàn (Security Bits)</th>
+<th style="text-align: center;">Kích Thước Khóa Đối Xứng (AES)</th>
+<th style="text-align: center;">Kích Thước Khóa RSA (Bits)</th>
+<th style="text-align: center;">Kích Thước Khóa ECC (Bits)</th>
+<th style="text-align: center;">Tỉ Lệ Tiết Kiệm Kích Thước</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">80-bit (Lỗi thời)</td>
+<td style="text-align: center;">2TDEA</td>
+<td style="text-align: center;">1024</td>
+<td style="text-align: center;">160</td>
+<td style="text-align: center;">6.4 : 1</td>
+</tr>
+<tr>
+<td style="text-align: center;">112-bit (Tối thiểu)</td>
+<td style="text-align: center;">3TDEA</td>
+<td style="text-align: center;">2048</td>
+<td style="text-align: center;">224</td>
+<td style="text-align: center;">9.1 : 1</td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>128-bit (Chuẩn hiện
+đại)</strong></td>
+<td style="text-align: center;"><strong>AES-128</strong></td>
+<td style="text-align: center;"><strong>3072</strong></td>
+<td style="text-align: center;"><strong>256</strong></td>
+<td style="text-align: center;"><strong>12.0 : 1</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>192-bit (An ninh
+cao)</strong></td>
+<td style="text-align: center;"><strong>AES-192</strong></td>
+<td style="text-align: center;"><strong>7680</strong></td>
+<td style="text-align: center;"><strong>384</strong></td>
+<td style="text-align: center;"><strong>20.0 : 1</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;"><strong>256-bit (Tuyệt mật quốc
+gia)</strong></td>
+<td style="text-align: center;"><strong>AES-256</strong></td>
+<td style="text-align: center;"><strong>15360</strong></td>
+<td style="text-align: center;"><strong>521</strong></td>
+<td style="text-align: center;"><strong>29.5 : 1</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Chính sự chênh lệch vượt trội này khiến toàn bộ hạ tầng Web PKI,
+thiết bị di động thông minh và các thẻ căn cước gắn chip hiện đại đều ưu
+tiên chuyển dịch sang <strong>ECDSA</strong> và <strong>Ed25519</strong>
+(Edwards curve RFC 8032) nhằm tiết kiệm băng thông mạng và năng lượng
+tính toán.</p>
+<hr />
+<h1
+id="chương-2-cấu-trúc-dữ-liệu-chứng-chỉ-x.509-v3-quy-cách-mã-hóa-asn.1-der">CHƯƠNG
+2: CẤU TRÚC DỮ LIỆU CHỨNG CHỈ X.509 V3 &amp; QUY CÁCH MÃ HÓA ASN.1
+DER</h1>
+<h2 id="cú-pháp-asn.1-quy-tắc-mã-hóa-nhị-phân-der">2.1. Cú Pháp ASN.1
+&amp; Quy Tắc Mã Hóa Nhị Phân DER</h2>
+<p>Chứng chỉ số không phải là một chuỗi văn bản ngẫu nhiên mà là một cấu
+trúc dữ liệu phân cấp được định nghĩa bằng chuẩn quốc tế <strong>ASN.1
+(Abstract Syntax Notation One - ITU-T X.680)</strong> và được đóng gói
+nhị phân theo quy tắc <strong>DER (Distinguished Encoding Rules - ITU-T
+X.690)</strong>.</p>
+<h3 id="cấu-trúc-khung-nhị-phân-tlv-tag---length---value">2.1.1. Cấu
+Trúc Khung Nhị Phân TLV (Tag - Length - Value)</h3>
+<p>Trong mã hóa DER, mỗi trường dữ liệu bắt buộc tuân theo định dạng 3
+phần: 1. <strong>Tag (Loại dữ liệu):</strong> 1 byte (hoặc nhiều bytes)
+xác định kiểu: - <code>0x02</code>: <code>INTEGER</code> (Số nguyên) -
+<code>0x03</code>: <code>BIT STRING</code> (Chuỗi bit) -
+<code>0x04</code>: <code>OCTET STRING</code> (Chuỗi byte) -
+<code>0x05</code>: <code>NULL</code> - <code>0x06</code>:
+<code>OBJECT IDENTIFIER (OID)</code> - <code>0x0C</code>:
+<code>UTF8String</code> - <code>0x13</code>:
+<code>PrintableString</code> - <code>0x17</code>: <code>UTCTime</code>
+(YYMMDDHHMMSSZ) - <code>0x18</code>: <code>GeneralizedTime</code>
+(YYYYMMDDHHMMSSZ) - <code>0x30</code>: <code>SEQUENCE</code> (Cấu trúc
+danh sách tuần tự - bit Constructed được bật:
+<code>0x20 | 0x10 = 0x30</code>) - <code>0x31</code>: <code>SET</code>
+(Tập hợp không thứ tự)</p>
+<ol start="2" type="1">
+<li><strong>Length (Độ dài phần dữ liệu Value):</strong>
+<ul>
+<li><strong>Dạng ngắn (Short form):</strong> Nếu chiều dài
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>≤</mo><mn>127</mn></mrow><annotation encoding="application/x-tex">\le 127</annotation></semantics></math>
+bytes, trường Length chiếm đúng 1 byte với bit cao nhất bằng 0
+(<code>0b0xxxxxxx</code>). Ví dụ: dài 45 bytes
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>⟹</mo><annotation encoding="application/x-tex">\implies</annotation></semantics></math>
+<code>0x2D</code>.</li>
+<li><strong>Dạng dài (Long form):</strong> Nếu chiều dài
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo><mn>127</mn></mrow><annotation encoding="application/x-tex">&gt; 127</annotation></semantics></math>
+bytes, byte đầu tiên có bit cao nhất bằng 1 (<code>0b1xxxxxxx</code>),
+trong đó 7 bits sau chỉ số lượng byte tiếp theo dùng để biểu diễn chiều
+dài. Ví dụ: chiều dài 500 bytes (<code>0x01F4</code>), biểu diễn:
+<code>0x82 0x01 0xF4</code>.</li>
+<li><strong>Quy tắc bất biến của DER:</strong> Khác với BER (Basic
+Encoding Rules) cho phép độ dài không xác định (indefinite length), DER
+bắt buộc phải dùng độ dài xác định ngắn nhất có thể. Điều này bảo đảm
+tính đơn nhất (canonical representation): <strong>Một đối tượng ASN.1
+chỉ có duy nhất một biểu diễn nhị phân DER tương ứng</strong>, ngăn chặn
+hoàn toàn tấn công giả mạo chữ ký bằng cách biến đổi padding nhị phân
+(malleability attack).</li>
+</ul></li>
+</ol>
+<hr />
+<h2 id="khung-dữ-liệu-tbscertificate-theo-chuẩn-rfc-5280">2.2. Khung Dữ
+Liệu TBSCertificate Theo Chuẩn RFC 5280</h2>
+<p>Cấu trúc chứng chỉ X.509 v3 được mô tả bằng cú pháp ASN.1 chính thức
+trong RFC 5280:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode asn1"><code class="sourceCode asn1"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Certificate ::= <span class="dt">SEQUENCE</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    tbsCertificate          TBSCertificate,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    signatureAlgorithm      AlgorithmIdentifier,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    signatureValue          BIT <span class="dt">STRING</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>TBSCertificate ::= <span class="dt">SEQUENCE</span> {</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    version             [<span class="dv">0</span>] EXPLICIT Version <span class="kw">DEFAULT</span> v1,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    serialNumber            CertificateSerialNumber,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    signature               AlgorithmIdentifier,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    issuer                  Name,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    validity                Validity,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    subject                 Name,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    subjectPublicKeyInfo    SubjectPublicKeyInfo,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    issuerUniqueID      [<span class="dv">1</span>] IMPLICIT UniqueIdentifier <span class="kw">OPTIONAL</span>,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    subjectUniqueID     [<span class="dv">2</span>] IMPLICIT UniqueIdentifier <span class="kw">OPTIONAL</span>,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    extensions          [<span class="dv">3</span>] EXPLICIT Extensions <span class="kw">OPTIONAL</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<pre><code>+-------------------------------------------------------------------+
+|                     X.509 v3 CERTIFICATE                          |
+|                                                                   |
+| +---------------------------------------------------------------+ |
+| |                    TBSCertificate (To-Be-Signed)              | |
+| |                                                               | |
+| | 1. Version: v3 (0x02)                                         | |
+| | 2. Serial Number: Số nguyên ngẫu nhiên dương (tối đa 20 bytes)| |
+| | 3. Signature Algorithm: e.g. ecdsa-with-SHA256 / sha256WithRSA| |
+| | 4. Issuer DN: CN=KMA Intermediate CA, O=KMA, C=VN             | |
+| | 5. Validity: notBefore (02/10/2026) -&gt; notAfter (02/10/2027)  | |
+| | 6. Subject DN: CN=api.kma.edu.vn, O=KMA, C=VN                 | |
+| | 7. SubjectPublicKeyInfo: Algorithm Identifier + Public Key Bit| |
+| | 8. Extensions (X.509 v3 Extensions):                          | |
+| |    - Basic Constraints: CA:FALSE                              | |
+| |    - Key Usage: Digital Signature                             | |
+| |    - Extended Key Usage: Server Auth, Client Auth             | |
+| |    - SAN: DNS:api.kma.edu.vn, IP:10.0.0.1                     | |
+| |    - CRL Distribution Points: http://crl.kma.edu.vn/ca.crl    | |
+| |    - AIA: OCSP http://ocsp.kma.edu.vn                         | |
+| +---------------------------------------------------------------+ |
+|                                                                   |
+| Signature Algorithm Identifier: ecdsa-with-SHA256 (OID 1.2.840...) |
+| Signature Value: Chữ ký số của CA trên toàn bộ khối DER băm của   |
+|                  TBSCertificate [BIT STRING]                      |
++-------------------------------------------------------------------+</code></pre>
+<hr />
+<h2
+id="phân-tích-chuyên-sâu-các-phần-mở-rộng-trọng-yếu-critical-extensions">2.3.
+Phân Tích Chuyên Sâu Các Phần Mở Rộng Trọng Yếu (Critical
+Extensions)</h2>
+<p>Phần mở rộng (Extensions) là nơi hiện thực hóa toàn bộ chính sách an
+ninh của PKI. Mỗi phần mở rộng gồm: <code>extnID</code> (OID), cờ
+<code>critical</code> (BOOLEAN, mặc định FALSE) và
+<code>extnValue</code> (OCTET STRING chứa dữ liệu DER đóng gói). &gt;
+<strong>Quy Tắc Vàng Của RFC 5280 Về Cờ Critical:</strong> Nếu một phần
+mở rộng có cờ <code>critical = TRUE</code>, mọi ứng dụng hoặc thiết bị
+xác thực (trình duyệt, hệ điều hành) <strong>BẮT BUỘC</strong> phải hiểu
+và thực thi đúng ngữ nghĩa của phần mở rộng đó. Nếu không nhận biết hoặc
+không thể xử lý, hệ thống <strong>BẮT BUỘC PHẢI TỪ CHỐI</strong> chứng
+chỉ ngay lập tức!</p>
+<ol type="1">
+<li><strong>Basic Constraints (OID <code>2.5.29.19</code> - BẮT BUỘC
+CRITICAL trên CA):</strong>
+<ul>
+<li>Chứa trường <code>cA</code> (BOOLEAN) và
+<code>pathLenConstraint</code> (INTEGER tùy chọn).</li>
+<li>Nếu <code>cA = TRUE</code>: Chứng chỉ đại diện cho một nhà cầm quyền
+xác thực (CA), được phép ký cấp phát chứng chỉ khác.</li>
+<li>Nếu <code>cA = FALSE</code>: Chứng chỉ thực thể cuối (End-Entity /
+Leaf Certificate), tuyệt đối không được dùng để ký chứng chỉ khác.</li>
+<li><code>pathLenConstraint = n</code>: Quy định chuỗi CA con bên dưới
+nó chỉ được phép có tối đa
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+cấp Intermediate CA trung gian trước khi tới chứng chỉ lá. Nếu
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">n = 0</annotation></semantics></math>,
+CA này chỉ được phép ký trực tiếp cho End-Entity, không được ký cấp phát
+thêm bất kỳ Sub-CA nào nữa.</li>
+<li><em>Lỗ hổng thực tế:</em> Nếu quản trị viên sơ suất cấp chứng chỉ
+cho máy chủ nội bộ mà đặt <code>cA = TRUE</code>, kẻ tấn công chiếm được
+máy chủ đó có thể tự biến mình thành CA trung gian và phát hành chứng
+chỉ giả mạo cho mọi tên miền trên Internet!</li>
+</ul></li>
+<li><strong>Key Usage (OID <code>2.5.29.15</code> - CRITICAL):</strong>
+Định nghĩa các thao tác mật mã mà khóa công khai trong chứng chỉ được
+phép thực hiện:
+<ul>
+<li><code>digitalSignature</code>: Ký thông điệp hoặc dữ liệu (trừ chứng
+chỉ và CRL).</li>
+<li><code>nonRepudiation</code>: Chống chối bỏ (thường dùng trong chữ ký
+văn bản số, pháp lý).</li>
+<li><code>keyEncipherment</code>: Mã hóa khóa đối xứng (dùng trong RSA
+Key Transport).</li>
+<li><code>keyAgreement</code>: Trao đổi khóa (dùng trong ECDH).</li>
+<li><code>keyCertSign</code>: Ký cấp phát chứng chỉ số (Chỉ được phép
+bật nếu <code>cA = TRUE</code>).</li>
+<li><code>cRLSign</code>: Ký danh sách thu hồi chứng chỉ (CRL).</li>
+</ul></li>
+<li><strong>Extended Key Usage - EKU (OID
+<code>2.5.29.37</code>):</strong> Xác định mục đích ứng dụng cụ thể:
+<ul>
+<li><code>serverAuth</code> (<code>1.3.6.1.5.5.7.3.1</code>): Xác thực
+máy chủ Web TLS.</li>
+<li><code>clientAuth</code> (<code>1.3.6.1.5.5.7.3.2</code>): Xác thực
+người dùng / máy trạm mTLS.</li>
+<li><code>codeSigning</code> (<code>1.3.6.1.5.5.7.3.3</code>): Ký mã
+nguồn phần mềm, driver.</li>
+<li><code>timeStamping</code> (<code>1.3.6.1.5.5.7.3.8</code>): Cấp dấu
+thời gian RFC 3161.</li>
+</ul></li>
+<li><strong>Subject Alternative Name - SAN (OID
+<code>2.5.29.17</code>):</strong>
+<ul>
+<li>Danh sách định danh thực thể thay thế: <code>dNSName</code>,
+<code>iPAddress</code>, <code>uniformResourceIdentifier</code>,
+<code>rfc822Name</code> (email).</li>
+<li><strong>Quy định nghiêm ngặt từ CA/B Forum Baseline Requirements
+v1.8+:</strong> Các trình duyệt hiện đại (Chrome, Firefox, Safari) đã
+loại bỏ hoàn toàn việc đọc tên miền từ trường
+<code>Common Name (CN)</code> của Subject DN. Toàn bộ tên miền và địa
+chỉ IP hợp lệ <strong>BẮT BUỘC PHẢI KHAI BÁO TRONG PHẦN MỞ RỘNG
+SAN</strong>. Chứng chỉ chỉ có CN mà thiếu SAN sẽ bị trình duyệt báo lỗi
+<code>NET::ERR_CERT_COMMON_NAME_INVALID</code>.</li>
+</ul></li>
+</ol>
+<hr />
+<h1
+id="chương-3-kiến-trúc-phân-tầng-ca-vòng-đời-khóa-quy-chế-cpcps-rfc-3647">CHƯƠNG
+3: KIẾN TRÚC PHÂN TẦNG CA, VÒNG ĐỜI KHÓA &amp; QUY CHẾ CP/CPS (RFC
+3647)</h1>
+<h2 id="các-mô-hình-phân-tầng-hạ-tầng-chứng-thực-ca-hierarchies">3.1.
+Các Mô Hình Phân Tầng Hạ Tầng Chứng Thực (CA Hierarchies)</h2>
+<p>Trong thực tế, một hệ thống PKI không bao giờ triển khai dưới dạng
+một CA đơn lẻ bởi vì nguyên tắc bảo vệ tài sản thông tin tối thượng:
+<strong>Càng ít sử dụng khóa bí mật có giá trị cao thì hệ thống càng an
+toàn.</strong></p>
+<pre><code>                           +------------------------+
+                           |     ROOT CA (GỐC)      |
+                           |  - Tự ký (Self-signed) |
+                           |  - Offline / Air-gap   |
+                           |  - Khóa: 4096-bit RSA  |
+                           |    hoặc P-384 / ML-DSA |
+                           |  - Hạn dùng: 10-25 năm |
+                           +------------------------+
+                                        |
+                         Ký cấp phát    | 1-2 lần trong đời
+                                        v
+                 +--------------------------------------------+
+                 |          INTERMEDIATE ISSUING CA           |
+                 |  - Online 24/7 (ACME / Web Enrollment)     |
+                 |  - Nằm sau tường lửa DMZ, bảo vệ bởi HSM   |
+                 |  - Hạn dùng: 2-5 năm                       |
+                 +--------------------------------------------+
+                          /                           \
+         Ký cấp hàng ngày /                             \ Ký cấp hàng ngày
+                         v                               v
+       +-------------------------------+   +-------------------------------+
+       |       TLS Web Server          |   |      mTLS Client / User       |
+       |  - SAN: *.kma.edu.vn          |   |  - Email: hocvien@kma.edu.vn  |
+       |  - Hạn dùng: 90 ngày (hoặc 1y)|   |  - Hạn dùng: 1 năm            |
+       +-------------------------------+   +-------------------------------+</code></pre>
+<h3 id="so-sánh-các-mô-hình-kiến-trúc">So Sánh Các Mô Hình Kiến
+Trúc:</h3>
+<ol type="1">
+<li><strong>Kiến trúc Single-Tier (Đơn cấp - Rủi ro đặc biệt nghiêm
+trọng):</strong> Root CA ký trực tiếp cho tất cả máy chủ. Nếu máy chủ
+Root CA bị xâm nhập hoặc lộ khóa, toàn bộ hạ tầng sụp đổ và không thể
+thu hồi mà phải cài đặt lại Trust Store trên toàn bộ thiết bị người
+dùng.</li>
+<li><strong>Kiến trúc Two-Tier (Hai cấp - Doanh nghiệp vừa):</strong> 1
+Root CA offline và 1 Issuing Intermediate CA online. Khi Issuing CA gặp
+sự cố, Root CA phát hành một bản thu hồi CRL và ký cấp một Issuing CA
+mới mà không làm gián đoạn Trust Anchor của người dùng.</li>
+<li><strong>Kiến trúc Three-Tier (Ba cấp - Chuẩn Quốc gia &amp; Tài
+chính):</strong> Root CA
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+Policy CA (Phân tách theo địa lý hoặc phân cấp bảo mật)
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+Issuing CA
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mo>→</mo><annotation encoding="application/x-tex">\to</annotation></semantics></math>
+End-Entity. Tách biệt hoàn toàn quyền hạn vận hành và kiểm toán.</li>
+</ol>
+<hr />
+<h2 id="nghi-thức-lễ-sinh-khóa-key-ceremony-thiết-bị-phần-cứng-hsm">3.2.
+Nghi Thức Lễ Sinh Khóa (Key Ceremony) &amp; Thiết Bị Phần Cứng HSM</h2>
+<p>Khóa bí mật của Root CA là linh hồn của hệ thống PKI. Việc tạo ra cặp
+khóa này không thể thực hiện tùy tiện trên máy tính cá nhân mà phải
+thông qua một nghi thức pháp lý và kỹ thuật trang trọng gọi là
+<strong>Key Ceremony</strong>.</p>
+<h3
+id="quy-trình-6-bước-của-một-buổi-lễ-key-ceremony-chuẩn-quốc-tế">3.2.1.
+Quy Trình 6 Bước Của Một Buổi Lễ Key Ceremony Chuẩn Quốc Tế</h3>
+<ol type="1">
+<li><strong>Chuẩn bị Phòng Kín Cách Ly (Faraday Clean Room):</strong>
+Phòng tổ chức phải được quét sóng điện từ, không có thiết bị thu phát vô
+tuyến, cách ly mạng hoàn toàn (Air-gapped), có hệ thống camera giám sát
+góc rộng ghi hình liên tục không góc chết.</li>
+<li><strong>Kiểm Tra Niêm Phong Phần Cứng:</strong> Các thiết bị HSM mới
+nguyên đai nguyên kiện được kiểm toán viên độc lập (Independent Auditor)
+kiểm tra số niêm phong (tamper-evident seal) và chứng thực chưa từng bị
+can thiệp.</li>
+<li><strong>Khởi Động Môi Trường Live OS Sạch:</strong> Máy chủ điều
+khiển nạp hệ điều hành chuyên dụng từ đĩa quang DVD-R (Write-Once) hoặc
+thẻ USB chỉ đọc có chữ ký số xác thực tính toàn vẹn của mã nhị
+phân.</li>
+<li><strong>Phân Quyền Kiểm Soát Kép (Dual Control / M-of-N):</strong>
+Khởi tạo thẻ quản trị viên HSM theo thuật toán phân chia bí mật Shamir:
+Phải có ít nhất
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
+trên tổng số
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
+người giữ khóa (Key Custodians) cùng cắm thẻ thông minh và nhập mã PIN
+thì mới mở được phân vùng bảo mật.</li>
+<li><strong>Sinh Cặp Khóa Phần Cứng:</strong> HSM tự kích hoạt bộ tạo số
+ngẫu nhiên vật lý (Hardware TRNG) để sinh cặp khóa Root bên trong bộ nhớ
+được bọc bảo vệ. Khóa bí mật <strong>TUYỆT ĐỐI KHÔNG BAO GIỜ RA KHỎI HSM
+DƯỚI DẠNG BẢN RÕ (Plaintext)</strong>.</li>
+<li><strong>Ký Tự Chứng Thực &amp; Niêm Phong Két Sắt:</strong> Xuất
+chứng chỉ Root CA công khai, sao lưu bản mã hóa khóa sang thẻ bảo mật dự
+phòng, sau đó ngắt điện HSM, đóng gói niêm phong và lưu trữ trong hai
+két sắt chống cháy tại hai địa điểm địa lý khác nhau.</li>
+</ol>
+<h3 id="thiết-bị-bảo-mật-phần-cứng-hsm-chuẩn-giao-tiếp-pkcs11">3.2.2.
+Thiết Bị Bảo Mật Phần Cứng HSM &amp; Chuẩn Giao Tiếp PKCS#11</h3>
+<ul>
+<li><p><strong>Tiêu chuẩn NIST FIPS 140-2 / FIPS 140-3:</strong></p>
+<ul>
+<li><em>Level 1:</em> Bảo vệ phần mềm cơ bản.</li>
+<li><em>Level 2:</em> Vỏ kim loại có khóa và tem niêm phong chống cạy
+mở.</li>
+<li><em>Level 3:</em> Kháng can thiệp tích cực — Tự động hủy khóa ngay
+lập tức (Zeroization) nếu phát hiện hành vi cạy nắp hoặc tháo vỏ bảo
+vệ.</li>
+<li><em>Level 4:</em> Bảo vệ mức vật lý tối thượng — Tự hủy khóa nếu
+phát hiện thay đổi nhiệt độ đột ngột (tấn công làm lạnh sâu) hoặc biến
+đổi điện áp nguồn.</li>
+</ul></li>
+<li><p><strong>Chuẩn giao diện PKCS#11 (Cryptoki):</strong> Định nghĩa
+API chuẩn C độc lập với nhà sản xuất (Thales, Entrust, Yubico) cho phép
+các ứng dụng (OpenSSL, Step-CA, HashiCorp Vault) ra lệnh cho HSM ký số
+mà không bao giờ cần đọc khóa bí mật vào RAM máy tính:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode c"><code class="sourceCode c"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>C_Initialize<span class="op">(...);</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>C_OpenSession<span class="op">(</span>slotID<span class="op">,</span> CKF_SERIAL_SESSION <span class="op">|</span> CKF_RW_SESSION<span class="op">,</span> <span class="op">...);</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>C_Login<span class="op">(</span>hSession<span class="op">,</span> CKU_USER<span class="op">,</span> pin<span class="op">,</span> pinLen<span class="op">);</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>C_SignInit<span class="op">(</span>hSession<span class="op">,</span> <span class="op">&amp;</span>mechanism<span class="op">,</span> hPrivateKey<span class="op">);</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>C_Sign<span class="op">(</span>hSession<span class="op">,</span> pData<span class="op">,</span> ulDataLen<span class="op">,</span> pSignature<span class="op">,</span> <span class="op">&amp;</span>ulSignatureLen<span class="op">);</span></span></code></pre></div></li>
+</ul>
+<hr />
+<h2 id="khung-quy-chế-chứng-thực-cp-cps-rfc-3647">3.3. Khung Quy Chế
+Chứng Thực CP &amp; CPS (RFC 3647)</h2>
+<p>Một hệ thống PKI chỉ có giá trị pháp lý khi đi kèm với hai văn kiện
+nền tảng: * <strong>Chính Sách Chứng Thực (Certificate Policy -
+CP):</strong> Tuyên ngôn cấp quản lý nêu rõ chứng chỉ được cấp cho ai,
+áp dụng cho mục đích gì và mức độ tin cậy đến đâu. * <strong>Quy Chế
+Thực Hành Chứng Thực (Certification Practice Statement - CPS):</strong>
+Tài liệu hướng dẫn kỹ thuật chi tiết tường tận cách thức CA vận hành để
+đạt được các mục tiêu đề ra trong CP.</p>
+<p>RFC 3647 chuẩn hóa cấu trúc của CP và CPS thành <strong>8 đề mục cốt
+lõi</strong>: 1. <strong>Giới thiệu chung (Introduction):</strong> Nhận
+diện tài liệu, các bên tham gia (CA, RA, Thuê bao Subscriber, Người tin
+cậy Relying Party), phạm vi khả dụng. 2. <strong>Trách nhiệm công bố và
+lưu trữ (Publication &amp; Repository Controls):</strong> Địa chỉ kho
+lưu trữ trực tuyến, tần suất cập nhật CRL/CPS. 3. <strong>Định danh và
+xác thực (Identification &amp; Authentication):</strong> Thủ tục xác
+minh danh tính tổ chức/cá nhân khi đăng ký lần đầu và khi thu hồi. 4.
+<strong>Vòng đời hoạt động của chứng chỉ (Certificate Life-Cycle
+Operations):</strong> Quy trình nộp đơn, cấp phát, gia hạn và thu hồi
+chứng chỉ. 5. <strong>Kiểm soát cơ sở vật chất, quản lý và vận hành
+(Facility, Management Controls):</strong> An ninh phòng máy chủ, kiểm
+soát truy cập vật lý, phòng cháy chữa cháy, sao lưu thảm họa. 6.
+<strong>Kiểm soát kỹ thuật an ninh (Technical Security
+Controls):</strong> Chuẩn thế hệ khóa, độ dài khóa, chuẩn HSM, cơ chế
+kiểm soát kép, an ninh mạng phân vùng DMZ. 7. <strong>Hồ sơ định dạng
+(Certificate, CRL, and OCSP Profiles):</strong> Cấu trúc chính xác các
+OID, thuật toán ký, các trường mở rộng Critical/Non-critical. 8.
+<strong>Đánh giá và kiểm toán tuân thủ (Compliance Audit &amp;
+Assessments):</strong> Cơ quan kiểm toán độc lập, chu kỳ kiểm toán hàng
+năm (WebTrust, ETSI EN 319 411).</p>
+<hr />
+<h1
+id="chương-4-thuật-toán-xác-thực-đường-dẫn-tin-cậy-cơ-chế-thu-hồi-chứng-chỉ">CHƯƠNG
+4: THUẬT TOÁN XÁC THỰC ĐƯỜNG DẪN TIN CẬY &amp; CƠ CHẾ THU HỒI CHỨNG
+CHỈ</h1>
+<h2 id="thuật-toán-xác-thực-chuỗi-chứng-chỉ-rfc-5280-6">4.1. Thuật Toán
+Xác Thực Chuỗi Chứng Chỉ (RFC 5280 §6)</h2>
+<p>Khi người dùng truy cập một website bảo mật, trình duyệt phải dựng
+một chuỗi chứng chỉ từ chứng chỉ lá
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>C</mi><mn>0</mn></msub><annotation encoding="application/x-tex">C_0</annotation></semantics></math>
+ngược về một chứng chỉ gốc
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>C</mi><mi>n</mi></msub><annotation encoding="application/x-tex">C_n</annotation></semantics></math>
+nằm trong cơ sở dữ liệu tin cậy cục bộ (Local Trust Store):</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mn>0</mn></msub><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="normal">Leaf</mtext><mo stretchy="false" form="postfix">)</mo><mo>→</mo><msub><mi>C</mi><mn>1</mn></msub><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="normal">Issuing CA</mtext><mo stretchy="false" form="postfix">)</mo><mo>→</mo><msub><mi>C</mi><mn>2</mn></msub><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="normal">Intermediate CA</mtext><mo stretchy="false" form="postfix">)</mo><mo>→</mo><msub><mi>C</mi><mi>n</mi></msub><mo stretchy="false" form="prefix">(</mo><mtext mathvariant="normal">Trust Anchor / Root CA</mtext><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">C_0 (\text{Leaf}) \to C_1 (\text{Issuing CA}) \to C_2 (\text{Intermediate CA}) \to C_n (\text{Trust Anchor / Root CA})</annotation></semantics></math></p>
+<p>Thuật toán xác thực đường dẫn (Path Validation Algorithm) duyệt qua
+từng mắt xích từ
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i = 1</annotation></semantics></math>
+đến
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>
+và thực hiện tuần tự <strong>6 bước kiểm định toán học nghiêm
+ngặt</strong>: 1. <strong>Kiểm tra chữ ký số:</strong> Sử dụng khóa công
+khai của chứng chỉ cha
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>C</mi><mi>i</mi></msub><annotation encoding="application/x-tex">C_i</annotation></semantics></math>
+để giải mã và kiểm tra chữ ký trên khối TBSCertificate của chứng chỉ con
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>C</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><annotation encoding="application/x-tex">C_{i-1}</annotation></semantics></math>.
+2. <strong>Kiểm tra thời gian hiệu lực:</strong> Thời điểm hiện tại
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>T</mi><mtext mathvariant="normal">now</mtext></msub><annotation encoding="application/x-tex">T_{\text{now}}</annotation></semantics></math>
+phải nằm trong khoảng:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mi>.</mi><mtext mathvariant="normal">notBefore</mtext><mo>≤</mo><msub><mi>T</mi><mtext mathvariant="normal">now</mtext></msub><mo>≤</mo><msub><mi>C</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mi>.</mi><mtext mathvariant="normal">notAfter</mtext></mrow><annotation encoding="application/x-tex">C_{i-1}.\text{notBefore} \le T_{\text{now}} \le C_{i-1}.\text{notAfter}</annotation></semantics></math>
+3. <strong>Khớp nối chuỗi định danh (Name Chaining):</strong> Tên định
+danh của người phát hành trong chứng chỉ con phải trùng khớp hoàn toàn
+từng byte nhị phân với tên chủ thể của chứng chỉ cha:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mi>.</mi><mtext mathvariant="normal">Issuer</mtext><mo>=</mo><mo>=</mo><msub><mi>C</mi><mi>i</mi></msub><mi>.</mi><mtext mathvariant="normal">Subject</mtext></mrow><annotation encoding="application/x-tex">C_{i-1}.\text{Issuer} == C_i.\text{Subject}</annotation></semantics></math>
+4. <strong>Kiểm tra quyền hạn CA (Basic Constraints):</strong> Đối với
+tất cả các mắt xích trung gian
+(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>≥</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">i \ge 1</annotation></semantics></math>),
+chứng chỉ
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>C</mi><mi>i</mi></msub><annotation encoding="application/x-tex">C_i</annotation></semantics></math>
+bắt buộc phải có phần mở rộng <code>Basic Constraints</code> với cờ
+<code>cA = TRUE</code>. 5. <strong>Kiểm tra giới hạn độ sâu (Path Length
+Constraint):</strong> Nếu
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>C</mi><mi>i</mi></msub><annotation encoding="application/x-tex">C_i</annotation></semantics></math>
+có quy định <code>pathLenConstraint = k</code>, số lượng chứng chỉ CA
+trung gian nằm giữa nó và chứng chỉ thực thể cuối không được vượt quá
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>k</mi><annotation encoding="application/x-tex">k</annotation></semantics></math>.
+6. <strong>Kiểm tra trạng thái thu hồi (Revocation Status):</strong>
+Kiểm tra xem số seri của
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>C</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><annotation encoding="application/x-tex">C_{i-1}</annotation></semantics></math>
+có bị liệt kê trong danh sách thu hồi CRL hoặc nhận phản hồi
+<code>REVOKED</code> từ OCSP Responder hay không.</p>
+<hr />
+<h2 id="cơ-chế-thu-hồi-crl-vs.-ocsp-vs.-ocsp-stapling">4.2. Cơ Chế Thu
+Hồi: CRL vs. OCSP vs. OCSP Stapling</h2>
+<p>Một chứng chỉ có thể bị hủy bỏ giá trị trước khi hết hạn do nhiều
+nguyên nhân: lộ khóa bí mật (<code>keyCompromise</code>), thay đổi thông
+tin định danh (<code>affiliationChanged</code>), hoặc đơn vị ngừng hoạt
+động. Ba cơ chế kiểm tra thu hồi được phát triển qua các thời kỳ:</p>
+<pre><code>1. CRL (Danh sách thu hồi tĩnh):
+   Client -------- Tải toàn bộ file CRL (dung lượng lớn hàng MB) --------&gt; CA CRL Server
+   (Nhược điểm: Tải nặng, độ trễ cập nhật lớn, gây chậm kết nối)
+
+2. OCSP (Tra cứu trực tuyến):
+   Client -------- Truy vấn: Chứng chỉ Serial #12345 còn sống không? -------&gt; OCSP Responder
+          &lt;------- Phản hồi: Trạng thái GOOD (ký bởi CA) ------------------
+   (Nhược điểm: Lộ lịch sử duyệt web của Client cho CA; nguy cơ Soft-Fail bị chặn)
+
+3. OCSP STAPLING (Khuyến nghị chuẩn hiện đại TLS 1.3):
+   Web Server tự truy vấn OCSP Responder định kỳ (mỗi giờ) và lưu đệm phản hồi.
+   Client &lt;======= Gói bắt tay TLS 1.3 kèm luôn phản hồi OCSP đã ký ======== Web Server
+   (Ưu điểm tuyệt đối: Tốc độ tối đa 0-RTT, bảo mật riêng tư 100%, không nghẽn CA)</code></pre>
+<h3 id="so-sánh-kỹ-thuật-chi-tiết">So Sánh Kỹ Thuật Chi Tiết:</h3>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Tiêu Chí Kỹ Thuật</th>
+<th>CRL (RFC 5280)</th>
+<th>OCSP (RFC 6960)</th>
+<th>OCSP Stapling (RFC 6066 / 7633)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Phương thức truyền tải</strong></td>
+<td>File tĩnh qua HTTP/FTP</td>
+<td>Giao thức nhị phân HTTP POST/GET</td>
+<td>Kẹp trong gói TLS Handshake</td>
+</tr>
+<tr>
+<td><strong>Băng thông Client</strong></td>
+<td>Rất nặng (tải danh sách lớn)</td>
+<td>Rất nhẹ (vài trăm bytes)</td>
+<td>Không tốn thêm kết nối ngoài</td>
+</tr>
+<tr>
+<td><strong>Quyền riêng tư (Privacy)</strong></td>
+<td>Tốt (CA không biết ai bị tra cứu)</td>
+<td>Kém (CA biết IP người dùng truy cập web nào)</td>
+<td>Hoàn hảo (CA không biết danh tính client)</td>
+</tr>
+<tr>
+<td><strong>Độ trễ kết nối mạng</strong></td>
+<td>Lớn (nếu file CRL chưa cache)</td>
+<td>Thêm 1 RTT tới OCSP server</td>
+<td>0 RTT (có sẵn trong gói TLS)</td>
+</tr>
+<tr>
+<td><strong>Hành vi khi mạng lỗi</strong></td>
+<td>Soft-fail (bỏ qua kiểm tra)</td>
+<td>Soft-fail (nguy cơ MitM chặn)</td>
+<td><strong>Hard-fail</strong> khi bật Must-Staple</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1
+id="chương-5-giao-thức-quản-trị-tự-động-acme-rfc-8555-hạ-tầng-zero-trust-pki">CHƯƠNG
+5: GIAO THỨC QUẢN TRỊ TỰ ĐỘNG ACME (RFC 8555) &amp; HẠ TẦNG ZERO TRUST
+PKI</h1>
+<h2
+id="cuộc-cách-mạng-tự-động-hóa-vòng-đời-chứng-chỉ-với-acme-rfc-8555">5.1.
+Cuộc Cách Mạng Tự Động Hóa Vòng Đời Chứng Chỉ Với ACME (RFC 8555)</h2>
+<p>Năm 2020, Apple, Google và Mozilla chính thức áp đặt giới hạn thời
+hạn sống của chứng chỉ TLS xuống còn <strong>398 ngày</strong>. Năm
+2024, Google đề xuất lộ trình rút ngắn tiếp xuống <strong>90
+ngày</strong>, và trong tương lai là <strong>45 ngày</strong>. Việc quản
+lý chứng chỉ thủ công bằng con người (tạo CSR, nộp đơn, chờ duyệt, tải
+về, cấu hình máy chủ) hoàn toàn phá sản.</p>
+<p>Giao thức <strong>ACME (Automated Certificate Management Environment
+- RFC 8555)</strong> do Let’s Encrypt tiên phong và IETF chuẩn hóa đã
+giải quyết bài toán này thông qua tự động hóa hoàn toàn 100%:</p>
+<pre><code>[ACME Client: Certbot / Step]                      [ACME Server: Step-CA / Let&#39;s Encrypt]
+             |                                                          |
+             | 1. Khởi tạo tài khoản (Account Key Pair Ed25519)         |
+             |---------------------------------------------------------&gt;|
+             |                                                          |
+             | 2. Yêu cầu cấp chứng chỉ cho &quot;api.kma.edu.vn&quot;            |
+             |---------------------------------------------------------&gt;|
+             | 3. Trả về Thử thách (Challenge: Token ngẫu nhiên)       |
+             |&lt;---------------------------------------------------------|
+             |                                                          |
+             | [Client chuẩn bị đáp ứng thử thách]                     |
+             | - HTTP-01: Ghi file vào /.well-known/acme-challenge/    |
+             | - DNS-01 : Tạo bản ghi TXT _acme-challenge.domain        |
+             |                                                          |
+             | 4. Báo hiệu đã sẵn sàng kiểm tra                         |
+             |---------------------------------------------------------&gt;|
+             |                                                          |
+             |           5. Server tự kết nối Internet kiểm tra thử thách
+             |              (Đúng token và chữ ký tài khoản)           |
+             |                                                          |
+             | 6. Xác thực thành công -&gt; Cho phép nộp CSR               |
+             |&lt;---------------------------------------------------------|
+             | 7. Nộp CSR kèm Public Key máy chủ                        |
+             |---------------------------------------------------------&gt;|
+             | 8. Ký và trả về chứng chỉ hoàn chỉnh X.509               |
+             |&lt;---------------------------------------------------------|</code></pre>
+<h3 id="các-loại-thử-thách-acme-phổ-biến">Các Loại Thử Thách ACME Phổ
+Biến:</h3>
+<ol type="1">
+<li><strong>HTTP-01 Challenge:</strong> Máy chủ ACME truy vấn qua cổng
+HTTP 80 để đọc token. Phù hợp cho máy chủ đơn lẻ, nhưng không cấp được
+chứng chỉ Wildcard (<code>*.domain.com</code>).</li>
+<li><strong>DNS-01 Challenge:</strong> Client sử dụng API của máy chủ
+DNS để tự động tạo bản ghi TXT. Đây là phương pháp mạnh mẽ nhất, hỗ trợ
+chứng chỉ Wildcard và hoạt động tốt ngay cả với máy chủ nằm sâu trong
+mạng nội bộ không mở cổng ra Internet.</li>
+<li><strong>TLS-ALPN-01 Challenge:</strong> Dành riêng cho các hệ thống
+reverse proxy (HAProxy, Traefik), đàm phán qua giao thức TLS ALPN chuyên
+dụng trên cổng 443 mà không cần can thiệp tầng HTTP.</li>
+</ol>
+<hr />
+<h2 id="pki-trong-kiến-trúc-mạng-không-tin-cậy-zero-trust-pki">5.2. PKI
+Trong Kiến Trúc Mạng Không Tin Cậy (Zero Trust PKI)</h2>
+<p>Mô hình phòng thủ chu vi truyền thống (“bên ngoài nguy hiểm, bên
+trong an toàn”) đã hoàn toàn lỗi thời. Kiến trúc <strong>Zero
+Trust</strong> áp dụng nguyên tắc: <strong>Luôn luôn xác thực, không bao
+giờ tin tưởng bất kỳ ai dù đang ở trong mạng nội bộ</strong>.</p>
+<ul>
+<li><strong>mTLS (Mutual TLS) Toàn Diện:</strong> Mọi kết nối giữa
+microservices A và microservices B đều bắt buộc cả hai bên phải xuất
+trình chứng chỉ X.509 để xác thực hai chiều và mã hóa đường truyền.</li>
+<li><strong>Chứng Chỉ Biểu Kiến (Ephemeral Certificates):</strong> Khóa
+bí mật và chứng chỉ được sinh tự động bởi HashiCorp Vault hoặc Step-CA
+với thời gian sống cực ngắn (từ 1 giờ đến 24 giờ). Khi chứng chỉ hết
+hạn, hệ thống tự động xoay vòng (key rotation). Kẻ tấn công nếu có đánh
+cắp được khóa bí mật trong bộ nhớ thì giá trị sử dụng cũng đã hết hạn
+sau ít phút.</li>
+</ul>
+<hr />
+<h1
+id="chương-6-các-kịch-bản-tấn-công-hạ-tầng-pki-chiến-lược-phòng-thủ-toàn-diện">CHƯƠNG
+6: CÁC KỊCH BẢN TẤN CÔNG HẠ TẦNG PKI &amp; CHIẾN LƯỢC PHÒNG THỦ TOÀN
+DIỆN</h1>
+<h2 id="bài-học-xương-máu-từ-các-thảm-họa-pki-lịch-sử">6.1. Bài Học
+Xương Máu Từ Các Thảm Họa PKI Lịch Sử</h2>
+<p>PKI được xây dựng dựa trên sự ủy thác. Nếu một CA gốc trong Trust
+Store bị xâm nhập, kẻ tấn công có quyền lực tối thượng để giả mạo bất kỳ
+dịch vụ nào trên thế giới.</p>
+<ol type="1">
+<li><strong>Vụ Án DigiNotar (Hà Lan - 2011):</strong>
+<ul>
+<li><em>Bối cảnh:</em> DigiNotar là CA công cộng uy tín của chính phủ Hà
+Lan, nằm trong Trust Store mặc định của Windows, iOS, Android,
+Firefox.</li>
+<li><em>Kịch bản tấn công:</em> Hacker thâm nhập vào mạng nội bộ của
+DigiNotar do hệ thống thiếu phân tách mạng và mật khẩu quản trị yếu.
+Root CA bị để ở trạng thái trực tuyến. Kẻ tấn công phát hành hơn 500
+chứng chỉ giả mạo cho các tên miền trọng yếu: <code>*.google.com</code>,
+<code>*.torproject.org</code>, <code>*.microsoft.com</code>.</li>
+<li><em>Hậu quả:</em> Hơn 300.000 người dùng Internet tại Iran đã bị tấn
+công Man-in-the-Middle đọc trộm toàn bộ email và tài khoản cá nhân.
+Google và Microsoft đã tung bản vá khẩn cấp loại bỏ hoàn toàn DigiNotar
+khỏi Trust Store, dẫn tới việc công ty này nộp đơn phá sản sau đó 1
+tháng.</li>
+</ul></li>
+<li><strong>Vũ Khí Mạng Flame (2012):</strong>
+<ul>
+<li><em>Kịch bản:</em> Nhóm phát triển mã độc gián điệp Flame đã thực
+hiện một cuộc tấn công toán học kỳ công: Khai thác lỗ hổng va chạm tiền
+ảnh (chosen-prefix collision) trên hàm băm MD5 mà Microsoft vẫn sử dụng
+để ký chứng chỉ dịch vụ Terminal Server.</li>
+<li><em>Khai thác:</em> Kẻ tấn công tạo ra một chứng chỉ giả mạo có cùng
+mã băm MD5 với chứng chỉ hợp lệ của Microsoft, từ đó ký mã độc giả dạng
+bản cập nhật chính thức của Windows Update để lây nhiễm vào các cơ sở hạ
+tầng trọng yếu tại Trung Đông.</li>
+</ul></li>
+</ol>
+<hr />
+<h2
+id="kỹ-thuật-tấn-công-active-directory-certificate-services-ad-cs">6.2.
+Kỹ Thuật Tấn Công Active Directory Certificate Services (AD CS)</h2>
+<p>Active Directory Certificate Services (AD CS) là thành phần PKI phổ
+biến nhất trong các tập đoàn lớn toàn cầu. Năm 2021, Will Schroeder và
+Lee Christensen (SpecterOps) đã công bố nghiên cứu gây chấn động chỉ ra
+hàng loạt cấu hình sai sót nghiêm trọng cho phép leo thang đặc quyền từ
+người dùng cấp thấp lên Quản trị viên miền (Domain Admin):</p>
+<ul>
+<li><strong>Kỹ thuật ESC1 (Misconfigured Certificate Template):</strong>
+<ul>
+<li>Mẫu chứng chỉ (Template) thỏa mãn đồng thời 3 điều kiện chết người:
+<ol type="1">
+<li>Cấp quyền cho nhóm người dùng bình thường
+(<code>Domain Users</code>) được nộp đơn xin cấp chứng chỉ.</li>
+<li>Bật cờ <code>ENROLLEE_SUPPLIES_SUBJECT</code>: Cho phép người nộp
+đơn tùy ý điền tên Subject Alternative Name (SAN) trong CSR.</li>
+<li>Cấu hình Extended Key Usage (EKU) có chứa
+<code>Client Authentication</code> (<code>1.3.6.1.5.5.7.3.2</code>) hoặc
+<code>Smart Card Logon</code>.</li>
+</ol></li>
+<li><em>Khai thác:</em> Kẻ tấn công sử dụng công cụ <code>Certipy</code>
+yêu cầu một chứng chỉ với SAN giả mạo là tài khoản
+<code>Administrator@domain.local</code>. Sau khi nhận được chứng chỉ từ
+AD CS, kẻ tấn công dùng chứng chỉ đó yêu cầu vé Kerberos TGT (Ticket
+Granting Ticket) để chiếm quyền điều khiển toàn bộ mạng công ty.</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Lệnh trinh sát và khai thác ESC1 bằng công cụ Certipy:</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">certipy</span> find <span class="at">-u</span> user@corp.local <span class="at">-p</span> Password123 <span class="at">-dc-ip</span> 10.0.0.1 <span class="at">-vulnerable</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">certipy</span> req <span class="at">-u</span> user@corp.local <span class="at">-p</span> Password123 <span class="at">-ca</span> Corp-CA <span class="at">-template</span> ESC1-Template <span class="at">-upn</span> administrator@corp.local</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">certipy</span> auth <span class="at">-pfx</span> administrator.pfx <span class="at">-dc-ip</span> 10.0.0.1</span></code></pre></div>
+<ul>
+<li><strong>Biện Pháp Phòng Thủ:</strong>
+<ul>
+<li>Bỏ cờ <code>ENROLLEE_SUPPLIES_SUBJECT</code> trên mọi template có
+tính năng Client Authentication.</li>
+<li>Thiết lập cơ chế phê duyệt thủ công
+(<code>CA administrator approval</code>) cho các chứng chỉ nhạy
+cảm.</li>
+<li>Giám sát Windows Event Log ID <code>4886</code> (Yêu cầu cấp chứng
+chỉ) và <code>4887</code> (Đã cấp chứng chỉ) bằng các luật phát hiện
+<strong>Sigma rules</strong>.</li>
+</ul></li>
+</ul>
+<hr />
+<h2
+id="hệ-thống-minh-bạch-chứng-chỉ-certificate-transparency---rfc-6962">6.3.
+Hệ Thống Minh Bạch Chứng Chỉ (Certificate Transparency - RFC 6962)</h2>
+<p>Để giải quyết triệt để vấn đề CA cấp lén lút chứng chỉ giả mạo như vụ
+DigiNotar, Google đã khởi xướng chuẩn <strong>Certificate Transparency
+(CT Logs - RFC 6962)</strong>:</p>
+<ol type="1">
+<li><strong>Nguyên Lý Hoạt Động:</strong> Mọi chứng chỉ muốn được trình
+duyệt (Chrome, Safari) tin cậy <strong>BẮT BUỘC</strong> phải được ghi
+vào các máy chủ CT Log công khai trước khi phát hành.</li>
+<li><strong>Cấu Trúc Cây Merkle (Merkle Hash Tree):</strong>
+<ul>
+<li>CT Log là một cuốn sổ cái chỉ thêm (Append-Only Cryptographic
+Ledger). Dữ liệu được tổ chức dưới dạng cây nhị phân Merkle Tree.</li>
+<li>Mỗi nút lá là một chứng chỉ đã được nộp. Nút cha là mã băm của hai
+nút con:
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>N</mi><mtext mathvariant="normal">parent</mtext></msub><mo>=</mo><mi>H</mi><mo stretchy="false" form="prefix">(</mo><msub><mi>N</mi><mtext mathvariant="normal">left</mtext></msub><mo>∥</mo><msub><mi>N</mi><mtext mathvariant="normal">right</mtext></msub><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">N_{\text{parent}} = H(N_{\text{left}} \parallel N_{\text{right}})</annotation></semantics></math>.</li>
+<li>Gốc cây (Merkle Tree Root) đại diện cho toàn bộ trạng thái lịch sử
+của hàng tỷ chứng chỉ đã phát hành.</li>
+</ul></li>
+</ol>
+<pre><code>                         Merkle Root Hash (Ký bởi CT Log Server)
+                                    /              \
+                                   /                \
+                             Node 12                Node 34
+                             /      \               /      \
+                          Hash 1   Hash 2        Hash 3   Hash 4
+                           [C1]     [C2]          [C3]     [C4]</code></pre>
+<ol start="3" type="1">
+<li><strong>Signed Certificate Timestamp (SCT):</strong> Khi CA gửi
+chứng chỉ tạm (Pre-certificate) lên CT Log, Log server trả về một biên
+nhận mật mã gọi là SCT. SCT là bằng chứng cam kết rằng chứng chỉ này sẽ
+được đưa vào cây Merkle trong vòng tối đa 24 giờ (Maximum Merge Delay -
+MMD). SCT được nhúng trực tiếp vào chứng chỉ X.509 chính thức dưới dạng
+một Extension.</li>
+<li><strong>Kiểm Định Tuân Thủ Với ZLint:</strong> Trước khi đưa chứng
+chỉ ra môi trường production, các tổ chức CA sử dụng công cụ nguồn mở
+<strong>ZLint</strong> để quét tự động hơn 250 điều khoản kỹ thuật của
+chuẩn CA/B Forum, bảo đảm 100% chứng chỉ không mắc các lỗi sai sót về
+định dạng bit hay OID.</li>
+</ol>
+<hr />
+<h1
+id="chương-7-chuyển-dịch-hệ-thống-sang-mật-mã-hậu-lượng-tử-pqc-migration">CHƯƠNG
+7: CHUYỂN DỊCH HỆ THỐNG SANG MẬT MÃ HẬU LƯỢNG TỬ (PQC MIGRATION)</h1>
+<h2 id="mối-đe-dọa-từ-máy-tính-lượng-tử-chiến-lược-hndl">7.1. Mối Đe Dọa
+Từ Máy Tính Lượng Tử &amp; Chiến Lược HNDL</h2>
+<p>Năm 1994, Peter Shor công bố thuật toán lượng tử chứng minh rằng: Một
+máy tính lượng tử lý tưởng (Cryptanalytically Relevant Quantum Computer
+- CRQC) có thể tìm chu kỳ hàm số và giải quyết đồng thời bài toán phân
+tích thừa số nguyên tố và logarit rời rạc trong <strong>thời gian đa
+thức</strong>:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="script">𝒪</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo stretchy="false" form="prefix">(</mo><mi mathvariant="normal">log</mi><mi>N</mi><msup><mo stretchy="false" form="postfix">)</mo><mn>3</mn></msup><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathcal{O}\left((\log N)^3\right)</annotation></semantics></math></p>
+<p>Điều này đồng nghĩa với việc toàn bộ thuật toán RSA, DSA, ECDSA và
+ECDH đang bảo vệ Internet <strong>sẽ hoàn toàn sụp đổ chỉ sau một
+đêm</strong> khi máy tính lượng tử đạt đủ số lượng Qubit vật lý ổn
+định.</p>
+<p>Mối đe dọa không nằm ở tương lai 10 năm nữa mà đang diễn ra
+<strong>ngay trong giây phút này</strong> thông qua chiến lược tấn công:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtext mathvariant="bold">𝐇𝐚𝐫𝐯𝐞𝐬𝐭 𝐍𝐨𝐰, 𝐃𝐞𝐜𝐫𝐲𝐩𝐭 𝐋𝐚𝐭𝐞𝐫 (𝐇𝐍𝐃𝐋) — 𝐓𝐡𝐮 𝐭𝐡ậ𝐩 𝐧𝐠𝐚𝐲, 𝐆𝐢ả𝐢 𝐦ã 𝐬𝐚𝐮</mtext><annotation encoding="application/x-tex">\textbf{Harvest Now, Decrypt Later (HNDL) — Thu thập ngay, Giải mã sau}</annotation></semantics></math>
+Các cơ quan tình báo và nhóm tội phạm mạng tinh vi đang bí mật thu thập
+và lưu trữ hàng terabyte lưu lượng mã hóa HTTPS, dữ liệu ngoại giao, hồ
+sơ bệnh án và giao dịch ngân hàng của các quốc gia. Khi máy tính lượng
+tử ra đời, toàn bộ kho dữ liệu lịch sử này sẽ bị giải mã hồi tố, làm lộ
+toàn bộ bí mật nhà nước và bí mật kinh doanh!</p>
+<hr />
+<h2
+id="bộ-tiêu-chuẩn-mật-mã-hậu-lượng-tử-chính-thức-của-nist-082024">7.2.
+Bộ Tiêu Chuẩn Mật Mã Hậu Lượng Tử Chính Thức Của NIST (08/2024)</h2>
+<p>Sau cuộc thi tuyển chọn toàn cầu kéo dài gần một thập kỷ, ngày
+13/08/2024, Viện Tiêu chuẩn và Công nghệ Quốc gia Hoa Kỳ (NIST) đã chính
+thức ban hành bộ tiêu chuẩn liên bang:</p>
+<h3
+id="nist-fips-203-chuẩn-đóng-gói-khóa-ml-kem-module-lattice-kem">7.2.1.
+NIST FIPS 203: Chuẩn Đóng Gói Khóa ML-KEM (Module-Lattice KEM)</h3>
+<ul>
+<li>Dựa trên thuật toán nguyên bản <strong>CRYSTALS-Kyber</strong>.</li>
+<li>Dựa trên bài toán khó <strong>Module Learning With Errors
+(M-LWE)</strong> trên vành đa thức hữu hạn: Cho ma trận đa thức
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="bold-italic">𝑨</mi><annotation encoding="application/x-tex">\mathbf{A}</annotation></semantics></math>,
+vector bí mật
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="bold-italic">𝒔</mi><annotation encoding="application/x-tex">\mathbf{s}</annotation></semantics></math>
+và vector sai số nhỏ
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="bold-italic">𝒆</mi><annotation encoding="application/x-tex">\mathbf{e}</annotation></semantics></math>,
+việc tìm
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="bold-italic">𝒔</mi><annotation encoding="application/x-tex">\mathbf{s}</annotation></semantics></math>
+từ
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold-italic">𝒃</mi><mo>=</mo><mi mathvariant="bold-italic">𝑨</mi><mi mathvariant="bold-italic">𝒔</mi><mo>+</mo><mi mathvariant="bold-italic">𝒆</mi></mrow><annotation encoding="application/x-tex">\mathbf{b} = \mathbf{A}\mathbf{s} + \mathbf{e}</annotation></semantics></math>
+là bài toán NP-hard ngay cả với máy tính lượng tử.</li>
+<li><strong>Ba cấp độ an ninh:</strong>
+<ul>
+<li><code>ML-KEM-512</code>: Tương đương mức an ninh AES-128 (NIST Level
+1).</li>
+<li><code>ML-KEM-768</code>: Tương đương mức an ninh AES-192 (NIST Level
+3 - Khuyến nghị chuẩn chung).</li>
+<li><code>ML-KEM-1024</code>: Tương đương mức an ninh AES-256 (NIST
+Level 5 - Dành cho hạ tầng tối mật).</li>
+</ul></li>
+</ul>
+<h3 id="nist-fips-204-chuẩn-chữ-ký-số-ml-dsa-module-lattice-dsa">7.2.2.
+NIST FIPS 204: Chuẩn Chữ Ký Số ML-DSA (Module-Lattice DSA)</h3>
+<ul>
+<li>Dựa trên thuật toán nguyên bản
+<strong>CRYSTALS-Dilithium</strong>.</li>
+<li>Áp dụng kiến trúc Fiat-Shamir with Aborts trên vành mạng lưới
+Module-LWE và Module-SIS.</li>
+<li><strong>Ba cấp độ an ninh:</strong> <code>ML-DSA-44</code>,
+<code>ML-DSA-65</code> (Khuyến nghị chuẩn), <code>ML-DSA-87</code>.</li>
+</ul>
+<h3
+id="nist-fips-205-chuẩn-chữ-ký-số-phi-trạng-thái-slh-dsa-sphincs">7.2.3.
+NIST FIPS 205: Chuẩn Chữ Ký Số Phi Trạng Thái SLH-DSA (SPHINCS+)</h3>
+<ul>
+<li>Dựa trên toán học hàm băm phi cấu trúc (Stateless Hash-Based).</li>
+<li>Ưu điểm: Cơ sở an toàn hoàn toàn độc lập với toán học mạng lưới
+(được xem là tuyến phòng thủ dự phòng an toàn tuyệt đối nếu một ngày
+toán học mạng lưới bị giải mã). Nhược điểm: Chữ ký có kích thước rất lớn
+(hơn 17 KB - 40 KB).</li>
+</ul>
+<hr />
+<h2 id="kiến-trúc-bắt-tay-lai-hybrid-tls-1.3-hybrid-certificates">7.3.
+Kiến Trúc Bắt Tay Lai (Hybrid TLS 1.3 &amp; Hybrid Certificates)</h2>
+<p>Việc chuyển dịch từ mật mã cổ điển sang PQC không thể diễn ra đột
+ngột mà phải thông qua cơ chế <strong>Bắt tay lai (Hybrid
+Approach)</strong> theo chuẩn IETF:</p>
+<pre><code>[Client]                                                        [Server]
+   |                                                               |
+   | 1. ClientHello:                                               |
+   |    Trao đổi khóa Lai (Supported Groups):                      |
+   |    - Khóa cổ điển : X25519 (32 bytes)                         |
+   |    - Khóa PQC     : ML-KEM-768 (1184 bytes)                  |
+   |--------------------------------------------------------------&gt;|
+   |                                                               |
+   | 2. ServerHello:                                               |
+   |    - Phản hồi X25519 (32 bytes)                               |
+   |    - Phản hồi Ciphertext ML-KEM-768 (1088 bytes)              |
+   |&lt;--------------------------------------------------------------|
+   |                                                               |
+   | [Cả hai bên tính toán Khóa bí mật chung kép]:                 |
+   | Shared_Secret = KDF(SS_X25519 || SS_ML-KEM-768)               |
+   | (Hệ thống an toàn nếu ít nhất một trong hai thuật toán an toàn)|</code></pre>
+<h3 id="thử-thách-kỹ-thuật-khi-chuyển-dịch-lên-môi-trường-sản-xuất">Thử
+Thách Kỹ Thuật Khi Chuyển Dịch Lên Môi Trường Sản Xuất:</h3>
+<ol type="1">
+<li><strong>Bùng Nổ Kích Thước Khóa &amp; Chữ Ký:</strong>
+<ul>
+<li>Khóa ECDSA P-256: Public Key 64 bytes, Signature 64 bytes.</li>
+<li>Khóa ML-DSA-65: Public Key <strong>1952 bytes</strong>, Signature
+<strong>3309 bytes</strong>.</li>
+</ul></li>
+<li><strong>Hiện Tượng Phân Mảnh Gói Tin TCP (TCP MTU Packet
+Fragmentation):</strong>
+<ul>
+<li>MTU tiêu chuẩn mạng Ethernet là 1500 bytes. Một chứng chỉ hoặc chữ
+ký ML-DSA vượt quá kích thước 1 MTU bắt buộc phải bị phân mảnh thành 3 -
+4 khung tin IP.</li>
+<li>Trên mạng di động (4G/5G) hoặc kết nối mạng vệ tinh có tỉ lệ mất gói
+cao, việc phân mảnh gói tin làm tăng đột biến độ trễ bắt tay mạng
+(Handshake Latency) và tăng nguy cơ rớt kết nối. Đây là bài toán kỹ
+thuật trọng tâm mà học viên Nhóm 3 sẽ đo kiểm thực tế trong đồ án môn
+học.</li>
+</ul></li>
+</ol>
+<hr />
+<h1
+id="chương-8-khung-pháp-lý-quy-chuẩn-kỹ-thuật-hạ-tầng-chữ-ký-số-quốc-gia">CHƯƠNG
+8: KHUNG PHÁP LÝ, QUY CHUẨN KỸ THUẬT &amp; HẠ TẦNG CHỮ KÝ SỐ QUỐC
+GIA</h1>
+<h2 id="hệ-thống-luật-pháp-quy-chuẩn-kỹ-thuật-việt-nam">8.1. Hệ Thống
+Luật Pháp &amp; Quy Chuẩn Kỹ Thuật Việt Nam</h2>
+<p>Tại Việt Nam, chữ ký số và hạ tầng khóa công khai được điều chỉnh bởi
+một hành lang pháp lý hoàn chỉnh và chặt chẽ: 1. <strong>Luật Giao dịch
+điện tử số 20/2023/QH15 (Chính thức có hiệu lực từ ngày
+01/07/2024):</strong> - Thay thế toàn diện Luật Giao dịch điện tử năm
+2005. - Quy định phân loại chi tiết: <strong>Chữ ký điện tử chuyên
+dùng</strong>, <strong>Chữ ký số chuyên dùng công vụ</strong> và
+<strong>Chữ ký số công cộng</strong>. - Khẳng định giá trị pháp lý tương
+đương chữ ký tay của cá nhân và con dấu của tổ chức. - Bổ sung quy định
+về <strong>Dịch vụ Tin cậy (Trust Services)</strong> bao gồm: Dịch vụ
+cấp dấu thời gian (Time-stamping), Dịch vụ chứng thực thông điệp dữ
+liệu, và Dịch vụ chứng thực chữ ký số. 2. <strong>Nghị định
+130/2018/NĐ-CP:</strong> Hướng dẫn chi tiết thi hành Luật Giao dịch điện
+tử về chữ ký số và dịch vụ chứng thực chữ ký số. 3. <strong>Thông tư số
+16/2019/TT-BTTTT &amp; Thông tư số 31/2020/TT-BTTTT:</strong> Quy định
+danh mục tiêu chuẩn kỹ thuật bắt buộc áp dụng cho chữ ký số và thiết bị
+lưu khóa: - Thuật toán băm: Tối thiểu SHA-256 (loại bỏ hoàn toàn SHA-1).
+- Thuật toán khóa công khai: RSA tối thiểu 2048-bit hoặc ECC tối thiểu
+256-bit. - Giao thức kiểm tra trạng thái: Bắt buộc hỗ trợ song song cả
+CRL và OCSP trực tuyến.</p>
+<hr />
+<h2 id="kiến-trúc-hạ-tầng-chữ-ký-số-quốc-gia">8.2. Kiến Trúc Hạ Tầng Chữ
+Ký Số Quốc Gia</h2>
+<p>Hạ tầng PKI Việt Nam được tổ chức theo mô hình hai nhánh quốc gia độc
+lập:</p>
+<pre><code>                            +-----------------------------+
+                            |       HỆ THỐNG PKI          |
+                            |       QUỐC GIA VIỆT NAM     |
+                            +-----------------------------+
+                                     /             \
+                                    /               \
+                                   /                 \
+  +-----------------------------------+   +-----------------------------------+
+  |   TRUNG TÂM CHỨNG THỰC ĐIỆN TỬ    |   |     BAN CƠ YẾU CHÍNH PHỦ          |
+  |     QUỐC GIA (NEAC) - BỘ TT&amp;TT    |   |                                   |
+  |  - Vận hành National Root CA      |   |  - Quản lý PKI Chuyên Dùng        |
+  |  - Cấp phép cho CA Công Cộng      |   |    Công Vụ                        |
+  +-----------------------------------+   +-----------------------------------+
+                   |                                       |
+    Ký cấp phép    |                                       | Ký cấp phát
+                   v                                       v
+  +-----------------------------------+   +-----------------------------------+
+  |      CÁC CA CÔNG CỘNG (PUBLIC CA) |   | CÁC BỘ, BAN, NGÀNH, UBND TỈNH     |
+  |  - VNPT-CA, Viettel-CA, FPT-CA,   |   |  - Phục vụ cán bộ, công chức      |
+  |    BKAV-CA, TrustCA, MISA-CA...   |   |  - Ký văn bản điều hành điện tử   |
+  +-----------------------------------+   +-----------------------------------+
+                   |
+    Cấp phát cho   |
+                   v
+  +-----------------------------------+
+  |  DOANH NGHIỆP, TỔ CHỨC, CÔNG DÂN  |
+  |  - Kê khai thuế, Hải quan điện tử |
+  |  - Hóa đơn điện tử, Ngân hàng số  |
+  +-----------------------------------+</code></pre>
+<hr />
+<h2
+id="tiêu-chuẩn-thiết-bị-lưu-khóa-bí-mật-ký-số-từ-xa-remote-signing">8.3.
+Tiêu Chuẩn Thiết Bị Lưu Khóa Bí Mật &amp; Ký Số Từ Xa (Remote
+Signing)</h2>
+<ol type="1">
+<li><strong>Thiết Bị Cứng Cục Bộ (USB Token / Smartcard):</strong>
+<ul>
+<li>Thiết bị phải đạt chứng chỉ an toàn quốc tế <strong>Common Criteria
+(CC) mức EAL4+</strong> hoặc <strong>NIST FIPS 140-2 Level
+2/3</strong>.</li>
+<li>Khóa bí mật được sinh trực tiếp bên trong chip bảo mật và không bao
+giờ cho phép sao chép ra ngoài.</li>
+<li>Có cơ chế khóa tự động sau một số lần nhập sai mã PIN (thường là 5
+lần).</li>
+</ul></li>
+<li><strong>Ký Số Từ Xa (Remote Signing / Cloud HSM):</strong>
+<ul>
+<li>Người dùng không cần mang theo thiết bị phần cứng USB Token cồng
+kềnh. Khóa bí mật được lưu tập trung trong các cụm thiết bị HSM đạt
+chuẩn FIPS 140-2 Level 3 tại trung tâm dữ liệu của nhà cung cấp dịch vụ
+tin cậy (TSP).</li>
+<li>Xác thực kích hoạt chữ ký thông qua phương thức xác thực đa yếu tố
+(MFA): Sinh trắc học (FIDO2 / FaceID / Vân tay) kết hợp mã OTP thông báo
+qua ứng dụng an toàn.</li>
+<li>Quy trình ký số từ xa bắt buộc tuân thủ tiêu chuẩn Châu Âu
+<strong>eIDAS (EN 419 241-1 / EN 419 241-2)</strong> bảo đảm người dùng
+duy trì quyền kiểm soát duy nhất (Sole Control) đối với khóa bí mật của
+mình.</li>
+</ul></li>
+</ol>
+<hr />
+<h1 id="phụ-lục-a-cẩm-nang-50-lệnh-openssl-3.5-thực-chiến">PHỤ LỤC A:
+CẨM NANG 50 LỆNH OPENSSL 3.5 THỰC CHIẾN</h1>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># PHẦN 1: QUẢN LÝ KHÓA CỔ ĐIỂN &amp; ĐƯỜNG CONG ELLIPTIC</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Sinh khóa bí mật RSA 4096-bit mã hóa bằng AES-256</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> genpkey <span class="at">-algorithm</span> RSA <span class="at">-pkeyopt</span> rsa_keygen_bits:4096 <span class="at">-aes-256-cbc</span> <span class="at">-out</span> root_rsa.key</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Trích xuất khóa công khai từ khóa bí mật RSA</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> pkey <span class="at">-in</span> root_rsa.key <span class="at">-pubout</span> <span class="at">-out</span> root_rsa.pub</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Liệt kê toàn bộ các đường cong Elliptic được hỗ trợ bởi OpenSSL 3.5</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> ecparam <span class="at">-list_curves</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Sinh khóa bí mật ECDSA trên đường cong chuẩn NIST P-384</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> genpkey <span class="at">-algorithm</span> EC <span class="at">-pkeyopt</span> ec_paramgen_curve:secp384r1 <span class="at">-out</span> ca_ecc.key</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Sinh khóa bí mật Ed25519 (Kháng kênh bên, tối ưu cho TLS 1.3)</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> genpkey <span class="at">-algorithm</span> ED25519 <span class="at">-out</span> server_ed25519.key</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co"># PHẦN 2: THỰC THI KHỞI TẠO ROOT CA VÀ INTERMEDIATE CA</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="co"># 6. Khởi tạo chứng chỉ Root CA tự ký X.509 v3 (Thời hạn 10 năm)</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> req <span class="at">-x509</span> <span class="at">-new</span> <span class="at">-nodes</span> <span class="at">-key</span> root_rsa.key <span class="at">-sha256</span> <span class="at">-days</span> 3650 <span class="dt">\</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">-subj</span> <span class="st">&quot;/C=VN/ST=Ho Chi Minh/O=KMA/OU=Security Division/CN=KMA National Root CA&quot;</span> <span class="dt">\</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">-addext</span> <span class="st">&quot;basicConstraints=critical,CA:TRUE&quot;</span> <span class="dt">\</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">-addext</span> <span class="st">&quot;keyUsage=critical,digitalSignature,keyCertSign,cRLSign&quot;</span> <span class="dt">\</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">-addext</span> <span class="st">&quot;subjectKeyIdentifier=hash&quot;</span> <span class="dt">\</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">-out</span> root_ca.crt</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="co"># 7. Tạo yêu cầu ký chứng chỉ (CSR) cho Issuing Intermediate CA</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> req <span class="at">-new</span> <span class="at">-newkey</span> ec <span class="at">-pkeyopt</span> ec_paramgen_curve:secp384r1 <span class="at">-nodes</span> <span class="dt">\</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">-keyout</span> intermediate.key <span class="dt">\</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">-subj</span> <span class="st">&quot;/C=VN/ST=Ho Chi Minh/O=KMA/OU=PKI Center/CN=KMA Issuing Intermediate CA&quot;</span> <span class="dt">\</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">-out</span> intermediate.csr</span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="co"># 8. Root CA ký cấp phát chứng chỉ cho Intermediate CA (Hạn dùng 5 năm, pathlen=0)</span></span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> x509 <span class="at">-req</span> <span class="at">-in</span> intermediate.csr <span class="at">-CA</span> root_ca.crt <span class="at">-CAkey</span> root_rsa.key <span class="dt">\</span></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">-CAcreateserial</span> <span class="at">-out</span> intermediate.crt <span class="at">-days</span> 1825 <span class="at">-sha384</span> <span class="dt">\</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">-extfile</span> <span class="op">&lt;(</span><span class="bu">printf</span> <span class="st">&quot;basicConstraints=critical,CA:TRUE,pathlen:0\nkeyUsage=critical,digitalSignature,keyCertSign,cRLSign\nauthorityKeyIdentifier=keyid:always,issuer\nsubjectKeyIdentifier=hash&quot;</span><span class="op">)</span></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="co"># PHẦN 3: CẤP PHÁT CHỨNG CHỈ WEB SERVER VỚI SAN (CA/B FORUM COMPLIANT)</span></span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a><span class="co"># 9. Tạo CSR cho máy chủ Web với đầy đủ tên miền SAN</span></span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> req <span class="at">-new</span> <span class="at">-newkey</span> rsa:2048 <span class="at">-nodes</span> <span class="at">-keyout</span> web.key <span class="at">-out</span> web.csr <span class="dt">\</span></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>  <span class="at">-subj</span> <span class="st">&quot;/C=VN/ST=Ho Chi Minh/O=Hoc Vien Mat Ma/CN=api.kma.edu.vn&quot;</span></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a><span class="co"># 10. Intermediate CA ký cấp chứng chỉ máy chủ Web (Hạn dùng 398 ngày)</span></span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> x509 <span class="at">-req</span> <span class="at">-in</span> web.csr <span class="at">-CA</span> intermediate.crt <span class="at">-CAkey</span> intermediate.key <span class="dt">\</span></span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>  <span class="at">-CAcreateserial</span> <span class="at">-out</span> web.crt <span class="at">-days</span> 398 <span class="at">-sha256</span> <span class="dt">\</span></span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>  <span class="at">-extfile</span> <span class="op">&lt;(</span><span class="bu">printf</span> <span class="st">&quot;basicConstraints=critical,CA:FALSE\nkeyUsage=digitalSignature,keyEncipherment\nextendedKeyUsage=serverAuth,clientAuth\nsubjectAltName=DNS:api.kma.edu.vn,DNS:localhost,IP:127.0.0.1\nauthorityKeyIdentifier=keyid,issuer&quot;</span><span class="op">)</span></span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a><span class="co"># 11. Đóng gói chuỗi tin cậy đầy đủ (Full Chain)</span></span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> web.crt intermediate.crt root_ca.crt <span class="op">&gt;</span> fullchain.pem</span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a><span class="co"># PHẦN 4: KIỂM ĐỊNH, PHÂN TÍCH NHỊ PHÂN VÀ THU HỒI</span></span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a><span class="co"># ==============================================================================</span></span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a><span class="co"># 12. Xem chi tiết văn bản đầy đủ của chứng chỉ X.509</span></span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> x509 <span class="at">-in</span> web.crt <span class="at">-noout</span> <span class="at">-text</span></span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a><span class="co"># 13. Mổ xẻ cấu trúc cây dữ liệu nhị phân ASN.1 DER</span></span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> asn1parse <span class="at">-in</span> web.crt <span class="at">-inform</span> PEM</span>
+<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a><span class="co"># 14. Kiểm tra xác thực đường dẫn tin cậy (Chain Validation)</span></span>
+<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> verify <span class="at">-CAfile</span> root_ca.crt <span class="at">-untrusted</span> intermediate.crt web.crt</span>
+<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a><span class="co"># 15. Khởi tạo danh sách thu hồi chứng chỉ (CRL) rỗng</span></span>
+<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> ca <span class="at">-gencrl</span> <span class="at">-config</span> openssl.cnf <span class="at">-out</span> crl.pem</span>
+<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a><span class="co"># 16. Chuyển đổi định dạng chứng chỉ từ PEM sang nhị phân DER</span></span>
+<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> x509 <span class="at">-in</span> web.crt <span class="at">-outform</span> DER <span class="at">-out</span> web.der</span>
+<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a><span class="co"># 17. Đóng gói cặp khóa và chứng chỉ sang kho chứa mật khẩu PKCS#12 (.p12 / .pfx)</span></span>
+<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> pkcs12 <span class="at">-export</span> <span class="at">-out</span> bundle.pfx <span class="at">-inkey</span> web.key <span class="at">-in</span> web.crt <span class="at">-certfile</span> intermediate.crt</span></code></pre></div>
+<hr />
+<h1
+id="phụ-lục-b-bộ-công-cụ-python-cryptography-phân-tích-kiểm-định">PHỤ
+LỤC B: BỘ CÔNG CỤ PYTHON CRYPTOGRAPHY PHÂN TÍCH &amp; KIỂM ĐỊNH</h1>
+<p>Dưới đây là công cụ Python hoàn chỉnh dựa trên thư viện chuẩn quốc tế
+<code>cryptography</code> hỗ trợ học viên tự động hóa kiểm định tính hợp
+lệ của chứng chỉ X.509 theo các quy tắc nghiêm ngặt của CA/B Forum:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/usr/bin/env python3</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># -*- coding: utf-8 -*-</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;&#39;&#39;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">PKI Certificate Auditor &amp; RFC 5280 Parser</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">Học phần: Cơ sở hạ tầng khóa công khai (ATHK 512)</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">Tác giả: Nguyễn An Khương (Khoa KH&amp;KT Máy tính, Trường ĐHBK Tp. HCM)</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;&#39;&#39;</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> datetime</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cryptography <span class="im">import</span> x509</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cryptography.hazmat.backends <span class="im">import</span> default_backend</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> cryptography.x509.oid <span class="im">import</span> ExtensionOID, ExtendedKeyUsageOID</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> audit_certificate(cert_path: <span class="bu">str</span>):</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;[*] Tiến hành kiểm toán chứng chỉ: </span><span class="sc">{</span>cert_path<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(cert_path, <span class="st">&quot;rb&quot;</span>) <span class="im">as</span> f:</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>        data <span class="op">=</span> f.read()</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Nạp chứng chỉ (hỗ trợ PEM hoặc DER)</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>        cert <span class="op">=</span> x509.load_pem_x509_certificate(data, default_backend())</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> <span class="pp">Exception</span>:</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>        cert <span class="op">=</span> x509.load_der_x509_certificate(data, default_backend())</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>    now <span class="op">=</span> datetime.datetime.now(datetime.timezone.utc)</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 1. Kiểm tra Version</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>    version_name <span class="op">=</span> cert.version.name</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot; [+] Phiên bản X.509: </span><span class="sc">{</span>version_name<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> cert.version <span class="op">!=</span> x509.Version.v3:</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;  [CẢNH BÁO] Chứng chỉ không phải X.509 v3!&quot;</span>)</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 2. Kiểm tra Thời gian hiệu lực</span></span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot; [+] Hiệu lực từ: </span><span class="sc">{</span>cert<span class="sc">.</span>not_valid_before_utc<span class="sc">}</span><span class="ss"> đến </span><span class="sc">{</span>cert<span class="sc">.</span>not_valid_after_utc<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> now <span class="op">&lt;</span> cert.not_valid_before_utc:</span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;  [LỖI] Chứng chỉ chưa đến thời điểm có hiệu lực!&quot;</span>)</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> now <span class="op">&gt;</span> cert.not_valid_after_utc:</span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;  [LỖI] Chứng chỉ ĐÃ HẾT HẠN!&quot;</span>)</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;  [PASS] Thời gian hiệu lực hợp lệ.&quot;</span>)</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 3. Kiểm tra Độ dài Serial Number (RFC 5280 giới hạn &lt;= 20 bytes)</span></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>    serial_len <span class="op">=</span> (cert.serial_number.bit_length() <span class="op">+</span> <span class="dv">7</span>) <span class="op">//</span> <span class="dv">8</span></span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot; [+] Serial Number: </span><span class="sc">{</span><span class="bu">hex</span>(cert.serial_number)<span class="sc">}</span><span class="ss"> (Độ dài: </span><span class="sc">{</span>serial_len<span class="sc">}</span><span class="ss"> bytes)&quot;</span>)</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> serial_len <span class="op">&gt;</span> <span class="dv">20</span>:</span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;  [VI PHẠM RFC 5280] Serial Number vượt quá 20 bytes!&quot;</span>)</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 4. Kiểm tra Basic Constraints</span></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a>        bc <span class="op">=</span> cert.extensions.get_extension_for_oid(ExtensionOID.BASIC_CONSTRAINTS)</span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot; [+] Basic Constraints: is_ca=</span><span class="sc">{</span>bc<span class="sc">.</span>value<span class="sc">.</span>ca<span class="sc">}</span><span class="ss">, path_length=</span><span class="sc">{</span>bc<span class="sc">.</span>value<span class="sc">.</span>path_length<span class="sc">}</span><span class="ss">, critical=</span><span class="sc">{</span>bc<span class="sc">.</span>critical<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> bc.value.ca <span class="kw">and</span> <span class="kw">not</span> bc.critical:</span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="st">&quot;  [CẢNH BÁO] Chứng chỉ CA nhưng cờ Basic Constraints không đặt CRITICAL!&quot;</span>)</span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> x509.ExtensionNotFound:</span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;  [LỖI NGHIÊM TRỌNG] Thiếu phần mở rộng Basic Constraints!&quot;</span>)</span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a>    <span class="co"># 5. Kiểm tra Subject Alternative Name (SAN)</span></span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a>        san <span class="op">=</span> cert.extensions.get_extension_for_oid(ExtensionOID.SUBJECT_ALTERNATIVE_NAME)</span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>        names <span class="op">=</span> san.value.get_values_for(x509.DNSName)</span>
+<span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a>        ips <span class="op">=</span> [<span class="bu">str</span>(ip) <span class="cf">for</span> ip <span class="kw">in</span> san.value.get_values_for(x509.IPAddress)]</span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot; [+] SAN DNS Names: </span><span class="sc">{</span>names<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot; [+] SAN IP Addresses: </span><span class="sc">{</span>ips<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span> x509.ExtensionNotFound:</span>
+<span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;  [VI PHẠM CA/B FORUM] Thiếu phần mở rộng Subject Alternative Name (SAN)!&quot;</span>)</span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;[*] Kiểm toán hoàn tất.&quot;</span>)</span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&quot;__main__&quot;</span>:</span>
+<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(sys.argv) <span class="op">&lt;</span> <span class="dv">2</span>:</span>
+<span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;Cách dùng: python3 </span><span class="sc">{</span>sys<span class="sc">.</span>argv[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> &lt;duong_dan_file_chung_chi&gt;&quot;</span>)</span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>        sys.exit(<span class="dv">1</span>)</span>
+<span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a>    audit_certificate(sys.argv[<span class="dv">1</span>])</span></code></pre></div>
+<hr />
+<h1 id="phụ-lục-c-danh-mục-tài-liệu-tham-khảo-khóa-học-quốc-tế">PHỤ LỤC
+C: DANH MỤC TÀI LIỆU THAM KHẢO &amp; KHÓA HỌC QUỐC TẾ</h1>
+<h3
+id="hệ-thống-khóa-học-quốc-tế-trực-tuyến-hàng-đầu-opencourseware-video-lectures">1.
+Hệ Thống Khóa Học Quốc Tế Trực Tuyến Hàng Đầu (OpenCourseWare &amp;
+Video Lectures)</h3>
+<ul>
+<li><strong>MIT OpenCourseWare 6.857: Computer and Network
+Security</strong><br />
+<em>Giảng viên:</em> GS. Ronald L. Rivest (Đồng tác giả RSA) và GS.
+Shafi Goldwasser (Giải thưởng Turing).<br />
+<em>Tài nguyên:</em> Bài giảng lý thuyết số, định danh chứng thực số và
+lược đồ cam kết mật mã.<br />
+<em>Địa chỉ truy cập:</em> <a
+href="https://ocw.mit.edu/courses/6-857-computer-and-network-security-spring-2014/">ocw.mit.edu/courses/6-857-computer-and-network-security-spring-2014</a></li>
+<li><strong>Stanford University CS 255: Introduction to
+Cryptography</strong><br />
+<em>Giảng viên:</em> GS. Dan Boneh.<br />
+<em>Nội dung:</em> Phân tích chuyên sâu về hệ mật khóa công khai, tính
+toán cặp trên đường cong elliptic (Pairing-based Crypto), thuật toán chữ
+ký số RSA-PSS và ECDSA.<br />
+<em>Địa chỉ truy cập:</em> <a
+href="https://crypto.stanford.edu/~dabo/cs255/">crypto.stanford.edu/~dabo/cs255/</a></li>
+<li><strong>UC Berkeley CS 161: Computer Security</strong><br />
+<em>Giảng viên:</em> GS. Nicholas Weaver và GS. David Wagner.<br />
+<em>Nội dung:</em> Thực hành tấn công và phòng thủ giao thức TLS/SSL,
+phân tích lỗ hổng CA, mô hình mối đe dọa Man-in-the-Middle và chính sách
+bảo mật trình duyệt.<br />
+<em>Địa chỉ truy cập:</em> <a
+href="https://cs161.org/">cs161.org</a></li>
+<li><strong>Simons Institute for the Theory of Computing (UC
+Berkeley):</strong><br />
+<em>Chuyên đề:</em> <em>Lattices: Algorithms, Complexity, and
+Cryptography</em> &amp; <em>Quantum Cryptography Program</em>.<br />
+<em>Địa chỉ:</em> <a
+href="https://simons.berkeley.edu/">simons.berkeley.edu</a></li>
+<li><strong>IACR Real World Crypto (RWC) Symposium:</strong><br />
+<em>Kênh tài liệu video:</em> Hội nghị thường niên quốc tế quy tụ các kỹ
+sư hàng đầu từ Google, Cloudflare, Apple về thực nghiệm triển khai TLS
+1.3, PQC Migration và tấn công kênh bên vào HSM.<br />
+<em>Kênh lưu trữ:</em> <a
+href="https://rwc.iacr.org/">rwc.iacr.org</a></li>
+</ul>
+<h3 id="tiêu-chuẩn-kỹ-thuật-quốc-tế-bắt-buộc-standards-rfcs">2. Tiêu
+Chuẩn Kỹ Thuật Quốc Tế Bắt Buộc (Standards &amp; RFCs)</h3>
+<ol type="1">
+<li><strong>IETF RFC 5280:</strong> <em>Internet X.509 Public Key
+Infrastructure Certificate and Certificate Revocation List (CRL)
+Profile</em>, 2008.</li>
+<li><strong>IETF RFC 3647:</strong> <em>Internet X.509 Public Key
+Infrastructure Certificate Policy and Certification Practices
+Framework</em>, 2003.</li>
+<li><strong>IETF RFC 8555:</strong> <em>Automatic Certificate Management
+Environment (ACME)</em>, 2019.</li>
+<li><strong>IETF RFC 6960:</strong> <em>X.509 Internet Public Key
+Infrastructure Online Certificate Status Protocol - OCSP</em>,
+2013.</li>
+<li><strong>IETF RFC 6962:</strong> <em>Certificate Transparency</em>,
+2013.</li>
+<li><strong>IETF RFC 8446:</strong> <em>The Transport Layer Security
+(TLS) Protocol Version 1.3</em>, 2018.</li>
+<li><strong>NIST FIPS 203:</strong> <em>Module-Lattice-Based
+Key-Encapsulation Mechanism Standard (ML-KEM)</em>, 2024.</li>
+<li><strong>NIST FIPS 204:</strong> <em>Module-Lattice-Based Digital
+Signature Standard (ML-DSA)</em>, 2024.</li>
+<li><strong>NIST FIPS 205:</strong> <em>Stateless Hash-Based Digital
+Signature Standard (SLH-DSA)</em>, 2024.</li>
+<li><strong>CA/Browser Forum:</strong> <em>Baseline Requirements for the
+Issuance and Management of Publicly-Trusted Certificates</em>, Version
+2.0+, 2024.</li>
+</ol>
+</body>
+</html>

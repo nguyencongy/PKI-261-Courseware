@@ -1,0 +1,92 @@
+\chapter{Chuyển Dịch Hệ Thống Sang Mật Mã Hậu Lượng Tử (PQC Migration)}
+
+\banddo{Điện toán lượng tử $\to$ Thuật toán Shor \& Grover $\to$ Hiểm họa HNDL $\to$ Chuẩn NIST FIPS 203/204/205 $\to$ Thách thức phân mảnh MTU $\to$ Chứng chỉ kép Hybrid RFC 9673}
+
+\section{Mối Đe Dọa Của Điện Toán Lượng Tử \& Thuật Toán Shor}
+
+Sự phát triển đột phá của máy tính lượng tử quy mô lớn có khả năng sửa lỗi (Cryptanalytically Relevant Quantum Computer -- CRQC) đe dọa xóa sổ toàn bộ nền tảng mật mã khóa công khai hiện đại:
+\begin{itemize}
+  \item \textbf{Thuật toán Shor (1994):} Cho phép tìm chu kỳ của hàm số trên không gian Hilbert lượng tử, qua đó giải quyết bài toán phân tích thừa số nguyên tố (bẻ gãy RSA) và bài toán logarit rời rạc trên trường hữu hạn lẫn đường cong Elliptic (bẻ gãy DSA, ECDSA, Ed25519) trong độ phức tạp thời gian đa thức:
+  \begin{equation}
+  \mathcal{O}((\log N)^3)
+  \end{equation}
+  Một máy tính lượng tử với khoảng 4.000 qubits logic có thể giải mã khóa RSA-2048 chỉ trong vài giờ!
+  \item \textbf{Thuật toán Grover (1996):} Tăng tốc độ tìm kiếm trên cơ sở dữ liệu không có cấu trúc từ $\mathcal{O}(N)$ lên $\mathcal{O}(\sqrt{N})$. Thuật toán này làm giảm một nửa độ dài khóa hiệu dụng của các hàm băm và thuật toán đối xứng (AES-128 chỉ còn tương đương 64-bit an ninh; AES-256 vẫn an toàn tuyệt đối với 128-bit an ninh lượng tử).
+\end{itemize}
+
+\section{Hiểm Họa Thu Hoạch Trước, Giải Mã Sau (HNDL)}
+
+Nhiều nhà quản trị lầm tưởng rằng chuyển dịch PQC là câu chuyện của tương lai xa khi máy tính lượng tử thương mại xuất hiện. Đây là một sai lầm chết người!\\
+Chiến lược tấn công \textbf{Harvest Now, Decrypt Later (HNDL -- Thu hoạch trước, Giải mã sau)} đang được các tổ chức tình báo hàng đầu thế giới triển khai rầm rộ:
+\begin{enumerate}
+  \item Thu thập và lưu trữ hàng terabytes lưu lượng mạng mã hóa TLS, thông tin liên lạc chính phủ, hồ sơ bệnh án và bí mật công nghệ ngay tại thời điểm hiện tại.
+  \item Khi máy tính lượng tử hoàn thiện trong 5--10 năm tới, kẻ tấn công sẽ nạp dữ liệu lịch sử này vào để giải mã toàn bộ.
+  \item Mọi thông tin có chu kỳ bảo mật kéo dài trên 10 năm (bí mật quốc phòng, dữ liệu định danh công dân) đều đang đứng trước nguy cơ bị phơi bày hoàn toàn!
+\end{enumerate}
+
+\section{Bộ Tiêu Chuẩn NIST PQC Chính Thức (Tháng 8/2024)}
+
+Sau cuộc thi chuẩn hóa quốc tế kéo dài 8 năm (2016--2024), ngày 13/8/2024, Viện Tiêu chuẩn và Công nghệ Quốc gia Hoa Kỳ (NIST) đã chính thức ban hành bộ ba tiêu chuẩn Mật mã Hậu lượng tử đầu tiên của nhân loại:
+\begin{enumerate}
+  \item \textbf{NIST FIPS 203 (ML-KEM):} Cơ chế đóng gói khóa (Key Encapsulation Mechanism) dựa trên bài toán mạng lưới Module Learning With Errors (Module-LWE), kế thừa từ thuật toán Kyber. Sử dụng cho trao đổi khóa bảo vệ kênh truyền TLS 1.3.
+  \item \textbf{NIST FIPS 204 (ML-DSA):} Chuẩn chữ ký số mạng lưới Module-LWE, kế thừa từ thuật toán Dilithium. Đóng vai trò thay thế trực tiếp cho RSA và ECDSA trong chữ ký chứng chỉ X.509.
+  \item \textbf{NIST FIPS 205 (SLH-DSA):} Chuẩn chữ ký số dựa trên hàm băm phi trạng thái (Stateless Hash-based Digital Signature Algorithm), kế thừa từ SPHINCS+. Đóng vai trò là phương án dự phòng an toàn tuyệt đối nếu các bài toán mạng lưới bị toán học bẻ gãy.
+\end{enumerate}
+
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\linewidth}{@{}l l r r r@{}}
+\toprule
+\textbf{Thuật Toán} & \textbf{Tiêu Chuẩn} & \textbf{Khóa Công Khai} & \textbf{Khóa Bí Mật} & \textbf{Chữ Ký / Ciphertext} \\
+\midrule
+RSA-3072 & Cổ điển & 384 bytes & 384 bytes & 384 bytes \\
+ECDSA P-256 & Cổ điển & 64 bytes & 32 bytes & 64 bytes \\
+Ed25519 & Cổ điển & 32 bytes & 32 bytes & 64 bytes \\
+\midrule
+\textbf{ML-KEM-768} & \textbf{NIST FIPS 203} & 1,184 bytes & 2,400 bytes & 1,088 bytes \\
+\textbf{ML-DSA-65} & \textbf{NIST FIPS 204} & 1,952 bytes & 4,032 bytes & \textbf{3,309 bytes} \\
+\textbf{ML-DSA-87} & \textbf{NIST FIPS 204} & 2,592 bytes & 4,896 bytes & \textbf{4,627 bytes} \\
+\textbf{SLH-DSA-128s} & \textbf{NIST FIPS 205} & 32 bytes & 64 bytes & \textbf{7,856 bytes} \\
+\bottomrule
+\end{tabularx}
+\caption{So sánh kích thước dữ liệu mật mã cổ điển và tiêu chuẩn NIST PQC FIPS.}
+\end{table}
+
+\section{Thách Thức Kỹ Thuật: Phân Mảnh TCP MTU \& Kiến Trúc Lai Hybrid}
+
+\begin{batngo}
+Tại sao chuyển dịch PQC trong PKI lại khó khăn gấp bội?\\
+Chữ ký Ed25519 cổ điển chỉ dài đúng \textbf{64 bytes}. Chữ ký ML-DSA-65 dài tới \textbf{3,309 bytes} (gấp hơn 50 lần!). Trong khi đó, kích thước khung truyền mạng cực đại (Maximum Transmission Unit -- MTU) của chuẩn Ethernet là 1500 bytes.\\
+Hậu quả: Một chuỗi chứng chỉ X.509 gồm 3 cấp PQC sẽ có kích thước vượt quá 10 KB, làm phân mảnh gói tin IP thành 7--8 mảnh TCP trong phiên bắt tay TLS Handshake. Hiện tượng này dẫn tới tỉ lệ rớt gói tin cao trên mạng di động 4G/5G, tăng vọt độ trễ bắt tay mạng và gây tràn bộ nhớ đệm trên các vi điều khiển IoT công nghiệp.
+\end{batngo}
+
+Để bảo đảm tính tương thích ngược và an toàn đa tầng trong giai đoạn quá độ, chuẩn quốc tế \textbf{IETF RFC 9673} quy định kiến trúc \textbf{Chứng chỉ số lai kép (Hybrid X.509 Certificate)}:
+\begin{equation}
+\text{Certificate}_{\text{Hybrid}} = \{\text{Subject}, K_{\text{pub\_Classic}}, K_{\text{pub\_PQC}}\} + \sigma_{\text{Classic}} + \sigma_{\text{PQC}}
+\end{equation}
+Kênh truyền chỉ được coi là tin cậy nếu \textbf{cả hai chữ ký cổ điển và PQC đều được thẩm định thành công}, loại trừ triệt để nguy cơ tấn công HNDL trong khi vẫn bảo đảm vận hành trơn tru trên các phần mềm cũ.
+
+\begin{chayngay}
+Khởi tạo cặp khóa và chứng chỉ số PQC ML-DSA-65 bằng OpenSSL 3.5:
+\begin{lstlisting}[language=bash]
+# Sinh khoa bi mat ML-DSA-65 (NIST FIPS 204)
+openssl genpkey -algorithm mldsa65 -out mldsa65.key
+# Sinh chung chi tu ky PQC Root CA
+openssl req -x509 -new -key mldsa65.key -out mldsa65-root.crt \
+  -days 3650 -subj "/CN=KMA Post-Quantum Root CA/O=KMA/C=VN"
+# In chi tiet chung chi PQC
+openssl x509 -in mldsa65-root.crt -text -noout
+\end{lstlisting}
+\end{chayngay}
+
+\begin{tukiemtra}
+\begin{enumerate}
+  \item Phân tích cơ chế toán học của thuật toán Shor và giải thích vì sao nó có thể bẻ gãy RSA và ECC trong thời gian đa thức.
+  \item Thuật toán Grover ảnh hưởng như thế nào đến độ dài an toàn của thuật toán mã hóa đối xứng AES?
+  \item Trình bày các giải pháp kỹ thuật để xử lý hiện tượng phân mảnh gói tin TCP khi triển khai chứng chỉ PQC trên mạng viễn thông.
+\end{enumerate}
+\end{tukiemtra}
+
+\begin{kbox}
+Mối đe dọa HNDL đòi hỏi phải di chuyển PQC ngay hôm nay. NIST FIPS 203 (ML-KEM) và FIPS 204 (ML-DSA) là các chuẩn mực toàn cầu mới. Kích thước chữ ký PQC lớn gây phân mảnh MTU, đòi hỏi áp dụng kiến trúc chứng chỉ lai kép Hybrid X.509 (RFC 9673) trong giai đoạn chuyển tiếp.
+\end{kbox}

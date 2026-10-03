@@ -1,0 +1,158 @@
+% =====================================================================
+%  PKI Session 8: Enterprise Microservices PKI & Defense Phase 2
+%  Author: Nguyen An Khuong (CSE-HCMUT · ORCID: 0000-0002-9910-6387)
+%  Teaching Assistant: Nguyen Huu Hoang Huy (LinkedIn)
+%  Master of Science in Information Security (CHAT4P) · HK261
+% =====================================================================
+
+\title{\color{hcmutblue}\textbf{\LARGE PUBLIC KEY INFRASTRUCTURE}\\[0.25em]
+       \color{hcmutblue}\textbf{\large S08: Hạ Tầng PKI Trong Microservices \& Bảo Vệ Đồ Án (Đợt 2)}}
+\date{\footnotesize Session 8 of 9 $\cdot$ ATHK 512 (KMA CHAT4P, HK261)\\
+      Class: Sat 21/11/2026 $\cdot$ 13h30--18h30\\
+      \textit{Standards: Kubernetes PKI, Cert-Manager, Envoy, Nhóm 3 \& 4}}
+
+\begin{document}
+\PKItitleframe
+
+\section{Tổng quan \& Lộ trình Buổi S08}
+
+\begin{frame}{Lộ Trình Học Phần (Buổi 8/9)}
+  \centering
+  \makebox[\linewidth][c]{\PKIcoursemap{8}}
+  \vspace{0.4em}
+  \raggedright\small
+  Buổi học kết nối PKI với điện toán đám mây Kubernetes và tổ chức phiên bảo vệ đồ án chuyên đề Đợt 2: Nhóm 3 (PQC Migration) và Nhóm 4 (Enterprise ACME).
+  \gvnote{[~2 phút | 13h30--13h32] Chào mừng Hội đồng đến với phiên bảo vệ đồ án Đợt 2.}
+\end{frame}
+
+\begin{frame}{Nội Dung Trọng Tâm Buổi Học S08}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Phần 1: Chuyên Đề Kubernetes PKI (45 Phút)}
+      \begin{itemize}\small
+        \item Kiến trúc chứng chỉ số nội bộ trong cụm K8s Control Plane.
+        \item Quản trị tự động bằng Cert-Manager \& Secret Injection.
+        \item Giám sát hiệu năng và xoay vòng chứng chỉ Service Mesh.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Phần 2: Bảo Vệ Đồ Án Đợt 2 (195 Phút)}
+      \begin{itemize}\small
+        \item \textbf{Nhóm 3 (TMN):} PQC Root of Trust \& Benchmark. (Phản biện: Nhóm 5).
+        \item \textbf{Nhóm 4 (CAP):} Enterprise ACME PKI. (Phản biện: Nhóm 1).
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \begin{keybox}[Thách Thức Của Cụm Kubernetes]
+    Một cụm Kubernetes sản xuất có thể có hơn 20 chứng chỉ số nội bộ khác nhau: API Server, etcd, kubelet, proxy, scheduler. Bất kỳ chứng chỉ nào hết hạn đều làm tê liệt toàn bộ hạ tầng!
+  \end{keybox}
+  \gvnote{[~3 phút | 13h32--13h35] Nhấn mạnh vai trò của PKI trong hạ tầng Cloud Native Kubernetes.}
+\end{frame}
+
+\section{Kiến trúc PKI Trong Cụm Kubernetes}
+
+\begin{frame}{Hạ Tầng Chứng Chỉ Số Trong Kubernetes Control Plane}
+  \centering
+  \begin{tikzpicture}[
+    scale=0.82, every node/.style={transform shape},
+    node distance=1.1cm and 1.6cm,
+    cp/.style={rectangle, draw=hcmutblue, fill=keybg, thick, rounded corners=3pt, font=\small\bfseries, minimum width=3.2cm, minimum height=1.0cm, align=center},
+    nd/.style={rectangle, draw=solgreen, fill=solgreen!15, thick, rounded corners=3pt, font=\small\bfseries, minimum width=3.2cm, minimum height=1.0cm, align=center},
+    arr/.style={-{Stealth[scale=1.1]}, thick, color=hcmutblue}
+  ]
+    \node[cp] (apiserver) {Kube-APIServer\\{\scriptsize (Trung tâm điều phối)}};
+    \node[cp, above=of apiserver] (etcd) {etcd Cluster\\{\scriptsize (mTLS bắt buộc)}};
+    \node[nd, below left=1.0cm and 0.2cm of apiserver] (w1) {Worker Node 1\\{\scriptsize Kubelet mTLS Client}};
+    \node[nd, below right=1.0cm and 0.2cm of apiserver] (w2) {Worker Node 2\\{\scriptsize Kubelet mTLS Client}};
+
+    \draw[arr, color=warnred] (apiserver) -- node[right, font=\scriptsize, color=warnred] {mTLS Client / Peer} (etcd);
+    \draw[arr] (apiserver) -- node[left, font=\scriptsize] {CSR Approve} (w1);
+    \draw[arr] (apiserver) -- node[right, font=\scriptsize] {CSR Approve} (w2);
+
+    \node[draw=hcmutblue!60, fill=gray!5, rounded corners=3pt, below=1.2cm of apiserver, text width=11.5cm, font=\scriptsize, align=left] {
+      \textbf{Các chuỗi CA độc lập trong cụm Kubernetes:}\\
+      $\bullet$ \textbf{Cluster CA:} Ký cấp chứng chỉ cho APIServer, Kubelet và ServiceAccount.\\
+      $\bullet$ \textbf{etcd CA:} Tách biệt độc lập hoàn toàn để bảo vệ cơ sở dữ liệu cốt lõi.\\
+      $\bullet$ \textbf{Front-Proxy CA:} Dùng cho cơ chế mạo danh yêu cầu xác thực (RequestHeader).
+    };
+  \end{tikzpicture}
+  \gvnote{[~3 phút | 13h35--13h38] Mổ xẻ 3 chuỗi CA độc lập trong cụm Kubernetes.}
+\end{frame}
+
+\begin{frame}[fragile]{Tự Động Hóa Với Cert-Manager Trong K8s}
+  \begin{beyond}{try}
+    \textbf{Cert-Manager:} Kubernetes Operator quản trị toàn diện vòng đời chứng chỉ số X.509, tự động lấy chứng chỉ từ Let's Encrypt hoặc Step-CA nội bộ và nạp vào Kubernetes Secret.
+  \end{beyond}
+
+  \begin{lstlisting}[language=bash]
+# Khai bao ClusterIssuer ket noi voi Step-CA noi bo qua ACME
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: step-ca-issuer
+spec:
+  acme:
+    server: https://step-ca.kma.local:9000/acme/acme/directory
+    privateKeySecretRef:
+      name: step-ca-account-key
+    solvers:
+    - http01:
+        ingress:
+          class: nginx
+  \end{lstlisting}
+  \gvnote{[~3 phút | 13h38--13h41] Giới thiệu Manifest YAML của Cert-Manager trong Kubernetes.}
+\end{frame}
+
+\section{Bảo vệ Đồ án Chuyên đề Đợt 2}
+
+\begin{frame}{Quy Chế Chấm Chéo Đối Kháng Buổi S08}
+  \centering
+  \begin{tikzpicture}[
+    scale=0.88, every node/.style={transform shape},
+    node distance=1.5cm and 2.5cm,
+    grp/.style={rectangle, draw=hcmutblue, fill=keybg, thick, rounded corners=3pt, minimum width=3.5cm, minimum height=1.2cm, align=center, font=\small\bfseries},
+    rev/.style={rectangle, draw=warnred, fill=warnred!15, thick, rounded corners=3pt, minimum width=3.5cm, minimum height=1.2cm, align=center, font=\small\bfseries}
+  ]
+    \node[grp] (n3) {Nhóm 3: TMN (Báo Cáo)\\{\scriptsize PQC Root of Trust (Minh, Nguyên, Triết)}};
+    \node[rev] (n5) [right=of n3] {Nhóm 5: TYN (Phản Biện)\\{\scriptsize CT \& Compliance}};
+
+    \node[grp] (n4) [below=0.8cm of n3] {Nhóm 4: CAP (Báo Cáo)\\{\scriptsize Enterprise ACME (Diệu Anh, Chi, Phúc)}};
+    \node[rev] (n1) [right=of n4] {Nhóm 1: VAULT (Phản Biện)\\{\scriptsize Zero Trust PKI}};
+
+    \draw[{Stealth[scale=1.2]}-{Stealth[scale=1.2]}, thick, color=hcmutblue] (n3) -- node[above, font=\scriptsize] {Thuyết trình (25') $\leftrightarrow$ Phản biện (15')} (n5);
+    \draw[{Stealth[scale=1.2]}-{Stealth[scale=1.2]}, thick, color=hcmutblue] (n4) -- node[above, font=\scriptsize] {Thuyết trình (25') $\leftrightarrow$ Phản biện (15')} (n1);
+  \end{tikzpicture}
+
+  \begin{keybox}[Trọng Tâm Đánh Giá Đợt 2]
+    Nhóm 3: Kiểm thử tải và đo lường phân mảnh MTU của chữ ký ML-DSA.\\
+    Nhóm 4: Thiết lập kịch bản tự động cấp và xoay vòng chứng chỉ thành công 100\%.
+  \end{keybox}
+  \gvnote{[~2 phút | 13h41--13h43] Khởi động phiên bảo vệ đồ án của Nhóm 3 và Nhóm 4.}
+\end{frame}
+
+\begin{frame}{Báo Cáo Đồ Án: Nhóm 3 (TMN) \& Nhóm 4 (CAP)}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Nhóm 3: PQC Root of Trust (TMN)}
+      \begin{itemize}\small
+        \item \textbf{Thành viên:} Võ Thông Minh (T), Tăng Triển Nguyên, Trần Minh Triết.
+        \item \textbf{Trọng tâm:} OpenSSL 3.5, liboqs, đo lường hiệu năng bắt tay TLS 1.3 với ML-KEM/ML-DSA.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Nhóm 4: Enterprise ACME (CAP)}
+      \begin{itemize}\small
+        \item \textbf{Thành viên:} Vũ Thị Diệu Anh (T), Diệp Kim Chi, Đoàn Quang Phúc.
+        \item \textbf{Trọng tâm:} Thiết kế CP/CPS RFC 3647, triển khai Step-CA và Certbot tự động hóa.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.6em}
+  \centering\large\sffamily\bfseries\color{hcmutblue}
+  Mời đại diện Nhóm 3 và Nhóm 4 lên bục thuyết trình!
+  \gvnote{[~180 phút | 13h45--16h45] Giai đoạn thuyết trình và phản biện của Nhóm 3 và 4.}
+\end{frame}
+
+\end{document}

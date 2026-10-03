@@ -1,7 +1,7 @@
 # Slides S06: Kiến trúc Zero Trust & mTLS Gateway trong Hạ tầng Microservices
 
 **Học phần:** Cơ sở hạ tầng khóa công khai (ATHK 512) · Lớp CHAT4P  
-**Giảng viên:** Nguyễn An Khương (Khoa Khoa học & Kỹ thuật Máy tính, Trường ĐHBK Tp. HCM)  
+**Giảng viên:** Nguyễn An Khương (Khoa Khoa học & Kỹ thuật Máy tính, Trường ĐHBK Tp. HCM · [ORCID: 0000-0002-9910-6387](https://orcid.org/0000-0002-9910-6387))  
 **Trợ giảng:** Nguyễn Hữu Hoàng Huy  
 
 ---

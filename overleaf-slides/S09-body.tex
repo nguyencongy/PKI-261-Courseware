@@ -1,0 +1,147 @@
+% =====================================================================
+%  PKI Session 9: Capstone Defense Phase 3 & Course Synthesis
+%  Author: Nguyen An Khuong (CSE-HCMUT · ORCID: 0000-0002-9910-6387)
+%  Teaching Assistant: Nguyen Huu Hoang Huy (LinkedIn)
+%  Master of Science in Information Security (CHAT4P) · HK261
+% =====================================================================
+
+\title{\color{hcmutblue}\textbf{\LARGE PUBLIC KEY INFRASTRUCTURE}\\[0.25em]
+       \color{hcmutblue}\textbf{\large S09: Báo Cáo Đồ Án (Đợt 3) \& Tổng Kết Học Phần}}
+\date{\footnotesize Session 9 of 9 $\cdot$ ATHK 512 (KMA CHAT4P, HK261)\\
+      Class: Sat 28/11/2026 $\cdot$ 13h30--18h30\\
+      \textit{Synthesis: Nhóm 5 (TYN), Đối soát Bảng điểm KMA, Bế mạc}}
+
+\begin{document}
+\PKItitleframe
+
+\section{Tổng quan \& Lộ trình Buổi S09}
+
+\begin{frame}{Lộ Trình Học Phần (Buổi 9/9 -- Chung Cuộc)}
+  \centering
+  \makebox[\linewidth][c]{\PKIcoursemap{9}}
+  \vspace{0.4em}
+  \raggedright\small
+  Buổi học bế mạc học phần ATHK 512: Báo cáo đồ án Nhóm 5 (Certificate Compliance), hệ thống hóa 10 nguyên tắc vàng của PKI và tiến hành đối soát, ký biên bản điểm số chính thức.
+  \gvnote{[~2 phút | 13h30--13h32] Chào mừng toàn thể lớp CHAT4P đến với buổi học cuối cùng của học phần.}
+\end{frame}
+
+\begin{frame}{Lịch Trình Buổi Bế Mạc S09}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Nửa Đầu Buổi Học (13h30--15h15):}
+      \begin{itemize}\small
+        \item Báo cáo đồ án Nhóm 5: Certificate Compliance \& CT Logs (Nhóm 2 phản biện).
+        \item Đánh giá và tổng kết chất lượng 5 đề tài đồ án chuyên đề.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Nửa Sau Buổi Học (15h30--18h00):}
+      \begin{itemize}\small
+        \item Tổng kết 10 nguyên tắc vàng quản trị hạ tầng PKI doanh nghiệp.
+        \item Định hướng nghiên cứu luận văn thạc sĩ.
+        \item \textbf{Đối soát bảng điểm 100 điểm \& Ký biên bản điểm KMA.}
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \begin{keybox}[Khẳng Định Năng Lực Học Viên]
+    Trải qua 9 buổi học và 5 đồ án lớn, học viên lớp CHAT4P đã hoàn thiện trọn vẹn năng lực từ thẩm định toán học, cấu trúc chuẩn nhị phân đến vận hành PKI an ninh mức doanh nghiệp.
+  \end{keybox}
+  \gvnote{[~3 phút | 13h32--13h35] Chúc mừng học viên đã hoàn thành hành trình 9 buổi học thực chiến.}
+\end{frame}
+
+\section{Bảo vệ Đồ án: Nhóm 5 (TYN)}
+
+\begin{frame}{Báo Cáo Đồ Án: Nhóm 5 (Certificate Compliance)}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \textbf{Đề tài: Kiểm Định Tuân Thủ CT Logs \& ZLint}
+      \begin{itemize}\small
+        \item \textbf{Thành viên:} Võ Minh Nhật (Trưởng nhóm), Hồ Quốc Thái, Nguyễn Công Ý.
+        \item \textbf{Đơn vị phản biện:} Nhóm 2 (RootCA).
+        \item \textbf{Mục tiêu kỹ thuật:} Xây dựng hệ thống tự động quét và phân tích chứng chỉ vi phạm CA/B Forum bằng ZLint viết trên nền Golang.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.46\textwidth}
+      \begin{quizbox}[Câu Hỏi Trọng Tâm Phản Biện]
+        Làm thế nào hệ thống của Nhóm 5 phân biệt được một lỗi cú pháp ASN.1 vô hại với một lỗ hổng an ninh buộc CA phải thu hồi chứng chỉ trong 24 giờ?
+      \end{quizbox}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.6em}
+  \centering\large\sffamily\bfseries\color{hcmutblue}
+  Mời đại diện Nhóm 5 lên bục thuyết trình và Live Demo!
+  \gvnote{[~45 phút | 13h35--14h20] Phiên báo cáo và phản biện của Nhóm 5.}
+\end{frame}
+
+\section{Hệ thống hóa Kiến thức \& 10 Nguyên tắc Vàng}
+
+\begin{frame}{10 Nguyên Tắc Vàng Quản Trị Hạ Tầng PKI Doanh Nghiệp}
+  \begin{enumerate}\footnotesize
+    \item \textbf{Air-Gapped Root CA:} Root CA tuyệt đối ngắt kết nối mạng, bảo vệ trong HSM FIPS 140-3 L4.
+    \item \textbf{Path Length Constraint:} Luôn đặt \texttt{pathLen=0} trên Intermediate CA cấp phát.
+    \item \textbf{Khai tử Common Name:} 100\% định danh tên miền bắt buộc phải nằm trong SAN.
+    \item \textbf{Chứng chỉ ngắn hạn:} Giảm thời hạn xuống dưới 90 ngày kết hợp ACME RFC 8555 tự động.
+    \item \textbf{Khóa chặt Soft-fail:} Kích hoạt OCSP Stapling đi kèm cờ Must-Staple RFC 7633.
+    \item \textbf{Minh bạch công khai:} Ghi nhận toàn bộ chứng chỉ vào Certificate Transparency Logs.
+    \item \textbf{Zero Trust mTLS:} Xác thực hai chiều cho mọi microservices bằng SPIFFE/SPIRE.
+    \item \textbf{Không commit khóa lên Git:} Bắt buộc kiểm soát bằng TruffleHog / Gitleaks pre-commit hooks.
+    \item \textbf{Sẵn sàng Hậu lượng tử (PQC-Ready):} Thiết kế kiến trúc lai Hybrid X.509 RFC 9881.
+    \item \textbf{Kiểm toán định kỳ:} Chạy ZLint và rà soát CP/CPS RFC 3647 ít nhất một lần mỗi năm.
+  \end{enumerate}
+  \gvnote{[~5 phút | 14h20--14h25] Đúc kết 10 nguyên tắc quản trị vàng làm hành trang nghề nghiệp cho các tân thạc sĩ An toàn thông tin.}
+\end{frame}
+
+\section{Đối soát Bảng điểm \& Bế mạc Học phần}
+
+\begin{frame}{Quy Trình Đối Soát Điểm \& Chốt Điểm KMA}
+  \begin{table}[h]
+    \centering\scriptsize
+    \begin{tabularx}{\linewidth}{@{}p{0.25\linewidth} c p{0.30\linewidth} X@{}}
+      \toprule
+      \textbf{Thành Phần} & \textbf{Tỷ Lệ} & \textbf{Hình Thức Đánh Giá} & \textbf{Cơ Chế Đối Soát} \\
+      \midrule
+      \textbf{Chuyên Cần} & 10\% & Điểm danh 9 buổi học & Ký tên đối chiếu tại lớp \\
+      \textbf{Thực Hành Lab} & 20\% & 5 bài lab (Log + Git commit) & Đối soát trên repo nhóm \\
+      \textbf{Đồ Án Nhóm} & 30\% & Báo cáo Hội đồng + Chấm chéo & Công bố điểm phản biện \\
+      \textbf{Thi Cuối Kỳ} & 40\% & Bài thi KTHP tổng hợp & Thẩm định theo barem KMA \\
+      \bottomrule
+    \end{tabularx}
+  \end{table}
+
+  \begin{block}{Công Thức Điểm Tổng Kết}
+    $$\text{Điểm TK} = 0.1 \times \text{CC} + 0.2 \times \text{Lab} + 0.3 \times \text{Đồ\_Án} + 0.4 \times \text{Thi}$$
+  \end{block}
+  \gvnote{[~5 phút | 14h25--14h30] Phổ biến quy chế đối soát điểm công khai, minh bạch trước toàn thể học viên.}
+\end{frame}
+
+\begin{frame}{Lời Cảm Ơn \& Bế Mạc Học Phần}
+  \centering
+  {\Huge\sffamily\bfseries\color{hcmutblue} CHÚC MỪNG KHÓA HỌC CHAT4P!}\\[0.4cm]
+  {\Large\sffamily\color{solgreen} Hoàn thành xuất sắc học phần Cơ sở hạ tầng khóa công khai (ATHK 512)}\\[1.2cm]
+
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \centering
+      \textbf{Giảng viên phụ trách:}\\
+      Nguyễn An Khương\\
+      {\footnotesize\textit{Khoa Khoa học \& Kỹ thuật Máy tính}}\\
+      {\footnotesize\textit{Trường ĐHBK Tp. HCM --- ĐHQG-HCM}}\\
+      {\scriptsize ORCID: \href{https://orcid.org/0000-0002-9910-6387}{0000-0002-9910-6387}}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \centering
+      \textbf{Trợ giảng học phần:}\\
+      Nguyễn Hữu Hoàng Huy\\
+      {\footnotesize\textit{Hỗ trợ kỹ thuật \& Lab Framework}}\\
+      {\scriptsize LinkedIn: \href{https://www.linkedin.com/in/nguyen-huu-hoang-huy-abb138366/}{Profile}}
+    \end{column}
+  \end{columns}
+
+  \vspace{1.0cm}
+  {\small\itshape\color{gray} Thành phố Hồ Chí Minh --- Tháng 11 năm 2026}
+  \gvnote{[~5 phút | 14h30--14h35] Lời cảm ơn bế mạc và chụp ảnh lưu niệm cùng lớp học.}
+\end{frame}
+
+\end{document}

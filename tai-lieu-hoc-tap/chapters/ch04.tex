@@ -1,0 +1,79 @@
+\chapter{Thuật Toán Xác Thực Đường Dẫn Tin Cậy \& Cơ Chế Thu Hồi Chứng Chỉ}
+
+\banddo{Duyệt chuỗi tin cậy $\to$ 6 bước Path Validation RFC 5280 $\to$ Danh sách thu hồi CRL $\to$ Giao thức trực tuyến OCSP $\to$ Tối ưu hóa OCSP Stapling}
+
+\section{Thuật Toán Thẩm Định Đường Dẫn (Path Validation Algorithm)}
+
+Khi một ứng dụng (trình duyệt web, ứng dụng ngân hàng) nhận được chứng chỉ từ máy chủ dịch vụ, nó không thể chấp nhận ngay lập tức mà phải xây dựng và thẩm tra toàn bộ chuỗi chứng chỉ ngược về Root CA nằm trong kho tin cậy (\emph{Trust Store}):
+\begin{equation}
+C_{\text{Leaf}} \to C_{\text{Intermediate}} \to C_{\text{Root}}
+\end{equation}
+
+Theo IETF RFC 5280 mục 6, thuật toán thẩm định đường dẫn thực hiện \textbf{6 bước kiểm tra nghiêm ngặt}:
+\begin{enumerate}
+  \item \textbf{Xác minh chữ ký số (Signature Verification):} Khóa công khai của chứng chỉ cha $C_{i+1}$ phải giải mã và xác nhận hợp lệ chữ ký số trên chứng chỉ con $C_i$.
+  \item \textbf{Kiểm tra thời gian hiệu lực (Validity Window):} Thời điểm kiểm tra hiện tại $T_{\text{current}}$ phải nằm trọn vẹn trong khoảng $[\text{notBefore}, \text{notAfter}]$ của từng chứng chỉ trong chuỗi.
+  \item \textbf{Khớp nối tên định danh (Name Chaining):} Tên tổ chức phát hành của chứng chỉ con phải trùng khớp từng ký tự với tên chủ thể của chứng chỉ cha:
+  \begin{equation}
+  C_i.\text{Issuer} \equiv C_{i+1}.\text{Subject}
+  \end{equation}
+  \item \textbf{Quyền hạn chứng thực CA:} Mọi chứng chỉ trung gian trên đường dẫn bắt buộc phải có phần mở rộng \texttt{basicConstraints.isCA = TRUE}.
+  \item \textbf{Độ sâu chuỗi (Path Length Constraint):} Số lượng cấp CA trung gian tính từ Root CA đến chứng chỉ lá không được vượt quá giá trị \texttt{pathLenConstraint}.
+  \item \textbf{Kiểm tra trạng thái thu hồi (Revocation Status):} Không có bất kỳ chứng chỉ nào trong chuỗi nằm trong danh sách thu hồi (CRL) hoặc bị máy chủ OCSP thông báo trạng thái \texttt{REVOKED}.
+\end{enumerate}
+
+\section{Cơ Chế Thu Hồi Chứng Chỉ: CRL vs OCSP vs OCSP Stapling}
+
+Khi khóa bí mật của người dùng bị lộ, thông tin định danh thay đổi hoặc nhân viên rời doanh nghiệp, chứng chỉ bắt buộc phải bị thu hồi trước khi hết hạn.
+
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\linewidth}{@{}p{0.22\linewidth} p{0.25\linewidth} p{0.25\linewidth} X@{}}
+\toprule
+\textbf{Đặc Trưng} & \textbf{CRL (RFC 5280)} & \textbf{OCSP (RFC 6960)} & \textbf{OCSP Stapling (RFC 6066)} \\
+\midrule
+\textbf{Phương thức truyền} & File nhị phân tĩnh HTTP & Truy vấn nhị phân HTTP & Kẹp kèm trong TLS Handshake \\
+\textbf{Kích thước dữ liệu} & Rất nặng (hàng MB) & Nhẹ (vài trăm bytes) & Không tốn thêm kết nối \\
+\textbf{Quyền riêng tư} & Tốt (CA không biết) & Kém (CA biết lịch sử duyệt) & \textbf{Bảo mật tuyệt đối} \\
+\textbf{Độ trễ kết nối} & Cao khi tải file & Tăng thêm 1 RTT & \textbf{0 RTT (Tức thì)} \\
+\textbf{Xử lý sự cố mạng} & Soft-fail & Soft-fail (Dễ bị tấn công) & \textbf{Hard-fail} (khi có Must-Staple) \\
+\bottomrule
+\end{tabularx}
+\caption{So sánh toàn diện ba cơ chế kiểm tra thu hồi chứng chỉ.}
+\end{table}
+
+\begin{batngo}
+Hiểm họa chết người của chế độ Soft-fail:\\
+Do lo ngại máy chủ của CA bị nghẽn mạng làm gián đoạn trải nghiệm người dùng, hầu hết các trình duyệt web mặc định chuyển sang chế độ \textbf{Soft-fail}: nếu không kết nối được tới máy chủ OCSP, trình duyệt sẽ coi như chứng chỉ vẫn còn hợp lệ!\\
+Hậu quả: Kẻ tấn công Man-in-the-Middle sở hữu một chứng chỉ đã bị thu hồi chỉ cần chủ động chặn các gói tin DNS/HTTP gửi đến máy chủ OCSP Responder của CA. Trình duyệt nạn nhân sẽ tự động bỏ qua bước kiểm tra thu hồi và kết nối an toàn với máy chủ giả mạo của hacker!
+\end{batngo}
+
+\section{Kỹ Thuật OCSP Stapling \& Chuẩn OCSP Must-Staple (RFC 7633)}
+
+Để khắc phục triệt để lỗ hổng Soft-fail và bảo vệ quyền riêng tư người dùng, công nghệ hiện đại áp dụng \textbf{OCSP Stapling}:
+\begin{enumerate}
+  \item Định kỳ (mỗi vài giờ), chính máy chủ Web sẽ tự chủ động truy vấn máy chủ OCSP của CA để lấy một bản phản hồi OCSP có chữ ký số hợp lệ (\emph{OCSP Response}).
+  \item Khi người dùng kết nối qua TLS Handshake, máy chủ kẹp thẳng bản phản hồi này vào thông điệp \texttt{CertificateStatus}.
+  \item Trình duyệt nhận được bằng chứng thu hồi trực tiếp từ phiên bắt tay mà không cần gửi bất kỳ gói tin nào ra Internet.
+  \item Kết hợp cờ mở rộng \textbf{OCSP Must-Staple (RFC 7633)} trong chứng chỉ: Buộc trình duyệt phải chuyển sang chế độ \textbf{Hard-fail} (chặn kết nối ngay lập tức) nếu máy chủ không gửi kèm bản OCSP Stapled hợp lệ.
+\end{enumerate}
+
+\begin{chayngay}
+Kiểm tra OCSP Stapling của một website trực tiếp bằng lệnh OpenSSL:
+\begin{lstlisting}[language=bash]
+openssl s_client -connect www.cloudflare.com:443 -status -tlsextdebug < /dev/null \
+  | grep -A 17 "OCSP Response Data:"
+\end{lstlisting}
+\end{chayngay}
+
+\begin{tukiemtra}
+\begin{enumerate}
+  \item Trình bày chi tiết 6 bước kiểm tra của thuật toán Path Validation theo RFC 5280.
+  \item Phân tích tại sao cơ chế OCSP truyền thống lại vi phạm nghiêm trọng quyền riêng tư của người duyệt web.
+  \item Làm thế nào cờ OCSP Must-Staple loại trừ hoàn toàn nguy cơ tấn công Man-in-the-Middle dựa trên lỗ hổng Soft-fail?
+\end{enumerate}
+\end{tukiemtra}
+
+\begin{kbox}
+Thuật toán Path Validation bảo đảm toàn bộ mắt xích từ End-entity đến Root CA đều hợp lệ về chữ ký, thời gian, tên định danh và quyền hạn. Kỹ thuật OCSP Stapling kết hợp cờ Must-Staple là chuẩn mực công nghiệp cao nhất, tối ưu 0 RTT độ trễ và triệt tiêu nguy cơ tấn công thu hồi Soft-fail.
+\end{kbox}

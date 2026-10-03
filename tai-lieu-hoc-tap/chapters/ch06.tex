@@ -1,0 +1,67 @@
+\chapter{Các Kịch Bản Tấn Công Hạ Tầng PKI \& Chiến Lược Phòng Thủ Toàn Diện}
+
+\banddo{Mô hình đe dọa $\to$ Thảm họa lịch sử (DigiNotar, Flame) $\to$ Ma trận tấn công AD CS (ESC1--ESC8) $\to$ Giám sát CT Logs $\to$ Kiểm định tự động ZLint}
+
+\section{Tổng Quan Mô Hình Đe Dọa Trên Hạ Tầng PKI}
+
+Hạ tầng PKI đối mặt với ba lớp tấn công chính:
+\begin{enumerate}
+  \item \textbf{Compromised / Rogue CA:} Kẻ tấn công thâm nhập máy chủ CA hoặc nhân viên nội bộ biến chất tự ý ký phát hành các chứng chỉ giả mạo cho các tên miền nhạy cảm (\texttt{google.com}, \texttt{microsoft.com}).
+  \item \textbf{Thuật toán mật mã bị bẻ gãy:} Khai thác va chạm hàm băm (MD5, SHA-1) để tạo ra hai chứng chỉ có cùng giá trị băm nhưng khác nội dung, giúp chuyển chữ ký hợp lệ sang chứng chỉ độc hại.
+  \item \textbf{Cấu hình sai lệch hệ thống (Misconfiguration):} Lỗ hổng trong các mẫu chứng chỉ doanh nghiệp (như Active Directory Certificate Services -- AD CS) cho phép người dùng bình thường leo thang đặc quyền Domain Admin.
+\end{enumerate}
+
+\section{Các Bài Học Xương Máu Trong Lịch Sử PKI}
+
+\subsection{Vụ Án DigiNotar (Hà Lan -- 2011)}
+
+DigiNotar là một Root CA công cộng uy tín của Hà Lan. Tháng 7/2011, hacker đã thâm nhập vào mạng nội bộ của DigiNotar do hệ thống thiếu phân tách mạng và thiếu giám sát bảo mật. Kẻ tấn công đã phát hành hơn \textbf{531 chứng chỉ giả mạo}, bao gồm \texttt{*.google.com}, \texttt{*.torproject.org} và \texttt{*.mozilla.org}.\\
+Hậu quả: Hơn 300.000 người dùng Internet tại Iran đã bị cơ quan tình báo nghe lén toàn bộ tài khoản Gmail và dịch vụ tìm kiếm qua tấn công Man-in-the-Middle. Khi vụ việc bị phát hiện, Google, Microsoft, Apple và Mozilla đã đồng loạt xóa sổ DigiNotar khỏi mọi Trust Store, dẫn đến việc công ty này tuyên bố phá sản chỉ sau vài tuần.
+
+\subsection{Vũ Khí Mạng Flame (2012)}
+
+Mã độc gián điệp không gian mạng Flame đã tạo ra một chứng chỉ số giả mạo mang danh nghĩa Microsoft Windows Update. Kẻ tấn công đã tính toán một \textbf{va chạm tiền ảnh chọn trước (Chosen-prefix Collision)} trên thuật toán băm yếu MD5 được Microsoft Terminal Server sử dụng. Kết quả là mã độc đã vượt qua cơ chế kiểm tra chữ ký số của hệ điều hành Windows và tự động cài đặt vào hàng nghìn máy tính công nghiệp tối mật ở Trung Đông.
+
+\begin{batngo}
+Sự ra đời của Certificate Transparency (CT Logs):\\
+Vụ án DigiNotar chứng minh rằng hệ sinh thái PKI truyền thống hoàn toàn bị động: khi một CA bị thâm nhập và âm thầm phát hành chứng chỉ giả mạo, chủ sở hữu tên miền (như Google) không có cách nào biết được sự tồn tại của chứng chỉ đó!\\
+Để giải quyết bài toán này, năm 2013, Ben Laurie (Google) đã khởi xướng chuẩn \textbf{Certificate Transparency (RFC 6962)}: Mọi chứng chỉ số trước khi được trình duyệt tin cậy \textbf{bắt buộc phải được ghi vào các sổ cái công khai (CT Logs)} hoạt động dựa trên cấu trúc cây Merkle chỉ thêm (Append-only Merkle Tree). Nhờ CT Logs, bất kỳ chứng chỉ giả mạo nào xuất hiện trên mạng đều bị các công cụ giám sát phát hiện chỉ trong vài phút.
+\end{batngo}
+
+\section{Ma Trận Tấn Công Active Directory Certificate Services (AD CS)}
+
+Nghiên cứu đột phá của Will Schroeder và Lee Christensen (SpecterOps 2021) đã chỉ ra các kỹ thuật tấn công leo thang đặc quyền nghiêm trọng trong mạng nội bộ doanh nghiệp thông qua dịch vụ AD CS:
+\begin{itemize}
+  \item \textbf{Lỗ hổng ESC1 (Misconfigured Certificate Template):} Mẫu chứng chỉ cấp cờ \texttt{CT\_FLAG\_ENROLLEE\_SUPPLIES\_SUBJECT} kết hợp với mục đích EKU \texttt{Client Authentication}. Kẻ tấn công với tài khoản người dùng bình thường có thể yêu cầu cấp chứng chỉ nhưng điền tên chủ thể là tài khoản quản trị tối cao \texttt{Domain Admin}, sau đó sử dụng kỹ thuật PKINIT Kerberos để chiếm đoạt toàn bộ Domain Controller.
+  \item \textbf{Lỗ hổng ESC8 (NTLM Relay to AD CS Web Enrollment):} Cổng đăng ký chứng chỉ qua giao diện web (\texttt{/certsrv}) mặc định không bật xác thực ký số NTLM và không bật HTTPS bảo vệ kênh truyền. Kẻ tấn công kích hoạt tấn công chuyển tiếp NTLM Relay từ một máy tính trong mạng sang cổng web của CA để yêu cầu cấp chứng chỉ máy cho Domain Controller, chiếm quyền kiểm soát toàn mạng.
+\end{itemize}
+
+\section{Kiểm Định Tự Động Tuân Thủ Bằng ZLint}
+
+\textbf{ZLint} là bộ công cụ mã nguồn mở viết bằng Golang, được cộng đồng CA/B Forum và các nhà phát triển trình duyệt (Apple, Google, Mozilla) sử dụng làm tiêu chuẩn vàng để kiểm tra tuân thủ:
+\begin{itemize}
+  \item Tự động đối chiếu chứng chỉ với hơn 300 quy tắc chuẩn hóa (RFC 5280, CA/B Forum Baseline Requirements).
+  \item Phát hiện tức thời các lỗi cú pháp ASN.1, sai lệch cờ Critical, thiếu trường SAN hoặc độ dài khóa không đạt chuẩn.
+\end{itemize}
+
+\begin{chayngay}
+Kiểm tra tính tuân thủ của chứng chỉ X.509 bằng ZLint:
+\begin{lstlisting}[language=bash]
+# Cai dat zlint bang Go
+go install github.com/zmap/zlint/v3/cmd/zlint@latest
+# Kiem dinh file chung chi PEM
+zlint -pretty cert.pem | jq '.[] | select(.result == "error")'
+\end{lstlisting}
+\end{chayngay}
+
+\begin{tukiemtra}
+\begin{enumerate}
+  \item Phân tích nguyên nhân sâu xa dẫn đến sự sụp đổ của tổ chức chứng thực DigiNotar năm 2011.
+  \item Cấu trúc cây Merkle trong Certificate Transparency hoạt động như thế nào để chứng minh tính toàn vẹn của sổ cái CT Logs?
+  \item Trình bày các biện pháp kỹ thuật để phòng ngự triệt để trước lỗ hổng AD CS ESC1 và ESC8.
+\end{enumerate}
+\end{tukiemtra}
+
+\begin{kbox}
+Hạ tầng PKI là mục tiêu hàng đầu của các cuộc tấn công mạng cấp quốc gia. Certificate Transparency (RFC 6962) biến việc phát hành chứng chỉ thành tiến trình minh bạch toàn cầu. Công cụ kiểm định tự động ZLint và rà soát ma trận lỗ hổng AD CS ESC1--ESC8 là yêu cầu phòng thủ bắt buộc của mọi trung tâm SOC hiện đại.
+\end{kbox}

@@ -1,0 +1,189 @@
+% =====================================================================
+%  PKI Session 2: X.509 v3, ASN.1 DER & Path Validation
+%  Author: Nguyen An Khuong (CSE-HCMUT · ORCID: 0000-0002-9910-6387)
+%  Teaching Assistant: Nguyen Huu Hoang Huy (LinkedIn)
+%  Master of Science in Information Security (CHAT4P) · HK261
+% =====================================================================
+
+\title{\color{hcmutblue}\textbf{\LARGE PUBLIC KEY INFRASTRUCTURE}\\[0.25em]
+       \color{hcmutblue}\textbf{\large S02: X.509 v3, Cấu trúc ASN.1 DER \& Thẩm tra Chuỗi}}
+\date{\footnotesize Session 2 of 9 $\cdot$ ATHK 512 (KMA CHAT4P, HK261)\\
+      Class: Sat 10/10/2026 $\cdot$ 13h30--18h30\\
+      \textit{Standards: IETF RFC 5280, ITU-T X.690, CA/B Forum, ZLint}}
+
+\begin{document}
+\PKItitleframe
+
+\section{Tổng quan \& Chuẩn đầu ra Buổi S02}
+
+\begin{frame}{Lộ Trình Học Phần (Buổi 2/9)}
+  \centering
+  \makebox[\linewidth][c]{\PKIcoursemap{2}}
+  \vspace{0.4em}
+  \raggedright\small
+  Buổi học đi sâu vào tầng biểu diễn dữ liệu nhị phân: cách một chứng chỉ số được đóng gói bằng ASN.1 DER và quy trình giải mã, kiểm tra chữ ký ở mức byte.
+  \gvnote{[~2 phút | 13h30--13h32] Giới thiệu vị trí của Buổi 2 trên bản đồ học phần. Sau khi đã nắm tổng quan kiến trúc ở S01, hôm nay chúng ta mổ xẻ cấu trúc dữ liệu cốt lõi X.509 v3.}
+\end{frame}
+
+\begin{frame}{Chuẩn Đầu Ra Buổi Học S02 (Learning Objectives)}
+  \small
+  Sau buổi học S02, học viên làm chủ các năng lực:
+  \begin{enumerate}
+    \item \textbf{Phân tích} quy tắc đóng gói Tag-Length-Value (TLV) trong chuẩn ASN.1 DER.
+    \item \textbf{Mổ xẻ} toàn diện các trường dữ liệu của TBSCertificate theo RFC 5280.
+    \item \textbf{Thực thi} thuật toán kiểm tra chuỗi tin cậy 6 bước (Path Validation).
+    \item \textbf{Sử dụng} công cụ ZLint để phát hiện tự động lỗi cú pháp và vi phạm chính sách CA/B Forum.
+  \end{enumerate}
+
+  \begin{keybox}[Quy Luật Bất Biến Của Mật Mã Nhị Phân]
+    Chữ ký số $\sigma$ được tính toán trên chuỗi byte DER của TBSCertificate. Chỉ cần sai khác đúng 1 bit hoặc thừa 1 byte padding trong cấu trúc DER, toàn bộ chuỗi tin cậy sẽ sụp đổ ngay lập tức!
+  \end{keybox}
+  \gvnote{[~3 phút | 13h32--13h35] Nhấn mạnh vai trò của tính xác định (Determinism) trong DER: Không được có sự nhập nhằng trong cách biểu diễn dữ liệu.}
+\end{frame}
+
+\section{Ngôn ngữ ASN.1 \& Quy tắc Mã hóa DER}
+
+\begin{frame}{Từ Định Dạng Trừu Tượng Đến Chuỗi Byte Nhị Phân}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{ASN.1 (Abstract Syntax Notation One):}
+      \begin{itemize}\small
+        \item Ngôn ngữ đặc tả kiểu dữ liệu độc lập với phần cứng và hệ điều hành.
+        \item Định nghĩa cấu trúc đối tượng: \texttt{SEQUENCE}, \texttt{INTEGER}, \texttt{OCTET STRING}, \texttt{BIT STRING}.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Quy Tắc Mã Hóa DER (ITU-T X.690):}
+      \begin{itemize}\small
+        \item \textbf{BER:} Cho phép nhiều cách mã hóa độ dài khác nhau.
+        \item \textbf{DER:} Quy chuẩn chặt chẽ nhất, \textbf{chỉ có duy nhất 1 cách mã hóa} cho mỗi cấu trúc (Canonical Encoding).
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \begin{beyond}{why}
+    Nếu dùng BER (nhiều cách mã hóa), kẻ tấn công có thể thay đổi cách mã hóa độ dài mà không làm đổi dữ liệu, khiến hash thay đổi và chữ ký số bị vô hiệu hóa (hoặc khai thác Signature Malleability)!
+  \end{beyond}
+  \gvnote{[~3 phút | 13h35--13h38] Giải thích vì sao PKI bắt buộc dùng DER mà không dùng BER hay JSON/XML: Cần dạng chính tắc tuyệt đối.}
+\end{frame}
+
+\begin{frame}{Cấu Trúc Bộ Ba Tag - Length - Value (TLV)}
+  \centering
+  \begin{tikzpicture}[
+    scale=0.88, every node/.style={transform shape},
+    box/.style={rectangle, draw=hcmutblue, thick, rounded corners=3pt, align=center, font=\small, minimum height=1.1cm}
+  ]
+    \node[box, fill=keybg, minimum width=2.8cm] (t) {\textbf{Tag (1 Byte)}\\\scriptsize 0x30: SEQUENCE\\0x02: INTEGER\\0x06: OID};
+    \node[box, fill=quizbg, minimum width=2.8cm, right=0.3cm of t] (l) {\textbf{Length (1--4 Bytes)}\\\scriptsize Dạng ngắn ($<128$B)\\Dạng dài ($0x80 + n$)};
+    \node[box, fill=solgreen!15, draw=solgreen, minimum width=4.5cm, right=0.3cm of l] (v) {\textbf{Value (Nội dung)}\\\scriptsize Dữ liệu nguyên thủy\\hoặc các bộ TLV con lồng nhau};
+
+    \node[draw=hcmutblue!60, fill=gray!5, rounded corners=3pt, below=0.6cm of l, text width=10.5cm, font=\scriptsize, align=left] {
+      \textbf{Ví dụ phân tích nhị phân (dumpasn1 / openssl asn1parse):}\\
+      \texttt{30 82 04 2a 30 82 03 12 a0 03 02 01 02 02 10 5a ...}\\
+      $\bullet$ \texttt{30}: Tag SEQUENCE (hộp chứa danh sách đối tượng).\\
+      $\bullet$ \texttt{82 04 2a}: Length = 0x042a = 1066 bytes dữ liệu.\\
+      $\bullet$ \texttt{a0 03 02 01 02}: Trường \texttt{[0] EXPLICIT version = 2} (tức phiên bản X.509 v3).
+    };
+  \end{tikzpicture}
+  \gvnote{[~3 phút | 13h38--13h41] Hướng dẫn học viên đọc bytecode nhị phân ASN.1 DER. Đây là kỹ năng tối quan trọng trong bài Lab 1.}
+\end{frame}
+
+\section{Mổ xẻ Chi tiết Cấu trúc TBSCertificate}
+
+\begin{frame}{Cấu Trúc Các Trường Dữ Liệu Trong RFC 5280}
+  \begin{table}[h]
+    \centering\scriptsize
+    \begin{tabularx}{\linewidth}{@{}p{0.25\linewidth} p{0.28\linewidth} X@{}}
+      \toprule
+      \textbf{Trường Dữ Liệu} & \textbf{Kiểu ASN.1} & \textbf{Ý Nghĩa An Ninh} \\
+      \midrule
+      \texttt{version} & \texttt{EXPLICIT Version} & Phiên bản (v3 có giá trị nguyên \texttt{0x02}) \\
+      \texttt{serialNumber} & \texttt{CertificateSerialNumber} & Định danh ngẫu nhiên dương do CA cấp (tối đa 20B) \\
+      \texttt{signature} & \texttt{AlgorithmIdentifier} & Thuật toán CA dùng để ký TBSCertificate \\
+      \texttt{issuer} & \texttt{Name} & Tên phân biệt DN của CA phát hành \\
+      \texttt{validity} & \texttt{Validity} & Thời gian hiệu lực (\texttt{notBefore} đến \texttt{notAfter}) \\
+      \texttt{subject} & \texttt{Name} & Tên phân biệt của thực thể được cấp chứng chỉ \\
+      \texttt{subjectPublicKeyInfo} & \texttt{SubjectPublicKeyInfo} & Khóa công khai của chủ thể và tham số thuật toán \\
+      \texttt{extensions} & \texttt{Extensions OPTIONAL} & Danh sách các phần mở rộng v3 \\
+      \bottomrule
+    \end{tabularx}
+  \end{table}
+  \gvnote{[~3 phút | 13h41--13h44] Phân tích từng trường dữ liệu. Lưu ý: Trường subjectPublicKeyInfo chứa public key của người dùng, độc lập với thuật toán ký của CA.}
+\end{frame}
+
+\begin{frame}{Hiểm Họa An Ninh Khi Thiếu Cờ Basic Constraints}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Cấu hình chuẩn:}
+      \begin{itemize}\small
+        \item \textbf{Root / Sub CA:} \texttt{isCA=TRUE}, \texttt{critical=TRUE}.
+        \item \textbf{End-Entity (Server/Client):} \texttt{isCA=FALSE} hoặc không có cờ này.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Kịch bản tấn công nếu thiếu cờ:}
+      \begin{itemize}\small
+        \item Hacker đăng ký chứng chỉ hợp lệ cho \texttt{attacker.com}.
+        \item Do CA quên gán \texttt{isCA=FALSE}, hacker lấy khóa bí mật tự ký cấp chứng chỉ cho \texttt{google.com}!
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \begin{alertblock}{Quy Tắc Sống Còn Của Thẩm Định Chuỗi}
+    Trình duyệt web và hệ điều hành bắt buộc phải từ chối ngay lập tức bất kỳ chứng chỉ lá (End-Entity) nào tự ý ký chứng chỉ cho một thực thể khác!
+  \end{alertblock}
+  \gvnote{[~3 phút | 13h44--13h47] Đây là lỗ hổng từng xảy ra trong lịch sử khi một số CA cấp phát chứng chỉ SSL có cờ isCA=TRUE cho khách hàng cá nhân.}
+\end{frame}
+
+\section{Phần Mở Rộng Trọng Yếu \& Kiểm Định ZLint}
+
+\begin{frame}{Subject Alternative Name (SAN) Thay Thế Common Name}
+  \begin{itemize}\small
+    \item \textbf{Lịch sử:} Trước đây tên miền được ghi trong trường \texttt{Common Name (CN)} của Subject.
+    \item \textbf{Hạn chế:} Không hỗ trợ nhiều tên miền, không phân định rõ định danh IP, DNS hay URI.
+    \item \textbf{Quy chuẩn hiện đại:} Bắt buộc dùng phần mở rộng \textbf{Subject Alternative Name (SAN - OID: 2.5.29.17)}:
+  \end{itemize}
+
+  \begin{block}{Cấu Hình SAN Trong Môi Trường Doanh Nghiệp}
+    \texttt{subjectAltName = @alt\_names}\\
+    \texttt{[alt\_names]}\\
+    \texttt{DNS.1 = kma.edu.vn}\\
+    \texttt{DNS.2 = *.kma.edu.vn \quad \# Wildcard Certificate}\\
+    \texttt{IP.1  = 192.168.1.100}\\
+    \texttt{URI.1 = spiffe://kma.edu.vn/ns/prod/sa/payment}
+  \end{block}
+  \gvnote{[~3 phút | 13h47--13h50] Hướng dẫn cú pháp cấu hình OpenSSL cho SAN đa dạng: DNS, Wildcard, IP và SPIFFE URI.}
+\end{frame}
+
+\begin{frame}[fragile]{Kiểm Định Tự Động Bằng Bộ Công Cụ ZLint}
+  \begin{beyond}{try}
+    \textbf{ZLint (ZMap Project):} Bộ kiểm tra tuân thủ mã nguồn mở viết bằng Golang, tích hợp hơn 300 luật kiểm tra tự động đối chiếu với RFC 5280 và CA/B Forum Baseline Requirements.
+  \end{beyond}
+
+  \begin{lstlisting}[language=bash]
+# Kiem dinh chung chi so x509 bang zlint
+zlint -pretty my_certificate.pem
+
+# Ket qua tra ve:
+# - "result": "NE" (Not Eligible)
+# - "result": "NA" (Not Applicable)
+# - "result": "pass" (Dat chuan)
+# - "result": "warn" (Canh bao khuyen nghi)
+# - "result": "error" (VI PHAM NGHIEM TRONG: CA/B Forum yeu cau thu hoi!)
+  \end{lstlisting}
+  \gvnote{[~3 phút | 13h50--13h53] Giới thiệu ZLint: Đây là công cụ các Root Store dùng để quét định kỳ toàn bộ chứng chỉ trên thế giới.}
+\end{frame}
+
+\begin{frame}{Bài Tập Tự Kiểm Tra Buổi S02}
+  \begin{quizbox}[Câu Hỏi Thẩm Định Năng Lực]
+    \begin{enumerate}\footnotesize
+      \item \textbf{Câu 1:} Một chứng chỉ có trường \texttt{basicConstraints} với \texttt{isCA=TRUE} và \texttt{pathLen=0}. CA này có thể ký phát hành thêm một Intermediate CA khác được không?
+      \answer{\\\textbf{Giải đáp:} KHÔNG. \texttt{pathLen=0} nghĩa là CA này chỉ được phép ký trực tiếp cho chứng chỉ lá (End-Entity), không được ký thêm bất kỳ CA cấp dưới nào.}
+      \item \textbf{Câu 2:} Tại sao cờ \texttt{digitalSignature} trong Key Usage không thể dùng thay cho \texttt{keyCertSign}?
+      \answer{\\\textbf{Giải đáp:} Để phân tách đặc quyền: Khóa dùng để ký tài liệu/dữ liệu người dùng không bao giờ được phép dùng để ký phát hành chứng chỉ số.}
+    \end{enumerate}
+  \end{quizbox}
+  \gvnote{[~2 phút | 13h53--13h55] Tổng kết buổi học S02 và giao nhiệm vụ bài Lab 1 cho học viên.}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,237 @@
+% =====================================================================
+%  PKI (ATHK 512) Public Key Infrastructure, HK261: Shared Master Preamble
+%  Instructor: Nguyen An Khuong, CSE-HCMUT (ORCID: 0000-0002-9910-6387)
+%  Teaching Assistant: Nguyen Huu Hoang Huy (LinkedIn: nguyen-huu-hoang-huy-abb138366)
+%  Brand Identity Standard: HCMUT Blue & Dual-Version Multi-Variant Architecture
+% =====================================================================
+
+\usepackage{iftex}
+\ifXeTeX
+  \usepackage{fontspec}
+  \setmainfont{Arial}
+  \setsansfont{Arial}
+\else\ifLuaTeX
+  \usepackage{fontspec}
+  \setmainfont{Arial}
+  \setsansfont{Arial}
+\else
+  \usepackage[utf8]{inputenc}
+  \usepackage[T5,T1]{fontenc}
+  \usepackage{lmodern}
+  \usepackage[english,vietnamese]{babel}
+\fi\fi
+\usepackage{amsmath, amsthm, amssymb, amsfonts, mathtools}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,shapes.geometric,fit,backgrounds,decorations.pathreplacing,patterns,shadows,trees}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepackage{pgfpages}
+\usepackage{hyperref}
+\usepackage{appendixnumberbeamer}
+\usepackage{url}
+
+\hypersetup{colorlinks=true, linkcolor=hcmutblue, filecolor=magenta, urlcolor=hcmutblue}
+\urlstyle{same}
+
+\graphicspath{{images/}{figs/}{figures/}}
+
+% ---------------------------------------------------------------- Variant Selection
+\newif\ifprivate   \privatefalse
+\newif\ifnotesout  \notesoutfalse
+\def\PKItmp{notes}\ifx\PKIvariant\PKItmp \privatetrue \notesouttrue
+  \setbeameroption{show notes}\fi
+\def\PKItmp{dual}\ifx\PKIvariant\PKItmp \privatetrue \notesouttrue
+  \setbeameroption{show notes on second screen=right}\fi
+\def\PKItmp{present}\ifx\PKIvariant\PKItmp \privatetrue\fi
+
+\newcommand{\answer}[1]{\ifprivate{\color{solgreen}#1}\fi}
+\ifXeTeX
+  \newcommand{\gvnote}[1]{\note{#1}}
+  \newcommand{\vi}[1]{#1}
+\else\ifLuaTeX
+  \newcommand{\gvnote}[1]{\note{#1}}
+  \newcommand{\vi}[1]{#1}
+\else
+  \newcommand{\gvnote}[1]{\note{\begin{otherlanguage}{vietnamese}#1\end{otherlanguage}}}
+  \newcommand{\vi}[1]{\foreignlanguage{vietnamese}{#1}}
+\fi\fi
+
+% ---------------------------------------------------------------- HCMUT Brand Colours
+\definecolor{hcmutblue}{RGB}{0,51,153}     % HCMUT Primary Brand Blue (#003399)
+\definecolor{solgreen}{RGB}{0,110,40}      % Solution Green
+\definecolor{warnred}{RGB}{180,20,20}      % Security Warning Red
+\definecolor{keybg}{RGB}{232,240,255}      % Key Concept Background
+\definecolor{quizbg}{RGB}{255,244,214}     % Checkpoint / Quiz Background
+\definecolor{pqcpurple}{RGB}{110,30,130}   % Post-Quantum Cryptography Accent
+\definecolor{cloudteal}{RGB}{0,105,105}    % Cloud / Architecture Accent
+
+% ---------------------------------------------------------------- Beamer Theme Styling & Alignment
+\setbeamercolor{title}{bg=}
+\setbeamercolor{frametitle}{fg=hcmutblue}
+\setbeamercolor{structure}{fg=hcmutblue}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{itemize items}[triangle]
+\setbeamerfont{section in toc}{size=\large, series=\bfseries}
+\setbeamersize{text margin left=0.7cm, text margin right=0.7cm}
+
+% Force top alignment by default to avoid vertical centering push-out
+\makeatletter
+\beamer@centeredfalse
+\makeatother
+
+\setbeamertemplate{section page}{%
+  \centering\vspace{1.5cm}%
+  {\fontsize{20}{24}\selectfont \insertsectionnumber. \insertsection\par}}
+\AtBeginSection[]{\begin{frame}[plain,noframenumbering]\sectionpage\end{frame}}
+
+% Footline: Course-qualified slide numbering (ATHK512 · S1-x/y)
+\setbeamertemplate{footline}{%
+  \leavevmode%
+  \hbox to \paperwidth{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.1ex,leftskip=1.2em,rightskip=1.5em]{footline}%
+      \usebeamerfont{footline}\color{gray!80!black}\scriptsize
+      \textbf{PKI (ATHK512)} $\cdot$ S\PKIsession: \PKIsessiontitle\hfill
+      S\PKIsession-\insertframenumber/\inserttotalframenumber
+    \end{beamercolorbox}%
+  }%
+  \vskip0pt%
+}
+
+\newcommand{\includetitlebackground}{\includegraphics[width=\paperwidth]{slideStart_EN_no_footer.png}}
+\newcommand{\includebackground}{\includegraphics[width=\paperwidth]{frame.png}}
+
+% Note Page Architecture (Dual-Screen Presentation)
+\newsavebox{\PKInotebox}
+\newlength{\PKInoteht}
+\setbeamertemplate{note page}{%
+  \sbox{\PKInotebox}{\begin{minipage}[t]{0.73\linewidth}\vspace{0pt}%
+    {\color{hcmutblue}\bfseries\small S\PKIsession-\insertframenumber\ $\cdot$ \insertframetitle}\par
+    \vspace{0.25em}%
+    \footnotesize\linespread{0.97}\selectfont\raggedright\setlength{\parskip}{0.15em}%
+    \insertnote
+  \end{minipage}}%
+  \setlength{\PKInoteht}{\ht\PKInotebox}\addtolength{\PKInoteht}{\dp\PKInotebox}%
+  \vspace*{0.3em}%
+  \begin{minipage}[t]{0.25\linewidth}\vspace{0pt}%
+    \insertslideintonotes{0.2}%
+  \end{minipage}\hfill
+  \usebox{\PKInotebox}}
+
+% ---------------------------------------------------------------- Pedagogical Callout Boxes (Compact & Sharp)
+\newenvironment{keybox}[1][Điểm Cốt Lõi]{%
+  \begin{beamercolorbox}[rounded=true,shadow=false,sep=0.25em,wd=\linewidth]{keyc}%
+  \footnotesize{\bfseries\color{hcmutblue}#1.}\ }{\end{beamercolorbox}\vskip 0.12em}
+\setbeamercolor{keyc}{bg=keybg,fg=black}
+
+\newenvironment{quizbox}[1][Tự Kiểm Tra / Thảo Luận]{%
+  \begin{beamercolorbox}[rounded=true,shadow=false,sep=0.25em,wd=\linewidth]{quizc}%
+  \footnotesize{\bfseries\color{warnred}#1.}\ }{\end{beamercolorbox}\vskip 0.12em}
+\setbeamercolor{quizc}{bg=quizbg,fg=black}
+
+\newenvironment{pqcbox}[1][Chuyển Dịch Hậu Lượng Tử (PQC)]{%
+  \begin{beamercolorbox}[rounded=true,shadow=false,sep=0.25em,wd=\linewidth]{pqcc}%
+  \footnotesize{\bfseries\color{pqcpurple}#1.}\ }{\end{beamercolorbox}\vskip 0.12em}
+\setbeamercolor{pqcc}{bg=keybg!60!quizbg,fg=black}
+
+% ---------------------------------------------------------------- CO5115 Beyond & Self-Study System
+\definecolor{bhist}{RGB}{120,72,20}   \definecolor{bhistbg}{RGB}{248,238,224}
+\definecolor{bopen}{RGB}{110,30,130}  \definecolor{bopenbg}{RGB}{242,230,248}
+\definecolor{bwhy}{RGB}{0,105,105}    \definecolor{bwhybg}{RGB}{222,244,242}
+\definecolor{btry}{RGB}{40,110,20}    \definecolor{btrybg}{RGB}{230,245,222}
+\definecolor{bthink}{RGB}{190,90,0}   \definecolor{bthinkbg}{RGB}{255,236,214}
+\definecolor{bpit}{RGB}{180,20,20}    \definecolor{bpitbg}{RGB}{255,236,236}
+
+\setbeamercolor{bhistc}{bg=bhistbg,fg=black}
+\setbeamercolor{bopenc}{bg=bopenbg,fg=black}
+\setbeamercolor{bwhyc}{bg=bwhybg,fg=black}
+\setbeamercolor{btryc}{bg=btrybg,fg=black}
+\setbeamercolor{bthinkc}{bg=bthinkbg,fg=black}
+\setbeamercolor{bpitc}{bg=bpitbg,fg=black}
+
+\makeatletter
+\@namedef{COb@history}{bhist/History \& Context}
+\@namedef{COb@open}{bopen/Open Problem \& Future}
+\@namedef{COb@why}{bwhy/Why It Matters}
+\@namedef{COb@try}{btry/Pro-Tip \& Practical Command}
+\@namedef{COb@pitfall}{bpit/Critical Pitfall to Avoid}
+\newenvironment{beyond}[2][]{%
+  \edef\COb@spec{\csname COb@#2\endcsname}%
+  \expandafter\COb@split\COb@spec\@nil
+  \begin{beamercolorbox}[rounded=true,shadow=false,sep=0.25em,wd=\linewidth]{\COb@col c}%
+  \footnotesize{\bfseries\color{\COb@col}Beyond $\cdot$ \COb@lab\ifx\relax#1\relax\else: #1\fi.}\ }%
+  {\end{beamercolorbox}\vskip 0.12em}
+\def\COb@split#1/#2\@nil{\def\COb@col{#1}\def\COb@lab{#2}}
+\makeatother
+
+\newenvironment{thinkbox}[1][Suy ngẫm \& Phản biện]{%
+  \begin{beamercolorbox}[rounded=true,shadow=false,sep=0.25em,wd=\linewidth]{bthinkc}%
+  \footnotesize{\bfseries\color{bthink}#1.}\ }{\end{beamercolorbox}\vskip 0.12em}
+
+\newcommand{\selfstudy}{\tikz[remember picture,overlay]\node[anchor=north east,
+  fill=btry,text=white,font=\normalfont\tiny\bfseries,rounded corners=2pt,inner sep=2pt]
+  at ([xshift=-0.25cm,yshift=-0.22cm]current page.north east) {SELF-STUDY};}
+
+\newcommand{\lvl}[1]{{\normalfont\tiny\color{white}\colorbox{hcmutblue!\ifcase#1\or45\or70\or100\fi}{L#1}}}
+\newcommand{\codefile}[1]{{\small\ttfamily\color{hcmutblue}#1}}
+
+% ---------------------------------------------------------------- Title Frame Setup
+\newcommand{\PKItitleframe}{%
+  \ifdefined\includetitlebackground
+    \setbeamertemplate{background}{\includetitlebackground}%
+  \fi
+  \begin{frame}[plain,noframenumbering,t]\vspace*{0.9cm}\titlepage\end{frame}%
+  \ifdefined\includebackground
+    \setbeamertemplate{background}{\includebackground}%
+  \fi}
+
+% ---------------------------------------------------------------- Author & Academic Metadata
+\author{\textbf{Nguyen An Khuong}, \textit{CSE-HCMUT} \\
+\footnotesize ORCID: \href{https://orcid.org/0000-0002-9910-6387}{0000-0002-9910-6387} $\cdot$ Email: \texttt{nakhuong@hcmut.edu.vn}}
+
+\institute{Ho Chi Minh City University of Technology (HCMUT), VNU-HCM\\
+Faculty of Computer Science and Engineering\\
+\vspace{0.2em}
+\scriptsize \textbf{Teaching Assistant:} Mr. Nguyen Huu Hoang Huy (\href{https://www.linkedin.com/in/nguyen-huu-hoang-huy-abb138366/}{LinkedIn Profile})}
+
+% ---------------------------------------------------------------- Course Map Infographic (9 Sessions)
+\newcommand{\PKIcoursemap}[1]{%
+  \begin{tikzpicture}[x=3.7cm,y=1.4cm,
+      sess/.style={draw=hcmutblue!60,rounded corners=4pt,minimum width=3.5cm,
+        minimum height=1.15cm,align=center,font=\scriptsize,text width=3.4cm,drop shadow={opacity=0.12}},
+      cur/.style={fill=hcmutblue,text=white,draw=hcmutblue,font=\scriptsize\bfseries}]
+    \foreach \i/\t/\x/\y in {
+      1/{S01: Architecture, Trust\\\& Threat Models}/0/2,
+      2/{S02: X.509, ASN.1\\\& Path Validation}/1/2,
+      3/{S03: CA Lifecycle\\\& ACME Protocol}/2/2,
+      4/{S04: Revocation (CRL/OCSP)\\\& Hardware HSM}/0/1,
+      5/{S05: TLS 1.3 \& mTLS\\Zero Trust Gateway}/1/1,
+      6/{S06: Certificate Transparency\\(CT) Logs \& Merkle Tree}/2/1,
+      7/{S07: PQC Migration\\NIST FIPS 203/204}/0/0,
+      8/{S08: Enterprise AD CS\\Attack \& Defense}/1/0,
+      9/{S09: Capstone Defense\\\& Audit Synthesis}/2/0}{%
+      \ifnum\i=#1\relax
+        \node[sess,cur] at (\x,\y) {\t};
+      \else
+        \node[sess,fill=white] at (\x,\y) {\t};
+      \fi}
+  \end{tikzpicture}}
+
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{hcmutblue}\bfseries,
+  commentstyle=\color{solgreen!80!black}\itshape,
+  stringstyle=\color{warnred},
+  breaklines=true,
+  showstringspaces=false,
+  frame=single,
+  rulecolor=\color{gray!30},
+  backgroundcolor=\color{gray!5}
+}

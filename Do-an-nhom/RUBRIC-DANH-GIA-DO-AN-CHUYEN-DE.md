@@ -1,7 +1,7 @@
 # Barem & Rubric Đánh Giá Đồ Án Chuyên Đề PKI (Thang điểm 100)
 
 **Học phần:** Cơ sở hạ tầng khóa công khai (ATHK 512) - Lớp CHAT4P  
-**Giảng viên phụ trách:** Nguyễn An Khương (Khoa Khoa học & Kỹ thuật Máy tính, Trường ĐHBK Tp. HCM)  
+**Giảng viên phụ trách:** Nguyễn An Khương (Khoa Khoa học & Kỹ thuật Máy tính, Trường ĐHBK Tp. HCM · [ORCID: 0000-0002-9910-6387](https://orcid.org/0000-0002-9910-6387))  
 **Thời gian bảo vệ:** Các buổi S07, S08, S09.  
 **Cơ cấu điểm thi kết thúc học phần (KTHP):** Điểm đánh giá đồ án nhóm đóng góp **70%** điểm tổng kết học phần.
 

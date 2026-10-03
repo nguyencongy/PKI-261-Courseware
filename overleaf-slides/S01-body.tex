@@ -1,0 +1,628 @@
+% =====================================================================
+%  PKI Session 1: Architecture, Trust Models & Threat Landscape
+%  Author: Nguyen An Khuong (CSE-HCMUT · ORCID: 0000-0002-9910-6387)
+%  Teaching Assistant: Nguyen Huu Hoang Huy (LinkedIn)
+%  Master of Science in Information Security (CHAT4P) · HK261
+% =====================================================================
+
+\title{\color{hcmutblue}\textbf{\LARGE PUBLIC KEY INFRASTRUCTURE}\\[0.25em]
+       \color{hcmutblue}\textbf{\large S01: Architecture, Trust Hierarchy \& Threat Models}}
+\date{\footnotesize Session 1 of 9 $\cdot$ ATHK 512 (KMA CHAT4P, HK261)\\
+      Class: Sat 03/10/2026 $\cdot$ 13h30--18h30\\
+      \textit{Standards: IETF RFC 5280, CA/B Forum, Decision 1875/QĐ-TTg}}
+
+\begin{document}
+\PKItitleframe
+
+% =====================================================================
+%  SECTION 1: COURSE OVERVIEW & ROADMAP
+% =====================================================================
+\section{Lộ trình Học phần \& Chuẩn Đầu ra}
+
+\begin{frame}{Lộ Trình Học Phần (9 Buổi Thực Chiến)}
+  \centering
+  \makebox[\linewidth][c]{\PKIcoursemap{1}}
+
+  \vspace{0.4em}
+  \raggedright\small
+  Học phần tập trung vào thiết kế, thẩm định và vận hành hạ tầng PKI cấp doanh nghiệp, chuẩn bị di chuyển sang Mật mã Hậu lượng tử (PQC).
+  \gvnote{[~2 phút | 13h30--13h32] Chào toàn thể 15 học viên cao học lớp CHAT4P. Đây là buổi thứ nhất trong 9 buổi học thực chiến của môn Cơ sở hạ tầng khóa công khai (ATHK 512). Bản đồ lộ trình trên slide cho thấy rõ kết cấu môn học: 6 buổi đầu là các trụ cột kỹ thuật cốt lõi từ kiến trúc phân tầng CA, chuẩn dữ liệu X.509 ASN.1, tự động hóa ACME, thu hồi chứng chỉ qua SoftHSM, mTLS Zero Trust, cho đến kiểm định CT Logs và di chuyển sang PQC. Ba buổi cuối là giai đoạn thẩm định và bảo vệ đồ án chuyên đề trước Hội đồng.}
+\end{frame}
+
+\begin{frame}{Chuẩn Đầu Ra Buổi Học S01 (Learning Objectives)}
+  \small
+  Sau buổi học S01, học viên làm chủ 4 năng lực kỹ thuật cốt lõi:
+  \begin{enumerate}
+    \item \textbf{Phân tích} mô hình đe dọa MitM và chứng minh giới hạn của mật mã khóa công khai thuần túy.
+    \item \textbf{Thiết kế} kiến trúc chuỗi tin cậy phân tầng 3 cấp (Root CA $\to$ Intermediate CA $\to$ End-Entity).
+    \item \textbf{Đánh giá} an ninh nghi thức Lễ sinh khóa (Key Ceremony) và tiêu chuẩn phần cứng HSM FIPS 140-3.
+    \item \textbf{Khởi tạo} môi trường lab Docker Compose, OpenSSL 3.5 và chữ ký số xác thực commit Git.
+  \end{enumerate}
+
+  \begin{keybox}[Nguyên Lý Cốt Lõi Của Môn Học]
+    Toán học mật mã sinh cặp khóa $K_{\text{pub}} / K_{\text{priv}}$. Chỉ có \textbf{Hạ tầng Khóa Công khai (PKI)} mới là hệ thống kỹ thuật liên kết một Khóa với \textbf{Định danh pháp lý xác định} (Identity Binding).
+  \end{keybox}
+  \gvnote{[~3 phút | 13h32--13h35] Nhấn mạnh sự khác biệt giữa Cryptography và PKI: Toán học rất mạnh, nhưng nếu Alice nhận được một public key mà không có bằng chứng chứng minh key đó thuộc về Bob, Alice sẽ bị tấn công MitM ngay lập tức. PKI là cầu nối giữa thế giới số học và thế giới thực.}
+\end{frame}
+
+\begin{frame}{Quy Chế Học Phần \& Barem Đánh Giá 100 Điểm}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Thành Phần Điểm Đánh Giá:}
+      \begin{itemize}\small
+        \item \textbf{Chuyên cần \& Thảo luận (10\%):} Điểm danh và đóng góp bài học.
+        \item \textbf{Thực hành Lab (20\%):} 5 bài lab nộp báo cáo kèm log thực thi và chữ ký Git.
+        \item \textbf{Đồ án Chuyên đề Nhóm (30\%):} 5 nhóm kỹ thuật bảo vệ tại S07--S09.
+        \item \textbf{Thi Cuối Kỳ KMA (40\%):} Đề thi trắc nghiệm \& tự luận tích hợp.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{quizbox}[Quy Định Nộp Bài \& Liêm Chính]
+        \begin{itemize}\small
+          \item Mọi mã nguồn thực nghiệm bắt buộc commit lên repo GitHub/GitLab của nhóm.
+          \item Bắt buộc cấu hình chữ ký số commit bằng SSH key hoặc GPG.
+          \item Nghiêm cấm sao chép báo cáo giữa các nhóm.
+        \end{itemize}
+      \end{quizbox}
+    \end{column}
+  \end{columns}
+  \gvnote{[~3 phút | 13h35--13h38] Giải thích rõ thang điểm 100 và điều kiện đạt môn học. Nhấn mạnh việc chấm bài dựa trên evidence log thực thi trên hệ thống lab của từng nhóm.}
+\end{frame}
+
+% =====================================================================
+%  SECTION 2: FOUNDATIONS & THREAT MODEL
+% =====================================================================
+\section{Mô hình Đe dọa \& Giới hạn Mật mã Khóa công khai}
+
+\begin{frame}{Kênh Truyền Thông Bị Xâm Nhiệm (Threat Model)}
+  Mô hình an ninh mạng Dolev-Yao giả định kênh truyền thông hoàn toàn nằm dưới sự kiểm soát của kẻ tấn công (Mallory):
+  \begin{itemize}
+    \item Mallory có thể \textbf{nghe lén} (Eavesdrop) toàn bộ dữ liệu truyền qua mạng.
+    \item Mallory có thể \textbf{chặn bắt, sửa đổi} (Tamper) gói tin trên đường truyền.
+    \item Mallory có thể \textbf{chèn gói tin giả mạo} (Inject) với địa chỉ IP nguồn tùy ý.
+  \end{itemize}
+
+  \begin{alertblock}{Bài Toán Đặt Ra}
+    Làm thế nào Alice và Bob có thể thiết lập một kênh truyền bí mật và xác thực lẫn nhau khi kênh truyền vật lý hoàn toàn không an toàn?
+  \end{alertblock}
+  \gvnote{[~2 phút | 13h38--13h40] Phân tích mô hình tấn công Dolev-Yao: Mọi kết nối Internet mặc định đều không an toàn. Kẻ tấn công có thể là router trung gian, nhà mạng, hoặc hacker cùng mạng Wi-Fi.}
+\end{frame}
+
+\begin{frame}{Cuộc Tấn Công Mạo Danh Man-in-the-Middle (MitM)}
+  \centering
+  \begin{tikzpicture}[
+    scale=0.88, every node/.style={transform shape},
+    node distance=2.2cm and 2.8cm,
+    entity/.style={rectangle, draw=hcmutblue, fill=keybg, thick, rounded corners=3pt, minimum width=2.2cm, minimum height=1.0cm, align=center, font=\small\bfseries},
+    bad/.style={rectangle, draw=warnred, fill=warnred!15, thick, rounded corners=3pt, minimum width=2.4cm, minimum height=1.0cm, align=center, font=\small\bfseries},
+    msg/.style={-{Stealth[scale=1.1]}, thick}
+  ]
+    \node[entity] (alice) {Alice\\{\scriptsize Khách hàng}};
+    \node[bad] (mallory) [right=of alice] {Mallory (MitM)\\{\scriptsize Kẻ tấn công}};
+    \node[entity] (bob) [right=of mallory] {Bob\\{\scriptsize Ngân hàng}};
+
+    \draw[msg, color=hcmutblue] (alice.north east) -- node[above, font=\scriptsize] {1. Gửi $K_{\text{pub\_A}}$} (mallory.north west);
+    \draw[msg, color=warnred] (mallory.north east) -- node[above, font=\scriptsize, color=warnred] {1'. Gửi $K_{\text{pub\_M}}$ (giả Alice)} (bob.north west);
+
+    \draw[msg, color=hcmutblue] (bob.south west) -- node[below, font=\scriptsize] {2. Gửi $K_{\text{pub\_B}}$} (mallory.south east);
+    \draw[msg, color=warnred] (mallory.south west) -- node[below, font=\scriptsize, color=warnred] {2'. Gửi $K_{\text{pub\_M'}}$ (giả Bob)} (alice.south east);
+
+    \node[draw=warnred, fill=quizbg, rounded corners=3pt, below=0.6cm of mallory, align=center, font=\scriptsize, text width=9.5cm] {
+      \textbf{Hậu quả:} Mallory thiết lập 2 phiên mã hóa độc lập với Alice và Bob.\\
+      Mọi tin nhắn của Alice gửi cho Bob đều bị Mallory giải mã, đọc nội dung, sửa đổi rồi mã hóa lại gửi cho Bob mà không bên nào hay biết!
+    };
+  \end{tikzpicture}
+  \gvnote{[~3 phút | 13h40--13h43] Minh họa trực quan cuộc tấn công MitM kinh điển trên giao thức Diffie-Hellman không xác thực. Đây là lý do ra đời của PKI.}
+\end{frame}
+
+\begin{frame}{Nghịch Lý Khóa Công Khai \& Bản Chất Của PKI}
+  \textbf{Nghịch lý:} Mật mã bất đối xứng giải quyết bài toán chia sẻ khóa bí mật, nhưng lại sinh ra bài toán xác thực khóa công khai!
+  \begin{itemize}
+    \item Alice nhận được khóa $K_{\text{pub}}$, nhưng làm sao Alice biết chắc chắn khóa đó là của Bob chứ không phải của Mallory?
+    \item Nếu dùng một khóa khác để xác thực khóa này, lại cần khóa thứ ba... dẫn tới vòng lặp vô tận!
+  \end{itemize}
+
+  \begin{block}{Giải Pháp Của Hệ Thống PKI: Bên Thứ Ba Đáng Tin Cậy}
+    Cần một thực thể có thẩm quyền tối cao được tất cả mọi người tin tưởng: \textbf{Nhà cầm quyền Chứng thực (Certificate Authority -- CA)}. CA ký xác nhận mối quan hệ giữa danh tính của Bob và khóa công khai của Bob.
+  \end{block}
+  \gvnote{[~2 phút | 13h41--13h43] Nhấn mạnh bản chất của PKI: Không thể giải quyết bài toán tin cậy chỉ bằng thuật toán toán học. Bắt buộc phải có một điểm tựa tin cậy (Root of Trust) có tính tổ chức và pháp lý.}
+\end{frame}
+
+\begin{frame}{Định Nghĩa Chuẩn Về Chứng Chỉ Số (Digital Certificate)}
+  Chứng chỉ số X.509 là một cấu trúc dữ liệu điện tử liên kết một khóa công khai với một thực thể sở hữu (chủ thể):
+  $$\text{Cert} = \{\text{TBSCertificate}, \text{SignatureAlgorithm}, \sigma_{\text{CA}}\}$$
+  \textbf{Quy trình xác minh tính xác thực:}
+  \begin{itemize}\small
+    \item Chữ ký số $\sigma_{\text{CA}} = \text{Sign}(K_{\text{priv\_CA}}, \text{Hash}(\text{TBSCertificate}))$.
+    \item Người nhận dùng khóa công khai $K_{\text{pub\_CA}}$ có sẵn trong máy để kiểm tra $\sigma_{\text{CA}}$.
+    \item Nếu chữ ký hợp lệ, người nhận tin tưởng tuyệt đối: \textbf{Khóa công khai này thuộc về đúng chủ thể được ghi trên chứng chỉ}.
+  \end{itemize}
+
+  \begin{pqcbox}[Nguyên Lý Vàng Về Lòng Tin]
+    Khóa bí mật của CA chính là điểm tựa tối cao (Root of Trust) của toàn bộ hệ thống. Mọi sự thỏa hiệp hoặc rò rỉ khóa CA đều dẫn đến sự sụp đổ dây chuyền của mọi chứng chỉ cấp dưới.
+  \end{pqcbox}
+  \gvnote{[~2 phút | 13h43--13h45] Khẳng định vai trò của chữ ký CA: Đóng băng mối liên kết giữa Public Key và Định danh. Nếu kẻ tấn công thay đổi public key, chữ ký $\sigma_{\text{CA}}$ sẽ lập tức bị sai.}
+\end{frame}
+
+% =====================================================================
+%  SECTION 3: PKI ARCHITECTURE & 3-TIER CA HIERARCHY
+% =====================================================================
+\section{Kiến trúc Phân tầng \& Vòng đời Chứng chỉ}
+
+\begin{frame}{Lịch Sử \& Nguồn Gốc Khái Niệm Chứng Chỉ Số \selfstudy}
+  \begin{beyond}{history}
+    \begin{itemize}\footnotesize
+      \item \textbf{1976 -- Diffie \& Hellman:} Trao đổi khóa bất đối xứng (kế thừa Merkle Puzzles).
+      \item \textbf{1977 -- Rivest, Shamir, Adleman:} Hệ mật \textbf{RSA} và thuật toán chữ ký số đầu tiên.
+      \item \textbf{1978 -- Loren Kohnfelder (MIT):} Đề xuất thuật ngữ \textbf{Digital Certificate}, gắn kết khóa công khai với định danh pháp lý qua chữ ký số của bên thứ ba tin cậy.
+    \end{itemize}
+  \end{beyond}
+
+  \begin{beyond}{why}
+    \footnotesize
+    Toán học mật mã chỉ xử lý dữ liệu và khóa vô danh $K_{\text{pub}}$. Không có chứng chỉ số, người nhận không thể phân biệt khóa của đối tác hợp pháp với khóa giả mạo của kẻ tấn công MitM.
+  \end{beyond}
+  \gvnote{[Tự học | Lịch sử PKI] Loren Kohnfelder tại MIT năm 1978 chính là người đầu tiên đặt nền móng cho khái niệm chứng chỉ số X.509 ngày nay.}
+\end{frame}
+
+\begin{frame}{Suy Ngẫm \& Thảo Luận Phản Biện Tại Lớp}
+  \begin{thinkbox}[Bản Chất Của Lòng Tin Trong Không Gian Số]
+    \begin{enumerate}\footnotesize
+      \item \textbf{Toán học vs Thực tế:} Vì sao mật mã vững chắc vẫn cần tổ chức CA giám sát?
+      \item \textbf{Web of Trust vs X.509:} Vì sao mô hình PGP phi tập trung thất bại trên quy mô toàn cầu, trong khi PKI phân tầng X.509 lại thống trị Internet?
+    \end{enumerate}
+  \end{thinkbox}
+
+  \begin{keybox}[Chìa Khóa Phản Biện]
+    \footnotesize
+    Toán học mật mã chỉ xử lý khóa. Lòng tin số đòi hỏi \textbf{tính pháp lý, quy trình thẩm định danh tính và cơ chế thu hồi}. PKI là cấu trúc thể chế hóa lòng tin trên không gian số.
+  \end{keybox}
+  \gvnote{[~3 phút | 13h45--13h48] PKI phân tầng thành công vì nó gắn liền với trách nhiệm pháp lý và quy chế vận hành rõ ràng.}
+\end{frame}
+
+\begin{frame}{Các Thành Phần Cơ Bản Của Hệ Thống PKI (RFC 5280)}
+  Hạ tầng PKI không chỉ có mỗi CA mà bao gồm 5 thực thể chức năng:
+  \begin{enumerate}\small
+    \item \textbf{Certification Authority (CA):} Tổ chức ký phát hành, gia hạn và thu hồi chứng chỉ số.
+    \item \textbf{Registration Authority (RA):} Cơ quan tiếp nhận hồ sơ, thẩm tra danh tính pháp lý trước khi chuyển lệnh ký sang CA.
+    \item \textbf{Repository (Kho lưu trữ công khai):} Máy chủ công bố chứng chỉ CA, chính sách CP/CPS và danh sách thu hồi CRL.
+    \item \textbf{Subscribers (Thuê bao):} Thực thể được cấp chứng chỉ (máy chủ web, lập trình viên, người dùng cá nhân).
+    \item \textbf{Relying Parties (Bên tin cậy):} Trình duyệt web, hệ điều hành tiến hành kiểm tra tính hợp lệ của chứng chỉ trước khi chấp nhận.
+  \end{enumerate}
+  \gvnote{[~2 phút | 13h45--13h47] Phân biệt rõ CA và RA: CA tập trung vào nghiệp vụ mật mã ký số an toàn. RA tập trung vào quy trình xác minh danh tính ngoài đời thực.}
+\end{frame}
+
+\begin{frame}{Kiến Trúc Chuỗi Tin Cậy Phân Tầng (3-Tier CA Hierarchy)}
+  \centering
+  \begin{tikzpicture}[
+    scale=0.82, every node/.style={transform shape},
+    node distance=0.85cm and 1.4cm,
+    ca/.style={rectangle, draw=hcmutblue, fill=keybg, thick, rounded corners=4pt, align=center, font=\small\bfseries, minimum width=4.3cm, minimum height=1.0cm},
+    leaf/.style={rectangle, draw=solgreen, fill=solgreen!10, thick, rounded corners=4pt, align=center, font=\footnotesize, minimum width=3.2cm, minimum height=0.85cm},
+    arr/.style={-{Stealth[scale=1.1]}, thick, color=hcmutblue}
+  ]
+    \node[ca, fill=warnred!15, draw=warnred] (root) {\textbf{Root CA (Offline / Air-Gapped)}\\\footnotesize Khóa RSA-4096 / P-384 / ML-DSA-87\\\scriptsize Lưu trong HSM FIPS 140-3 L4 $\cdot$ Hạn: 15--25 năm};
+    \node[ca, below=of root] (int) {\textbf{Issuing Intermediate CA (Online)}\\\footnotesize Cấp phát chứng chỉ tự động qua ACME RFC 8555\\\scriptsize Nằm trong phân vùng DMZ $\cdot$ Hạn: 3--5 năm};
+    \node[leaf, below left=0.9cm and -0.5cm of int] (srv) {\textbf{Web Server TLS 1.3}\\\scriptsize SAN: \texttt{api.kma.edu.vn}\\\scriptsize Hạn dùng: 90 ngày};
+    \node[leaf, below right=0.9cm and -0.5cm of int] (usr) {\textbf{mTLS Microservice Client}\\\scriptsize Client Auth EKU\\\scriptsize Hạn dùng: 24h (Ephemeral Key)};
+
+    \draw[arr, color=warnred] (root) -- node[right, font=\scriptsize, color=warnred!80!black] {Ký cấp phát 1--2 lần trong đời} (int);
+    \draw[arr] (int) -- node[left, font=\scriptsize] {Ký cấp tự động} (srv);
+    \draw[arr] (int) -- node[right, font=\scriptsize] {Xoay vòng chứng chỉ} (usr);
+  \end{tikzpicture}
+  \gvnote{[~3 phút | 13h47--13h50] Root CA ngắt mạng hoàn toàn (Air-gapped). Khi cấp chứng chỉ hàng ngày, chỉ có Intermediate CA trực tuyến làm việc. Nếu Intermediate CA bị lộ, Root CA chỉ cần ký 1 bản thu hồi CRL là xong.}
+\end{frame}
+
+\begin{frame}{Nghi Thức Lễ Sinh Khóa (Key Ceremony) \& Chuẩn HSM}
+  Khóa bí mật của Root CA được tạo ra trong một nghi thức pháp lý và kỹ thuật đặc biệt:
+  \begin{itemize}\small
+    \item \textbf{Phòng Kín Faraday (Air-gapped Clean Room):} Cách ly tuyệt đối sóng vô tuyến, giám sát camera an ninh đa góc quay liên tục.
+    \item \textbf{Kiểm Soát Kép (Dual Control / M-of-N):} Phân rã quyền mở khóa HSM cho $N$ người nắm giữ thẻ thông minh (Key Custodians) theo thuật toán Shamir; cần ít nhất $M$ người có mặt đồng thời.
+    \item \textbf{Thiết Bị Phần Cứng HSM (Hardware Security Module):}
+      \begin{itemize}\footnotesize
+        \item Đạt tiêu chuẩn an ninh \textbf{NIST FIPS 140-2 / FIPS 140-3 Level 3 hoặc Level 4}.
+        \item Khóa bí mật sinh bằng bộ tạo số ngẫu nhiên vật lý (Hardware TRNG).
+        \item Cơ chế tự hủy khóa ngay lập tức (Zeroization) nếu phát hiện hành vi cạy nắp, thay đổi nhiệt độ hoặc điện áp.
+      \end{itemize}
+  \end{itemize}
+  \gvnote{[~3 phút | 13h50--13h53] Giới thiệu về quy chuẩn Key Ceremony và cơ chế Zeroization của HSM FIPS 140-3 Level 4.}
+\end{frame}
+
+\begin{frame}{Lời Khuyên Thực Chiến: Thiết Kế Chuỗi CA Bất Khả Xâm Phạm}
+  \begin{beyond}{try}
+    \begin{itemize}\footnotesize
+      \item \textbf{Triệt tiêu rủi ro CA con:} Thiết lập \texttt{pathLenConstraint:0} trên Issuing Sub-CA, ngăn chặn kẻ tấn công lợi dụng để tự ký sinh thêm các CA cấp dưới.
+      \item \textbf{Air-gapped tuyệt đối:} Root CA chỉ hoạt động offline cách ly vật lý. Mỗi năm chỉ khởi động 1--2 lần ký gia hạn CRL hoặc cấp Sub-CA mới.
+      \item \textbf{Ký số Git Commit:} Kích hoạt ký SSH commit (\texttt{git config gpg.format ssh}) bảo đảm 100\% mã nguồn có nguồn gốc danh tính rõ ràng.
+    \end{itemize}
+  \end{beyond}
+
+  \begin{beyond}{pitfall}
+    \footnotesize
+    \textbf{Rò rỉ khóa bí mật lên Git:} Quên thêm \texttt{*.key} vào \texttt{.gitignore}. Khi đã commit, khóa vẫn nằm trong lịch sử Git. Kẻ tấn công quét bot có thể chiếm quyền CA trong tích tắc! Luôn cấu hình hook TruffleHog / Gitleaks.
+  \end{beyond}
+  \gvnote{[~3 phút | 13h53--13h56] Cảnh báo học viên về lỗi sơ đẳng nhưng nguy hiểm nhất: commit file private key lên kho GitHub của nhóm.}
+\end{frame}
+
+% =====================================================================
+%  SECTION 4: X.509 V3 & CA/B FORUM RULES
+% =====================================================================
+\section{Cấu trúc Dữ liệu X.509 v3 \& Quy chuẩn CA/B Forum}
+
+\begin{frame}{Cấu Trúc Khung Nhị Phân ASN.1 DER (RFC 5280)}
+  \small
+  Chứng chỉ số được mã hóa nhị phân theo chuẩn \textbf{DER} với cấu trúc bộ ba TLV:
+  \begin{columns}[T]
+    \begin{column}{0.52\textwidth}
+      \textbf{Cấu trúc TBSCertificate (RFC 5280):}
+      \begin{itemize}\scriptsize
+        \item \texttt{version}: v3 (\texttt{0x02})
+        \item \texttt{serialNumber}: Định danh ngẫu nhiên ($< 20$B).
+        \item \texttt{signature}: Thuật toán ký của CA.
+        \item \texttt{issuer / subject}: Tên định danh DN.
+        \item \texttt{validity}: Thời hạn (\texttt{notBefore} $\to$ \texttt{notAfter}).
+        \item \texttt{subjectPublicKeyInfo}: Khóa công khai chủ thể.
+        \item \texttt{extensions}: Danh sách mở rộng v3.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.46\textwidth}
+      \begin{keybox}[Quy Tắc Nhị Phân Cốt Lõi]
+        Mã hóa DER bảo đảm \textbf{Canonical Form}: Một cấu trúc ASN.1 chỉ có duy nhất một biểu diễn nhị phân, loại bỏ nguy cơ tấn công biến dạng chữ ký số (Signature Malleability).
+      \end{keybox}
+    \end{column}
+  \end{columns}
+  \gvnote{[~3 phút | 13h53--13h56] Mổ xẻ cấu trúc TBSCertificate. Chữ ký số nằm ở cuối chứng chỉ là chữ ký trên toàn bộ khối nhị phân DER của TBSCertificate.}
+\end{frame}
+
+\begin{frame}{Các Phần Mở Rộng Trọng Yếu (Critical Extensions)}
+  \begin{table}[h]
+    \centering\scriptsize
+    \begin{tabularx}{\linewidth}{@{}p{0.24\linewidth} p{0.18\linewidth} X@{}}
+      \toprule
+      \textbf{Phần Mở Rộng} & \textbf{OID} & \textbf{Quy Chuẩn Bắt Buộc} \\
+      \midrule
+      \textbf{Basic Constraints} & \texttt{2.5.29.19} & \textbf{CRITICAL} trên CA: \texttt{isCA=TRUE}, \texttt{pathLen=0..n} \\
+      \textbf{Key Usage} & \texttt{2.5.29.15} & \textbf{CRITICAL}: Tách \texttt{digitalSignature} vs \texttt{keyCertSign} \\
+      \textbf{Extended Key Usage} & \texttt{2.5.29.37} & \texttt{serverAuth} (Web TLS), \texttt{clientAuth} (mTLS) \\
+      \textbf{Subject Alt Name} & \texttt{2.5.29.17} & BẮT BUỘC: Danh sách DNS / IP thay thế CN \\
+      \textbf{CRL Distribution} & \texttt{2.5.29.31} & Điểm tải file danh sách thu hồi HTTP \\
+      \textbf{AIA (OCSP)} & \texttt{1.3.6.1.5.5.7.1.1} & URL máy chủ phản hồi trạng thái trực tuyến \\
+      \bottomrule
+    \end{tabularx}
+  \end{table}
+
+  \begin{alertblock}{Quy Tắc Xử Lý Cờ Critical (RFC 5280)}
+    Nếu phần mở rộng được đánh dấu \texttt{critical=TRUE}, mọi ứng dụng thẩm tra \textbf{bắt buộc phải nhận biết và thực thi đúng ngữ nghĩa}. Nếu không nhận biết được, ứng dụng \textbf{bắt buộc phải từ chối} chứng chỉ ngay lập tức!
+  \end{alertblock}
+  \gvnote{[~3 phút | 13h56--13h59] Giải thích tầm quan trọng của cờ Critical: Ngăn chặn các phần mềm bỏ qua các ràng buộc an ninh quan trọng.}
+\end{frame}
+
+\begin{frame}{Quy Định Khai Tử Common Name (CN) \& Bắt Buộc SAN}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \textbf{Thực Trạng Lịch Sử (Lỗi thời):}
+      \begin{itemize}\small
+        \item Trước đây, tên miền website được ghi vào trường \texttt{Common Name (CN)} của Subject DN:
+        \texttt{CN=www.kma.edu.vn}
+        \item Nhược điểm: Chỉ chứa được một tên miền duy nhất, dễ gây nhập nhằng cú pháp.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Quy Chuẩn CA/B Forum Hiện Đại:}
+      \begin{itemize}\small
+        \item Bãi bỏ hoàn toàn việc đọc CN để xác thực tên miền trên trình duyệt hiện đại.
+        \item Mọi tên miền, địa chỉ IP hợp lệ \textbf{bắt buộc phải nằm trong Subject Alternative Name (SAN)}:
+        \texttt{DNS:kma.edu.vn}, \texttt{DNS:api.kma.edu.vn}
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \begin{quizbox}[Lỗi Thường Gặp Trong Phòng Lab]
+    Nếu học viên sinh chứng chỉ máy chủ chỉ có trường CN mà quên cấu hình SAN, trình duyệt sẽ báo lỗi an ninh:
+    \textbf{\color{warnred}NET::ERR\_CERT\_COMMON\_NAME\_INVALID}
+  \end{quizbox}
+  \gvnote{[~2 phút | 13h59--14h01] Nhắc nhở học viên khi làm bài Lab 1 và Lab 4: Bắt buộc phải thêm phần mở rộng SAN trong file openssl.cnf, không được chỉ ghi CN.}
+\end{frame}
+
+% =====================================================================
+%  SECTION 5: PATH VALIDATION & REVOCATION
+% =====================================================================
+\section{Xác thực Đường dẫn \& Cơ chế Thu hồi Chứng chỉ}
+
+\begin{frame}{Thuật Toán Xác Thực Chuỗi Tin Cậy (RFC 5280 §6)}
+  Khi nhận được chứng chỉ từ máy chủ Web, Client duyệt ngược chuỗi tin cậy:
+  $$C_{\text{Leaf}} \to C_{\text{Intermediate}} \to C_{\text{Root (Trust Store)}}$$
+  \textbf{6 Bước Kiểm Tra Bắt Buộc:}
+  \begin{enumerate}\small
+    \item \textbf{Chữ ký số:} Dùng Public Key của CA cha kiểm tra chữ ký của chứng chỉ con.
+    \item \textbf{Thời gian hiệu lực:} $T_{\text{hiện\_tại}} \in [\text{notBefore}, \text{notAfter}]$.
+    \item \textbf{Khớp nối tên định danh (Name Chaining):}
+      $C_{\text{child}}.\text{Issuer} == C_{\text{parent}}.\text{Subject}$.
+    \item \textbf{Quyền hạn CA:} Mọi mắt xích cha phải có \texttt{basicConstraints.isCA=TRUE}.
+    \item \textbf{Độ sâu chuỗi (Path Length):} Số lượng cấp CA không vượt quá \texttt{pathLenConstraint}.
+    \item \textbf{Trạng thái thu hồi:} Chứng chỉ không nằm trong CRL và không bị OCSP báo \texttt{REVOKED}.
+  \end{enumerate}
+  \gvnote{[~3 phút | 14h01--14h04] Trình bày 6 bước của thuật toán Path Validation theo RFC 5280. Đây là nội dung cốt lõi sẽ được kiểm tra trong đề thi.}
+\end{frame}
+
+\begin{frame}{So Sánh Cơ Chế Thu Hồi: CRL vs OCSP vs OCSP Stapling}
+  \begin{table}[h]
+    \centering\scriptsize
+    \begin{tabularx}{\linewidth}{@{}p{0.22\linewidth} p{0.24\linewidth} p{0.25\linewidth} X@{}}
+      \toprule
+      \textbf{Tiêu Chí} & \textbf{CRL (RFC 5280)} & \textbf{OCSP (RFC 6960)} & \textbf{OCSP Stapling (RFC 6066)} \\
+      \midrule
+      \textbf{Phương thức} & File nhị phân qua HTTP & Truy vấn nhị phân HTTP & Kẹp trong gói TLS Handshake \\
+      \textbf{Kích thước} & Nặng (hàng MB) & Nhẹ (vài trăm bytes) & Không tốn thêm kết nối ngoài \\
+      \textbf{Riêng tư} & Tốt (CA không biết) & Kém (CA biết lịch sử) & \textbf{Bảo mật tuyệt đối} \\
+      \textbf{Độ trễ} & Tải file định kỳ & Tăng 1 RTT mạng & \textbf{0 RTT (Tức thì)} \\
+      \textbf{Xử lý sự cố} & Soft-fail & Soft-fail (Rủi ro MitM) & \textbf{Hard-fail} (Must-Staple) \\
+      \bottomrule
+    \end{tabularx}
+  \end{table}
+
+  \begin{keybox}[Khuyến Nghị Vận Hành]
+    Kích hoạt \textbf{OCSP Stapling} kết hợp cờ \textbf{OCSP Must-Staple (RFC 7633)}: Vừa bảo đảm quyền riêng tư, triệt tiêu độ trễ mạng và ngăn chặn hoàn toàn tấn công Soft-fail!
+  \end{keybox}
+  \gvnote{[~3 phút | 14h04--14h07] So sánh 3 cơ chế thu hồi. Phân tích rõ tại sao OCSP Stapling lại là tiêu chuẩn vàng của ngành Web hiện nay.}
+\end{frame}
+
+% =====================================================================
+%  SECTION 6: DISASTERS & POST-QUANTUM MIGRATION
+% =====================================================================
+\section{Bối cảnh Tấn công \& Di chuyển Hậu Lượng tử (PQC)}
+
+\begin{frame}{Các Thảm Họa PKI Điển Hình Trong Lịch Sử}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Vụ Án DigiNotar (Hà Lan - 2011):}
+      \begin{itemize}\small
+        \item Hacker thâm nhập mạng nội bộ CA do thiếu phân tách vùng mạng.
+        \item Phát hành 500+ chứng chỉ giả mạo cho \texttt{*.google.com}, \texttt{*.torproject.org}.
+        \item 300.000+ người dùng bị nghe lén toàn bộ tài khoản email/web.
+        \item Hậu quả: DigiNotar bị trục xuất khỏi mọi Trust Store và phá sản hoàn toàn.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Vũ Khí Mạng Flame (2012):}
+      \begin{itemize}\small
+        \item Khai thác va chạm tiền ảnh (chosen-prefix collision) trên hàm băm MD5.
+        \item Giả mạo chứng chỉ số dịch vụ Microsoft Terminal Server.
+        \item Đột lốt bản cập nhật Windows Update hợp lệ để phát tán mã độc gián điệp vào hạ tầng năng lượng.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \gvnote{[~3 phút | 14h07--14h10] Phân tích 2 bài học lịch sử lớn nhất của ngành PKI: DigiNotar (sự cố quản trị) và Flame (sự cố toán học va chạm MD5).}
+\end{frame}
+
+\begin{frame}{Bài Học Xương Máu: Certificate Transparency \& ZLint}
+  \begin{beyond}{why}
+    \textbf{Điểm yếu cố hữu của PKI truyền thống:} Khi một CA bị thâm nhập và âm thầm phát hành chứng chỉ giả mạo, chủ sở hữu tên miền hoàn toàn không có cách nào phát hiện sự tồn tại của chứng chỉ đó!
+  \end{beyond}
+
+  \begin{keybox}[Cơ Chế Giám Sát Chủ Động Toàn Cầu]
+    \begin{itemize}\small
+      \item \textbf{Certificate Transparency (RFC 6962):} Mọi chứng chỉ công khai bắt buộc phải được ghi vào các sổ cái Merkle Tree công khai (CT Logs) trước khi được trình duyệt chấp nhận.
+      \item \textbf{Bộ công cụ kiểm định ZLint:} Tự động đối chiếu hơn 300 quy chuẩn IETF RFC 5280 và CA/B Forum Baseline Requirements.
+    \end{itemize}
+  \end{keybox}
+  \gvnote{[~2 phút | 14h10--14h12] Giới thiệu sự ra đời của Certificate Transparency và công cụ ZLint như lá chắn giám sát toàn cầu.}
+\end{frame}
+
+\begin{frame}{Khai Thác Active Directory Certificate Services (AD CS)}
+  Nghiên cứu của SpecterOps (2021) chỉ ra các lỗ hổng leo thang đặc quyền nghiêm trọng:
+  \begin{itemize}\small
+    \item \textbf{Lỗ hổng ESC1 (Misconfigured Template):} Mẫu chứng chỉ cấp cờ \texttt{ENROLLEE\_SUPPLIES\_SUBJECT} kết hợp EKU \texttt{Client Authentication}, cho phép người dùng thường mạo danh \texttt{Domain Admin}.
+    \item \textbf{Lỗ hổng ESC8 (NTLM Relay to Web Enrollment):} Kẻ tấn công relay gói tin NTLM sang cổng web HTTP của CA để yêu cầu cấp chứng chỉ máy và chiếm toàn bộ mạng Active Directory.
+  \end{itemize}
+
+  \begin{quizbox}[Phòng Ngự Kỹ Thuật (Đề tài Đồ án Nhóm 2)]
+    \begin{itemize}\small
+      \item Bỏ cờ \texttt{ENROLLEE\_SUPPLIES\_SUBJECT} trên các mẫu chứng chỉ nhạy cảm.
+      \item Giám sát Windows Event Log ID \texttt{4886} và \texttt{4887} bằng hệ thống Sigma rules.
+    \end{itemize}
+  \end{quizbox}
+  \gvnote{[~2 phút | 14h10--14h12] Giới thiệu sơ lược về AD CS ESC1/ESC8. Đây là chủ đề đồ án của Nhóm 2 (Hiển, Sơn, Phú).}
+\end{frame}
+
+\begin{frame}{Mối Đe Dọa Lượng Tử \& Bộ Tiêu Chuẩn NIST FIPS 203/204}
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \textbf{Nguy Cơ Sụp Đổ Mật Mã:}
+      \begin{itemize}\small
+        \item Thuật toán Shor trên máy tính lượng tử giải quyết bài toán thừa số nguyên tố và DLP trong thời gian đa thức $\mathcal{O}((\log N)^3)$.
+        \item Toàn bộ RSA và ECC sẽ sụp đổ hoàn toàn.
+        \item Tấn công \textbf{Harvest Now, Decrypt Later (HNDL)} đang diễn ra: Dữ liệu mã hóa hôm nay đang bị thu thập để giải mã trong tương lai!
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \begin{pqcbox}[Chuẩn NIST Mới Nhất (08/2024)]
+        \begin{itemize}\small
+          \item \textbf{NIST FIPS 203 (ML-KEM):} Đóng gói khóa mạng lưới Module-LWE (Kyber).
+          \item \textbf{NIST FIPS 204 (ML-DSA):} Chữ ký số mạng lưới Module-LWE (Dilithium).
+          \item \textbf{NIST FIPS 205 (SLH-DSA):} Chữ ký số hàm băm phi trạng thái (SPHINCS+).
+        \end{itemize}
+      \end{pqcbox}
+    \end{column}
+  \end{columns}
+  \gvnote{[~3 phút | 14h12--14h15] Giới thiệu về PQC và chuẩn mới nhất ban hành tháng 8/2024 của NIST. Nhấn mạnh khái niệm Harvest Now, Decrypt Later.}
+\end{frame}
+
+\begin{frame}{Infographic: So Sánh Kích Thước Khóa \& Chữ Ký Cổ Điển vs PQC}
+  \centering
+  \begin{tikzpicture}[
+    scale=0.80, every node/.style={transform shape},
+    bar/.style={rectangle, draw=none, rounded corners=2pt, minimum height=0.55cm}
+  ]
+    % Labels
+    \node[anchor=east, font=\small\bfseries] at (0, 3) {Ed25519 (Cổ điển)};
+    \node[anchor=east, font=\small\bfseries] at (0, 1.8) {RSA-3072 (Cổ điển)};
+    \node[anchor=east, font=\small\bfseries, color=warnred] at (0, 0.6) {ML-DSA-65 (NIST FIPS 204)};
+
+    % Ed25519 Bars
+    \fill[solgreen] (0.2, 2.7) rectangle (0.6, 3.3);
+    \node[anchor=west, font=\scriptsize] at (0.7, 3) {Public Key: 32 B $\cdot$ Signature: 64 B};
+
+    % RSA Bars
+    \fill[hcmutblue] (0.2, 1.5) rectangle (1.8, 2.1);
+    \node[anchor=west, font=\scriptsize] at (1.9, 1.8) {Public Key: 384 B $\cdot$ Signature: 384 B};
+
+    % ML-DSA Bars
+    \fill[warnred] (0.2, 0.3) rectangle (5.2, 0.9);
+    \node[anchor=west, font=\scriptsize\bfseries, color=warnred] at (5.3, 0.6) {Key: 1,952 B $\cdot$ Sig: 3,309 B (\textgreater 50x!)};
+    \coordinate (mldsa_anchor) at (4.0, 0.3);
+
+    % Note box
+    \node[draw=warnred, fill=warnred!10, rounded corners=4pt, align=center, font=\scriptsize, below=0.6cm of mldsa_anchor, text width=10.5cm] {
+      \textbf{Thách Thức Kỹ Thuật Đồ Án Nhóm 3 (PQC Migration):}\\
+      Chữ ký ML-DSA lớn hơn kích thước 1 khung tin TCP MTU (1500 bytes), dẫn tới phân mảnh gói tin IP và tăng độ trễ bắt tay mạng trên đường truyền vô tuyến.
+    };
+  \end{tikzpicture}
+  \gvnote{[~3 phút | 14h15--14h18] Biểu đồ so sánh kích thước: Trực quan hóa lý do vì sao chuyển dịch PQC lại khó về mặt kỹ thuật mạng.}
+\end{frame}
+
+\begin{frame}{Thách Thức Nghiên Cứu Mật Mã Hậu Lượng Tử (PQC) \selfstudy}
+  \begin{beyond}{open}
+    \begin{itemize}\small
+      \item \textbf{1. Phân mảnh gói tin TCP do chữ ký PQC quá lớn:} Chữ ký ML-DSA-65 dài 3,309 bytes, vượt quá MTU chuẩn (1500 bytes), làm tăng độ trễ mạng trong TLS Handshake.
+      \item \textbf{2. Chống tấn công Harvest Now, Decrypt Later (HNDL):} Cần triển khai kiến trúc chứng chỉ kép lai (Hybrid X.509 Certificate -- RFC 9881), kết hợp song song chữ ký cổ điển (ECDSA) và PQC (ML-DSA).
+      \item \textbf{3. Zero-Knowledge Proofs (ZKP) cho Định Danh Riêng Tư:} PKI thế hệ mới cho phép chứng minh sở hữu chứng chỉ hợp lệ mà không để lộ danh tính cá nhân.
+    \end{itemize}
+  \end{beyond}
+  \gvnote{[Tự học | Đề tài nghiên cứu] Giới thiệu 3 bài toán mở thời sự làm định hướng đề tài nghiên cứu chuyên sâu hoặc luận văn thạc sĩ.}
+\end{frame}
+
+% =====================================================================
+%  SECTION 7: LAB ENVIRONMENT & PROJECTS
+% =====================================================================
+\section{Môi trường Thực hành \& Phân công Đồ án}
+
+\begin{frame}{Môi Trường Thực Hành Chuẩn Hóa Docker Compose}
+  Toàn bộ các bài thực hành và đồ án môn học được đóng gói sẵn trong Docker:
+  \begin{itemize}\small
+    \item \textbf{OpenSSL 3.5.0-dev + liboqs:} Biên dịch sẵn hỗ trợ toàn diện các thuật toán PQC (ML-KEM, ML-DSA).
+    \item \textbf{SoftHSMv2:} Môi trường giả lập HSM phần cứng chuẩn PKCS\#11.
+    \item \textbf{Step-CA:} Máy chủ ACME RFC 8555 độc lập cho mạng private.
+  \end{itemize}
+
+  \begin{block}{Khởi Động Nhanh Môi Trường Thực Hành (Lab 1)}
+    \texttt{\$ git clone https://github.com/KMA-PKI-261/PKI-261-Courseware.git}\\
+    \texttt{\$ cd PKI-261-Courseware/Lab-Framework}\\
+    \texttt{\$ docker compose up -d \&\& docker compose exec pki-lab bash}
+  \end{block}
+  \gvnote{[~2 phút | 14h18--14h20] Hướng dẫn học viên clone kho bài tập và khởi động Docker container.}
+\end{frame}
+
+\begin{frame}{Phân Bổ 5 Đồ Án Chuyên Đề Cho 5 Nhóm Học Viên}
+  \begin{table}[h]
+    \centering\scriptsize
+    \begin{tabularx}{\linewidth}{@{}c p{0.24\linewidth} p{0.32\linewidth} X@{}}
+      \toprule
+      \textbf{Nhóm} & \textbf{Chủ Đề Đồ Án} & \textbf{Công Nghệ Trọng Tâm} & \textbf{Thành Viên Chính Thức} \\
+      \midrule
+      \textbf{Nhóm 1} & Zero Trust PKI (VAULT) & SoftHSMv2, Vault, mTLS Gateway & Hoài (T), Long, Quân \\
+      \textbf{Nhóm 2} & AD CS Security (RootCA) & Certipy, ESC1--ESC8, Sigma Rules & Hiển (T), Sơn, Phú \\
+      \textbf{Nhóm 3} & PQC Root of Trust (TMN) & OpenSSL 3.5, liboqs, FIPS 204 & Minh (T), Nguyên, Triết \\
+      \textbf{Nhóm 4} & Enterprise ACME (CAP) & Step-CA, Certbot, CP/CPS RFC 3647 & Diệu Anh (T), Chi, Phúc \\
+      \textbf{Nhóm 5} & CT \& Compliance (TYN) & ZLint, CT Logs RFC 6962, Golang & Nhật (T), Thái, Ý \\
+      \bottomrule
+    \end{tabularx}
+  \end{table}
+
+  \begin{keybox}[Thông Điệp Đồng Hành Cùng 5 Nhóm]
+    Toàn bộ 5 đề tài đều có bộ khung Docker Compose, tài liệu hướng dẫn và Makefile mẫu. Giảng viên và Trợ giảng trực tiếp hỗ trợ kỹ thuật qua GitHub issues.
+  \end{keybox}
+  \gvnote{[~3 phút | 14h20--14h23] Công bố danh sách chính thức 5 nhóm theo MASTER-DIEU-PHOI-HOC-PHAN.md.}
+\end{frame}
+
+% =====================================================================
+%  SELF-STUDY PACK: TIMELINE, PORTRAITS, CHEAT-SHEET & REVIEW
+% =====================================================================
+\appendix
+\section{Gói Tự Học \& Ôn Tập Nâng Cao (Self-Study Pack)}
+
+\begin{frame}{Dòng Thời Gian Lịch Sử Phát Triển Của PKI \selfstudy}
+  \centering\small
+  \begin{tikzpicture}[x=1.7cm, y=1cm, every node/.style={font=\scriptsize}]
+    \draw[-{Stealth[scale=1.1]}, thick, color=hcmutblue] (-0.5, 0) -- (6.5, 0);
+    \foreach \x/\yr/\txt in {
+      0/1976/Diffie-Hellman\\Public Key,
+      1.3/1978/Kohnfelder\\Digital Cert,
+      2.6/1988/ITU-T\\X.509 v1,
+      3.9/2011/DigiNotar\\Crisis,
+      5.2/2015/Let's Encrypt\\ACME RFC 8555,
+      6.3/2024/NIST FIPS\\ML-KEM/DSA
+    }{
+      \draw[thick, color=hcmutblue] (\x, 0.12) -- (\x, -0.12);
+      \node[anchor=south, font=\scriptsize\bfseries, color=hcmutblue] at (\x, 0.15) {\yr};
+      \node[anchor=north, align=center, text width=1.8cm] at (\x, -0.15) {\txt};
+    }
+  \end{tikzpicture}
+
+  \vspace{0.4em}
+  \begin{keybox}[Quy Luật Phát Triển Của Hệ Sinh Thái]
+    Mỗi bước ngoặt của PKI đều bắt nguồn từ một cuộc khủng hoảng niềm tin hoặc đột phá toán học: từ bài toán mạo danh sơ khai (1978), sự sụp đổ của các CA đơn lẻ (2011), đến cuộc đại di chuyển trước mối đe dọa lượng tử (2024).
+  \end{keybox}
+  \gvnote{[Tự học | Lịch sử] Trực quan hóa tiến trình nửa thế kỷ phát triển của PKI trên một trục thời gian duy nhất.}
+\end{frame}
+
+\begin{frame}{Tờ Tra Cứu Nhanh Các Phần Mở Rộng X.509 (Cheat-Sheet) \selfstudy}
+  \begin{table}[h]
+    \centering\scriptsize
+    \begin{tabularx}{\linewidth}{@{}p{0.26\linewidth} X c c@{}}
+      \toprule
+      \textbf{Phần Mở Rộng} & \textbf{Mục Đích Kỹ Thuật} & \textbf{Critical} & \textbf{Chuẩn Bắt Buộc} \\
+      \midrule
+      \textbf{Basic Constraints} & Phân định CA vs End-Entity & \textbf{BẮT BUỘC} & RFC 5280 \\
+      \textbf{Key Usage} & Khóa ký (\texttt{keyCertSign}) vs mã hóa & \textbf{BẮT BUỘC} & RFC 5280 \\
+      \textbf{Extended Key Usage} & Mục đích ứng dụng (\texttt{serverAuth}) & Tùy chọn & CA/B Forum \\
+      \textbf{Subject Alt Name} & Tên miền DNS, địa chỉ IP thay CN & Tùy chọn & Bắt buộc Web PKI \\
+      \textbf{CRL Distribution} & Điểm tải file thu hồi CRL & Không & RFC 5280 \\
+      \textbf{AIA (OCSP)} & URL máy chủ kiểm tra OCSP & Không & RFC 5280 \\
+      \textbf{OCSP Must-Staple} & Buộc máy chủ kẹp phản hồi OCSP & Tùy chọn & RFC 7633 \\
+      \bottomrule
+    \end{tabularx}
+  \end{table}
+  \gvnote{[Tự học | Tra cứu] Bảng cheat-sheet tóm tắt các thuộc tính X.509 trọng yếu dùng để tra cứu nhanh khi làm bài Lab và thi cử.}
+\end{frame}
+
+\begin{frame}{Bộ Câu Hỏi Thẩm Định Năng Lực Buổi Học S01}
+  \begin{quizbox}[Bộ Câu Hỏi Thẩm Định Năng Lực Buổi Học S01]
+    \begin{enumerate}\footnotesize
+      \item \textbf{Câu hỏi 1:} Tại sao cờ \texttt{basicConstraints} bắt buộc phải được đánh dấu là \texttt{critical=TRUE} trên chứng chỉ CA trung gian? Điều gì xảy ra nếu cờ này là \texttt{non-critical}?
+      \answer{\\\textbf{Giải đáp:} Nếu không đánh dấu critical, các ứng dụng xác thực cũ có thể bỏ qua việc kiểm tra thuộc tính này và chấp nhận chứng chỉ máy chủ web làm CA, dẫn đến nguy cơ bất kỳ ai cũng có thể tự ký cấp chứng chỉ giả mạo!}
+      \item \textbf{Câu hỏi 2:} Trong lễ sinh khóa (Key Ceremony), vì sao người ta dùng cơ chế $M$-of-$N$ Shamir Secret Sharing mà không giao toàn quyền cho một quản trị viên cao nhất?
+      \answer{\\\textbf{Giải đáp:} Loại bỏ hoàn toàn điểm yếu đơn lẻ (Single Point of Failure), ngăn chặn rủi ro nội bộ (Insider Threat), tống tiền hoặc sơ suất cá nhân. Bắt buộc phải có sự đồng thuận của ít nhất $M$ người giám sát độc lập.}
+    \end{enumerate}
+  \end{quizbox}
+  \gvnote{[~3 phút | 14h21--14h24] Cho học viên 1 phút suy nghĩ và trả lời 2 câu hỏi ôn tập. Đáp án chi tiết hiển thị trong bản giáo án của GV và bản ghi chú.}
+\end{frame}
+
+\begin{frame}{Tóm Tắt Buổi Học \& Chuẩn Bị Tuần Tiếp Theo (S02)}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Nội Dung Đã Nắm Vững (S01):}
+      \begin{itemize}\small
+        \item Bản chất bài toán Identity Binding của PKI.
+        \item Mô hình phân tầng 3 cấp: Root CA $\to$ Intermediate CA $\to$ End-Entity.
+        \item Nghi thức Key Ceremony \& HSM FIPS 140-3.
+        \item Các kịch bản tấn công và lộ trình PQC.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Nhiệm Vụ Tuần Tiếp Theo (S02):}
+      \begin{itemize}\small
+        \item Đọc Chương 2 của \textbf{Tài liệu học tập}.
+        \item Hoàn thành bài Lab 1: Khởi tạo Root CA và Sub-CA bằng OpenSSL 3.5.
+        \item Họp nhóm đồ án lần 1, phân công vai trò kỹ thuật theo Makefile mẫu.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.6em}
+  \centering\large\sffamily\bfseries\color{hcmutblue}
+  Xin cảm ơn các anh chị học viên! Chúc lớp có một học kỳ thành công xuất sắc!
+  \gvnote{[~2 phút | 14h23--14h25] Tổng kết buổi học, giải đáp thắc mắc và hẹn gặp lại học viên vào 13h30 chiều Thứ Bảy tuần sau.}
+\end{frame}
+
+\end{document}

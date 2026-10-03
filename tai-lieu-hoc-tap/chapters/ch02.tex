@@ -1,0 +1,102 @@
+\chapter{Cấu Trúc Dữ Liệu Chứng Chỉ X.509 v3 \& Quy Cách Mã Hóa ASN.1 DER}
+
+\banddo{Cú pháp trừu tượng ASN.1 $\to$ Mã hóa nhị phân DER (TLV) $\to$ Khung dữ liệu TBSCertificate $\to$ Các phần mở rộng v3 trọng yếu $\to$ Quy định CA/B Forum}
+
+\section{Cú Pháp ASN.1 \& Quy Tắc Mã Hóa Nhị Phân DER}
+
+Chứng chỉ số không phải là một chuỗi văn bản thuần túy mà là một cấu trúc dữ liệu phân cấp được định nghĩa bằng chuẩn quốc tế \textbf{ASN.1 (Abstract Syntax Notation One -- ITU-T X.680)} và được đóng gói nhị phân theo quy tắc \textbf{DER (Distinguished Encoding Rules -- ITU-T X.690)}.
+
+\subsection{Cấu Trúc Khung Nhị Phân TLV (Tag -- Length -- Value)}
+
+Trong mã hóa DER, mọi thành phần dữ liệu đều được biểu diễn dưới dạng bộ ba:
+\begin{enumerate}
+  \item \textbf{Tag (Thẻ phân loại):} 1 byte (hoặc nhiều bytes) xác định kiểu dữ liệu. Ví dụ: \texttt{0x02} (INTEGER), \texttt{0x03} (BIT STRING), \texttt{0x04} (OCTET STRING), \texttt{0x05} (NULL), \texttt{0x06} (OBJECT IDENTIFIER -- OID), \texttt{0x30} (SEQUENCE).
+  \item \textbf{Length (Độ dài nội dung):} Số lượng bytes của phần Value. Nếu độ dài $< 128$, biểu diễn bằng 1 byte dạng ngắn (\texttt{0x00} -- \texttt{0x7F}). Nếu độ dài $\ge 128$, byte đầu có bit cao nhất bằng 1, các bit còn lại chỉ số lượng byte tiếp theo dùng để ghi độ dài.
+  \item \textbf{Value (Giá trị dữ liệu):} Chuỗi byte dữ liệu nhị phân thực tế của trường.
+\end{enumerate}
+
+\begin{batngo}
+Tại sao PKI bắt buộc dùng mã hóa DER mà không dùng BER (Basic Encoding Rules)?\\
+BER cho phép nhiều cách biểu diễn nhị phân cho cùng một giá trị toán học (ví dụ: cờ boolean có thể biểu diễn bằng bất kỳ byte nào khác 0). Ngược lại, DER là chuẩn \textbf{đơn nhất tuyệt đối (Canonical Encoding)}: một cấu trúc ASN.1 chỉ có duy nhất một chuỗi byte nhị phân tương ứng. Nếu không dùng DER, kẻ tấn công có thể thay đổi cách mã hóa byte mà vẫn giữ nguyên ngữ nghĩa, dẫn đến việc chữ ký số bị sai lệch hoặc mở đường cho tấn công biến dạng chữ ký (\emph{Signature Malleability}).
+\end{batngo}
+
+\section{Cấu Trúc Khung Nhị Phân RFC 5280}
+
+Một chứng chỉ X.509 v3 chuẩn hóa theo IETF RFC 5280 bao gồm 3 khối dữ liệu chính:
+\begin{enumerate}
+  \item \textbf{TBSCertificate (To-Be-Signed Certificate):} Toàn bộ nội dung thông tin chứng chỉ cần được CA ký xác thực.
+  \item \textbf{SignatureAlgorithm:} Định danh thuật toán mật mã mà CA sử dụng để ký (OID: ví dụ \texttt{sha256WithRSAEncryption} hoặc \texttt{ecdsa-with-SHA256}).
+  \item \textbf{SignatureValue:} Chữ ký số nhị phân được tính bằng cách băm toàn bộ khối nhị phân DER của TBSCertificate và ký bằng khóa bí mật của CA:
+  \begin{equation}
+  \sigma_{\text{CA}} = \text{Sign}(K_{\text{priv\_CA}}, \text{Hash}(\text{TBSCertificate}_{\text{DER}}))
+  \end{equation}
+\end{enumerate}
+
+\begin{table}[h]
+\centering\small
+\begin{tabularx}{\linewidth}{@{}p{0.26\linewidth} p{0.28\linewidth} X@{}}
+\toprule
+\textbf{Trường Dữ Liệu} & \textbf{Kiểu ASN.1} & \textbf{Ý Nghĩa Kỹ Thuật} \\
+\midrule
+\texttt{version} & \texttt{EXPLICIT Version} & Phiên bản X.509 (v3 biểu diễn bằng số nguyên \texttt{0x02}) \\
+\texttt{serialNumber} & \texttt{CertificateSerialNumber} & Số định danh duy nhất (ngẫu nhiên dương, tối đa 20 bytes) \\
+\texttt{signature} & \texttt{AlgorithmIdentifier} & Thuật toán CA dùng để ký TBSCertificate \\
+\texttt{issuer} & \texttt{Name} & Tên phân biệt (Distinguished Name -- DN) của CA phát hành \\
+\texttt{validity} & \texttt{Validity} & Thời gian hiệu lực (\texttt{notBefore} đến \texttt{notAfter}) \\
+\texttt{subject} & \texttt{Name} & Tên phân biệt của thực thể được cấp chứng chỉ \\
+\texttt{subjectPublicKeyInfo} & \texttt{SubjectPublicKeyInfo} & Khóa công khai của chủ thể và thuật toán tương ứng \\
+\texttt{extensions} & \texttt{Extensions OPTIONAL} & Danh sách các phần mở rộng v3 \\
+\bottomrule
+\end{tabularx}
+\caption{Cấu trúc các trường trong TBSCertificate theo RFC 5280.}
+\end{table}
+
+\section{Các Phần Mở Rộng Trọng Yếu (Critical Extensions)}
+
+Chuẩn X.509 v3 bổ sung cơ chế mở rộng linh hoạt. Mỗi phần mở rộng gồm một OID, cờ \texttt{critical} (BOOLEAN) và giá trị \texttt{extnValue} (OCTET STRING).
+
+\begin{definition}[Quy tắc xử lý cờ Critical]
+Nếu một phần mở rộng được đánh dấu \texttt{critical = TRUE}, mọi ứng dụng phần mềm thẩm tra (trình duyệt, hệ điều hành) \textbf{bắt buộc phải nhận biết và thực thi đúng ngữ nghĩa} của phần mở rộng đó. Nếu ứng dụng không hiểu phần mở rộng này, nó \textbf{bắt buộc phải từ chối chứng chỉ ngay lập tức}!
+\Enddinhnghia
+\end{definition}
+
+Các phần mở rộng then chốt:
+\begin{itemize}
+  \item \textbf{Basic Constraints (OID 2.5.29.19):} Bắt buộc đánh dấu \texttt{critical = TRUE} trên chứng chỉ CA. Chứa trường \texttt{cA = TRUE/FALSE} và ràng buộc độ sâu chuỗi \texttt{pathLenConstraint}.
+  \item \textbf{Key Usage (OID 2.5.29.15):} Ràng buộc mục đích sử dụng của khóa công khai: \texttt{digitalSignature}, \texttt{keyCertSign}, \texttt{cRLSign}, \texttt{keyEncipherment}.
+  \item \textbf{Extended Key Usage (OID 2.5.29.37):} Xác định ứng dụng cụ thể: \texttt{serverAuth} (TLS Web Server), \texttt{clientAuth} (mTLS), \texttt{codeSigning} (ký mã nguồn), \texttt{emailProtection} (S/MIME).
+  \item \textbf{Subject Alternative Name -- SAN (OID 2.5.29.17):} Danh sách tên miền (\texttt{dNSName}), địa chỉ IP (\texttt{iPAddress}), URI định danh cho chủ thể.
+\end{itemize}
+
+\begin{lichsu}
+Trước năm 2017, các quản trị viên thường đặt tên miền máy chủ vào trường \texttt{Common Name (CN)} thuộc Subject DN (ví dụ: \texttt{CN=www.kma.edu.vn}). Tuy nhiên, trường CN chỉ chứa được một tên miền duy nhất, dễ gây nhầm lẫn cú pháp và không hỗ trợ nhiều dịch vụ hiện đại. Tháng 5/2017, Google Chrome 58 chính thức loại bỏ hoàn toàn việc kiểm tra CN, buộc mọi chứng chỉ Web PKI phải dùng trường SAN.
+\end{lichsu}
+
+\begin{thuthach}
+\textbf{Cạm bẫy bỏ quên SAN:} Nếu kỹ sư bảo mật sinh chứng chỉ web chỉ cấu hình trường Common Name (CN) mà bỏ qua phần mở rộng Subject Alternative Name (SAN), toàn bộ các trình duyệt hiện đại (Chrome, Safari, Edge, Firefox) sẽ chặn kết nối và hiển thị lỗi an ninh nghiêm trọng:
+\begin{center}
+\textbf{\color{warnred}NET::ERR\_CERT\_COMMON\_NAME\_INVALID}
+\end{center}
+\end{thuthach}
+
+\begin{chayngay}
+Giải mã nhị phân cấu trúc ASN.1 DER của một chứng chỉ bằng OpenSSL:
+\begin{lstlisting}[language=bash]
+# Phan tich cau truc TLV cua file chung chi DER
+openssl asn1parse -in cert.der -inform DER -i
+# Trich xuat rieng phan mo rong Extensions
+openssl x509 -in cert.pem -noout -text -certopt no_sigdump,no_pubkey
+\end{lstlisting}
+\end{chayngay}
+
+\begin{tukiemtra}
+\begin{enumerate}
+  \item Điều gì xảy ra nếu chứng chỉ của một Intermediate CA bị quên thiết lập cờ \texttt{critical = TRUE} trên phần mở rộng Basic Constraints?
+  \item Tại sao một chứng chỉ máy chủ web TLS bắt buộc phải có phần mở rộng Extended Key Usage chứa mục đích \texttt{serverAuth}?
+  \item Phân biệt sự khác nhau giữa \texttt{digitalSignature} và \texttt{keyCertSign} trong phần mở rộng Key Usage.
+\end{enumerate}
+\end{tukiemtra}
+
+\begin{kbox}
+Mã hóa nhị phân DER bảo đảm tính đơn nhất tuyệt đối của chứng chỉ X.509, chống tấn công Signature Malleability. Cờ Critical buộc ứng dụng phải tuân thủ nghiêm ngặt chính sách an ninh. Toàn bộ hạ tầng Web PKI hiện đại đã bãi bỏ trường Common Name (CN) và bắt buộc sử dụng Subject Alternative Name (SAN).
+\end{kbox}

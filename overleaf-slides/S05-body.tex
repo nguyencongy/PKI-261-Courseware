@@ -1,0 +1,152 @@
+% =====================================================================
+%  PKI Session 5: TLS 1.3 & mTLS Zero Trust Gateway
+%  Author: Nguyen An Khuong (CSE-HCMUT · ORCID: 0000-0002-9910-6387)
+%  Teaching Assistant: Nguyen Huu Hoang Huy (LinkedIn)
+%  Master of Science in Information Security (CHAT4P) · HK261
+% =====================================================================
+
+\title{\color{hcmutblue}\textbf{\LARGE PUBLIC KEY INFRASTRUCTURE}\\[0.25em]
+       \color{hcmutblue}\textbf{\large S05: Giao thức TLS 1.3 \& Kiến trúc mTLS Zero Trust}}
+\date{\footnotesize Session 5 of 9 $\cdot$ ATHK 512 (KMA CHAT4P, HK261)\\
+      Class: Sat 31/10/2026 $\cdot$ 13h30--18h30\\
+      \textit{Standards: IETF RFC 8446 (TLS 1.3), SPIFFE/SPIRE, Envoy Proxy}}
+
+\begin{document}
+\PKItitleframe
+
+\section{Tổng quan \& Lộ trình Buổi S05}
+
+\begin{frame}{Lộ Trình Học Phần (Buổi 5/9)}
+  \centering
+  \makebox[\linewidth][c]{\PKIcoursemap{5}}
+  \vspace{0.4em}
+  \raggedright\small
+  Buổi học đưa chứng chỉ số vào bảo vệ kênh truyền thực tế: phân tích bước nhảy vọt của giao thức TLS 1.3 và kiến trúc xác thực hai chiều mTLS trong mạng lưới Microservices Zero Trust.
+  \gvnote{[~2 phút | 13h30--13h32] Giới thiệu Buổi 5: Giao thức bắt tay TLS 1.3 và mô hình an ninh Zero Trust với mTLS Gateway.}
+\end{frame}
+
+\begin{frame}{Chuẩn Đầu Ra Buổi Học S05 (Learning Objectives)}
+  \small
+  Sau buổi học S05, học viên làm chủ các năng lực:
+  \begin{enumerate}
+    \item \textbf{Phân tích} chi tiết quy trình bắt tay 1-RTT của giao thức TLS 1.3 (RFC 8446).
+    \item \textbf{Chứng minh} tính chất bí mật chuyển tiếp hoàn hảo (Perfect Forward Secrecy -- PFS).
+    \item \textbf{Thiết kế} kiến trúc xác thực hai chiều mTLS bảo vệ kết nối giữa các microservices.
+    \item \textbf{Triển khai} định danh tài nguyên động dạng SPIFFE ID và cấu hình Reverse Proxy Envoy/Nginx.
+  \end{enumerate}
+
+  \begin{keybox}[Triết Lý Kiến Trúc Zero Trust]
+    "Không bao giờ tin tưởng, luôn luôn xác thực" (Never Trust, Always Verify). Mạng nội bộ không an toàn hơn Internet. Mọi kết nối giữa các microservices bắt buộc phải có chứng chỉ số mTLS hợp lệ!
+  \end{keybox}
+  \gvnote{[~3 phút | 13h32--13h35] Nhấn mạnh sự sụp đổ của chu vi mạng (Perimeter Defense) và vai trò trung tâm của mTLS trong Zero Trust.}
+\end{frame}
+
+\section{Giao thức TLS 1.3 (RFC 8446)}
+
+\begin{frame}{Bước Nhảy Vọt Của Giao Thức TLS 1.3 So Với TLS 1.2}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{TLS 1.2 (Lỗi thời, chậm):}
+      \begin{itemize}\small
+        \item Bắt tay mất \textbf{2 RTT} mạng mới bắt đầu truyền dữ liệu ứng dụng.
+        \item Còn hỗ trợ thuật toán trao đổi khóa RSA tĩnh (không có tính chất PFS).
+        \item Cho phép chế độ CBC mode dễ bị tấn công Padding Oracle (Lucky Thirteen).
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{TLS 1.3 (Hiện đại, siêu tốc):}
+      \begin{itemize}\small
+        \item Rút ngắn bắt tay xuống còn đúng \textbf{1 RTT} (hoặc 0-RTT với Early Data).
+        \item \textbf{Bắt buộc PFS:} Chỉ cho phép Ephemeral Diffie-Hellman (ECDHE/DHE).
+        \item \textbf{Chỉ dùng mật mã xác thực AEAD:} AES-GCM, ChaCha20-Poly1305.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \begin{keybox}[Ý Nghĩa An Ninh Của Perfect Forward Secrecy]
+    Dù kẻ tấn công có đánh cắp được khóa bí mật của máy chủ trong tương lai, toàn bộ các phiên bắt tay TLS 1.3 đã ghi lại trong quá khứ vẫn an toàn tuyệt đối, không thể bị giải mã!
+  \end{keybox}
+  \gvnote{[~3 phút | 13h35--13h38] Phân tích lý do TLS 1.3 khai tử trao đổi khóa RSA: Bảo đảm tính chất PFS bắt buộc.}
+\end{frame}
+
+\begin{frame}{Sơ Đồ Bắt Tay 1-RTT Trong TLS 1.3}
+  \centering
+  \begin{tikzpicture}[
+    scale=0.84, every node/.style={transform shape},
+    node distance=2.2cm and 4.2cm,
+    cl/.style={rectangle, draw=hcmutblue, fill=keybg, thick, rounded corners=3pt, minimum width=2.8cm, minimum height=0.9cm, align=center, font=\small\bfseries},
+    sv/.style={rectangle, draw=solgreen, fill=solgreen!15, thick, rounded corners=3pt, minimum width=2.8cm, minimum height=0.9cm, align=center, font=\small\bfseries},
+    msg/.style={-{Stealth[scale=1.1]}, thick}
+  ]
+    \node[cl] (client) {Client (Browser)};
+    \node[sv] (server) [right=of client] {Server (Web)};
+
+    \draw[msg, color=hcmutblue] (client.north east) -- node[above, font=\scriptsize] {1. ClientHello + Key Share ($g^a$) + CipherSuites} (server.north west);
+    \draw[msg, color=solgreen] (server.west) -- node[above, font=\scriptsize, align=center] {2. ServerHello + Key Share ($g^b$)\\$\to$ \textbf{Thiết lập khóa phiên $g^{ab}$!}} (client.east);
+    \draw[msg, color=solgreen] (server.south west) -- node[above, font=\scriptsize, color=solgreen!80!black] {3. EncryptedExtensions + Certificate + Finished} (client.south east);
+    \draw[msg, color=hcmutblue] (client.south) to[bend right=25] node[below, font=\scriptsize] {4. [Encrypted] HTTP GET / (1 RTT!)} (server.south);
+
+    \node[draw=hcmutblue!60, fill=gray!5, rounded corners=3pt, below=1.5cm of client, text width=11.5cm, font=\scriptsize, align=left] {
+      \textbf{Điểm cải tiến then chốt:}\\
+      $\bullet$ Client gửi ngay khóa trao đổi $g^a$ trong gói tin đầu tiên (Key Share).\\
+      $\bullet$ Toàn bộ thông tin chứng chỉ máy chủ được mã hóa bằng khóa phiên, bảo vệ quyền riêng tư trước kẻ nghe lén trên đường truyền!
+    };
+  \end{tikzpicture}
+  \gvnote{[~3 phút | 13h38--13h41] Mổ xẻ chi tiết gói tin bắt tay TLS 1.3: Mã hóa chứng chỉ ngay từ gói tin phản hồi của máy chủ.}
+\end{frame}
+
+\section{Kiến trúc Xác thực Hai Chiều mTLS \& SPIFFE/SPIRE}
+
+\begin{frame}{Khác Biệt Giữa TLS Một Chiều \& mTLS Hai Chiều}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{TLS Một Chiều (Web truyền thống):}
+      \begin{itemize}\small
+        \item Chỉ máy chủ Web xuất trình chứng chỉ cho Client kiểm tra.
+        \item Client chỉ là người dùng ẩn danh (hoặc xác thực sau qua mật khẩu/cookie).
+        \item Dễ bị tấn công giả mạo client trong mạng nội bộ.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{mTLS Hai Chiều (Zero Trust):}
+      \begin{itemize}\small
+        \item Máy chủ yêu cầu gói \texttt{CertificateRequest}.
+        \item \textbf{Cả Client và Server đều bắt buộc phải xuất trình chứng chỉ X.509 hợp lệ} do cùng hệ thống CA tin cậy ký.
+        \item Xác thực định danh cấp độ mật mã phần cứng cho từng service.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \begin{keybox}[Khuyến Nghị Thiết Kế]
+    Trong kiến trúc Microservices, mTLS loại bỏ hoàn toàn việc truyền API keys hoặc mật khẩu tĩnh trong mã nguồn, ngăn chặn triệt để nguy cơ lộ lọt thông tin xác thực.
+  \end{keybox}
+  \gvnote{[~3 phút | 13h41--13h44] Phân tích vai trò của mTLS trong việc bảo vệ các kết nối dịch vụ tài chính, ngân hàng và đám mây.}
+\end{frame}
+
+\begin{frame}{Chuẩn Định Danh SPIFFE \& Nền Tảng SPIRE}
+  \begin{beyond}{why}
+    Làm thế nào để cấp phát chứng chỉ số cho hàng nghìn container tự động sinh ra và tự hủy trong vài phút mà không lưu private key lên ổ cứng?
+  \end{beyond}
+
+  \begin{itemize}\small
+    \item \textbf{SPIFFE ID:} Chuỗi định danh chuẩn hóa dạng URI trong SAN:
+      $$\texttt{spiffe://kma.edu.vn/ns/prod/sa/payment-service}$$
+    \item \textbf{SVID (SPIFFE Verifiable Identity Document):} Chứng chỉ số X.509 ngắn hạn (thời hạn 1 giờ) cấp trực tiếp vào bộ nhớ RAM của Pod.
+    \item \textbf{SPIRE Agent:} Lắng nghe API Kernel Linux (cgroups, namespaces) để tự động chứng thực pod và xoay vòng chứng chỉ định kỳ.
+  \end{itemize}
+  \gvnote{[~3 phút | 13h44--13h47] Giới thiệu chuẩn SPIFFE/SPIRE: Tiêu chuẩn vàng của điện toán đám mây Cloud Native.}
+\end{frame}
+
+\begin{frame}{Bài Tập Tự Kiểm Tra Buổi S05}
+  \begin{quizbox}[Câu Hỏi Thẩm Định Năng Lực]
+    \begin{enumerate}\footnotesize
+      \item \textbf{Câu 1:} Một kỹ sư cấu hình Nginx làm mTLS Gateway nhưng chỉ kiểm tra chứng chỉ client hợp lệ mà quên kiểm tra trường SAN/Subject. Rủi ro là gì?
+      \answer{\\\textbf{Giải đáp:} Bất kỳ ai sở hữu một chứng chỉ hợp lệ do cùng CA cấp (ví dụ tài khoản thực tập sinh) đều có thể kết nối thành công và mạo danh dịch vụ thanh toán nhạy cảm!}
+      \item \textbf{Câu 2:} Vì sao chế độ 0-RTT trong TLS 1.3 lại tiềm ẩn nguy cơ tấn công phát lại (Replay Attack)?
+      \answer{\\\textbf{Giải đáp:} Dữ liệu gửi trong 0-RTT Early Data không được bảo vệ chống phát lại. Kẻ tấn công có thể bắt gói tin này và gửi lại nhiều lần để lặp lại một lệnh thanh toán ngân hàng.}
+    \end{enumerate}
+  \end{quizbox}
+  \gvnote{[~2 phút | 13h47--13h50] Tổng kết kiến thức Buổi 5 và hướng dẫn thực hành Lab 4.}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,1930 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{\textbf{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{caption}
+\captionsetup[table]{skip=6pt}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+{
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\section{TÀI LIỆU HỌC TẬP}\label{tuxe0i-liux1ec7u-hux1ecdc-tux1eadp}
+
+\section{CƠ SỞ HẠ TẦNG KHÓA CÔNG KHAI (PKI) \& CHUYỂN DỊCH MẬT MÃ HẬU
+LƯỢNG TỬ
+(PQC)}\label{cux1a1-sux1edf-hux1ea1-tux1ea7ng-khuxf3a-cuxf4ng-khai-pki-chuyux1ec3n-dux1ecbch-mux1eadt-muxe3-hux1eadu-lux1b0ux1ee3ng-tux1eed-pqc}
+
+\textbf{Mã học phần:} ATHK 512 · \textbf{Khóa đào tạo:} Cao học An toàn
+Thông tin (CHAT4P)\\
+\textbf{Học kỳ:} HK261 · \textbf{Năm học:} 2026 -- 2027\\
+\textbf{Cơ sở đào tạo:} Khoa An toàn Thông tin --- Học viện Kỹ thuật Mật
+mã (Phân hiệu TP.HCM)\\
+\textbf{Đơn vị phối hợp chuyên môn:} Khoa Khoa học \& Kỹ thuật Máy tính,
+Trường Đại học Bách khoa --- ĐHQG TP.HCM
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{THÔNG TIN ĐỘI NGŨ GIẢNG DẠY \& HỖ TRỢ HỌC
+THUẬT}\label{thuxf4ng-tin-ux111ux1ed9i-ngux169-giux1ea3ng-dux1ea1y-hux1ed7-trux1ee3-hux1ecdc-thuux1eadt}
+
+\begin{itemize}
+\item
+  \textbf{Chủ biên \& Giảng viên phụ trách:}\\
+  \textbf{Nguyễn An Khương}\\
+  \emph{Đơn vị công tác:} Khoa Khoa học \& Kỹ thuật Máy tính, Trường Đại
+  học Bách khoa --- ĐHQG TP.HCM\\
+  \emph{Mã định danh học thuật toàn cầu:}
+  \href{https://orcid.org/0000-0002-9910-6387}{ORCID:
+  0000-0002-9910-6387}\\
+  \emph{Email công vụ:} \texttt{nakhuong@gmail.com} /
+  \texttt{nakhuong@hcmut.edu.vn}
+\item
+  \textbf{Trợ giảng học phần (Teaching Assistant):}\\
+  \textbf{Nguyễn Hữu Hoàng Huy}\\
+  \emph{Hồ sơ chuyên môn:}
+  \href{https://www.linkedin.com/in/nguyen-huu-hoang-huy-abb138366/}{LinkedIn
+  Profile}\\
+  \emph{GitHub:} \texttt{@HuyLHP} (Quyền quản trị kỹ thuật: Collaborator
+  \texttt{write})
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsubsection{BẢN QUYỀN VÀ GIẤY PHÉP PHÁT
+HÀNH}\label{bux1ea3n-quyux1ec1n-vuxe0-giux1ea5y-phuxe9p-phuxe1t-huxe0nh}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Bản quyền Nội dung \& Học liệu:} Bản quyền thuộc về Giảng viên
+  \textbf{Nguyễn An Khương}. Tác phẩm này được phát hành dưới Giấy phép
+  Quốc tế
+  \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{Creative
+  Commons Attribution-NonCommercial-NoDerivatives 4.0 (CC BY-NC-ND
+  4.0)}. Người học được phép sao chép, phân phối tài liệu cho mục đích
+  học tập cá nhân phi thương mại, không được phép chỉnh sửa hoặc cắt
+  ghép nội dung khi chưa có văn bản chấp thuận của tác giả.
+\item
+  \textbf{Bản quyền Mã nguồn \& Thực nghiệm:} Toàn bộ mã nguồn, kịch bản
+  tự động hóa, cấu hình container Docker và test suites trong học liệu
+  được phát hành theo \href{https://opensource.org/licenses/MIT}{Giấy
+  phép Nguồn mở MIT (MIT License)}.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{LỜI NÓI ĐẦU}\label{lux1eddi-nuxf3i-ux111ux1ea7u}
+
+Hạ tầng Khóa Công khai (Public Key Infrastructure - PKI) từ lâu đã trở
+thành ``xương sống vô hình'' bảo đảm tính bảo mật, toàn vẹn, xác thực và
+chống chối bỏ cho toàn bộ thế giới số hiện đại. Từ giao thức bắt tay TLS
+bảo vệ hàng tỷ phiên duyệt web an toàn mỗi ngày, chữ ký số trên các
+chứng từ tài chính - ngân hàng, đến các định danh thiết bị IoT và cơ chế
+khởi động an toàn (Secure Boot) trong hệ điều hành máy tính --- tất cả
+đều vận hành dựa trên các nguyên lý cốt lõi của PKI.
+
+Tuy nhiên, kỷ nguyên số đang bước vào một khúc quanh lịch sử với hai
+chuyển biến mang tính cách mạng: 1. \textbf{Kiến trúc Zero Trust \& Điện
+toán Đám mây Phân tán:} Mô hình chu vi mạng truyền thống bị xóa bỏ hoàn
+toàn. Các hệ thống hiện đại đòi hỏi hàng triệu kết nối mTLS giữa các
+microservices được mã hóa với chứng chỉ có thời hạn sống biểu kiến
+(ephemeral certificates tính bằng giờ hoặc phút), kéo theo yêu cầu tự
+động hóa tuyệt đối thông qua giao thức ACME (RFC 8555) và kiểm định tuân
+thủ tự động (ZLint). 2. \textbf{Nguy cơ Hiện hữu từ Điện toán Lượng tử
+(Post-Quantum Transition):} Thuật toán lượng tử Shor đã chứng minh khả
+năng bẻ gãy hoàn toàn các hệ mật mã khóa công khai kinh điển dựa trên
+bài toán phân tích thừa số nguyên tố (RSA) và logarit rời rạc (DSA,
+ECDSA, ECDH) trong thời gian đa thức. Tháng 8/2024, Viện Tiêu chuẩn và
+Công nghệ Quốc gia Hoa Kỳ (NIST) đã chính thức ban hành bộ tiêu chuẩn
+FIPS 203 (ML-KEM), FIPS 204 (ML-DSA) và FIPS 205 (SLH-DSA), mở ra một
+cuộc đại di chuyển mật mã (cryptographic migration) quy mô toàn cầu chưa
+từng có trong lịch sử nhân loại.
+
+Bộ \textbf{Tài liệu học tập: Cơ sở Hạ tầng Khóa công khai \& Mật mã Hậu
+lượng tử} này được biên soạn dành riêng cho học viên cao học ngành An
+toàn Thông tin (CHAT4P) nhằm trang bị một góc nhìn sâu sắc, toàn diện và
+hiện đại: kết hợp chặt chẽ giữa \textbf{nền tảng toán học hàn lâm chuẩn
+mực}, \textbf{chuẩn giao thức kỹ thuật quốc tế (IETF RFCs, CA/B Forum,
+NIST FIPS)} và \textbf{năng lực thực chiến công nghiệp (DevSecOps,
+Docker, OpenSSL 3.5, liboqs, HSM)}.
+
+Tài liệu được kết cấu thành 8 chương chuyên sâu kèm theo hệ thống phụ
+lục thực nghiệm phong phú, đóng vai trò là kim chỉ nam xuyên suốt 9 buổi
+học lý thuyết, thực hành phòng lab và 5 đề tài đồ án chuyên đề lớn của
+học phần.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{MỤC LỤC TỔNG QUAN}\label{mux1ee5c-lux1ee5c-tux1ed5ng-quan}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Chương 1:} Nền Tảng Lý Thuyết Số \& Cơ Sở Toán Học Mật Mã Khóa
+  Công Khai
+\item
+  \textbf{Chương 2:} Cấu Trúc Dữ Liệu Chứng Chỉ X.509 v3 \& Quy Cách Mã
+  Hóa ASN.1 DER
+\item
+  \textbf{Chương 3:} Kiến Trúc Phân Tầng CA, Vòng Đời Khóa \& Quy Chế
+  CP/CPS (RFC 3647)
+\item
+  \textbf{Chương 4:} Thuật Toán Xác Thực Đường Dẫn Tin Cậy \& Cơ Chế Thu
+  Hồi Chứng Chỉ
+\item
+  \textbf{Chương 5:} Giao Thức Quản Trị Tự Động ACME (RFC 8555) \& Hạ
+  Tầng Zero Trust PKI
+\item
+  \textbf{Chương 6:} Các Kịch Bản Tấn Công Hạ Tầng PKI \& Chiến Lược
+  Phòng Thủ Toàn Diện
+\item
+  \textbf{Chương 7:} Chuyển Dịch Hệ Thống Sang Mật Mã Hậu Lượng Tử (PQC
+  Migration)
+\item
+  \textbf{Chương 8:} Khung Pháp Lý, Quy Chuẩn Kỹ Thuật \& Hạ Tầng Chữ Ký
+  Số Quốc Gia
+\item
+  \textbf{Phụ lục A:} Cẩm Nang 50 Lệnh OpenSSL 3.5 Thực Chiến Cho Chuyên
+  Gia ATTT
+\item
+  \textbf{Phụ lục B:} Bộ Công Cụ Python Cryptography Phân Tích \& Kiểm
+  Định Chứng Chỉ
+\item
+  \textbf{Phụ lục C:} Danh Mục Tài Liệu Tham Khảo Hàn Lâm \& Khóa Học
+  Quốc Tế (OCW)
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{CHƯƠNG 1: NỀN TẢNG LÝ THUYẾT SỐ \& CƠ SỞ TOÁN HỌC MẬT MÃ KHÓA
+CÔNG
+KHAI}\label{chux1b0ux1a1ng-1-nux1ec1n-tux1ea3ng-luxfd-thuyux1ebft-sux1ed1-cux1a1-sux1edf-touxe1n-hux1ecdc-mux1eadt-muxe3-khuxf3a-cuxf4ng-khai}
+
+\subsection{1.1. Cấu Trúc Đại Số Trừu Tượng \& Các Phép Toán Số
+Học}\label{cux1ea5u-truxfac-ux111ux1ea1i-sux1ed1-trux1eebu-tux1b0ux1ee3ng-cuxe1c-phuxe9p-touxe1n-sux1ed1-hux1ecdc}
+
+Mật mã khóa công khai không thể tồn tại nếu thiếu nền tảng vững chắc của
+đại số trừu tượng. Thay vì hoạt động trên tập số thực liên tục
+\(\mathbb{R}\), mật mã học hiện đại vận hành trên các cấu trúc rời rạc
+hữu hạn nhằm bảo đảm tính chính xác tuyệt đối và ngăn chặn triệt để hiện
+tượng sai số làm tròn số học.
+
+\subsubsection{1.1.1. Nhóm (Groups), Vành (Rings) và Trường Hữu Hạn
+(Finite
+Fields)}\label{nhuxf3m-groups-vuxe0nh-rings-vuxe0-trux1b0ux1eddng-hux1eefu-hux1ea1n-finite-fields}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Nhóm (Group):} Một tập hợp \(G\) cùng với phép toán hai ngôi
+  \(\star\) được gọi là một nhóm \((G, \star)\) nếu thỏa mãn 4 tiên đề:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Tính đóng (Closure):}
+    \(\forall a, b \in G \implies a \star b \in G\).
+  \item
+    \textbf{Tính kết hợp (Associativity):}
+    \(\forall a, b, c \in G \implies (a \star b) \star c = a \star (b \star c)\).
+  \item
+    \textbf{Phần tử trung hòa (Identity):}
+    \(\exists e \in G, \forall a \in G \implies a \star e = e \star a = a\).
+  \item
+    \textbf{Phần tử nghịch đảo (Inverse):}
+    \(\forall a \in G, \exists a^{-1} \in G \implies a \star a^{-1} = a^{-1} \star a = e\).
+  \item
+    Nếu \(a \star b = b \star a\), nhóm được gọi là \textbf{nhóm giao
+    hoán (nhóm Abel)}.
+  \end{itemize}
+\item
+  \textbf{Vành (Ring):} Một tập hợp \(R\) cùng hai phép toán cộng
+  \((+)\) và nhân \((\cdot)\) được gọi là một vành nếu \((R, +)\) là một
+  nhóm Abel, phép nhân có tính kết hợp và phân phối đối với phép cộng.
+  Vành số dư \(\mathbb{Z}_n = \{0, 1, \dots, n-1\}\) là vành cơ bản của
+  hệ mật RSA.
+\item
+  \textbf{Trường (Field):} Một vành giao hoán có đơn vị mà trong đó mọi
+  phần tử khác 0 đều khả nghịch dưới phép nhân. Trường hữu hạn Galois
+  \(\mathbb{F}_q\) chỉ tồn tại khi số phần tử \(q = p^m\) (với \(p\) là
+  số nguyên tố và \(m \ge 1\)):
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Khi \(m = 1\), ta có trường số nguyên tố
+    \(\mathbb{F}_p = \mathbb{Z}_p\), nơi các phép toán modulo \(p\) diễn
+    ra.
+  \item
+    Khi \(m > 1\), ta có trường mở rộng \(\mathbb{F}_{2^m}\), đặc biệt
+    quan trọng trong phần cứng mật mã vi mạch.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{1.1.2. Các Định Lý Số Học Cốt
+Lõi}\label{cuxe1c-ux111ux1ecbnh-luxfd-sux1ed1-hux1ecdc-cux1ed1t-luxf5i}
+
+\begin{itemize}
+\item
+  \textbf{Bổ đề Bézout \& Thuật toán Euclid mở rộng:} Với hai số nguyên
+  \(a, b\), luôn tồn tại hai số nguyên \(x, y\) sao cho:
+  \[a \cdot x + b \cdot y = \gcd(a, b)\] Khi \(\gcd(a, n) = 1\), ta có
+  \(a \cdot x \equiv 1 \pmod n\), tức \(x = a^{-1} \pmod n\). Thuật toán
+  Euclid mở rộng tính toán phần tử nghịch đảo này trong độ phức tạp thời
+  gian cực nhanh \(O(\log n)\).
+\item
+  \textbf{Định lý Fermat nhỏ \& Định lý Euler:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Nếu \(p\) nguyên tố và \(\gcd(a, p) = 1\), thì
+    \(a^{p-1} \equiv 1 \pmod p\).
+  \item
+    Tổng quát hóa bởi Leonhard Euler: Với số nguyên dương \(n\), hàm phi
+    Euler \(\phi(n)\) đếm số lượng các số nguyên dương nhỏ hơn \(n\) và
+    nguyên tố cùng nhau với \(n\). Nếu \(n = p \cdot q\) (\(p, q\)
+    nguyên tố), thì: \[\phi(n) = (p - 1)(q - 1)\]
+  \item
+    Khi đó, với mọi \(a\) nguyên tố cùng nhau với \(n\):
+    \[a^{\phi(n)} \equiv 1 \pmod n\]
+  \end{itemize}
+\item
+  \textbf{Định lý Phần dư Trung Hoa (Chinese Remainder Theorem - CRT):}
+  Cho các số nguyên dương \(m_1, m_2, \dots, m_k\) đôi một nguyên tố
+  cùng nhau. Hệ phương trình đồng dư:
+  \[x \equiv a_i \pmod{m_i} \quad (i = 1, \dots, k)\] luôn có nghiệm duy
+  nhất modulo \(M = \prod_{i=1}^k m_i\). Trong cài đặt thực tế của RSA,
+  kỹ thuật RSA-CRT phân rã phép tính lũy thừa trên module 2048-bit thành
+  hai phép tính trên hai module \(p\) và \(q\) 1024-bit, giúp tăng tốc
+  độ giải mã và ký số lên \textbf{4 lần}.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{1.2. Khái Niệm Hàm Một Chiều \& Cửa Sập (Trapdoor One-Way
+Functions)}\label{khuxe1i-niux1ec7m-huxe0m-mux1ed9t-chiux1ec1u-cux1eeda-sux1eadp-trapdoor-one-way-functions}
+
+Mọi hệ thống mật mã khóa công khai đều được xây dựng trên nền tảng của
+\textbf{Hàm một chiều có cửa sập (Trapdoor One-Way Function - TOWF)}:
+
+\[f: X \to Y\]
+
+Hàm \(f\) phải thỏa mãn ba đặc trưng toán học nghiêm ngặt: 1. \textbf{Dễ
+tính toán theo chiều xuôi:} Cho trước \(x \in X\), việc tính
+\(y = f(x)\) là một bài toán thời gian đa thức \(O(\text{poly}(|x|))\).
+2. \textbf{Bất khả thi theo chiều ngược (Hard to Invert):} Cho trước
+\(y \in Y\), việc tìm \(x\) sao cho \(f(x) = y\) là bài toán bất khả thi
+về mặt độ phức tạp tính toán đối với bất kỳ thuật toán cổ điển nào (thời
+gian tính toán vượt xa tuổi thọ vũ trụ). 3. \textbf{Cửa sập bí mật
+(Trapdoor Key):} Tồn tại một thông tin bổ trợ đặc biệt
+\(K_{\text{priv}}\) (khóa bí mật). Khi biết \(K_{\text{priv}}\), việc
+tính ngược \(x = f^{-1}(y, K_{\text{priv}})\) trở thành một bài toán đa
+thức tường minh và hiệu quả.
+
+\begin{verbatim}
+                  +-----------------------------------+
+                  |          Đầu vào x                |
+                  +-----------------------------------+
+                                    |
+                                    | Chiều xuôi: Dễ (Đa thức)
+                                    v
+                  +-----------------------------------+
+                  |          Đầu ra y = f(x)          |
+                  +-----------------------------------+
+                                    |
+       Không có Cửa sập             |             Có Cửa sập (K_priv)
+  ---------------------------       |       -------------------------------
+  Nghịch đảo: BẤT KHẢ THI           |       Nghịch đảo: DỄ DÀNG (Đa thức)
+  (Chi phí hàm mũ hoặc cận hàm mũ)  v       x = f^-1(y, K_priv)
+\end{verbatim}
+
+Hiện nay, toán học thế giới công nhận ba bài toán khó kinh điển được
+dùng làm nền tảng cho các hàm cửa sập trong PKI cổ điển: 1. \textbf{Bài
+toán Phân tích Thừa số Nguyên tố (Integer Factorization Problem - IFP)}
+\(\implies\) Hệ mật RSA. 2. \textbf{Bài toán Logarit Rời rạc (Discrete
+Logarithm Problem - DLP)} \(\implies\) Giao thức Diffie-Hellman,
+ElGamal, DSA. 3. \textbf{Bài toán Logarit Rời rạc trên Đường cong
+Elliptic (ECDLP)} \(\implies\) ECDH, ECDSA, Ed25519.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{1.3. Bài Toán Phân Tích Thừa Số Nguyên Tố \& Hệ Mật Mã
+RSA}\label{buxe0i-touxe1n-phuxe2n-tuxedch-thux1eeba-sux1ed1-nguyuxean-tux1ed1-hux1ec7-mux1eadt-muxe3-rsa}
+
+\subsubsection{1.3.1. Thuật Toán Sinh Khóa, Mã Hóa và Ký Số
+RSA}\label{thuux1eadt-touxe1n-sinh-khuxf3a-muxe3-huxf3a-vuxe0-kuxfd-sux1ed1-rsa}
+
+Được phát minh bởi Ron Rivest, Adi Shamir và Leonard Adleman năm 1977
+tại MIT: 1. \textbf{Sinh khóa:} - Chọn ngẫu nhiên hai số nguyên tố rất
+lớn \(p\) và \(q\) (mỗi số 1024-bit hoặc 2048-bit). - Tính module công
+khai \(n = p \cdot q\). Kích thước \(n\) thường là 2048-bit hoặc
+4096-bit. - Tính hàm Euler: \(\phi(n) = (p - 1)(q - 1)\). - Chọn số mũ
+công khai \(e\) thỏa mãn \(1 < e < \phi(n)\) và
+\(\gcd(e, \phi(n)) = 1\). Giá trị chuẩn công nghiệp luôn chọn
+\(e = 65537 = 2^{16} + 1\) (số nguyên tố Fermat \(F_4\)) nhằm tối ưu hóa
+phép lũy thừa nhị phân (chỉ có đúng hai bit 1). - Tính số mũ bí mật
+\(d\) bằng thuật toán Euclid mở rộng:
+\(d \equiv e^{-1} \pmod{\phi(n)}\), tức
+\(e \cdot d \equiv 1 \pmod{\phi(n)}\). - \textbf{Khóa công khai:}
+\(K_{\text{pub}} = (n, e)\). - \textbf{Khóa bí mật:}
+\(K_{\text{priv}} = (d, p, q)\).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  \textbf{Mã hóa \& Giải mã:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Mã hóa bản rõ \(m < n\): \(c = m^e \pmod n\).
+  \item
+    Giải mã bản mã \(c\): \(m = c^d \pmod n\).
+  \item
+    Tính đúng đắn xuất phát từ Định lý Euler:
+    \(c^d \equiv (m^e)^d \equiv m^{e \cdot d} \equiv m^{1 + k \cdot \phi(n)} \equiv m \cdot (m^{\phi(n)})^k \equiv m \cdot 1^k \equiv m \pmod n\).
+  \end{itemize}
+\item
+  \textbf{Chữ ký số RSA:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Người ký tính hàm băm thông điệp \(h = H(M)\).
+  \item
+    Chữ ký số: \(\sigma = h^d \pmod n\).
+  \item
+    Người kiểm tra tính: \(h' = \sigma^e \pmod n\). Nếu \(h' == H(M)\),
+    chữ ký hợp lệ.
+  \end{itemize}
+\end{enumerate}
+
+\subsubsection{1.3.2. Cơ Chế Đệm An Toàn (Padding Schemes) \& Các Nguy
+Cơ Tấn
+Công}\label{cux1a1-chux1ebf-ux111ux1ec7m-an-touxe0n-padding-schemes-cuxe1c-nguy-cux1a1-tux1ea5n-cuxf4ng}
+
+RSA ``thô'' (Textbook RSA) hoàn toàn không an toàn do tính chất
+\textbf{đồng cấu nhân}:
+\[(m_1)^e \cdot (m_2)^e \equiv (m_1 \cdot m_2)^e \pmod n\] Kẻ tấn công
+có thể giả mạo chữ ký trên thông điệp mới từ tích của hai chữ ký đã
+biết. Do đó, chuẩn mã hóa PKI bắt buộc áp dụng cơ chế đệm ngẫu nhiên: *
+\textbf{PKCS\#1 v1.5:} Thêm chuỗi padding ngẫu nhiên có định dạng cố
+định. Tuy nhiên, PKCS\#1 v1.5 dễ bị tổn thương trước tấn công
+Bleichenbacher (Million Message Attack) trên các máy chủ SSL/TLS nếu trả
+về lỗi giải mã không đồng nhất. * \textbf{RSA-OAEP (Optimal Asymmetric
+Encryption Padding):} Dùng cho mã hóa, bảo đảm tính an toàn IND-CCA2
+(kháng tấn công bản mã chọn lọc thích nghi). * \textbf{RSA-PSS
+(Probabilistic Signature Scheme):} Được chuẩn hóa trong RFC 8017 / FIPS
+186-5. Sử dụng muối ngẫu nhiên (salt) trước khi băm, chứng minh an toàn
+tuyệt đối trong mô hình Random Oracle Model. Các hệ thống PKI hiện đại
+được khuyến nghị chuyển dịch toàn bộ từ RSA PKCS\#1 v1.5 sang RSA-PSS.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{1.4. Bài Toán Logarit Rời Rạc \& Mật Mã Đường Cong Elliptic
+(ECC)}\label{buxe0i-touxe1n-logarit-rux1eddi-rux1ea1c-mux1eadt-muxe3-ux111ux1b0ux1eddng-cong-elliptic-ecc}
+
+\subsubsection{1.4.1. Bài Toán Logarit Rời Rạc
+(DLP)}\label{buxe0i-touxe1n-logarit-rux1eddi-rux1ea1c-dlp}
+
+Cho nhóm cyclic \(G\) cấp \(q\) sinh bởi phần tử \(g\). - \textbf{Bài
+toán chiều xuôi:} Cho \(x \in \mathbb{Z}_q\), tính \(y = g^x \in G\) (dễ
+dàng bằng thuật toán nhân đôi lũy thừa). - \textbf{Bài toán Logarit Rời
+rạc (DLP):} Cho \(y \in G\), tìm \(x \in \mathbb{Z}_q\) sao cho
+\(g^x = y\). - Trên nhóm nhân \(\mathbb{Z}_p^*\), các thuật toán Sàng
+trường số tổng quát (General Number Field Sieve - GNFS) và Index
+Calculus giải quyết DLP trong thời gian cận hàm mũ:
+\[L_p\left[\frac{1}{3}, c\right] = \exp\left((c + o(1)) (\ln p)^{1/3} (\ln \ln p)^{2/3}\right)\]
+Do đó, để đạt mức an toàn 128-bit, module số nguyên tố \(p\) phải có độ
+dài ít nhất \textbf{3072 bits}.
+
+\subsubsection{1.4.2. Mật Mã Đường Cong Elliptic (Elliptic Curve
+Cryptography -
+ECC)}\label{mux1eadt-muxe3-ux111ux1b0ux1eddng-cong-elliptic-elliptic-curve-cryptography---ecc}
+
+Nhận định thiên tài của Neal Koblitz và Victor Miller năm 1985: Nếu thay
+thế nhóm nhân \(\mathbb{Z}_p^*\) bằng nhóm các điểm trên đường cong
+Elliptic, các thuật toán Index Calculus hoàn toàn bị vô hiệu hóa!
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{Phương trình Đường cong Elliptic:} Trên trường hữu hạn
+  \(\mathbb{F}_p\) (\(p > 3\)), đường cong Weierstrass không suy biến có
+  phương trình: \[E: y^2 \equiv x^3 + a \cdot x + b \pmod p\] với điều
+  kiện biệt thức \(\Delta = 4a^3 + 27b^2 \not\equiv 0 \pmod p\).
+\item
+  \textbf{Luật Cộng Điểm Hình Học \& Đại Số:} Tập hợp các điểm
+  \(P = (x, y) \in E(\mathbb{F}_p)\) cùng với \textbf{Điểm ở vô cực
+  \(\mathcal{O}\)} (phần tử trung hòa) tạo thành một nhóm Abel:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Với hai điểm \(P = (x_1, y_1)\) và \(Q = (x_2, y_2)\): Nếu
+    \(P \neq Q\), hệ số góc đường cát tuyến:
+    \(\lambda = \frac{y_2 - y_1}{x_2 - x_1} \pmod p\). Nếu \(P = Q\)
+    (nhân đôi điểm), hệ số góc tiếp tuyến:
+    \(\lambda = \frac{3x_1^2 + a}{2y_1} \pmod p\).
+  \item
+    Tọa độ điểm tổng \(R = P + Q = (x_3, y_3)\):
+    \[x_3 = \lambda^2 - x_1 - x_2 \pmod p\]
+    \[y_3 = \lambda(x_1 - x_3) - y_1 \pmod p\]
+  \end{itemize}
+\item
+  \textbf{Ưu thế Vượt Trội Của ECC Trong Hạ Tầng PKI:} Thuật toán mạnh
+  nhất hiện nay giải bài toán ECDLP trên các đường cong chuẩn (NIST
+  P-256, Curve25519) chỉ là Pollard's Rho với độ phức tạp hàm mũ đầy đủ:
+  \[\mathcal{O}(\sqrt{\pi \cdot n / 2}) \approx 2^{128} \text{ phép tính đối với khóa 256-bit}\]
+\end{enumerate}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}
+  >{\centering\arraybackslash}p{(\linewidth - 8\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\centering
+Mức Độ An Toàn (Security Bits)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Kích Thước Khóa Đối Xứng (AES)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Kích Thước Khóa RSA (Bits)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Kích Thước Khóa ECC (Bits)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\centering
+Tỉ Lệ Tiết Kiệm Kích Thước
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+80-bit (Lỗi thời) & 2TDEA & 1024 & 160 & 6.4 : 1 \\
+112-bit (Tối thiểu) & 3TDEA & 2048 & 224 & 9.1 : 1 \\
+\textbf{128-bit (Chuẩn hiện đại)} & \textbf{AES-128} & \textbf{3072} &
+\textbf{256} & \textbf{12.0 : 1} \\
+\textbf{192-bit (An ninh cao)} & \textbf{AES-192} & \textbf{7680} &
+\textbf{384} & \textbf{20.0 : 1} \\
+\textbf{256-bit (Tuyệt mật quốc gia)} & \textbf{AES-256} &
+\textbf{15360} & \textbf{521} & \textbf{29.5 : 1} \\
+\end{longtable}
+}
+
+Chính sự chênh lệch vượt trội này khiến toàn bộ hạ tầng Web PKI, thiết
+bị di động thông minh và các thẻ căn cước gắn chip hiện đại đều ưu tiên
+chuyển dịch sang \textbf{ECDSA} và \textbf{Ed25519} (Edwards curve RFC
+8032) nhằm tiết kiệm băng thông mạng và năng lượng tính toán.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{CHƯƠNG 2: CẤU TRÚC DỮ LIỆU CHỨNG CHỈ X.509 V3 \& QUY CÁCH MÃ
+HÓA ASN.1
+DER}\label{chux1b0ux1a1ng-2-cux1ea5u-truxfac-dux1eef-liux1ec7u-chux1ee9ng-chux1ec9-x.509-v3-quy-cuxe1ch-muxe3-huxf3a-asn.1-der}
+
+\subsection{2.1. Cú Pháp ASN.1 \& Quy Tắc Mã Hóa Nhị Phân
+DER}\label{cuxfa-phuxe1p-asn.1-quy-tux1eafc-muxe3-huxf3a-nhux1ecb-phuxe2n-der}
+
+Chứng chỉ số không phải là một chuỗi văn bản ngẫu nhiên mà là một cấu
+trúc dữ liệu phân cấp được định nghĩa bằng chuẩn quốc tế \textbf{ASN.1
+(Abstract Syntax Notation One - ITU-T X.680)} và được đóng gói nhị phân
+theo quy tắc \textbf{DER (Distinguished Encoding Rules - ITU-T X.690)}.
+
+\subsubsection{2.1.1. Cấu Trúc Khung Nhị Phân TLV (Tag - Length -
+Value)}\label{cux1ea5u-truxfac-khung-nhux1ecb-phuxe2n-tlv-tag---length---value}
+
+Trong mã hóa DER, mỗi trường dữ liệu bắt buộc tuân theo định dạng 3
+phần: 1. \textbf{Tag (Loại dữ liệu):} 1 byte (hoặc nhiều bytes) xác định
+kiểu: - \texttt{0x02}: \texttt{INTEGER} (Số nguyên) - \texttt{0x03}:
+\texttt{BIT\ STRING} (Chuỗi bit) - \texttt{0x04}: \texttt{OCTET\ STRING}
+(Chuỗi byte) - \texttt{0x05}: \texttt{NULL} - \texttt{0x06}:
+\texttt{OBJECT\ IDENTIFIER\ (OID)} - \texttt{0x0C}: \texttt{UTF8String}
+- \texttt{0x13}: \texttt{PrintableString} - \texttt{0x17}:
+\texttt{UTCTime} (YYMMDDHHMMSSZ) - \texttt{0x18}:
+\texttt{GeneralizedTime} (YYYYMMDDHHMMSSZ) - \texttt{0x30}:
+\texttt{SEQUENCE} (Cấu trúc danh sách tuần tự - bit Constructed được
+bật: \texttt{0x20\ \textbar{}\ 0x10\ =\ 0x30}) - \texttt{0x31}:
+\texttt{SET} (Tập hợp không thứ tự)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  \textbf{Length (Độ dài phần dữ liệu Value):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Dạng ngắn (Short form):} Nếu chiều dài \(\le 127\) bytes,
+    trường Length chiếm đúng 1 byte với bit cao nhất bằng 0
+    (\texttt{0b0xxxxxxx}). Ví dụ: dài 45 bytes \(\implies\)
+    \texttt{0x2D}.
+  \item
+    \textbf{Dạng dài (Long form):} Nếu chiều dài \(> 127\) bytes, byte
+    đầu tiên có bit cao nhất bằng 1 (\texttt{0b1xxxxxxx}), trong đó 7
+    bits sau chỉ số lượng byte tiếp theo dùng để biểu diễn chiều dài. Ví
+    dụ: chiều dài 500 bytes (\texttt{0x01F4}), biểu diễn:
+    \texttt{0x82\ 0x01\ 0xF4}.
+  \item
+    \textbf{Quy tắc bất biến của DER:} Khác với BER (Basic Encoding
+    Rules) cho phép độ dài không xác định (indefinite length), DER bắt
+    buộc phải dùng độ dài xác định ngắn nhất có thể. Điều này bảo đảm
+    tính đơn nhất (canonical representation): \textbf{Một đối tượng
+    ASN.1 chỉ có duy nhất một biểu diễn nhị phân DER tương ứng}, ngăn
+    chặn hoàn toàn tấn công giả mạo chữ ký bằng cách biến đổi padding
+    nhị phân (malleability attack).
+  \end{itemize}
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.2. Khung Dữ Liệu TBSCertificate Theo Chuẩn RFC
+5280}\label{khung-dux1eef-liux1ec7u-tbscertificate-theo-chuux1ea9n-rfc-5280}
+
+Cấu trúc chứng chỉ X.509 v3 được mô tả bằng cú pháp ASN.1 chính thức
+trong RFC 5280:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{Certificate ::= }\DataTypeTok{SEQUENCE}\NormalTok{ \{}
+\NormalTok{    tbsCertificate          TBSCertificate,}
+\NormalTok{    signatureAlgorithm      AlgorithmIdentifier,}
+\NormalTok{    signatureValue          BIT }\DataTypeTok{STRING}
+\NormalTok{\}}
+
+\NormalTok{TBSCertificate ::= }\DataTypeTok{SEQUENCE}\NormalTok{ \{}
+\NormalTok{    version             [}\DecValTok{0}\NormalTok{] EXPLICIT Version }\KeywordTok{DEFAULT}\NormalTok{ v1,}
+\NormalTok{    serialNumber            CertificateSerialNumber,}
+\NormalTok{    signature               AlgorithmIdentifier,}
+\NormalTok{    issuer                  Name,}
+\NormalTok{    validity                Validity,}
+\NormalTok{    subject                 Name,}
+\NormalTok{    subjectPublicKeyInfo    SubjectPublicKeyInfo,}
+\NormalTok{    issuerUniqueID      [}\DecValTok{1}\NormalTok{] IMPLICIT UniqueIdentifier }\KeywordTok{OPTIONAL}\NormalTok{,}
+\NormalTok{    subjectUniqueID     [}\DecValTok{2}\NormalTok{] IMPLICIT UniqueIdentifier }\KeywordTok{OPTIONAL}\NormalTok{,}
+\NormalTok{    extensions          [}\DecValTok{3}\NormalTok{] EXPLICIT Extensions }\KeywordTok{OPTIONAL}
+\NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
++-------------------------------------------------------------------+
+|                     X.509 v3 CERTIFICATE                          |
+|                                                                   |
+| +---------------------------------------------------------------+ |
+| |                    TBSCertificate (To-Be-Signed)              | |
+| |                                                               | |
+| | 1. Version: v3 (0x02)                                         | |
+| | 2. Serial Number: Số nguyên ngẫu nhiên dương (tối đa 20 bytes)| |
+| | 3. Signature Algorithm: e.g. ecdsa-with-SHA256 / sha256WithRSA| |
+| | 4. Issuer DN: CN=KMA Intermediate CA, O=KMA, C=VN             | |
+| | 5. Validity: notBefore (02/10/2026) -> notAfter (02/10/2027)  | |
+| | 6. Subject DN: CN=api.kma.edu.vn, O=KMA, C=VN                 | |
+| | 7. SubjectPublicKeyInfo: Algorithm Identifier + Public Key Bit| |
+| | 8. Extensions (X.509 v3 Extensions):                          | |
+| |    - Basic Constraints: CA:FALSE                              | |
+| |    - Key Usage: Digital Signature                             | |
+| |    - Extended Key Usage: Server Auth, Client Auth             | |
+| |    - SAN: DNS:api.kma.edu.vn, IP:10.0.0.1                     | |
+| |    - CRL Distribution Points: http://crl.kma.edu.vn/ca.crl    | |
+| |    - AIA: OCSP http://ocsp.kma.edu.vn                         | |
+| +---------------------------------------------------------------+ |
+|                                                                   |
+| Signature Algorithm Identifier: ecdsa-with-SHA256 (OID 1.2.840...) |
+| Signature Value: Chữ ký số của CA trên toàn bộ khối DER băm của   |
+|                  TBSCertificate [BIT STRING]                      |
++-------------------------------------------------------------------+
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{2.3. Phân Tích Chuyên Sâu Các Phần Mở Rộng Trọng Yếu
+(Critical
+Extensions)}\label{phuxe2n-tuxedch-chuyuxean-suxe2u-cuxe1c-phux1ea7n-mux1edf-rux1ed9ng-trux1ecdng-yux1ebfu-critical-extensions}
+
+Phần mở rộng (Extensions) là nơi hiện thực hóa toàn bộ chính sách an
+ninh của PKI. Mỗi phần mở rộng gồm: \texttt{extnID} (OID), cờ
+\texttt{critical} (BOOLEAN, mặc định FALSE) và \texttt{extnValue} (OCTET
+STRING chứa dữ liệu DER đóng gói). \textgreater{} \textbf{Quy Tắc Vàng
+Của RFC 5280 Về Cờ Critical:} Nếu một phần mở rộng có cờ
+\texttt{critical\ =\ TRUE}, mọi ứng dụng hoặc thiết bị xác thực (trình
+duyệt, hệ điều hành) \textbf{BẮT BUỘC} phải hiểu và thực thi đúng ngữ
+nghĩa của phần mở rộng đó. Nếu không nhận biết hoặc không thể xử lý, hệ
+thống \textbf{BẮT BUỘC PHẢI TỪ CHỐI} chứng chỉ ngay lập tức!
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Basic Constraints (OID \texttt{2.5.29.19} - BẮT BUỘC CRITICAL
+  trên CA):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Chứa trường \texttt{cA} (BOOLEAN) và \texttt{pathLenConstraint}
+    (INTEGER tùy chọn).
+  \item
+    Nếu \texttt{cA\ =\ TRUE}: Chứng chỉ đại diện cho một nhà cầm quyền
+    xác thực (CA), được phép ký cấp phát chứng chỉ khác.
+  \item
+    Nếu \texttt{cA\ =\ FALSE}: Chứng chỉ thực thể cuối (End-Entity /
+    Leaf Certificate), tuyệt đối không được dùng để ký chứng chỉ khác.
+  \item
+    \texttt{pathLenConstraint\ =\ n}: Quy định chuỗi CA con bên dưới nó
+    chỉ được phép có tối đa \(n\) cấp Intermediate CA trung gian trước
+    khi tới chứng chỉ lá. Nếu \(n = 0\), CA này chỉ được phép ký trực
+    tiếp cho End-Entity, không được ký cấp phát thêm bất kỳ Sub-CA nào
+    nữa.
+  \item
+    \emph{Lỗ hổng thực tế:} Nếu quản trị viên sơ suất cấp chứng chỉ cho
+    máy chủ nội bộ mà đặt \texttt{cA\ =\ TRUE}, kẻ tấn công chiếm được
+    máy chủ đó có thể tự biến mình thành CA trung gian và phát hành
+    chứng chỉ giả mạo cho mọi tên miền trên Internet!
+  \end{itemize}
+\item
+  \textbf{Key Usage (OID \texttt{2.5.29.15} - CRITICAL):} Định nghĩa các
+  thao tác mật mã mà khóa công khai trong chứng chỉ được phép thực hiện:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{digitalSignature}: Ký thông điệp hoặc dữ liệu (trừ chứng chỉ
+    và CRL).
+  \item
+    \texttt{nonRepudiation}: Chống chối bỏ (thường dùng trong chữ ký văn
+    bản số, pháp lý).
+  \item
+    \texttt{keyEncipherment}: Mã hóa khóa đối xứng (dùng trong RSA Key
+    Transport).
+  \item
+    \texttt{keyAgreement}: Trao đổi khóa (dùng trong ECDH).
+  \item
+    \texttt{keyCertSign}: Ký cấp phát chứng chỉ số (Chỉ được phép bật
+    nếu \texttt{cA\ =\ TRUE}).
+  \item
+    \texttt{cRLSign}: Ký danh sách thu hồi chứng chỉ (CRL).
+  \end{itemize}
+\item
+  \textbf{Extended Key Usage - EKU (OID \texttt{2.5.29.37}):} Xác định
+  mục đích ứng dụng cụ thể:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{serverAuth} (\texttt{1.3.6.1.5.5.7.3.1}): Xác thực máy chủ
+    Web TLS.
+  \item
+    \texttt{clientAuth} (\texttt{1.3.6.1.5.5.7.3.2}): Xác thực người
+    dùng / máy trạm mTLS.
+  \item
+    \texttt{codeSigning} (\texttt{1.3.6.1.5.5.7.3.3}): Ký mã nguồn phần
+    mềm, driver.
+  \item
+    \texttt{timeStamping} (\texttt{1.3.6.1.5.5.7.3.8}): Cấp dấu thời
+    gian RFC 3161.
+  \end{itemize}
+\item
+  \textbf{Subject Alternative Name - SAN (OID \texttt{2.5.29.17}):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Danh sách định danh thực thể thay thế: \texttt{dNSName},
+    \texttt{iPAddress}, \texttt{uniformResourceIdentifier},
+    \texttt{rfc822Name} (email).
+  \item
+    \textbf{Quy định nghiêm ngặt từ CA/B Forum Baseline Requirements
+    v1.8+:} Các trình duyệt hiện đại (Chrome, Firefox, Safari) đã loại
+    bỏ hoàn toàn việc đọc tên miền từ trường \texttt{Common\ Name\ (CN)}
+    của Subject DN. Toàn bộ tên miền và địa chỉ IP hợp lệ \textbf{BẮT
+    BUỘC PHẢI KHAI BÁO TRONG PHẦN MỞ RỘNG SAN}. Chứng chỉ chỉ có CN mà
+    thiếu SAN sẽ bị trình duyệt báo lỗi
+    \texttt{NET::ERR\_CERT\_COMMON\_NAME\_INVALID}.
+  \end{itemize}
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{CHƯƠNG 3: KIẾN TRÚC PHÂN TẦNG CA, VÒNG ĐỜI KHÓA \& QUY CHẾ
+CP/CPS (RFC
+3647)}\label{chux1b0ux1a1ng-3-kiux1ebfn-truxfac-phuxe2n-tux1ea7ng-ca-vuxf2ng-ux111ux1eddi-khuxf3a-quy-chux1ebf-cpcps-rfc-3647}
+
+\subsection{3.1. Các Mô Hình Phân Tầng Hạ Tầng Chứng Thực (CA
+Hierarchies)}\label{cuxe1c-muxf4-huxecnh-phuxe2n-tux1ea7ng-hux1ea1-tux1ea7ng-chux1ee9ng-thux1ef1c-ca-hierarchies}
+
+Trong thực tế, một hệ thống PKI không bao giờ triển khai dưới dạng một
+CA đơn lẻ bởi vì nguyên tắc bảo vệ tài sản thông tin tối thượng:
+\textbf{Càng ít sử dụng khóa bí mật có giá trị cao thì hệ thống càng an
+toàn.}
+
+\begin{verbatim}
+                           +------------------------+
+                           |     ROOT CA (GỐC)      |
+                           |  - Tự ký (Self-signed) |
+                           |  - Offline / Air-gap   |
+                           |  - Khóa: 4096-bit RSA  |
+                           |    hoặc P-384 / ML-DSA |
+                           |  - Hạn dùng: 10-25 năm |
+                           +------------------------+
+                                        |
+                         Ký cấp phát    | 1-2 lần trong đời
+                                        v
+                 +--------------------------------------------+
+                 |          INTERMEDIATE ISSUING CA           |
+                 |  - Online 24/7 (ACME / Web Enrollment)     |
+                 |  - Nằm sau tường lửa DMZ, bảo vệ bởi HSM   |
+                 |  - Hạn dùng: 2-5 năm                       |
+                 +--------------------------------------------+
+                          /                           \
+         Ký cấp hàng ngày /                             \ Ký cấp hàng ngày
+                         v                               v
+       +-------------------------------+   +-------------------------------+
+       |       TLS Web Server          |   |      mTLS Client / User       |
+       |  - SAN: *.kma.edu.vn          |   |  - Email: hocvien@kma.edu.vn  |
+       |  - Hạn dùng: 90 ngày (hoặc 1y)|   |  - Hạn dùng: 1 năm            |
+       +-------------------------------+   +-------------------------------+
+\end{verbatim}
+
+\subsubsection{So Sánh Các Mô Hình Kiến
+Trúc:}\label{so-suxe1nh-cuxe1c-muxf4-huxecnh-kiux1ebfn-truxfac}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Kiến trúc Single-Tier (Đơn cấp - Rủi ro đặc biệt nghiêm
+  trọng):} Root CA ký trực tiếp cho tất cả máy chủ. Nếu máy chủ Root CA
+  bị xâm nhập hoặc lộ khóa, toàn bộ hạ tầng sụp đổ và không thể thu hồi
+  mà phải cài đặt lại Trust Store trên toàn bộ thiết bị người dùng.
+\item
+  \textbf{Kiến trúc Two-Tier (Hai cấp - Doanh nghiệp vừa):} 1 Root CA
+  offline và 1 Issuing Intermediate CA online. Khi Issuing CA gặp sự cố,
+  Root CA phát hành một bản thu hồi CRL và ký cấp một Issuing CA mới mà
+  không làm gián đoạn Trust Anchor của người dùng.
+\item
+  \textbf{Kiến trúc Three-Tier (Ba cấp - Chuẩn Quốc gia \& Tài chính):}
+  Root CA \(\to\) Policy CA (Phân tách theo địa lý hoặc phân cấp bảo
+  mật) \(\to\) Issuing CA \(\to\) End-Entity. Tách biệt hoàn toàn quyền
+  hạn vận hành và kiểm toán.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3.2. Nghi Thức Lễ Sinh Khóa (Key Ceremony) \& Thiết Bị Phần
+Cứng
+HSM}\label{nghi-thux1ee9c-lux1ec5-sinh-khuxf3a-key-ceremony-thiux1ebft-bux1ecb-phux1ea7n-cux1ee9ng-hsm}
+
+Khóa bí mật của Root CA là linh hồn của hệ thống PKI. Việc tạo ra cặp
+khóa này không thể thực hiện tùy tiện trên máy tính cá nhân mà phải
+thông qua một nghi thức pháp lý và kỹ thuật trang trọng gọi là
+\textbf{Key Ceremony}.
+
+\subsubsection{3.2.1. Quy Trình 6 Bước Của Một Buổi Lễ Key Ceremony
+Chuẩn Quốc
+Tế}\label{quy-truxecnh-6-bux1b0ux1edbc-cux1ee7a-mux1ed9t-buux1ed5i-lux1ec5-key-ceremony-chuux1ea9n-quux1ed1c-tux1ebf}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Chuẩn bị Phòng Kín Cách Ly (Faraday Clean Room):} Phòng tổ
+  chức phải được quét sóng điện từ, không có thiết bị thu phát vô tuyến,
+  cách ly mạng hoàn toàn (Air-gapped), có hệ thống camera giám sát góc
+  rộng ghi hình liên tục không góc chết.
+\item
+  \textbf{Kiểm Tra Niêm Phong Phần Cứng:} Các thiết bị HSM mới nguyên
+  đai nguyên kiện được kiểm toán viên độc lập (Independent Auditor) kiểm
+  tra số niêm phong (tamper-evident seal) và chứng thực chưa từng bị can
+  thiệp.
+\item
+  \textbf{Khởi Động Môi Trường Live OS Sạch:} Máy chủ điều khiển nạp hệ
+  điều hành chuyên dụng từ đĩa quang DVD-R (Write-Once) hoặc thẻ USB chỉ
+  đọc có chữ ký số xác thực tính toàn vẹn của mã nhị phân.
+\item
+  \textbf{Phân Quyền Kiểm Soát Kép (Dual Control / M-of-N):} Khởi tạo
+  thẻ quản trị viên HSM theo thuật toán phân chia bí mật Shamir: Phải có
+  ít nhất \(M\) trên tổng số \(N\) người giữ khóa (Key Custodians) cùng
+  cắm thẻ thông minh và nhập mã PIN thì mới mở được phân vùng bảo mật.
+\item
+  \textbf{Sinh Cặp Khóa Phần Cứng:} HSM tự kích hoạt bộ tạo số ngẫu
+  nhiên vật lý (Hardware TRNG) để sinh cặp khóa Root bên trong bộ nhớ
+  được bọc bảo vệ. Khóa bí mật \textbf{TUYỆT ĐỐI KHÔNG BAO GIỜ RA KHỎI
+  HSM DƯỚI DẠNG BẢN RÕ (Plaintext)}.
+\item
+  \textbf{Ký Tự Chứng Thực \& Niêm Phong Két Sắt:} Xuất chứng chỉ Root
+  CA công khai, sao lưu bản mã hóa khóa sang thẻ bảo mật dự phòng, sau
+  đó ngắt điện HSM, đóng gói niêm phong và lưu trữ trong hai két sắt
+  chống cháy tại hai địa điểm địa lý khác nhau.
+\end{enumerate}
+
+\subsubsection{3.2.2. Thiết Bị Bảo Mật Phần Cứng HSM \& Chuẩn Giao Tiếp
+PKCS\#11}\label{thiux1ebft-bux1ecb-bux1ea3o-mux1eadt-phux1ea7n-cux1ee9ng-hsm-chuux1ea9n-giao-tiux1ebfp-pkcs11}
+
+\begin{itemize}
+\item
+  \textbf{Tiêu chuẩn NIST FIPS 140-2 / FIPS 140-3:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \emph{Level 1:} Bảo vệ phần mềm cơ bản.
+  \item
+    \emph{Level 2:} Vỏ kim loại có khóa và tem niêm phong chống cạy mở.
+  \item
+    \emph{Level 3:} Kháng can thiệp tích cực --- Tự động hủy khóa ngay
+    lập tức (Zeroization) nếu phát hiện hành vi cạy nắp hoặc tháo vỏ bảo
+    vệ.
+  \item
+    \emph{Level 4:} Bảo vệ mức vật lý tối thượng --- Tự hủy khóa nếu
+    phát hiện thay đổi nhiệt độ đột ngột (tấn công làm lạnh sâu) hoặc
+    biến đổi điện áp nguồn.
+  \end{itemize}
+\item
+  \textbf{Chuẩn giao diện PKCS\#11 (Cryptoki):} Định nghĩa API chuẩn C
+  độc lập với nhà sản xuất (Thales, Entrust, Yubico) cho phép các ứng
+  dụng (OpenSSL, Step-CA, HashiCorp Vault) ra lệnh cho HSM ký số mà
+  không bao giờ cần đọc khóa bí mật vào RAM máy tính:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{C\_Initialize}\OperatorTok{(...);}
+\NormalTok{C\_OpenSession}\OperatorTok{(}\NormalTok{slotID}\OperatorTok{,}\NormalTok{ CKF\_SERIAL\_SESSION }\OperatorTok{|}\NormalTok{ CKF\_RW\_SESSION}\OperatorTok{,} \OperatorTok{...);}
+\NormalTok{C\_Login}\OperatorTok{(}\NormalTok{hSession}\OperatorTok{,}\NormalTok{ CKU\_USER}\OperatorTok{,}\NormalTok{ pin}\OperatorTok{,}\NormalTok{ pinLen}\OperatorTok{);}
+\NormalTok{C\_SignInit}\OperatorTok{(}\NormalTok{hSession}\OperatorTok{,} \OperatorTok{\&}\NormalTok{mechanism}\OperatorTok{,}\NormalTok{ hPrivateKey}\OperatorTok{);}
+\NormalTok{C\_Sign}\OperatorTok{(}\NormalTok{hSession}\OperatorTok{,}\NormalTok{ pData}\OperatorTok{,}\NormalTok{ ulDataLen}\OperatorTok{,}\NormalTok{ pSignature}\OperatorTok{,} \OperatorTok{\&}\NormalTok{ulSignatureLen}\OperatorTok{);}
+\end{Highlighting}
+\end{Shaded}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{3.3. Khung Quy Chế Chứng Thực CP \& CPS (RFC
+3647)}\label{khung-quy-chux1ebf-chux1ee9ng-thux1ef1c-cp-cps-rfc-3647}
+
+Một hệ thống PKI chỉ có giá trị pháp lý khi đi kèm với hai văn kiện nền
+tảng: * \textbf{Chính Sách Chứng Thực (Certificate Policy - CP):} Tuyên
+ngôn cấp quản lý nêu rõ chứng chỉ được cấp cho ai, áp dụng cho mục đích
+gì và mức độ tin cậy đến đâu. * \textbf{Quy Chế Thực Hành Chứng Thực
+(Certification Practice Statement - CPS):} Tài liệu hướng dẫn kỹ thuật
+chi tiết tường tận cách thức CA vận hành để đạt được các mục tiêu đề ra
+trong CP.
+
+RFC 3647 chuẩn hóa cấu trúc của CP và CPS thành \textbf{8 đề mục cốt
+lõi}: 1. \textbf{Giới thiệu chung (Introduction):} Nhận diện tài liệu,
+các bên tham gia (CA, RA, Thuê bao Subscriber, Người tin cậy Relying
+Party), phạm vi khả dụng. 2. \textbf{Trách nhiệm công bố và lưu trữ
+(Publication \& Repository Controls):} Địa chỉ kho lưu trữ trực tuyến,
+tần suất cập nhật CRL/CPS. 3. \textbf{Định danh và xác thực
+(Identification \& Authentication):} Thủ tục xác minh danh tính tổ
+chức/cá nhân khi đăng ký lần đầu và khi thu hồi. 4. \textbf{Vòng đời
+hoạt động của chứng chỉ (Certificate Life-Cycle Operations):} Quy trình
+nộp đơn, cấp phát, gia hạn và thu hồi chứng chỉ. 5. \textbf{Kiểm soát cơ
+sở vật chất, quản lý và vận hành (Facility, Management Controls):} An
+ninh phòng máy chủ, kiểm soát truy cập vật lý, phòng cháy chữa cháy, sao
+lưu thảm họa. 6. \textbf{Kiểm soát kỹ thuật an ninh (Technical Security
+Controls):} Chuẩn thế hệ khóa, độ dài khóa, chuẩn HSM, cơ chế kiểm soát
+kép, an ninh mạng phân vùng DMZ. 7. \textbf{Hồ sơ định dạng
+(Certificate, CRL, and OCSP Profiles):} Cấu trúc chính xác các OID,
+thuật toán ký, các trường mở rộng Critical/Non-critical. 8. \textbf{Đánh
+giá và kiểm toán tuân thủ (Compliance Audit \& Assessments):} Cơ quan
+kiểm toán độc lập, chu kỳ kiểm toán hàng năm (WebTrust, ETSI EN 319
+411).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{CHƯƠNG 4: THUẬT TOÁN XÁC THỰC ĐƯỜNG DẪN TIN CẬY \& CƠ CHẾ THU
+HỒI CHỨNG
+CHỈ}\label{chux1b0ux1a1ng-4-thuux1eadt-touxe1n-xuxe1c-thux1ef1c-ux111ux1b0ux1eddng-dux1eabn-tin-cux1eady-cux1a1-chux1ebf-thu-hux1ed3i-chux1ee9ng-chux1ec9}
+
+\subsection{4.1. Thuật Toán Xác Thực Chuỗi Chứng Chỉ (RFC 5280
+§6)}\label{thuux1eadt-touxe1n-xuxe1c-thux1ef1c-chuux1ed7i-chux1ee9ng-chux1ec9-rfc-5280-6}
+
+Khi người dùng truy cập một website bảo mật, trình duyệt phải dựng một
+chuỗi chứng chỉ từ chứng chỉ lá \(C_0\) ngược về một chứng chỉ gốc
+\(C_n\) nằm trong cơ sở dữ liệu tin cậy cục bộ (Local Trust Store):
+
+\[C_0 (\text{Leaf}) \to C_1 (\text{Issuing CA}) \to C_2 (\text{Intermediate CA}) \to C_n (\text{Trust Anchor / Root CA})\]
+
+Thuật toán xác thực đường dẫn (Path Validation Algorithm) duyệt qua từng
+mắt xích từ \(i = 1\) đến \(n\) và thực hiện tuần tự \textbf{6 bước kiểm
+định toán học nghiêm ngặt}: 1. \textbf{Kiểm tra chữ ký số:} Sử dụng khóa
+công khai của chứng chỉ cha \(C_i\) để giải mã và kiểm tra chữ ký trên
+khối TBSCertificate của chứng chỉ con \(C_{i-1}\). 2. \textbf{Kiểm tra
+thời gian hiệu lực:} Thời điểm hiện tại \(T_{\text{now}}\) phải nằm
+trong khoảng:
+\[C_{i-1}.\text{notBefore} \le T_{\text{now}} \le C_{i-1}.\text{notAfter}\]
+3. \textbf{Khớp nối chuỗi định danh (Name Chaining):} Tên định danh của
+người phát hành trong chứng chỉ con phải trùng khớp hoàn toàn từng byte
+nhị phân với tên chủ thể của chứng chỉ cha:
+\[C_{i-1}.\text{Issuer} == C_i.\text{Subject}\] 4. \textbf{Kiểm tra
+quyền hạn CA (Basic Constraints):} Đối với tất cả các mắt xích trung
+gian (\(i \ge 1\)), chứng chỉ \(C_i\) bắt buộc phải có phần mở rộng
+\texttt{Basic\ Constraints} với cờ \texttt{cA\ =\ TRUE}. 5. \textbf{Kiểm
+tra giới hạn độ sâu (Path Length Constraint):} Nếu \(C_i\) có quy định
+\texttt{pathLenConstraint\ =\ k}, số lượng chứng chỉ CA trung gian nằm
+giữa nó và chứng chỉ thực thể cuối không được vượt quá \(k\). 6.
+\textbf{Kiểm tra trạng thái thu hồi (Revocation Status):} Kiểm tra xem
+số seri của \(C_{i-1}\) có bị liệt kê trong danh sách thu hồi CRL hoặc
+nhận phản hồi \texttt{REVOKED} từ OCSP Responder hay không.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{4.2. Cơ Chế Thu Hồi: CRL vs.~OCSP vs.~OCSP
+Stapling}\label{cux1a1-chux1ebf-thu-hux1ed3i-crl-vs.-ocsp-vs.-ocsp-stapling}
+
+Một chứng chỉ có thể bị hủy bỏ giá trị trước khi hết hạn do nhiều nguyên
+nhân: lộ khóa bí mật (\texttt{keyCompromise}), thay đổi thông tin định
+danh (\texttt{affiliationChanged}), hoặc đơn vị ngừng hoạt động. Ba cơ
+chế kiểm tra thu hồi được phát triển qua các thời kỳ:
+
+\begin{verbatim}
+1. CRL (Danh sách thu hồi tĩnh):
+   Client -------- Tải toàn bộ file CRL (dung lượng lớn hàng MB) --------> CA CRL Server
+   (Nhược điểm: Tải nặng, độ trễ cập nhật lớn, gây chậm kết nối)
+
+2. OCSP (Tra cứu trực tuyến):
+   Client -------- Truy vấn: Chứng chỉ Serial #12345 còn sống không? -------> OCSP Responder
+          <------- Phản hồi: Trạng thái GOOD (ký bởi CA) ------------------
+   (Nhược điểm: Lộ lịch sử duyệt web của Client cho CA; nguy cơ Soft-Fail bị chặn)
+
+3. OCSP STAPLING (Khuyến nghị chuẩn hiện đại TLS 1.3):
+   Web Server tự truy vấn OCSP Responder định kỳ (mỗi giờ) và lưu đệm phản hồi.
+   Client <======= Gói bắt tay TLS 1.3 kèm luôn phản hồi OCSP đã ký ======== Web Server
+   (Ưu điểm tuyệt đối: Tốc độ tối đa 0-RTT, bảo mật riêng tư 100%, không nghẽn CA)
+\end{verbatim}
+
+\subsubsection{So Sánh Kỹ Thuật Chi
+Tiết:}\label{so-suxe1nh-kux1ef9-thuux1eadt-chi-tiux1ebft}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Tiêu Chí Kỹ Thuật
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+CRL (RFC 5280)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+OCSP (RFC 6960)
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+OCSP Stapling (RFC 6066 / 7633)
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Phương thức truyền tải} & File tĩnh qua HTTP/FTP & Giao thức nhị
+phân HTTP POST/GET & Kẹp trong gói TLS Handshake \\
+\textbf{Băng thông Client} & Rất nặng (tải danh sách lớn) & Rất nhẹ (vài
+trăm bytes) & Không tốn thêm kết nối ngoài \\
+\textbf{Quyền riêng tư (Privacy)} & Tốt (CA không biết ai bị tra cứu) &
+Kém (CA biết IP người dùng truy cập web nào) & Hoàn hảo (CA không biết
+danh tính client) \\
+\textbf{Độ trễ kết nối mạng} & Lớn (nếu file CRL chưa cache) & Thêm 1
+RTT tới OCSP server & 0 RTT (có sẵn trong gói TLS) \\
+\textbf{Hành vi khi mạng lỗi} & Soft-fail (bỏ qua kiểm tra) & Soft-fail
+(nguy cơ MitM chặn) & \textbf{Hard-fail} khi bật Must-Staple \\
+\end{longtable}
+}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{CHƯƠNG 5: GIAO THỨC QUẢN TRỊ TỰ ĐỘNG ACME (RFC 8555) \& HẠ TẦNG
+ZERO TRUST
+PKI}\label{chux1b0ux1a1ng-5-giao-thux1ee9c-quux1ea3n-trux1ecb-tux1ef1-ux111ux1ed9ng-acme-rfc-8555-hux1ea1-tux1ea7ng-zero-trust-pki}
+
+\subsection{5.1. Cuộc Cách Mạng Tự Động Hóa Vòng Đời Chứng Chỉ Với ACME
+(RFC
+8555)}\label{cuux1ed9c-cuxe1ch-mux1ea1ng-tux1ef1-ux111ux1ed9ng-huxf3a-vuxf2ng-ux111ux1eddi-chux1ee9ng-chux1ec9-vux1edbi-acme-rfc-8555}
+
+Năm 2020, Apple, Google và Mozilla chính thức áp đặt giới hạn thời hạn
+sống của chứng chỉ TLS xuống còn \textbf{398 ngày}. Năm 2024, Google đề
+xuất lộ trình rút ngắn tiếp xuống \textbf{90 ngày}, và trong tương lai
+là \textbf{45 ngày}. Việc quản lý chứng chỉ thủ công bằng con người (tạo
+CSR, nộp đơn, chờ duyệt, tải về, cấu hình máy chủ) hoàn toàn phá sản.
+
+Giao thức \textbf{ACME (Automated Certificate Management Environment -
+RFC 8555)} do Let's Encrypt tiên phong và IETF chuẩn hóa đã giải quyết
+bài toán này thông qua tự động hóa hoàn toàn 100\%:
+
+\begin{verbatim}
+[ACME Client: Certbot / Step]                      [ACME Server: Step-CA / Let's Encrypt]
+             |                                                          |
+             | 1. Khởi tạo tài khoản (Account Key Pair Ed25519)         |
+             |--------------------------------------------------------->|
+             |                                                          |
+             | 2. Yêu cầu cấp chứng chỉ cho "api.kma.edu.vn"            |
+             |--------------------------------------------------------->|
+             | 3. Trả về Thử thách (Challenge: Token ngẫu nhiên)       |
+             |<---------------------------------------------------------|
+             |                                                          |
+             | [Client chuẩn bị đáp ứng thử thách]                     |
+             | - HTTP-01: Ghi file vào /.well-known/acme-challenge/    |
+             | - DNS-01 : Tạo bản ghi TXT _acme-challenge.domain        |
+             |                                                          |
+             | 4. Báo hiệu đã sẵn sàng kiểm tra                         |
+             |--------------------------------------------------------->|
+             |                                                          |
+             |           5. Server tự kết nối Internet kiểm tra thử thách
+             |              (Đúng token và chữ ký tài khoản)           |
+             |                                                          |
+             | 6. Xác thực thành công -> Cho phép nộp CSR               |
+             |<---------------------------------------------------------|
+             | 7. Nộp CSR kèm Public Key máy chủ                        |
+             |--------------------------------------------------------->|
+             | 8. Ký và trả về chứng chỉ hoàn chỉnh X.509               |
+             |<---------------------------------------------------------|
+\end{verbatim}
+
+\subsubsection{Các Loại Thử Thách ACME Phổ
+Biến:}\label{cuxe1c-loux1ea1i-thux1eed-thuxe1ch-acme-phux1ed5-biux1ebfn}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{HTTP-01 Challenge:} Máy chủ ACME truy vấn qua cổng HTTP 80 để
+  đọc token. Phù hợp cho máy chủ đơn lẻ, nhưng không cấp được chứng chỉ
+  Wildcard (\texttt{*.domain.com}).
+\item
+  \textbf{DNS-01 Challenge:} Client sử dụng API của máy chủ DNS để tự
+  động tạo bản ghi TXT. Đây là phương pháp mạnh mẽ nhất, hỗ trợ chứng
+  chỉ Wildcard và hoạt động tốt ngay cả với máy chủ nằm sâu trong mạng
+  nội bộ không mở cổng ra Internet.
+\item
+  \textbf{TLS-ALPN-01 Challenge:} Dành riêng cho các hệ thống reverse
+  proxy (HAProxy, Traefik), đàm phán qua giao thức TLS ALPN chuyên dụng
+  trên cổng 443 mà không cần can thiệp tầng HTTP.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{5.2. PKI Trong Kiến Trúc Mạng Không Tin Cậy (Zero Trust
+PKI)}\label{pki-trong-kiux1ebfn-truxfac-mux1ea1ng-khuxf4ng-tin-cux1eady-zero-trust-pki}
+
+Mô hình phòng thủ chu vi truyền thống (``bên ngoài nguy hiểm, bên trong
+an toàn'') đã hoàn toàn lỗi thời. Kiến trúc \textbf{Zero Trust} áp dụng
+nguyên tắc: \textbf{Luôn luôn xác thực, không bao giờ tin tưởng bất kỳ
+ai dù đang ở trong mạng nội bộ}.
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{mTLS (Mutual TLS) Toàn Diện:} Mọi kết nối giữa microservices A
+  và microservices B đều bắt buộc cả hai bên phải xuất trình chứng chỉ
+  X.509 để xác thực hai chiều và mã hóa đường truyền.
+\item
+  \textbf{Chứng Chỉ Biểu Kiến (Ephemeral Certificates):} Khóa bí mật và
+  chứng chỉ được sinh tự động bởi HashiCorp Vault hoặc Step-CA với thời
+  gian sống cực ngắn (từ 1 giờ đến 24 giờ). Khi chứng chỉ hết hạn, hệ
+  thống tự động xoay vòng (key rotation). Kẻ tấn công nếu có đánh cắp
+  được khóa bí mật trong bộ nhớ thì giá trị sử dụng cũng đã hết hạn sau
+  ít phút.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{CHƯƠNG 6: CÁC KỊCH BẢN TẤN CÔNG HẠ TẦNG PKI \& CHIẾN LƯỢC PHÒNG
+THỦ TOÀN
+DIỆN}\label{chux1b0ux1a1ng-6-cuxe1c-kux1ecbch-bux1ea3n-tux1ea5n-cuxf4ng-hux1ea1-tux1ea7ng-pki-chiux1ebfn-lux1b0ux1ee3c-phuxf2ng-thux1ee7-touxe0n-diux1ec7n}
+
+\subsection{6.1. Bài Học Xương Máu Từ Các Thảm Họa PKI Lịch
+Sử}\label{buxe0i-hux1ecdc-xux1b0ux1a1ng-muxe1u-tux1eeb-cuxe1c-thux1ea3m-hux1ecda-pki-lux1ecbch-sux1eed}
+
+PKI được xây dựng dựa trên sự ủy thác. Nếu một CA gốc trong Trust Store
+bị xâm nhập, kẻ tấn công có quyền lực tối thượng để giả mạo bất kỳ dịch
+vụ nào trên thế giới.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Vụ Án DigiNotar (Hà Lan - 2011):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \emph{Bối cảnh:} DigiNotar là CA công cộng uy tín của chính phủ Hà
+    Lan, nằm trong Trust Store mặc định của Windows, iOS, Android,
+    Firefox.
+  \item
+    \emph{Kịch bản tấn công:} Hacker thâm nhập vào mạng nội bộ của
+    DigiNotar do hệ thống thiếu phân tách mạng và mật khẩu quản trị yếu.
+    Root CA bị để ở trạng thái trực tuyến. Kẻ tấn công phát hành hơn 500
+    chứng chỉ giả mạo cho các tên miền trọng yếu: \texttt{*.google.com},
+    \texttt{*.torproject.org}, \texttt{*.microsoft.com}.
+  \item
+    \emph{Hậu quả:} Hơn 300.000 người dùng Internet tại Iran đã bị tấn
+    công Man-in-the-Middle đọc trộm toàn bộ email và tài khoản cá nhân.
+    Google và Microsoft đã tung bản vá khẩn cấp loại bỏ hoàn toàn
+    DigiNotar khỏi Trust Store, dẫn tới việc công ty này nộp đơn phá sản
+    sau đó 1 tháng.
+  \end{itemize}
+\item
+  \textbf{Vũ Khí Mạng Flame (2012):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \emph{Kịch bản:} Nhóm phát triển mã độc gián điệp Flame đã thực hiện
+    một cuộc tấn công toán học kỳ công: Khai thác lỗ hổng va chạm tiền
+    ảnh (chosen-prefix collision) trên hàm băm MD5 mà Microsoft vẫn sử
+    dụng để ký chứng chỉ dịch vụ Terminal Server.
+  \item
+    \emph{Khai thác:} Kẻ tấn công tạo ra một chứng chỉ giả mạo có cùng
+    mã băm MD5 với chứng chỉ hợp lệ của Microsoft, từ đó ký mã độc giả
+    dạng bản cập nhật chính thức của Windows Update để lây nhiễm vào các
+    cơ sở hạ tầng trọng yếu tại Trung Đông.
+  \end{itemize}
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{6.2. Kỹ Thuật Tấn Công Active Directory Certificate Services
+(AD
+CS)}\label{kux1ef9-thuux1eadt-tux1ea5n-cuxf4ng-active-directory-certificate-services-ad-cs}
+
+Active Directory Certificate Services (AD CS) là thành phần PKI phổ biến
+nhất trong các tập đoàn lớn toàn cầu. Năm 2021, Will Schroeder và Lee
+Christensen (SpecterOps) đã công bố nghiên cứu gây chấn động chỉ ra hàng
+loạt cấu hình sai sót nghiêm trọng cho phép leo thang đặc quyền từ người
+dùng cấp thấp lên Quản trị viên miền (Domain Admin):
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Kỹ thuật ESC1 (Misconfigured Certificate Template):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Mẫu chứng chỉ (Template) thỏa mãn đồng thời 3 điều kiện chết người:
+
+    \begin{enumerate}
+    \def\labelenumi{\arabic{enumi}.}
+    \tightlist
+    \item
+      Cấp quyền cho nhóm người dùng bình thường (\texttt{Domain\ Users})
+      được nộp đơn xin cấp chứng chỉ.
+    \item
+      Bật cờ \texttt{ENROLLEE\_SUPPLIES\_SUBJECT}: Cho phép người nộp
+      đơn tùy ý điền tên Subject Alternative Name (SAN) trong CSR.
+    \item
+      Cấu hình Extended Key Usage (EKU) có chứa
+      \texttt{Client\ Authentication} (\texttt{1.3.6.1.5.5.7.3.2}) hoặc
+      \texttt{Smart\ Card\ Logon}.
+    \end{enumerate}
+  \item
+    \emph{Khai thác:} Kẻ tấn công sử dụng công cụ \texttt{Certipy} yêu
+    cầu một chứng chỉ với SAN giả mạo là tài khoản
+    \texttt{Administrator@domain.local}. Sau khi nhận được chứng chỉ từ
+    AD CS, kẻ tấn công dùng chứng chỉ đó yêu cầu vé Kerberos TGT (Ticket
+    Granting Ticket) để chiếm quyền điều khiển toàn bộ mạng công ty.
+  \end{itemize}
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Lệnh trinh sát và khai thác ESC1 bằng công cụ Certipy:}
+\ExtensionTok{certipy}\NormalTok{ find }\AttributeTok{{-}u}\NormalTok{ user@corp.local }\AttributeTok{{-}p}\NormalTok{ Password123 }\AttributeTok{{-}dc{-}ip}\NormalTok{ 10.0.0.1 }\AttributeTok{{-}vulnerable}
+\ExtensionTok{certipy}\NormalTok{ req }\AttributeTok{{-}u}\NormalTok{ user@corp.local }\AttributeTok{{-}p}\NormalTok{ Password123 }\AttributeTok{{-}ca}\NormalTok{ Corp{-}CA }\AttributeTok{{-}template}\NormalTok{ ESC1{-}Template }\AttributeTok{{-}upn}\NormalTok{ administrator@corp.local}
+\ExtensionTok{certipy}\NormalTok{ auth }\AttributeTok{{-}pfx}\NormalTok{ administrator.pfx }\AttributeTok{{-}dc{-}ip}\NormalTok{ 10.0.0.1}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Biện Pháp Phòng Thủ:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Bỏ cờ \texttt{ENROLLEE\_SUPPLIES\_SUBJECT} trên mọi template có tính
+    năng Client Authentication.
+  \item
+    Thiết lập cơ chế phê duyệt thủ công
+    (\texttt{CA\ administrator\ approval}) cho các chứng chỉ nhạy cảm.
+  \item
+    Giám sát Windows Event Log ID \texttt{4886} (Yêu cầu cấp chứng chỉ)
+    và \texttt{4887} (Đã cấp chứng chỉ) bằng các luật phát hiện
+    \textbf{Sigma rules}.
+  \end{itemize}
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{6.3. Hệ Thống Minh Bạch Chứng Chỉ (Certificate Transparency
+- RFC
+6962)}\label{hux1ec7-thux1ed1ng-minh-bux1ea1ch-chux1ee9ng-chux1ec9-certificate-transparency---rfc-6962}
+
+Để giải quyết triệt để vấn đề CA cấp lén lút chứng chỉ giả mạo như vụ
+DigiNotar, Google đã khởi xướng chuẩn \textbf{Certificate Transparency
+(CT Logs - RFC 6962)}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Nguyên Lý Hoạt Động:} Mọi chứng chỉ muốn được trình duyệt
+  (Chrome, Safari) tin cậy \textbf{BẮT BUỘC} phải được ghi vào các máy
+  chủ CT Log công khai trước khi phát hành.
+\item
+  \textbf{Cấu Trúc Cây Merkle (Merkle Hash Tree):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    CT Log là một cuốn sổ cái chỉ thêm (Append-Only Cryptographic
+    Ledger). Dữ liệu được tổ chức dưới dạng cây nhị phân Merkle Tree.
+  \item
+    Mỗi nút lá là một chứng chỉ đã được nộp. Nút cha là mã băm của hai
+    nút con:
+    \(N_{\text{parent}} = H(N_{\text{left}} \parallel N_{\text{right}})\).
+  \item
+    Gốc cây (Merkle Tree Root) đại diện cho toàn bộ trạng thái lịch sử
+    của hàng tỷ chứng chỉ đã phát hành.
+  \end{itemize}
+\end{enumerate}
+
+\begin{verbatim}
+                         Merkle Root Hash (Ký bởi CT Log Server)
+                                    /              \
+                                   /                \
+                             Node 12                Node 34
+                             /      \               /      \
+                          Hash 1   Hash 2        Hash 3   Hash 4
+                           [C1]     [C2]          [C3]     [C4]
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  \textbf{Signed Certificate Timestamp (SCT):} Khi CA gửi chứng chỉ tạm
+  (Pre-certificate) lên CT Log, Log server trả về một biên nhận mật mã
+  gọi là SCT. SCT là bằng chứng cam kết rằng chứng chỉ này sẽ được đưa
+  vào cây Merkle trong vòng tối đa 24 giờ (Maximum Merge Delay - MMD).
+  SCT được nhúng trực tiếp vào chứng chỉ X.509 chính thức dưới dạng một
+  Extension.
+\item
+  \textbf{Kiểm Định Tuân Thủ Với ZLint:} Trước khi đưa chứng chỉ ra môi
+  trường production, các tổ chức CA sử dụng công cụ nguồn mở
+  \textbf{ZLint} để quét tự động hơn 250 điều khoản kỹ thuật của chuẩn
+  CA/B Forum, bảo đảm 100\% chứng chỉ không mắc các lỗi sai sót về định
+  dạng bit hay OID.
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{CHƯƠNG 7: CHUYỂN DỊCH HỆ THỐNG SANG MẬT MÃ HẬU LƯỢNG TỬ (PQC
+MIGRATION)}\label{chux1b0ux1a1ng-7-chuyux1ec3n-dux1ecbch-hux1ec7-thux1ed1ng-sang-mux1eadt-muxe3-hux1eadu-lux1b0ux1ee3ng-tux1eed-pqc-migration}
+
+\subsection{7.1. Mối Đe Dọa Từ Máy Tính Lượng Tử \& Chiến Lược
+HNDL}\label{mux1ed1i-ux111e-dux1ecda-tux1eeb-muxe1y-tuxednh-lux1b0ux1ee3ng-tux1eed-chiux1ebfn-lux1b0ux1ee3c-hndl}
+
+Năm 1994, Peter Shor công bố thuật toán lượng tử chứng minh rằng: Một
+máy tính lượng tử lý tưởng (Cryptanalytically Relevant Quantum Computer
+- CRQC) có thể tìm chu kỳ hàm số và giải quyết đồng thời bài toán phân
+tích thừa số nguyên tố và logarit rời rạc trong \textbf{thời gian đa
+thức}:
+
+\[\mathcal{O}\left((\log N)^3\right)\]
+
+Điều này đồng nghĩa với việc toàn bộ thuật toán RSA, DSA, ECDSA và ECDH
+đang bảo vệ Internet \textbf{sẽ hoàn toàn sụp đổ chỉ sau một đêm} khi
+máy tính lượng tử đạt đủ số lượng Qubit vật lý ổn định.
+
+Mối đe dọa không nằm ở tương lai 10 năm nữa mà đang diễn ra \textbf{ngay
+trong giây phút này} thông qua chiến lược tấn công:
+\[\textbf{Harvest Now, Decrypt Later (HNDL) — Thu thập ngay, Giải mã sau}\]
+Các cơ quan tình báo và nhóm tội phạm mạng tinh vi đang bí mật thu thập
+và lưu trữ hàng terabyte lưu lượng mã hóa HTTPS, dữ liệu ngoại giao, hồ
+sơ bệnh án và giao dịch ngân hàng của các quốc gia. Khi máy tính lượng
+tử ra đời, toàn bộ kho dữ liệu lịch sử này sẽ bị giải mã hồi tố, làm lộ
+toàn bộ bí mật nhà nước và bí mật kinh doanh!
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{7.2. Bộ Tiêu Chuẩn Mật Mã Hậu Lượng Tử Chính Thức Của NIST
+(08/2024)}\label{bux1ed9-tiuxeau-chuux1ea9n-mux1eadt-muxe3-hux1eadu-lux1b0ux1ee3ng-tux1eed-chuxednh-thux1ee9c-cux1ee7a-nist-082024}
+
+Sau cuộc thi tuyển chọn toàn cầu kéo dài gần một thập kỷ, ngày
+13/08/2024, Viện Tiêu chuẩn và Công nghệ Quốc gia Hoa Kỳ (NIST) đã chính
+thức ban hành bộ tiêu chuẩn liên bang:
+
+\subsubsection{7.2.1. NIST FIPS 203: Chuẩn Đóng Gói Khóa ML-KEM
+(Module-Lattice
+KEM)}\label{nist-fips-203-chuux1ea9n-ux111uxf3ng-guxf3i-khuxf3a-ml-kem-module-lattice-kem}
+
+\begin{itemize}
+\tightlist
+\item
+  Dựa trên thuật toán nguyên bản \textbf{CRYSTALS-Kyber}.
+\item
+  Dựa trên bài toán khó \textbf{Module Learning With Errors (M-LWE)}
+  trên vành đa thức hữu hạn: Cho ma trận đa thức \(\mathbf{A}\), vector
+  bí mật \(\mathbf{s}\) và vector sai số nhỏ \(\mathbf{e}\), việc tìm
+  \(\mathbf{s}\) từ \(\mathbf{b} = \mathbf{A}\mathbf{s} + \mathbf{e}\)
+  là bài toán NP-hard ngay cả với máy tính lượng tử.
+\item
+  \textbf{Ba cấp độ an ninh:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \texttt{ML-KEM-512}: Tương đương mức an ninh AES-128 (NIST Level 1).
+  \item
+    \texttt{ML-KEM-768}: Tương đương mức an ninh AES-192 (NIST Level 3 -
+    Khuyến nghị chuẩn chung).
+  \item
+    \texttt{ML-KEM-1024}: Tương đương mức an ninh AES-256 (NIST Level 5
+    - Dành cho hạ tầng tối mật).
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{7.2.2. NIST FIPS 204: Chuẩn Chữ Ký Số ML-DSA
+(Module-Lattice
+DSA)}\label{nist-fips-204-chuux1ea9n-chux1eef-kuxfd-sux1ed1-ml-dsa-module-lattice-dsa}
+
+\begin{itemize}
+\tightlist
+\item
+  Dựa trên thuật toán nguyên bản \textbf{CRYSTALS-Dilithium}.
+\item
+  Áp dụng kiến trúc Fiat-Shamir with Aborts trên vành mạng lưới
+  Module-LWE và Module-SIS.
+\item
+  \textbf{Ba cấp độ an ninh:} \texttt{ML-DSA-44}, \texttt{ML-DSA-65}
+  (Khuyến nghị chuẩn), \texttt{ML-DSA-87}.
+\end{itemize}
+
+\subsubsection{7.2.3. NIST FIPS 205: Chuẩn Chữ Ký Số Phi Trạng Thái
+SLH-DSA
+(SPHINCS+)}\label{nist-fips-205-chuux1ea9n-chux1eef-kuxfd-sux1ed1-phi-trux1ea1ng-thuxe1i-slh-dsa-sphincs}
+
+\begin{itemize}
+\tightlist
+\item
+  Dựa trên toán học hàm băm phi cấu trúc (Stateless Hash-Based).
+\item
+  Ưu điểm: Cơ sở an toàn hoàn toàn độc lập với toán học mạng lưới (được
+  xem là tuyến phòng thủ dự phòng an toàn tuyệt đối nếu một ngày toán
+  học mạng lưới bị giải mã). Nhược điểm: Chữ ký có kích thước rất lớn
+  (hơn 17 KB - 40 KB).
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{7.3. Kiến Trúc Bắt Tay Lai (Hybrid TLS 1.3 \& Hybrid
+Certificates)}\label{kiux1ebfn-truxfac-bux1eaft-tay-lai-hybrid-tls-1.3-hybrid-certificates}
+
+Việc chuyển dịch từ mật mã cổ điển sang PQC không thể diễn ra đột ngột
+mà phải thông qua cơ chế \textbf{Bắt tay lai (Hybrid Approach)} theo
+chuẩn IETF:
+
+\begin{verbatim}
+[Client]                                                        [Server]
+   |                                                               |
+   | 1. ClientHello:                                               |
+   |    Trao đổi khóa Lai (Supported Groups):                      |
+   |    - Khóa cổ điển : X25519 (32 bytes)                         |
+   |    - Khóa PQC     : ML-KEM-768 (1184 bytes)                  |
+   |-------------------------------------------------------------->|
+   |                                                               |
+   | 2. ServerHello:                                               |
+   |    - Phản hồi X25519 (32 bytes)                               |
+   |    - Phản hồi Ciphertext ML-KEM-768 (1088 bytes)              |
+   |<--------------------------------------------------------------|
+   |                                                               |
+   | [Cả hai bên tính toán Khóa bí mật chung kép]:                 |
+   | Shared_Secret = KDF(SS_X25519 || SS_ML-KEM-768)               |
+   | (Hệ thống an toàn nếu ít nhất một trong hai thuật toán an toàn)|
+\end{verbatim}
+
+\subsubsection{Thử Thách Kỹ Thuật Khi Chuyển Dịch Lên Môi Trường Sản
+Xuất:}\label{thux1eed-thuxe1ch-kux1ef9-thuux1eadt-khi-chuyux1ec3n-dux1ecbch-luxean-muxf4i-trux1b0ux1eddng-sux1ea3n-xuux1ea5t}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Bùng Nổ Kích Thước Khóa \& Chữ Ký:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Khóa ECDSA P-256: Public Key 64 bytes, Signature 64 bytes.
+  \item
+    Khóa ML-DSA-65: Public Key \textbf{1952 bytes}, Signature
+    \textbf{3309 bytes}.
+  \end{itemize}
+\item
+  \textbf{Hiện Tượng Phân Mảnh Gói Tin TCP (TCP MTU Packet
+  Fragmentation):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    MTU tiêu chuẩn mạng Ethernet là 1500 bytes. Một chứng chỉ hoặc chữ
+    ký ML-DSA vượt quá kích thước 1 MTU bắt buộc phải bị phân mảnh thành
+    3 - 4 khung tin IP.
+  \item
+    Trên mạng di động (4G/5G) hoặc kết nối mạng vệ tinh có tỉ lệ mất gói
+    cao, việc phân mảnh gói tin làm tăng đột biến độ trễ bắt tay mạng
+    (Handshake Latency) và tăng nguy cơ rớt kết nối. Đây là bài toán kỹ
+    thuật trọng tâm mà học viên Nhóm 3 sẽ đo kiểm thực tế trong đồ án
+    môn học.
+  \end{itemize}
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{CHƯƠNG 8: KHUNG PHÁP LÝ, QUY CHUẨN KỸ THUẬT \& HẠ TẦNG CHỮ KÝ
+SỐ QUỐC
+GIA}\label{chux1b0ux1a1ng-8-khung-phuxe1p-luxfd-quy-chuux1ea9n-kux1ef9-thuux1eadt-hux1ea1-tux1ea7ng-chux1eef-kuxfd-sux1ed1-quux1ed1c-gia}
+
+\subsection{8.1. Hệ Thống Luật Pháp \& Quy Chuẩn Kỹ Thuật Việt
+Nam}\label{hux1ec7-thux1ed1ng-luux1eadt-phuxe1p-quy-chuux1ea9n-kux1ef9-thuux1eadt-viux1ec7t-nam}
+
+Tại Việt Nam, chữ ký số và hạ tầng khóa công khai được điều chỉnh bởi
+một hành lang pháp lý hoàn chỉnh và chặt chẽ: 1. \textbf{Luật Giao dịch
+điện tử số 20/2023/QH15 (Chính thức có hiệu lực từ ngày 01/07/2024):} -
+Thay thế toàn diện Luật Giao dịch điện tử năm 2005. - Quy định phân loại
+chi tiết: \textbf{Chữ ký điện tử chuyên dùng}, \textbf{Chữ ký số chuyên
+dùng công vụ} và \textbf{Chữ ký số công cộng}. - Khẳng định giá trị pháp
+lý tương đương chữ ký tay của cá nhân và con dấu của tổ chức. - Bổ sung
+quy định về \textbf{Dịch vụ Tin cậy (Trust Services)} bao gồm: Dịch vụ
+cấp dấu thời gian (Time-stamping), Dịch vụ chứng thực thông điệp dữ
+liệu, và Dịch vụ chứng thực chữ ký số. 2. \textbf{Nghị định
+130/2018/NĐ-CP:} Hướng dẫn chi tiết thi hành Luật Giao dịch điện tử về
+chữ ký số và dịch vụ chứng thực chữ ký số. 3. \textbf{Thông tư số
+16/2019/TT-BTTTT \& Thông tư số 31/2020/TT-BTTTT:} Quy định danh mục
+tiêu chuẩn kỹ thuật bắt buộc áp dụng cho chữ ký số và thiết bị lưu khóa:
+- Thuật toán băm: Tối thiểu SHA-256 (loại bỏ hoàn toàn SHA-1). - Thuật
+toán khóa công khai: RSA tối thiểu 2048-bit hoặc ECC tối thiểu 256-bit.
+- Giao thức kiểm tra trạng thái: Bắt buộc hỗ trợ song song cả CRL và
+OCSP trực tuyến.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{8.2. Kiến Trúc Hạ Tầng Chữ Ký Số Quốc
+Gia}\label{kiux1ebfn-truxfac-hux1ea1-tux1ea7ng-chux1eef-kuxfd-sux1ed1-quux1ed1c-gia}
+
+Hạ tầng PKI Việt Nam được tổ chức theo mô hình hai nhánh quốc gia độc
+lập:
+
+\begin{verbatim}
+                            +-----------------------------+
+                            |       HỆ THỐNG PKI          |
+                            |       QUỐC GIA VIỆT NAM     |
+                            +-----------------------------+
+                                     /             \
+                                    /               \
+                                   /                 \
+  +-----------------------------------+   +-----------------------------------+
+  |   TRUNG TÂM CHỨNG THỰC ĐIỆN TỬ    |   |     BAN CƠ YẾU CHÍNH PHỦ          |
+  |     QUỐC GIA (NEAC) - BỘ TT&TT    |   |                                   |
+  |  - Vận hành National Root CA      |   |  - Quản lý PKI Chuyên Dùng        |
+  |  - Cấp phép cho CA Công Cộng      |   |    Công Vụ                        |
+  +-----------------------------------+   +-----------------------------------+
+                   |                                       |
+    Ký cấp phép    |                                       | Ký cấp phát
+                   v                                       v
+  +-----------------------------------+   +-----------------------------------+
+  |      CÁC CA CÔNG CỘNG (PUBLIC CA) |   | CÁC BỘ, BAN, NGÀNH, UBND TỈNH     |
+  |  - VNPT-CA, Viettel-CA, FPT-CA,   |   |  - Phục vụ cán bộ, công chức      |
+  |    BKAV-CA, TrustCA, MISA-CA...   |   |  - Ký văn bản điều hành điện tử   |
+  +-----------------------------------+   +-----------------------------------+
+                   |
+    Cấp phát cho   |
+                   v
+  +-----------------------------------+
+  |  DOANH NGHIỆP, TỔ CHỨC, CÔNG DÂN  |
+  |  - Kê khai thuế, Hải quan điện tử |
+  |  - Hóa đơn điện tử, Ngân hàng số  |
+  +-----------------------------------+
+\end{verbatim}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\subsection{8.3. Tiêu Chuẩn Thiết Bị Lưu Khóa Bí Mật \& Ký Số Từ Xa
+(Remote
+Signing)}\label{tiuxeau-chuux1ea9n-thiux1ebft-bux1ecb-lux1b0u-khuxf3a-buxed-mux1eadt-kuxfd-sux1ed1-tux1eeb-xa-remote-signing}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Thiết Bị Cứng Cục Bộ (USB Token / Smartcard):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Thiết bị phải đạt chứng chỉ an toàn quốc tế \textbf{Common Criteria
+    (CC) mức EAL4+} hoặc \textbf{NIST FIPS 140-2 Level 2/3}.
+  \item
+    Khóa bí mật được sinh trực tiếp bên trong chip bảo mật và không bao
+    giờ cho phép sao chép ra ngoài.
+  \item
+    Có cơ chế khóa tự động sau một số lần nhập sai mã PIN (thường là 5
+    lần).
+  \end{itemize}
+\item
+  \textbf{Ký Số Từ Xa (Remote Signing / Cloud HSM):}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Người dùng không cần mang theo thiết bị phần cứng USB Token cồng
+    kềnh. Khóa bí mật được lưu tập trung trong các cụm thiết bị HSM đạt
+    chuẩn FIPS 140-2 Level 3 tại trung tâm dữ liệu của nhà cung cấp dịch
+    vụ tin cậy (TSP).
+  \item
+    Xác thực kích hoạt chữ ký thông qua phương thức xác thực đa yếu tố
+    (MFA): Sinh trắc học (FIDO2 / FaceID / Vân tay) kết hợp mã OTP thông
+    báo qua ứng dụng an toàn.
+  \item
+    Quy trình ký số từ xa bắt buộc tuân thủ tiêu chuẩn Châu Âu
+    \textbf{eIDAS (EN 419 241-1 / EN 419 241-2)} bảo đảm người dùng duy
+    trì quyền kiểm soát duy nhất (Sole Control) đối với khóa bí mật của
+    mình.
+  \end{itemize}
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{PHỤ LỤC A: CẨM NANG 50 LỆNH OPENSSL 3.5 THỰC
+CHIẾN}\label{phux1ee5-lux1ee5c-a-cux1ea9m-nang-50-lux1ec7nh-openssl-3.5-thux1ef1c-chiux1ebfn}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# ==============================================================================}
+\CommentTok{\# PHẦN 1: QUẢN LÝ KHÓA CỔ ĐIỂN \& ĐƯỜNG CONG ELLIPTIC}
+\CommentTok{\# ==============================================================================}
+
+\CommentTok{\# 1. Sinh khóa bí mật RSA 4096{-}bit mã hóa bằng AES{-}256}
+\ExtensionTok{openssl}\NormalTok{ genpkey }\AttributeTok{{-}algorithm}\NormalTok{ RSA }\AttributeTok{{-}pkeyopt}\NormalTok{ rsa\_keygen\_bits:4096 }\AttributeTok{{-}aes{-}256{-}cbc} \AttributeTok{{-}out}\NormalTok{ root\_rsa.key}
+
+\CommentTok{\# 2. Trích xuất khóa công khai từ khóa bí mật RSA}
+\ExtensionTok{openssl}\NormalTok{ pkey }\AttributeTok{{-}in}\NormalTok{ root\_rsa.key }\AttributeTok{{-}pubout} \AttributeTok{{-}out}\NormalTok{ root\_rsa.pub}
+
+\CommentTok{\# 3. Liệt kê toàn bộ các đường cong Elliptic được hỗ trợ bởi OpenSSL 3.5}
+\ExtensionTok{openssl}\NormalTok{ ecparam }\AttributeTok{{-}list\_curves}
+
+\CommentTok{\# 4. Sinh khóa bí mật ECDSA trên đường cong chuẩn NIST P{-}384}
+\ExtensionTok{openssl}\NormalTok{ genpkey }\AttributeTok{{-}algorithm}\NormalTok{ EC }\AttributeTok{{-}pkeyopt}\NormalTok{ ec\_paramgen\_curve:secp384r1 }\AttributeTok{{-}out}\NormalTok{ ca\_ecc.key}
+
+\CommentTok{\# 5. Sinh khóa bí mật Ed25519 (Kháng kênh bên, tối ưu cho TLS 1.3)}
+\ExtensionTok{openssl}\NormalTok{ genpkey }\AttributeTok{{-}algorithm}\NormalTok{ ED25519 }\AttributeTok{{-}out}\NormalTok{ server\_ed25519.key}
+
+\CommentTok{\# ==============================================================================}
+\CommentTok{\# PHẦN 2: THỰC THI KHỞI TẠO ROOT CA VÀ INTERMEDIATE CA}
+\CommentTok{\# ==============================================================================}
+
+\CommentTok{\# 6. Khởi tạo chứng chỉ Root CA tự ký X.509 v3 (Thời hạn 10 năm)}
+\ExtensionTok{openssl}\NormalTok{ req }\AttributeTok{{-}x509} \AttributeTok{{-}new} \AttributeTok{{-}nodes} \AttributeTok{{-}key}\NormalTok{ root\_rsa.key }\AttributeTok{{-}sha256} \AttributeTok{{-}days}\NormalTok{ 3650 }\DataTypeTok{\textbackslash{}}
+  \AttributeTok{{-}subj} \StringTok{"/C=VN/ST=Ho Chi Minh/O=KMA/OU=Security Division/CN=KMA National Root CA"} \DataTypeTok{\textbackslash{}}
+  \AttributeTok{{-}addext} \StringTok{"basicConstraints=critical,CA:TRUE"} \DataTypeTok{\textbackslash{}}
+  \AttributeTok{{-}addext} \StringTok{"keyUsage=critical,digitalSignature,keyCertSign,cRLSign"} \DataTypeTok{\textbackslash{}}
+  \AttributeTok{{-}addext} \StringTok{"subjectKeyIdentifier=hash"} \DataTypeTok{\textbackslash{}}
+  \AttributeTok{{-}out}\NormalTok{ root\_ca.crt}
+
+\CommentTok{\# 7. Tạo yêu cầu ký chứng chỉ (CSR) cho Issuing Intermediate CA}
+\ExtensionTok{openssl}\NormalTok{ req }\AttributeTok{{-}new} \AttributeTok{{-}newkey}\NormalTok{ ec }\AttributeTok{{-}pkeyopt}\NormalTok{ ec\_paramgen\_curve:secp384r1 }\AttributeTok{{-}nodes} \DataTypeTok{\textbackslash{}}
+  \AttributeTok{{-}keyout}\NormalTok{ intermediate.key }\DataTypeTok{\textbackslash{}}
+  \AttributeTok{{-}subj} \StringTok{"/C=VN/ST=Ho Chi Minh/O=KMA/OU=PKI Center/CN=KMA Issuing Intermediate CA"} \DataTypeTok{\textbackslash{}}
+  \AttributeTok{{-}out}\NormalTok{ intermediate.csr}
+
+\CommentTok{\# 8. Root CA ký cấp phát chứng chỉ cho Intermediate CA (Hạn dùng 5 năm, pathlen=0)}
+\ExtensionTok{openssl}\NormalTok{ x509 }\AttributeTok{{-}req} \AttributeTok{{-}in}\NormalTok{ intermediate.csr }\AttributeTok{{-}CA}\NormalTok{ root\_ca.crt }\AttributeTok{{-}CAkey}\NormalTok{ root\_rsa.key }\DataTypeTok{\textbackslash{}}
+  \AttributeTok{{-}CAcreateserial} \AttributeTok{{-}out}\NormalTok{ intermediate.crt }\AttributeTok{{-}days}\NormalTok{ 1825 }\AttributeTok{{-}sha384} \DataTypeTok{\textbackslash{}}
+  \AttributeTok{{-}extfile} \OperatorTok{\textless{}(}\BuiltInTok{printf} \StringTok{"basicConstraints=critical,CA:TRUE,pathlen:0\textbackslash{}nkeyUsage=critical,digitalSignature,keyCertSign,cRLSign\textbackslash{}nauthorityKeyIdentifier=keyid:always,issuer\textbackslash{}nsubjectKeyIdentifier=hash"}\OperatorTok{)}
+
+\CommentTok{\# ==============================================================================}
+\CommentTok{\# PHẦN 3: CẤP PHÁT CHỨNG CHỈ WEB SERVER VỚI SAN (CA/B FORUM COMPLIANT)}
+\CommentTok{\# ==============================================================================}
+
+\CommentTok{\# 9. Tạo CSR cho máy chủ Web với đầy đủ tên miền SAN}
+\ExtensionTok{openssl}\NormalTok{ req }\AttributeTok{{-}new} \AttributeTok{{-}newkey}\NormalTok{ rsa:2048 }\AttributeTok{{-}nodes} \AttributeTok{{-}keyout}\NormalTok{ web.key }\AttributeTok{{-}out}\NormalTok{ web.csr }\DataTypeTok{\textbackslash{}}
+  \AttributeTok{{-}subj} \StringTok{"/C=VN/ST=Ho Chi Minh/O=Hoc Vien Mat Ma/CN=api.kma.edu.vn"}
+
+\CommentTok{\# 10. Intermediate CA ký cấp chứng chỉ máy chủ Web (Hạn dùng 398 ngày)}
+\ExtensionTok{openssl}\NormalTok{ x509 }\AttributeTok{{-}req} \AttributeTok{{-}in}\NormalTok{ web.csr }\AttributeTok{{-}CA}\NormalTok{ intermediate.crt }\AttributeTok{{-}CAkey}\NormalTok{ intermediate.key }\DataTypeTok{\textbackslash{}}
+  \AttributeTok{{-}CAcreateserial} \AttributeTok{{-}out}\NormalTok{ web.crt }\AttributeTok{{-}days}\NormalTok{ 398 }\AttributeTok{{-}sha256} \DataTypeTok{\textbackslash{}}
+  \AttributeTok{{-}extfile} \OperatorTok{\textless{}(}\BuiltInTok{printf} \StringTok{"basicConstraints=critical,CA:FALSE\textbackslash{}nkeyUsage=digitalSignature,keyEncipherment\textbackslash{}nextendedKeyUsage=serverAuth,clientAuth\textbackslash{}nsubjectAltName=DNS:api.kma.edu.vn,DNS:localhost,IP:127.0.0.1\textbackslash{}nauthorityKeyIdentifier=keyid,issuer"}\OperatorTok{)}
+
+\CommentTok{\# 11. Đóng gói chuỗi tin cậy đầy đủ (Full Chain)}
+\FunctionTok{cat}\NormalTok{ web.crt intermediate.crt root\_ca.crt }\OperatorTok{\textgreater{}}\NormalTok{ fullchain.pem}
+
+\CommentTok{\# ==============================================================================}
+\CommentTok{\# PHẦN 4: KIỂM ĐỊNH, PHÂN TÍCH NHỊ PHÂN VÀ THU HỒI}
+\CommentTok{\# ==============================================================================}
+
+\CommentTok{\# 12. Xem chi tiết văn bản đầy đủ của chứng chỉ X.509}
+\ExtensionTok{openssl}\NormalTok{ x509 }\AttributeTok{{-}in}\NormalTok{ web.crt }\AttributeTok{{-}noout} \AttributeTok{{-}text}
+
+\CommentTok{\# 13. Mổ xẻ cấu trúc cây dữ liệu nhị phân ASN.1 DER}
+\ExtensionTok{openssl}\NormalTok{ asn1parse }\AttributeTok{{-}in}\NormalTok{ web.crt }\AttributeTok{{-}inform}\NormalTok{ PEM}
+
+\CommentTok{\# 14. Kiểm tra xác thực đường dẫn tin cậy (Chain Validation)}
+\ExtensionTok{openssl}\NormalTok{ verify }\AttributeTok{{-}CAfile}\NormalTok{ root\_ca.crt }\AttributeTok{{-}untrusted}\NormalTok{ intermediate.crt web.crt}
+
+\CommentTok{\# 15. Khởi tạo danh sách thu hồi chứng chỉ (CRL) rỗng}
+\ExtensionTok{openssl}\NormalTok{ ca }\AttributeTok{{-}gencrl} \AttributeTok{{-}config}\NormalTok{ openssl.cnf }\AttributeTok{{-}out}\NormalTok{ crl.pem}
+
+\CommentTok{\# 16. Chuyển đổi định dạng chứng chỉ từ PEM sang nhị phân DER}
+\ExtensionTok{openssl}\NormalTok{ x509 }\AttributeTok{{-}in}\NormalTok{ web.crt }\AttributeTok{{-}outform}\NormalTok{ DER }\AttributeTok{{-}out}\NormalTok{ web.der}
+
+\CommentTok{\# 17. Đóng gói cặp khóa và chứng chỉ sang kho chứa mật khẩu PKCS\#12 (.p12 / .pfx)}
+\ExtensionTok{openssl}\NormalTok{ pkcs12 }\AttributeTok{{-}export} \AttributeTok{{-}out}\NormalTok{ bundle.pfx }\AttributeTok{{-}inkey}\NormalTok{ web.key }\AttributeTok{{-}in}\NormalTok{ web.crt }\AttributeTok{{-}certfile}\NormalTok{ intermediate.crt}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{PHỤ LỤC B: BỘ CÔNG CỤ PYTHON CRYPTOGRAPHY PHÂN TÍCH \& KIỂM
+ĐỊNH}\label{phux1ee5-lux1ee5c-b-bux1ed9-cuxf4ng-cux1ee5-python-cryptography-phuxe2n-tuxedch-kiux1ec3m-ux111ux1ecbnh}
+
+Dưới đây là công cụ Python hoàn chỉnh dựa trên thư viện chuẩn quốc tế
+\texttt{cryptography} hỗ trợ học viên tự động hóa kiểm định tính hợp lệ
+của chứng chỉ X.509 theo các quy tắc nghiêm ngặt của CA/B Forum:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#!/usr/bin/env python3}
+\CommentTok{\# {-}*{-} coding: utf{-}8 {-}*{-}}
+\CommentTok{\textquotesingle{}\textquotesingle{}\textquotesingle{}}
+\CommentTok{PKI Certificate Auditor \& RFC 5280 Parser}
+\CommentTok{Học phần: Cơ sở hạ tầng khóa công khai (ATHK 512)}
+\CommentTok{Tác giả: Nguyễn An Khương (Khoa KH\&KT Máy tính, Trường ĐHBK Tp. HCM)}
+\CommentTok{\textquotesingle{}\textquotesingle{}\textquotesingle{}}
+
+\ImportTok{import}\NormalTok{ sys}
+\ImportTok{import}\NormalTok{ datetime}
+\ImportTok{from}\NormalTok{ cryptography }\ImportTok{import}\NormalTok{ x509}
+\ImportTok{from}\NormalTok{ cryptography.hazmat.backends }\ImportTok{import}\NormalTok{ default\_backend}
+\ImportTok{from}\NormalTok{ cryptography.x509.oid }\ImportTok{import}\NormalTok{ ExtensionOID, ExtendedKeyUsageOID}
+
+\KeywordTok{def}\NormalTok{ audit\_certificate(cert\_path: }\BuiltInTok{str}\NormalTok{):}
+    \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"[*] Tiến hành kiểm toán chứng chỉ: }\SpecialCharTok{\{}\NormalTok{cert\_path}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+    \ControlFlowTok{with} \BuiltInTok{open}\NormalTok{(cert\_path, }\StringTok{"rb"}\NormalTok{) }\ImportTok{as}\NormalTok{ f:}
+\NormalTok{        data }\OperatorTok{=}\NormalTok{ f.read()}
+
+    \CommentTok{\# Nạp chứng chỉ (hỗ trợ PEM hoặc DER)}
+    \ControlFlowTok{try}\NormalTok{:}
+\NormalTok{        cert }\OperatorTok{=}\NormalTok{ x509.load\_pem\_x509\_certificate(data, default\_backend())}
+    \ControlFlowTok{except} \PreprocessorTok{Exception}\NormalTok{:}
+\NormalTok{        cert }\OperatorTok{=}\NormalTok{ x509.load\_der\_x509\_certificate(data, default\_backend())}
+
+\NormalTok{    now }\OperatorTok{=}\NormalTok{ datetime.datetime.now(datetime.timezone.utc)}
+
+    \CommentTok{\# 1. Kiểm tra Version}
+\NormalTok{    version\_name }\OperatorTok{=}\NormalTok{ cert.version.name}
+    \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f" [+] Phiên bản X.509: }\SpecialCharTok{\{}\NormalTok{version\_name}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+    \ControlFlowTok{if}\NormalTok{ cert.version }\OperatorTok{!=}\NormalTok{ x509.Version.v3:}
+        \BuiltInTok{print}\NormalTok{(}\StringTok{"  [CẢNH BÁO] Chứng chỉ không phải X.509 v3!"}\NormalTok{)}
+
+    \CommentTok{\# 2. Kiểm tra Thời gian hiệu lực}
+    \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f" [+] Hiệu lực từ: }\SpecialCharTok{\{}\NormalTok{cert}\SpecialCharTok{.}\NormalTok{not\_valid\_before\_utc}\SpecialCharTok{\}}\SpecialStringTok{ đến }\SpecialCharTok{\{}\NormalTok{cert}\SpecialCharTok{.}\NormalTok{not\_valid\_after\_utc}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+    \ControlFlowTok{if}\NormalTok{ now }\OperatorTok{\textless{}}\NormalTok{ cert.not\_valid\_before\_utc:}
+        \BuiltInTok{print}\NormalTok{(}\StringTok{"  [LỖI] Chứng chỉ chưa đến thời điểm có hiệu lực!"}\NormalTok{)}
+    \ControlFlowTok{elif}\NormalTok{ now }\OperatorTok{\textgreater{}}\NormalTok{ cert.not\_valid\_after\_utc:}
+        \BuiltInTok{print}\NormalTok{(}\StringTok{"  [LỖI] Chứng chỉ ĐÃ HẾT HẠN!"}\NormalTok{)}
+    \ControlFlowTok{else}\NormalTok{:}
+        \BuiltInTok{print}\NormalTok{(}\StringTok{"  [PASS] Thời gian hiệu lực hợp lệ."}\NormalTok{)}
+
+    \CommentTok{\# 3. Kiểm tra Độ dài Serial Number (RFC 5280 giới hạn \textless{}= 20 bytes)}
+\NormalTok{    serial\_len }\OperatorTok{=}\NormalTok{ (cert.serial\_number.bit\_length() }\OperatorTok{+} \DecValTok{7}\NormalTok{) }\OperatorTok{//} \DecValTok{8}
+    \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f" [+] Serial Number: }\SpecialCharTok{\{}\BuiltInTok{hex}\NormalTok{(cert.serial\_number)}\SpecialCharTok{\}}\SpecialStringTok{ (Độ dài: }\SpecialCharTok{\{}\NormalTok{serial\_len}\SpecialCharTok{\}}\SpecialStringTok{ bytes)"}\NormalTok{)}
+    \ControlFlowTok{if}\NormalTok{ serial\_len }\OperatorTok{\textgreater{}} \DecValTok{20}\NormalTok{:}
+        \BuiltInTok{print}\NormalTok{(}\StringTok{"  [VI PHẠM RFC 5280] Serial Number vượt quá 20 bytes!"}\NormalTok{)}
+
+    \CommentTok{\# 4. Kiểm tra Basic Constraints}
+    \ControlFlowTok{try}\NormalTok{:}
+\NormalTok{        bc }\OperatorTok{=}\NormalTok{ cert.extensions.get\_extension\_for\_oid(ExtensionOID.BASIC\_CONSTRAINTS)}
+        \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f" [+] Basic Constraints: is\_ca=}\SpecialCharTok{\{}\NormalTok{bc}\SpecialCharTok{.}\NormalTok{value}\SpecialCharTok{.}\NormalTok{ca}\SpecialCharTok{\}}\SpecialStringTok{, path\_length=}\SpecialCharTok{\{}\NormalTok{bc}\SpecialCharTok{.}\NormalTok{value}\SpecialCharTok{.}\NormalTok{path\_length}\SpecialCharTok{\}}\SpecialStringTok{, critical=}\SpecialCharTok{\{}\NormalTok{bc}\SpecialCharTok{.}\NormalTok{critical}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+        \ControlFlowTok{if}\NormalTok{ bc.value.ca }\KeywordTok{and} \KeywordTok{not}\NormalTok{ bc.critical:}
+            \BuiltInTok{print}\NormalTok{(}\StringTok{"  [CẢNH BÁO] Chứng chỉ CA nhưng cờ Basic Constraints không đặt CRITICAL!"}\NormalTok{)}
+    \ControlFlowTok{except}\NormalTok{ x509.ExtensionNotFound:}
+        \BuiltInTok{print}\NormalTok{(}\StringTok{"  [LỖI NGHIÊM TRỌNG] Thiếu phần mở rộng Basic Constraints!"}\NormalTok{)}
+
+    \CommentTok{\# 5. Kiểm tra Subject Alternative Name (SAN)}
+    \ControlFlowTok{try}\NormalTok{:}
+\NormalTok{        san }\OperatorTok{=}\NormalTok{ cert.extensions.get\_extension\_for\_oid(ExtensionOID.SUBJECT\_ALTERNATIVE\_NAME)}
+\NormalTok{        names }\OperatorTok{=}\NormalTok{ san.value.get\_values\_for(x509.DNSName)}
+\NormalTok{        ips }\OperatorTok{=}\NormalTok{ [}\BuiltInTok{str}\NormalTok{(ip) }\ControlFlowTok{for}\NormalTok{ ip }\KeywordTok{in}\NormalTok{ san.value.get\_values\_for(x509.IPAddress)]}
+        \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f" [+] SAN DNS Names: }\SpecialCharTok{\{}\NormalTok{names}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+        \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f" [+] SAN IP Addresses: }\SpecialCharTok{\{}\NormalTok{ips}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+    \ControlFlowTok{except}\NormalTok{ x509.ExtensionNotFound:}
+        \BuiltInTok{print}\NormalTok{(}\StringTok{"  [VI PHẠM CA/B FORUM] Thiếu phần mở rộng Subject Alternative Name (SAN)!"}\NormalTok{)}
+
+    \BuiltInTok{print}\NormalTok{(}\StringTok{"[*] Kiểm toán hoàn tất."}\NormalTok{)}
+
+\ControlFlowTok{if} \VariableTok{\_\_name\_\_} \OperatorTok{==} \StringTok{"\_\_main\_\_"}\NormalTok{:}
+    \ControlFlowTok{if} \BuiltInTok{len}\NormalTok{(sys.argv) }\OperatorTok{\textless{}} \DecValTok{2}\NormalTok{:}
+        \BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Cách dùng: python3 }\SpecialCharTok{\{}\NormalTok{sys}\SpecialCharTok{.}\NormalTok{argv[}\DecValTok{0}\NormalTok{]}\SpecialCharTok{\}}\SpecialStringTok{ \textless{}duong\_dan\_file\_chung\_chi\textgreater{}"}\NormalTok{)}
+\NormalTok{        sys.exit(}\DecValTok{1}\NormalTok{)}
+\NormalTok{    audit\_certificate(sys.argv[}\DecValTok{1}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{PHỤ LỤC C: DANH MỤC TÀI LIỆU THAM KHẢO \& KHÓA HỌC QUỐC
+TẾ}\label{phux1ee5-lux1ee5c-c-danh-mux1ee5c-tuxe0i-liux1ec7u-tham-khux1ea3o-khuxf3a-hux1ecdc-quux1ed1c-tux1ebf}
+
+\subsubsection{1. Hệ Thống Khóa Học Quốc Tế Trực Tuyến Hàng Đầu
+(OpenCourseWare \& Video
+Lectures)}\label{hux1ec7-thux1ed1ng-khuxf3a-hux1ecdc-quux1ed1c-tux1ebf-trux1ef1c-tuyux1ebfn-huxe0ng-ux111ux1ea7u-opencourseware-video-lectures}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{MIT OpenCourseWare 6.857: Computer and Network Security}\\
+  \emph{Giảng viên:} GS. Ronald L. Rivest (Đồng tác giả RSA) và GS.
+  Shafi Goldwasser (Giải thưởng Turing).\\
+  \emph{Tài nguyên:} Bài giảng lý thuyết số, định danh chứng thực số và
+  lược đồ cam kết mật mã.\\
+  \emph{Địa chỉ truy cập:}
+  \href{https://ocw.mit.edu/courses/6-857-computer-and-network-security-spring-2014/}{ocw.mit.edu/courses/6-857-computer-and-network-security-spring-2014}
+\item
+  \textbf{Stanford University CS 255: Introduction to Cryptography}\\
+  \emph{Giảng viên:} GS. Dan Boneh.\\
+  \emph{Nội dung:} Phân tích chuyên sâu về hệ mật khóa công khai, tính
+  toán cặp trên đường cong elliptic (Pairing-based Crypto), thuật toán
+  chữ ký số RSA-PSS và ECDSA.\\
+  \emph{Địa chỉ truy cập:}
+  \href{https://crypto.stanford.edu/~dabo/cs255/}{crypto.stanford.edu/\textasciitilde dabo/cs255/}
+\item
+  \textbf{UC Berkeley CS 161: Computer Security}\\
+  \emph{Giảng viên:} GS. Nicholas Weaver và GS. David Wagner.\\
+  \emph{Nội dung:} Thực hành tấn công và phòng thủ giao thức TLS/SSL,
+  phân tích lỗ hổng CA, mô hình mối đe dọa Man-in-the-Middle và chính
+  sách bảo mật trình duyệt.\\
+  \emph{Địa chỉ truy cập:} \href{https://cs161.org/}{cs161.org}
+\item
+  \textbf{Simons Institute for the Theory of Computing (UC Berkeley):}\\
+  \emph{Chuyên đề:} \emph{Lattices: Algorithms, Complexity, and
+  Cryptography} \& \emph{Quantum Cryptography Program}.\\
+  \emph{Địa chỉ:}
+  \href{https://simons.berkeley.edu/}{simons.berkeley.edu}
+\item
+  \textbf{IACR Real World Crypto (RWC) Symposium:}\\
+  \emph{Kênh tài liệu video:} Hội nghị thường niên quốc tế quy tụ các kỹ
+  sư hàng đầu từ Google, Cloudflare, Apple về thực nghiệm triển khai TLS
+  1.3, PQC Migration và tấn công kênh bên vào HSM.\\
+  \emph{Kênh lưu trữ:} \href{https://rwc.iacr.org/}{rwc.iacr.org}
+\end{itemize}
+
+\subsubsection{2. Tiêu Chuẩn Kỹ Thuật Quốc Tế Bắt Buộc (Standards \&
+RFCs)}\label{tiuxeau-chuux1ea9n-kux1ef9-thuux1eadt-quux1ed1c-tux1ebf-bux1eaft-buux1ed9c-standards-rfcs}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{IETF RFC 5280:} \emph{Internet X.509 Public Key Infrastructure
+  Certificate and Certificate Revocation List (CRL) Profile}, 2008.
+\item
+  \textbf{IETF RFC 3647:} \emph{Internet X.509 Public Key Infrastructure
+  Certificate Policy and Certification Practices Framework}, 2003.
+\item
+  \textbf{IETF RFC 8555:} \emph{Automatic Certificate Management
+  Environment (ACME)}, 2019.
+\item
+  \textbf{IETF RFC 6960:} \emph{X.509 Internet Public Key Infrastructure
+  Online Certificate Status Protocol - OCSP}, 2013.
+\item
+  \textbf{IETF RFC 6962:} \emph{Certificate Transparency}, 2013.
+\item
+  \textbf{IETF RFC 8446:} \emph{The Transport Layer Security (TLS)
+  Protocol Version 1.3}, 2018.
+\item
+  \textbf{NIST FIPS 203:} \emph{Module-Lattice-Based Key-Encapsulation
+  Mechanism Standard (ML-KEM)}, 2024.
+\item
+  \textbf{NIST FIPS 204:} \emph{Module-Lattice-Based Digital Signature
+  Standard (ML-DSA)}, 2024.
+\item
+  \textbf{NIST FIPS 205:} \emph{Stateless Hash-Based Digital Signature
+  Standard (SLH-DSA)}, 2024.
+\item
+  \textbf{CA/Browser Forum:} \emph{Baseline Requirements for the
+  Issuance and Management of Publicly-Trusted Certificates}, Version
+  2.0+, 2024.
+\end{enumerate}
+
+\end{document}

@@ -720,4 +720,4 @@ Học viên tải và tham khảo trực tiếp tại thư mục `Do-an-nhom/`:
 
 ---
 
-*Bản quyền học liệu thuộc về Giảng viên Nguyễn An Khương (Khoa Khoa học & Kỹ thuật Máy tính, Trường ĐHBK Tp. HCM) & Ban Đào tạo Sau đại học, Phân hiệu Học viện Kỹ thuật Mật mã tại TP.HCM.*
+*Bản quyền học liệu thuộc về Giảng viên Nguyễn An Khương (Khoa Khoa học & Kỹ thuật Máy tính, Trường ĐHBK Tp. HCM · [ORCID: 0000-0002-9910-6387](https://orcid.org/0000-0002-9910-6387)) & Ban Đào tạo Sau đại học, Phân hiệu Học viện Kỹ thuật Mật mã tại TP.HCM.*

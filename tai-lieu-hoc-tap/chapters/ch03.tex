@@ -1,0 +1,78 @@
+\chapter{Kiến Trúc Phân Tầng CA, Vòng Đời Khóa \& Quy Chế CP/CPS (RFC 3647)}
+
+\banddo{Mô hình 3 tầng (Root $\to$ Intermediate $\to$ End-Entity) $\to$ Khung quy chế CP/CPS RFC 3647 $\to$ Lễ sinh khóa Key Ceremony $\to$ Thiết bị HSM FIPS 140-3 $\to$ Vòng đời chứng chỉ}
+
+\section{Kiến Trúc Chuỗi Tin Cậy Phân Tầng (3-Tier CA Hierarchy)}
+
+Hạ tầng PKI doanh nghiệp không bao giờ sử dụng một CA duy nhất để vừa đóng vai trò điểm tựa lòng tin tối cao vừa trực tiếp ký cấp phát chứng chỉ cho người dùng cuối. Thay vào đó, kiến trúc chuẩn hóa quốc tế thiết lập mô hình phân tầng tối thiểu 3 cấp:
+\begin{enumerate}
+  \item \textbf{Root CA (Offline / Air-Gapped):} Đỉnh tháp tin cậy tối cao. Khóa bí mật của Root CA chỉ dùng để ký chứng chỉ tự ký (Self-signed) cho chính nó và ký chứng chỉ ủy quyền cho 1--2 Intermediate CA. Toàn bộ máy chủ Root CA được ngắt mạng vật lý (Air-gapped), tắt nguồn và niêm phong trong két sắt phòng sạch an ninh cao. Thời hạn hiệu lực: 15--25 năm.
+  \item \textbf{Issuing Intermediate CA (Online):} Nằm trong phân vùng mạng an ninh (DMZ/VPC), trực tiếp kết nối với các hệ thống tự động hóa (ACME RFC 8555, SCEP, EST) để cấp phát chứng chỉ hàng ngày cho máy chủ, ứng dụng và người dùng. Ràng buộc an ninh: \texttt{pathLenConstraint = 0}. Thời hạn hiệu lực: 3--5 năm.
+  \item \textbf{End-Entity Certificates (Lá cây -- Leaf):} Chứng chỉ cấp cho máy chủ web, thiết bị IoT, lập trình viên phần mềm hoặc cán bộ nhân viên. Tuyệt đối không có quyền phát hành chứng chỉ khác (\texttt{isCA = FALSE}). Thời hạn hiệu lực: 90 ngày (hoặc tối đa 398 ngày).
+\end{enumerate}
+
+\begin{batngo}
+Tại sao phải tốn kém chi phí duy trì mô hình phân tầng?\\
+Nếu một Root CA duy nhất trực tuyến cấp phát chứng chỉ hàng ngày và bị kẻ tấn công thỏa hiệp, \textbf{toàn bộ hệ sinh thái sẽ sụp đổ}. Việc thu hồi Root CA đòi hỏi phải cập nhật thủ công hàng triệu thiết bị, trình duyệt và hệ điều hành trên toàn cầu. Với kiến trúc phân tầng, nếu Intermediate CA bị lộ khóa, Root CA (đang nằm an toàn offline) chỉ cần khởi động trong 10 phút để ký một bản thu hồi CRL hủy bỏ Intermediate CA đó và cấp ra Intermediate CA mới thay thế. Hệ thống người dùng không cần thay đổi Root Certificate.
+\end{batngo}
+
+\section{Khung Quy Chế CP và CPS Theo Chuẩn IETF RFC 3647}
+
+Một hệ thống PKI hợp pháp bắt buộc phải có hai văn bản pháp lý và kỹ thuật cốt lõi:
+\begin{itemize}
+  \item \textbf{Certificate Policy (CP -- Chính sách Chứng chỉ):} Tuyên ngôn nguyên tắc cấp cao quy định đối tượng được cấp, mức độ tin cậy và trách nhiệm pháp lý.
+  \item \textbf{Certification Practice Statement (CPS -- Quy chế Thực hành):} Tài liệu kỹ thuật chi tiết mô tả chính xác cách thức CA vận hành để đáp ứng các yêu cầu nêu trong CP.
+\end{itemize}
+
+IETF RFC 3647 chuẩn hóa cấu trúc của CP/CPS thành \textbf{9 phần bắt buộc}:
+\begin{enumerate}
+  \item Giới thiệu chung và phạm vi áp dụng (Introduction).
+  \item Trách nhiệm công bố và kho lưu trữ thông tin (Publication \& Repository).
+  \item Quy trình định danh và xác thực danh tính (Identification \& Authentication).
+  \item Yêu cầu nghiệp vụ vòng đời chứng chỉ (Certificate Life-Cycle Operations).
+  \item Kiểm soát an ninh cơ sở vật chất, quản trị và nhân sự (Facility, Management, and Operational Controls).
+  \item Kiểm soát an ninh kỹ thuật và mật mã (Technical Security Controls).
+  \item Cấu trúc chứng chỉ, CRL và hồ sơ OCSP (Certificate, CRL, and OCSP Profiles).
+  \item Đánh giá tuân thủ và kiểm toán độc lập (Compliance Audit and Other Assessments).
+  \item Các điều khoản pháp lý và kinh doanh (Other Business and Legal Matters).
+\end{enumerate}
+
+\section{Nghi Thức Lễ Sinh Khóa (Key Ceremony) \& Chuẩn HSM}
+
+Khóa bí mật của Root CA là tài sản an ninh tối cao. Nó được tạo ra trong một nghi thức pháp lý và kỹ thuật đặc biệt gọi là \textbf{Lễ sinh khóa (Key Ceremony)}:
+\begin{itemize}
+  \item \textbf{Không gian cách ly:} Phòng Faraday ngắt tuyệt đối mọi kết nối vô tuyến, điện thoại và thiết bị ghi âm; có sự chứng kiến của kiểm toán viên độc lập và máy quay an ninh đa góc 24/7.
+  \item \textbf{Kiểm soát kép (Dual Control / M-of-N):} Khóa quản trị HSM được phân rã cho $N$ người nắm giữ thẻ thông minh (Key Custodians) độc lập theo thuật toán chia sẻ bí mật Shamir. Cần sự có mặt đồng thời của tối thiểu $M$ người ($M \le N$, ví dụ 3-trong-5) để kích hoạt HSM.
+  \item \textbf{Thiết bị phần cứng HSM (Hardware Security Module):}
+  Đạt tiêu chuẩn an ninh \textbf{NIST FIPS 140-2 / FIPS 140-3 Level 3 hoặc Level 4}. Khóa được sinh bằng bộ tạo số ngẫu nhiên vật lý (Hardware TRNG). HSM có cảm biến vật lý tự hủy khóa ngay lập tức (\emph{Zeroization}) nếu phát hiện hành vi cạy nắp, thay đổi nhiệt độ hoặc khoan phá mạch vi xử lý.
+\end{itemize}
+
+\begin{thuthach}
+\textbf{Thảm họa mất bản sao lưu HSM:} Nếu CA không thực hiện quy trình sao lưu khóa Root CA sang các thẻ thông minh dự phòng (Backup Smartcards) theo cơ chế M-of-N, khi bo mạch phần cứng HSM gặp sự cố sốc điện hoặc hỏng chip, khóa bí mật của Root CA sẽ vĩnh viễn biến mất không thể phục hồi. Doanh nghiệp sẽ phải tuyên bố phá sản hạ tầng PKI và phát hành lại từ đầu toàn bộ hệ thống chứng chỉ!
+\end{thuthach}
+
+\begin{chayngay}
+Tạo cấu hình phân tầng và sinh khóa Root CA bằng OpenSSL:
+\begin{lstlisting}[language=bash]
+# Sinh khoa Root CA RSA-4096 ma hoa bang AES-256
+openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:4096 \
+  -aes256 -out root-ca.key
+# Sinh chung chi tu ky Root CA thoi han 20 nam
+openssl req -x509 -new -nodes -key root-ca.key -sha256 -days 7300 \
+  -out root-ca.crt -subj "/CN=KMA National Root CA/O=KMA/C=VN" \
+  -addext "basicConstraints=critical,CA:TRUE" \
+  -addext "keyUsage=critical,keyCertSign,cRLSign"
+\end{lstlisting}
+\end{chayngay}
+
+\begin{tukiemtra}
+\begin{enumerate}
+  \item Vì sao giá trị \texttt{pathLenConstraint = 0} trên Intermediate CA lại là một chốt chặn an ninh tối quan trọng?
+  \item Phân tích vai trò của kiểm toán viên độc lập (Independent Auditor) trong Lễ sinh khóa Root CA.
+  \item So sánh mức độ an ninh giữa HSM FIPS 140-3 Level 2 và Level 4.
+\end{enumerate}
+\end{tukiemtra}
+
+\begin{kbox}
+Mô hình phân tầng 3 cấp bảo vệ điểm tựa lòng tin tối cao trước các nguy cơ mạng. Tài liệu CP/CPS theo RFC 3647 là khuôn khổ pháp lý và quy chuẩn kỹ thuật bắt buộc của mọi CA. Thiết bị phần cứng HSM FIPS 140-3 kết hợp cơ chế kiểm soát kép M-of-N triệt tiêu hoàn toàn rủi ro nội bộ và rò rỉ khóa bí mật.
+\end{kbox}

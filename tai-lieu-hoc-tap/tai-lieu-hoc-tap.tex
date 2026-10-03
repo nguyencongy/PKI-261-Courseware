@@ -1,0 +1,237 @@
+% !TeX program = xelatex
+% ==============================================================================
+%  TÀI LIỆU HỌC TẬP: CƠ SỞ HẠ TẦNG KHÓA CÔNG KHAI (PKI)
+%                   & CHUYỂN DỊCH MẬT MÃ HẬU LƯỢNG TỬ (PQC)
+%  Mã học phần: ATHK 512 · Lớp: Cao học ATTT (CHAT4P) · Học kỳ: HK261
+%  Chủ biên: Nguyễn An Khương (CSE-HCMUT · ORCID: 0000-0002-9910-6387)
+%  Trợ giảng: Nguyễn Hữu Hoàng Huy (LinkedIn: nguyen-huu-hoang-huy-abb138366)
+%  Bộ nhận diện thương hiệu: Trường Đại học Bách khoa — ĐHQG-HCM
+% ==============================================================================
+\documentclass{hcmut-textbook}
+
+\usetikzlibrary{automata,positioning,arrows.meta,decorations.pathmorphing,
+  decorations.markings,backgrounds,calc,shapes.geometric,shadings}
+
+\definecolor{HCMUThi}{HTML}{5FB0EE}
+\definecolor{HCMUThair}{HTML}{9FB4D4}
+\definecolor{HCMUTglow}{HTML}{7CC4FF}
+\definecolor{warnred}{RGB}{180,20,20}
+\definecolor{solgreen}{RGB}{0,110,40}
+
+\graphicspath{{figures/}{figures/brand/}{brand/}}
+
+\begin{document}
+\frontmatter
+
+% ═══════════════════════════════════════════════════════════════════════
+%  BÌA 1: BÌA TRƯỚC THEO TỈ LỆ VÀNG CHUẨN HCMUT
+% ═══════════════════════════════════════════════════════════════════════
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{tikzpicture}[remember picture,overlay]
+  \coordinate (TL) at ($(current page.north west)+(2.2cm,0)$);
+  \coordinate (TR) at ($(current page.north east)+(-2.2cm,0)$);
+  \coordinate (GOLD) at ($(current page.north west)+(0,-18.36cm)$);
+
+  % Nền màu chủ phủ toàn trang
+  \shade[top color=HCMUTblue!95!black, bottom color=black!92]
+    (current page.south west) rectangle (current page.north east);
+
+  % Lưới lục giác mờ (motif nhận diện thương hiệu ĐHBK)
+  \begin{scope}[opacity=0.06]
+    \foreach \i in {0,...,9}{\foreach \j in {0,...,13}{
+      \begin{scope}[shift={($(current page.south west)+({\i*1.9cm + mod(\j,2)*0.95cm},{\j*1.62cm})$)}]
+        \draw[white,line width=0.3pt] (0:1.05cm)
+          \foreach \a in {60,120,...,300}{ -- (\a:1.05cm)} -- cycle;
+      \end{scope}}}
+  \end{scope}
+
+  % Khối nhận diện logo chính thức
+  \node[anchor=north west, inner sep=0pt] (brandplaque) at ($(TL)+(0,-0.9cm)$) {%
+    \tikz{\node[fill=white, rounded corners=3pt, inner xsep=10pt, inner ysep=7pt]{%
+      \raisebox{-0.5\height}{\includegraphics[height=0.92cm]{logo-vnu.png}}%
+      \hspace{9pt}\textcolor{HCMUThair!60!black}{\rule{0.5pt}{0.95cm}}\hspace{9pt}%
+      \raisebox{-0.5\height}{\includegraphics[height=1.05cm]{logo-bk.png}}};}};
+
+  % Vùng hình nghệ thuật mật mã (trên tuyến vàng)
+  \begin{scope}[shift={($(current page.north)+(0,-8.8cm)$)},scale=1.15]
+    \shade[inner color=HCMUTazure!30, outer color=HCMUTblue!10, opacity=0.4] (0,0) circle (4.2cm);
+    \begin{scope}[opacity=0.35]
+      \foreach \x in {-3,-2,-1,0,1,2,3}{
+        \foreach \y in {-2,-1,0,1,2}{
+          \fill[HCMUThi] (\x*1.1 + \y*0.3, \y*0.9 - \x*0.15) circle (1.8pt);
+        }
+      }
+      \draw[HCMUTglow, line width=0.6pt, dashed] (-2.2,-1.5) -- (2.2,1.5);
+      \draw[HCMUTglow, line width=0.6pt, dashed] (-1.5,1.8) -- (1.5,-1.8);
+    \end{scope}
+
+    \node[draw=HCMUTglow, fill=HCMUTblue!90!black, line width=1.4pt, rounded corners=6pt,
+          minimum width=5.2cm, minimum height=1.3cm, align=center] (rootca) at (0, 2.5) {
+      \sffamily\bfseries\color{white}\large KMA / NATIONAL ROOT CA\\
+      \sffamily\tiny\color{HCMUTglow} [ML-DSA-87 $\cdot$ RSA-4096 $\cdot$ Offline Air-Gapped HSM]
+    };
+
+    \node[draw=HCMUThi, fill=HCMUTblue!80!black, line width=1.1pt, rounded corners=5pt,
+          minimum width=4.6cm, minimum height=1.1cm, align=center] (subca) at (0, 0.4) {
+      \sffamily\bfseries\color{white}\normalsize ISSUING INTERMEDIATE CA\\
+      \sffamily\tiny\color{HCMUThair} [ML-DSA-65 $\cdot$ ECDSA P-384 $\cdot$ ACME RFC 8555]
+    };
+
+    \node[draw=white!80, fill=HCMUTblue!60!black, line width=0.9pt, rounded corners=4pt,
+          minimum width=2.6cm, minimum height=0.9cm, align=center] (ee1) at (-2.3, -1.8) {
+      \sffamily\bfseries\color{white}\small Web PKI\\
+      \sffamily\tiny\color{HCMUThair} TLS 1.3 Hybrid
+    };
+
+    \node[draw=white!80, fill=HCMUTblue!60!black, line width=0.9pt, rounded corners=4pt,
+          minimum width=2.6cm, minimum height=0.9cm, align=center] (ee2) at (2.3, -1.8) {
+      \sffamily\bfseries\color{white}\small Code Signing\\
+      \sffamily\tiny\color{HCMUThair} CT Logged
+    };
+
+    \draw[-{Stealth[length=2.8mm]}, HCMUTglow, line width=1.5pt]
+      (rootca.south) -- node[right, font=\tiny\sffamily, text=HCMUTglow] {Ký ủy quyền X.509} (subca.north);
+    \draw[-{Stealth[length=2.4mm]}, HCMUThi, line width=1.2pt]
+      (subca.south) -- (ee1.north);
+    \draw[-{Stealth[length=2.4mm]}, HCMUThi, line width=1.2pt]
+      (subca.south) -- (ee2.north);
+
+    \node[circle, draw=HCMUTglow, fill=HCMUTblue!95, line width=0.8pt, inner sep=3pt] at (0, 1.45) {
+      \sffamily\bfseries\tiny\color{HCMUTglow} $\sigma_{\text{CA}}$
+    };
+  \end{scope}
+
+  % Dải biểu tượng hàn lâm bổ trợ (Phân cách chân trời)
+  \begin{scope}[shift={($(current page.north)+(0,-16.2cm)$)}]
+    \begin{scope}[shift={(-5.4cm,0)},scale=0.9]
+      \shade[inner color=HCMUThi,outer color=HCMUTblue,opacity=0.15] (0,0) circle (1.2cm);
+      \node[text=white,font=\small\sffamily] at (0,0) {$g^{ab} \pmod p$};
+      \node[text=HCMUThair,font=\tiny\sffamily] at (0,-0.45cm) {Trapdoor DLP};
+    \end{scope}
+    \begin{scope}[shift={(-1.8cm,0)},scale=0.9]
+      \shade[inner color=HCMUThi,outer color=HCMUTblue,opacity=0.15] (0,0) circle (1.2cm);
+      \node[text=white,font=\small\sffamily] at (0,0.1cm) {RFC 5280};
+      \node[text=HCMUThair,font=\tiny\sffamily] at (0,-0.45cm) {X.509 v3 ASN.1};
+    \end{scope}
+    \begin{scope}[shift={(1.8cm,0)},scale=0.9]
+      \shade[inner color=HCMUThi,outer color=HCMUTblue,opacity=0.15] (0,0) circle (1.2cm);
+      \node[text=white,font=\small\sffamily] at (0,0.1cm) {RFC 6962};
+      \node[text=HCMUThair,font=\tiny\sffamily] at (0,-0.45cm) {CT Merkle Logs};
+    \end{scope}
+    \begin{scope}[shift={(5.4cm,0)},scale=0.9]
+      \shade[inner color=HCMUThi,outer color=HCMUTblue,opacity=0.15] (0,0) circle (1.2cm);
+      \node[text=HCMUTglow,font=\small\sffamily\bfseries] at (0,0.1cm) {FIPS 204};
+      \node[text=HCMUThair,font=\tiny\sffamily] at (0,-0.45cm) {ML-KEM / ML-DSA};
+    \end{scope}
+  \end{scope}
+
+  % Tầng 2: Tiêu đề sách (ngay dưới tuyến vàng)
+  \node[anchor=north west,text=white,align=left] at ($(TL)+(0,-18.8cm)$)
+    {{\fontsize{38}{44}\selectfont\sffamily\bfseries Cơ sở Hạ tầng}\\[4pt]
+     {\fontsize{38}{44}\selectfont\sffamily\bfseries Khóa công khai}\\[6pt]
+     {\fontsize{22}{26}\selectfont\sffamily\bfseries\color{HCMUTglow}\& Chuyển dịch Mật mã Hậu lượng tử (PQC)}};
+
+  \draw[HCMUThi,line width=2.5pt] ($(TL)+(0.05cm,-22.1cm)$) -- ($(TL)+(6.5cm,-22.1cm)$);
+
+  \node[anchor=north west,text=white,opacity=0.92] at ($(TL)+(0.05cm,-22.6cm)$)
+    {{\fontsize{20}{24}\selectfont\sffamily Tài liệu học tập học phần ATHK 512}};
+
+  % Tầng 3: Tác giả & Trợ giảng
+  \node[anchor=north west,text=white,align=left] at ($(TL)+(0.05cm,-23.9cm)$)
+    {\setlength{\baselineskip}{14pt}%
+     {\normalsize\sffamily\color{HCMUThair}Chủ biên:}\\[3pt]
+     {\large\sffamily\bfseries Nguyễn An Khương} \quad {\footnotesize\sffamily\color{HCMUTglow}[ORCID: 0000-0002-9910-6387]}\\[8pt]
+     {\normalsize\sffamily\color{HCMUThair}Trợ giảng học phần:}\\[3pt]
+     {\large\sffamily Nguyễn Hữu Hoàng Huy}};
+
+  % Tầng 4: Chân trang thương hiệu
+  \draw[HCMUThi,opacity=0.35,line width=0.5pt]
+    ($(current page.south west)+(2.2cm,2.4cm)$) -- ($(current page.south east)+(-2.2cm,2.4cm)$);
+  \node[anchor=north west,text=white,opacity=0.88] at ($(current page.south west)+(2.2cm,2.15cm)$)
+    {{\footnotesize\sffamily Trường Đại học Bách khoa --- ĐHQG-HCM}};
+  \node[anchor=north east,text=white,opacity=0.88] at ($(current page.south east)+(-2.2cm,2.15cm)$)
+    {{\footnotesize\sffamily Khoa Khoa học và Kỹ thuật Máy tính}};
+\end{tikzpicture}
+\end{titlepage}
+\clearpage
+
+% ═══════════════════════════════════════════════════════════════════════
+%  TRANG THÔNG TIN XUẤT BẢN & BẢN QUYỀN HỌC THUẬT
+% ═══════════════════════════════════════════════════════════════════════
+\thispagestyle{empty}
+\vspace*{3cm}
+\begin{center}
+  {\Huge\sffamily\bfseries\color{HCMUTblue} CƠ SỞ HẠ TẦNG KHÓA CÔNG KHAI}\\[0.4cm]
+  {\Large\sffamily\bfseries\color{HCMUTazure} VÀ CHUYỂN DỊCH MẬT MÃ HẬU LƯỢNG TỬ (PQC)}\\[1.2cm]
+  {\large\sffamily\textbf{TÀI LIỆU HỌC TẬP HỌC PHẦN ATHK 512}}\\[0.3cm]
+  {\normalsize\sffamily Khóa đào tạo: Cao học An toàn Thông tin (CHAT4P) $\cdot$ HK261}\\[2.0cm]
+
+  {\large\sffamily\textbf{Nguyễn An Khương}}\\[0.2cm]
+  {\small\sffamily Khoa Khoa học và Kỹ thuật Máy tính, Trường Đại học Bách khoa --- ĐHQG-HCM}\\[0.15cm]
+  {\footnotesize\sffamily Mã định danh học thuật toàn cầu: \href{https://orcid.org/0000-0002-9910-6387}{ORCID: 0000-0002-9910-6387}}\\[0.15cm]
+  {\footnotesize\sffamily Email: \texttt{nakhuong@hcmut.edu.vn} $\cdot$ \texttt{nakhuong@gmail.com}}\\[1.0cm]
+
+  {\normalsize\sffamily\textbf{Trợ giảng: Nguyễn Hữu Hoàng Huy}}\\[0.15cm]
+  {\footnotesize\sffamily Hồ sơ chuyên môn: \href{https://www.linkedin.com/in/nguyen-huu-hoang-huy-abb138366/}{LinkedIn Profile} $\cdot$ GitHub: \texttt{@HuyLHP}}\\[2.5cm]
+
+  {\itshape\color{MMslate} Thành phố Hồ Chí Minh --- Năm học 2026--2027}
+\end{center}
+\vfill
+\noindent\rule{\linewidth}{0.4pt}\\[0.2cm]
+{\footnotesize\color{MMslate}
+\textbf{Bản quyền \& Giấy phép phát hành:}\\
+$\copyright$ 2026 Nguyễn An Khương. Tác phẩm này được phát hành dưới Giấy phép Quốc tế \href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 (CC BY-NC-ND 4.0)}. Người học được phép sao chép và chia sẻ cho mục đích học tập cá nhân phi thương mại. Toàn bộ mã nguồn thực nghiệm và script đi kèm phát hành theo \href{https://opensource.org/licenses/MIT}{Giấy phép Nguồn mở MIT}.\\
+\textbf{Nhận diện thương hiệu:} Bộ nhận diện thương hiệu Trường Đại học Bách khoa --- ĐHQG-HCM (04/2021). Font: TeX Gyre Schola / Source Sans 3.
+}
+\clearpage
+
+% ═══════════════════════════════════════════════════════════════════════
+%  LỜI NÓI ĐẦU
+% ═══════════════════════════════════════════════════════════════════════
+\chapter*{Lời nói đầu}
+\addcontentsline{toc}{chapter}{Lời nói đầu}
+
+Hạ tầng Khóa Công khai (Public Key Infrastructure -- PKI) từ lâu đã trở thành ''xương sống vô hình'' bảo đảm tính bảo mật, toàn vẹn, xác thực và chống chối bỏ cho toàn bộ thế giới số hiện đại. Từ giao thức bắt tay TLS bảo vệ hàng tỷ phiên duyệt web an toàn mỗi ngày, chữ ký số trên các chứng từ tài chính -- ngân hàng, đến các định danh thiết bị IoT và cơ chế khởi động an toàn (Secure Boot) trong hệ điều hành máy tính --- tất cả đều vận hành dựa trên các nguyên lý cốt lõi của PKI.
+
+Tuy nhiên, kỷ nguyên số đang bước vào một khúc quanh lịch sử với hai chuyển biến mang tính cách mạng:
+\begin{enumerate}
+  \item \textbf{Kiến trúc Zero Trust \& Điện toán Đám mây Phân tán:} Mô hình chu vi mạng truyền thống bị xóa bỏ hoàn toàn. Các hệ thống hiện đại đòi hỏi hàng triệu kết nối mTLS giữa các microservices được mã hóa với chứng chỉ có thời hạn sống biểu kiến (ephemeral certificates tính bằng giờ hoặc phút), kéo theo yêu cầu tự động hóa tuyệt đối thông qua giao thức ACME (RFC 8555) và kiểm định tuân thủ tự động (ZLint).
+  \item \textbf{Nguy cơ Hiện hữu từ Điện toán Lượng tử (Post-Quantum Transition):} Thuật toán lượng tử Shor đã chứng minh khả năng bẻ gãy hoàn toàn các hệ mật mã khóa công khai kinh điển dựa trên bài toán phân tích thừa số nguyên tố (RSA) và logarit rời rạc (DSA, ECDSA, ECDH) trong thời gian đa thức. Tháng 8/2024, Viện Tiêu chuẩn và Công nghệ Quốc gia Hoa Kỳ (NIST) đã chính thức ban hành bộ tiêu chuẩn FIPS 203 (ML-KEM), FIPS 204 (ML-DSA) và FIPS 205 (SLH-DSA), mở ra một cuộc đại di chuyển mật mã (cryptographic migration) quy mô toàn cầu chưa từng có trong lịch sử nhân loại.
+\end{enumerate}
+
+Bộ \textbf{Tài liệu học tập: Cơ sở Hạ tầng Khóa công khai \& Mật mã Hậu lượng tử} này được biên soạn dành riêng cho học viên cao học ngành An toàn Thông tin (CHAT4P) nhằm trang bị một góc nhìn sâu sắc, toàn diện và hiện đại: kết hợp chặt chẽ giữa \textbf{nền tảng toán học hàn lâm chuẩn mực}, \textbf{chuẩn giao thức kỹ thuật quốc tế (IETF RFCs, CA/B Forum, NIST FIPS)} và \textbf{năng lực thực chiến công nghiệp (DevSecOps, Docker, OpenSSL 3.5, liboqs, HSM)}.
+
+Tài liệu được kết cấu thành 8 chương chuyên sâu kèm theo hệ thống phụ lục thực nghiệm phong phú, đóng vai trò là kim chỉ nam xuyên suốt 9 buổi học lý thuyết, thực hành phòng lab và 5 đề tài đồ án chuyên đề lớn của học phần. Mọi chương đều tích hợp đầy đủ các thiết bị sư phạm hiện đại kế thừa chuẩn mực học thuật của ĐHBK: Bản đồ nhận thức, Ghi chú lịch sử, Nhìn vào bản chất, Cạm bẫy an ninh, Bài toán mở, Thực hành ngay và Gói tự kiểm tra.
+
+\vspace{1.5cm}
+\begin{flushright}
+  \textbf{Nguyễn An Khương}\\
+  \textit{Khoa Khoa học và Kỹ thuật Máy tính}\\
+  \textit{Trường Đại học Bách khoa --- ĐHQG-HCM}\\
+  \textit{Tháng 10 năm 2026}
+\end{flushright}
+\clearpage
+
+% ═══════════════════════════════════════════════════════════════════════
+%  MỤC LỤC
+% ═══════════════════════════════════════════════════════════════════════
+\tableofcontents
+\clearpage
+
+\mainmatter
+
+\input{chapters/ch01}
+\input{chapters/ch02}
+\input{chapters/ch03}
+\input{chapters/ch04}
+\input{chapters/ch05}
+\input{chapters/ch06}
+\input{chapters/ch07}
+\input{chapters/ch08}
+
+\backmatter
+
+\input{chapters/appendices}
+
+\end{document}

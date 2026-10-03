@@ -1,0 +1,152 @@
+% =====================================================================
+%  PKI Session 7: PQC Migration & Capstone Defense Phase 1
+%  Author: Nguyen An Khuong (CSE-HCMUT · ORCID: 0000-0002-9910-6387)
+%  Teaching Assistant: Nguyen Huu Hoang Huy (LinkedIn)
+%  Master of Science in Information Security (CHAT4P) · HK261
+% =====================================================================
+
+\title{\color{hcmutblue}\textbf{\LARGE PUBLIC KEY INFRASTRUCTURE}\\[0.25em]
+       \color{hcmutblue}\textbf{\large S07: Di chuyển Mật mã Hậu Lượng tử (PQC) \& Bảo vệ Đồ án (Đợt 1)}}
+\date{\footnotesize Session 7 of 9 $\cdot$ ATHK 512 (KMA CHAT4P, HK261)\\
+      Class: Sat 14/11/2026 $\cdot$ 13h30--18h30\\
+      \textit{Standards: NIST FIPS 203/204/205, QĐ 1875/QĐ-TTg, Nhóm 1 \& 2}}
+
+\begin{document}
+\PKItitleframe
+
+\section{Tổng quan \& Lộ trình Buổi S07}
+
+\begin{frame}{Lộ Trình Học Phần (Buổi 7/9)}
+  \centering
+  \makebox[\linewidth][c]{\PKIcoursemap{7}}
+  \vspace{0.4em}
+  \raggedright\small
+  Học phần bước vào giai đoạn then chốt: cập nhật các tiêu chuẩn Mật mã Hậu lượng tử vừa ban hành của NIST và tiến hành bảo vệ Đồ án chuyên đề Đợt 1 (Nhóm 1 \& Nhóm 2).
+  \gvnote{[~2 phút | 13h30--13h32] Chào mừng Hội đồng và học viên đến với Buổi 7: Báo cáo đồ án đợt 1 và chuyên đề NIST PQC FIPS.}
+\end{frame}
+
+\begin{frame}{Nội Dung Trọng Tâm Buổi Học S07}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Phần 1: Chuyên Đề PQC (60 Phút)}
+      \begin{itemize}\small
+        \item Thuật toán Shor và mối nguy sụp đổ của hệ mật RSA/ECC.
+        \item Bộ ba tiêu chuẩn NIST: FIPS 203 (ML-KEM), 204 (ML-DSA), 205 (SLH-DSA).
+        \item Kiến trúc chứng chỉ lai Hybrid X.509 RFC 9881.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Phần 2: Bảo Vệ Đồ Án Đợt 1 (180 Phút)}
+      \begin{itemize}\small
+        \item \textbf{Nhóm 1 (VAULT):} Zero Trust PKI \& HashiCorp Vault. (Phản biện: Nhóm 3).
+        \item \textbf{Nhóm 2 (RootCA):} AD CS Security \& Hardening. (Phản biện: Nhóm 4).
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \begin{keybox}[Thời Khắc Lịch Sử Của Ngành Mật Mã]
+    Tháng 8/2024, NIST chính thức công bố bộ tiêu chuẩn FIPS 203/204, chấm dứt kỷ nguyên 50 năm thống trị của RSA và mở ra cuộc đại di chuyển mật mã lớn nhất lịch sử.
+  \end{keybox}
+  \gvnote{[~3 phút | 13h32--13h35] Nhấn mạnh tính thời sự của chuyên đề PQC và quán triệt quy chế phản biện chéo đối kháng.}
+\end{frame}
+
+\section{Bộ Tiêu chuẩn NIST FIPS 203/204/205}
+
+\begin{frame}{Bộ Ba Tiêu Chuẩn Mật Mã Hậu Lượng Tử Chính Thức}
+  \begin{table}[h]
+    \centering\scriptsize
+    \begin{tabularx}{\linewidth}{@{}p{0.22\linewidth} p{0.24\linewidth} p{0.24\linewidth} X@{}}
+      \toprule
+      \textbf{Tiêu Chuẩn} & \textbf{Tên Thuật Toán} & \textbf{Nền Tảng Toán Học} & \textbf{Ứng Dụng Trong PKI} \\
+      \midrule
+      \textbf{FIPS 203} & \textbf{ML-KEM} (Kyber) & Mạng lưới Module-LWE & Đóng gói khóa phiên TLS 1.3 Handshake \\
+      \textbf{FIPS 204} & \textbf{ML-DSA} (Dilithium) & Mạng lưới Module-LWE & \textbf{Chữ ký số thay thế trực tiếp RSA/ECDSA} \\
+      \textbf{FIPS 205} & \textbf{SLH-DSA} (SPHINCS+) & Hàm băm phi trạng thái & Phương án dự phòng an toàn tuyệt đối \\
+      \bottomrule
+    \end{tabularx}
+  \end{table}
+
+  \begin{pqcbox}[So Sánh Kích Thước Chữ Ký]
+    Chữ ký Ed25519 cổ điển: \textbf{64 bytes}.\\
+    Chữ ký ML-DSA-65 (NIST FIPS 204): \textbf{3,309 bytes} (gấp hơn 50 lần!).\\
+    Kích thước lớn làm phân mảnh gói tin TCP MTU (1500 bytes), gây rớt gói trên mạng di động.
+  \end{pqcbox}
+  \gvnote{[~3 phút | 13h35--13h38] So sánh 3 tiêu chuẩn FIPS. Nhấn mạnh bài toán kích thước chữ ký lớn trong hạ tầng mạng.}
+\end{frame}
+
+\begin{frame}{Chiến Lược Chuyển Dịch Lai: Hybrid X.509 Certificate}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Rủi ro của việc chuyển dịch đột ngột:}
+      \begin{itemize}\small
+        \item Toán học mạng lưới (Lattice) còn tương đối mới, có thể tồn tại lỗ hổng toán học tiềm ẩn.
+        \item Hệ thống phần mềm cũ (Legacy clients) không tương thích sẽ sụp đổ.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Giải pháp Kiến trúc Lai (RFC 9881):}
+      \begin{itemize}\small
+        \item Nhúng \textbf{đồng thời 2 chữ ký số} vào cùng 1 chứng chỉ:
+          $$\sigma_{\text{Hybrid}} = \{\sigma_{\text{ECDSA}}, \sigma_{\text{ML-DSA}}\}$$
+        \item Client cũ kiểm tra ECDSA; client hiện đại kiểm tra ML-DSA.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \begin{keybox}[Quyết Định 1875/QĐ-TTg Của Thủ Tướng Chính Phủ]
+    Việt Nam đã ban hành chiến lược quốc gia về chuyển dịch sang mật mã hậu lượng tử, yêu cầu các cơ quan trọng yếu bắt đầu lộ trình đánh giá và thử nghiệm từ năm 2026.
+  \end{keybox}
+  \gvnote{[~3 phút | 13h38--13h41] Giới thiệu cơ chế Hybrid Certificate và Quyết định 1875/QĐ-TTg của Thủ tướng Chính phủ.}
+\end{frame}
+
+\section{Bảo vệ Đồ án Chuyên đề Đợt 1}
+
+\begin{frame}{Quy Chế Chấm Chéo Đối Kháng Tại Buổi S07}
+  \centering
+  \begin{tikzpicture}[
+    scale=0.88, every node/.style={transform shape},
+    node distance=1.5cm and 2.5cm,
+    grp/.style={rectangle, draw=hcmutblue, fill=keybg, thick, rounded corners=3pt, minimum width=3.5cm, minimum height=1.2cm, align=center, font=\small\bfseries},
+    rev/.style={rectangle, draw=warnred, fill=warnred!15, thick, rounded corners=3pt, minimum width=3.5cm, minimum height=1.2cm, align=center, font=\small\bfseries}
+  ]
+    \node[grp] (n1) {Nhóm 1: VAULT\\{\scriptsize Zero Trust PKI (Hoài, Long, Quân)}};
+    \node[rev] (n3) [right=of n1] {Nhóm 3: TMN (Phản Biện)\\{\scriptsize PQC Root of Trust}};
+
+    \node[grp] (n2) [below=0.8cm of n1] {Nhóm 2: RootCA\\{\scriptsize AD CS Security (Hiển, Sơn, Phú)}};
+    \node[rev] (n4) [right=of n2] {Nhóm 4: CAP (Phản Biện)\\{\scriptsize Enterprise ACME}};
+
+    \draw[{Stealth[scale=1.2]}-{Stealth[scale=1.2]}, thick, color=hcmutblue] (n1) -- node[above, font=\scriptsize] {Thuyết trình (25') $\leftrightarrow$ Phản biện (15')} (n3);
+    \draw[{Stealth[scale=1.2]}-{Stealth[scale=1.2]}, thick, color=hcmutblue] (n2) -- node[above, font=\scriptsize] {Thuyết trình (25') $\leftrightarrow$ Phản biện (15')} (n4);
+  \end{tikzpicture}
+
+  \begin{alertblock}{Yêu Cầu Về Live Demo \& Bằng Chứng Kỹ Thuật}
+    Mọi nhóm bắt buộc chạy Live Demo trên môi trường Docker/Kubernetes thật. Nghiêm cấm chỉ chiếu slide chụp màn hình tĩnh.
+  \end{alertblock}
+  \gvnote{[~2 phút | 13h41--13h43] Khởi động phiên bảo vệ đồ án của Nhóm 1 và Nhóm 2.}
+\end{frame}
+
+\begin{frame}{Báo Cáo Đồ Án: Nhóm 1 (VAULT) \& Nhóm 2 (RootCA)}
+  \begin{columns}[T]
+    \begin{column}{0.48\textwidth}
+      \textbf{Nhóm 1: Zero Trust PKI}
+      \begin{itemize}\small
+        \item \textbf{Thành viên:} Nguyễn Ngọc Hoài (T), Nguyễn Trần Hoàng Long, Nguyễn Đình Quân.
+        \item \textbf{Trọng tâm:} Tích hợp HashiCorp Vault với SoftHSMv2, cấp phát chứng chỉ mTLS cho Envoy Proxy.
+      \end{itemize}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+      \textbf{Nhóm 2: AD CS Security}
+      \begin{itemize}\small
+        \item \textbf{Thành viên:} Nguyễn Vĩnh Hiển (T), Nguyễn Ngọc Sơn, Nguyễn Trường Phú.
+        \item \textbf{Trọng tâm:} Mô phỏng tấn công ESC1/ESC8 bằng Certipy và thiết lập hệ thống Sigma Rules giám sát.
+      \end{itemize}
+    \end{column}
+  \end{columns}
+
+  \vspace{0.6em}
+  \centering\large\sffamily\bfseries\color{hcmutblue}
+  Mời đại diện Nhóm 1 và Nhóm 2 lên bục thuyết trình!
+  \gvnote{[~180 phút | 13h45--16h45] Giai đoạn thuyết trình và phản biện của 2 nhóm.}
+\end{frame}
+
+\end{document}

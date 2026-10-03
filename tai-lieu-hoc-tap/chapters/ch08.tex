@@ -1,0 +1,65 @@
+\chapter{Khung Pháp Lý, Quy Chuẩn Kỹ Thuật \& Hạ Tầng Chữ Ký Số Quốc Gia}
+
+\banddo{Hành lang pháp lý quốc gia $\to$ Luật Giao dịch điện tử 2023 $\to$ Quyết định 1875/QĐ-TTg $\to$ Mô hình Root CA Quốc gia $\to$ Chữ ký số từ xa (Remote Signing)}
+
+\section{Hành Lang Pháp Lý: Luật Giao Dịch Điện Tử Năm 2023}
+
+Tại Việt Nam, hạ tầng khóa công khai được điều chỉnh bởi khung pháp lý cao nhất là \textbf{Luật Giao dịch điện tử năm 2023 (Luật số 20/2023/QH15)}, có hiệu lực thi hành từ ngày 01/07/2024:
+\begin{itemize}
+  \item \textbf{Phân loại chữ ký điện tử (Điều 21):} Luật phân định rõ ba cấp độ chữ ký điện tử:
+  \begin{enumerate}
+    \item Chữ ký điện tử chuyên dùng (dùng riêng cho cơ quan, tổ chức nội bộ).
+    \item Chữ ký số chuyên dùng công vụ (phục vụ hoạt động của các cơ quan nhà nước, do Ban Cơ yếu Chính phủ quản trị).
+    \item Chữ ký số công cộng (cung cấp dịch vụ cho người dân và doanh nghiệp số).
+  \end{enumerate}
+  \item \textbf{Giá trị pháp lý tương đương (Điều 23):} Chữ ký số an toàn đáp ứng đủ điều kiện theo quy định của pháp luật có \textbf{giá trị pháp lý tương đương chữ ký tay} của cá nhân trên văn bản giấy; chữ ký số của cơ quan, tổ chức có \textbf{giá trị tương đương con dấu pháp nhân}.
+  \item \textbf{Nguyên tắc chống chối bỏ (Non-repudiation):} Khi một thông điệp dữ liệu đã được ký bằng chữ ký số hợp lệ, người ký không thể phủ nhận việc mình đã tạo lập hoặc đồng thuận với nội dung giao dịch đó.
+\end{itemize}
+
+\section{Chiến Lược Quốc Gia Về Chuyển Dịch PQC Theo Quyết Định 1875/QĐ-TTg}
+
+Nhận thức rõ nguy cơ từ điện toán lượng tử đối với an ninh quốc gia, Thủ tướng Chính phủ đã ban hành \textbf{Quyết định số 1875/QĐ-TTg} phê duyệt Chiến lược phát triển ngành Cơ yếu Việt Nam:
+\begin{itemize}
+  \item Xác định nhiệm vụ trọng tâm: Chủ động nghiên cứu, thử nghiệm và xây dựng lộ trình chuyển đổi toàn bộ hạ tầng mật mã khóa công khai quốc gia sang chuẩn Mật mã Hậu lượng tử (PQC).
+  \item Ưu tiên bảo vệ các hệ thống thông tin phục vụ chỉ đạo, điều hành của Đảng, Nhà nước, lực lượng vũ trang và các cơ sở hạ tầng thông tin trọng yếu quốc gia (tài chính, ngân hàng, năng lượng).
+\end{itemize}
+
+\section{Kiến Trúc Hạ Tầng Khóa Công Khai Quốc Gia}
+
+Mô hình PKI quốc gia của Việt Nam được cấu trúc thành hai nhánh song song độc lập dưới sự điều phối của Bộ Thông tin \& Truyền thông và Ban Cơ yếu Chính phủ:
+\begin{enumerate}
+  \item \textbf{Nhánh Dịch vụ Chứng thực Chữ ký số Công cộng:}
+  Đỉnh tháp là \textbf{National Root CA} do Trung tâm Chứng thực điện tử quốc gia (NEAC) vận hành. National Root CA ký cấp chứng chỉ cho các nhà cung cấp dịch vụ chứng thực chữ ký số công cộng (Public CA: VNPT-CA, Viettel-CA, BKAV-CA, FPT-CA...). Các Public CA này sau đó cấp chứng chỉ cho công dân và doanh nghiệp.
+  \item \textbf{Nhánh Chữ ký số Chuyên dùng Công vụ:}
+  Do Cục Chứng thực số và An toàn thông tin thuộc Ban Cơ yếu Chính phủ trực tiếp quản lý và vận hành, phục vụ riêng cho các cơ quan Đảng và Nhà nước từ Trung ương đến địa phương.
+\end{enumerate}
+
+\section{Công Nghệ Chữ Ký Số Từ Xa (Remote Signing / Cloud PKI)}
+
+Xu thế hiện đại chuyển dịch từ thiết bị lưu trữ vật lý USB Token sang công nghệ \textbf{Ký số từ xa (Remote Signing)}:
+\begin{itemize}
+  \item Khóa bí mật của người dùng được lưu trữ và bảo vệ tập trung trong các thiết bị HSM chuyên dụng chuẩn \textbf{eIDAS (châu Âu) và Common Criteria EAL4+}.
+  \item Người dùng thực hiện ký số trên điện thoại thông minh thông qua xác thực đa nhân tố (MFA / Sinh trắc học FIDO2).
+  \item Đạt tốc độ ký hàng nghìn tài liệu mỗi giây, phục vụ đắc lực cho chương trình Chuyển đổi số Quốc gia.
+\end{itemize}
+
+\begin{chayngay}
+Kiểm tra thông tin chứng chỉ của Root CA Quốc gia Việt Nam:
+\begin{lstlisting}[language=bash]
+# Tai va xem thong tin chung chi National Root CA tu website NEAC
+curl -s http://neac.gov.vn/certificates/RootCA.cer | \
+  openssl x509 -inform DER -text -noout | grep -E "Issuer|Subject|Validity"
+\end{lstlisting}
+\end{chayngay}
+
+\begin{tukiemtra}
+\begin{enumerate}
+  \item Phân tích các điều kiện để một chữ ký số được công nhận có giá trị pháp lý tương đương chữ ký tay theo Luật Giao dịch điện tử 2023.
+  \item So sánh mô hình tổ chức của Nhánh Chữ ký số Công cộng (NEAC) và Nhánh Chuyên dùng Công vụ (Ban Cơ yếu Chính phủ).
+  \item Công nghệ Ký số từ xa (Remote Signing) giải quyết bài toán trải nghiệm người dùng như thế nào trong khi vẫn bảo đảm tính an toàn của khóa bí mật?
+\end{enumerate}
+\end{tukiemtra}
+
+\begin{kbox}
+Luật Giao dịch điện tử năm 2023 là nền móng pháp lý vững chắc cho chữ ký số an toàn tại Việt Nam. Quyết định số 1875/QĐ-TTg đặt ra yêu cầu chiến lược cấp bách về chuyển dịch PQC. Kiến trúc PKI quốc gia phân tầng bảo đảm tính toàn vẹn và chủ quyền số quốc gia trên không gian mạng.
+\end{kbox}

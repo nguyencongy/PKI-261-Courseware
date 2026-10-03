@@ -1,0 +1,81 @@
+\chapter{Giao Thức Quản Trị Tự Động ACME (RFC 8555) \& Hạ Tầng Zero Trust PKI}
+
+\banddo{Kiến trúc Zero Trust $\to$ Vấn đề chứng chỉ ngắn hạn $\to$ Chuẩn tự động hóa ACME RFC 8555 $\to$ Thử thách HTTP-01 / DNS-01 $\to$ mTLS Service Mesh}
+
+\section{Triết Lý Zero Trust \& Thách Thức Quản Trị Chứng Chỉ Ngắn Hạn}
+
+Mô hình an ninh truyền thống xây dựng trên giả định ''vùng biên mạng tin cậy'' (Perimeter Security) đã hoàn toàn phá sản. Kiến trúc an ninh hiện đại chuyển dịch sang nguyên lý \textbf{Zero Trust}: \emph{''Không bao giờ tin tưởng, luôn luôn xác thực'' (Never Trust, Always Verify)}.
+
+Trong kiến trúc Zero Trust:
+\begin{itemize}
+  \item Mọi giao tiếp giữa các microservices trong mạng nội bộ đều phải được mã hóa và xác thực hai chiều qua giao thức \textbf{Mutual TLS (mTLS)}.
+  \item Thời hạn hiệu lực của chứng chỉ bị rút ngắn tối đa (từ vài ngày xuống còn vài giờ hoặc vài phút -- \emph{Ephemeral Certificates}) để giảm thiểu thiệt hại khi khóa bí mật bị rò rỉ.
+  \item Với hàng triệu chứng chỉ ngắn hạn xoay vòng liên tục mỗi ngày, việc cấp phát thủ công bằng con người là bất khả thi, đòi hỏi hạ tầng tự động hóa tuyệt đối.
+\end{itemize}
+
+\section{Giao Thức Quản Trị Tự Động ACME (IETF RFC 8555)}
+
+Giao thức \textbf{ACME (Automated Certificate Management Environment -- RFC 8555)} được phát triển bởi nhóm Let's Encrypt và chuẩn hóa bởi IETF nhằm tự động hóa hoàn toàn quy trình xác thực tên miền, sinh khóa, cấp phát và gia hạn chứng chỉ số mà không cần sự can thiệp của con người.
+
+\subsection{Vòng Đời Giao Thức ACME}
+
+\begin{enumerate}
+  \item \textbf{Khởi tạo tài khoản (Account Creation):} ACME Client sinh một cặp khóa định danh tài khoản và gửi yêu cầu đăng ký lên ACME Server.
+  \item \textbf{Tạo đơn đặt hàng (Order Submission):} Client gửi danh sách tên miền cần xin cấp chứng chỉ (SAN domains).
+  \item \textbf{Phát hành thử thách (Challenges):} Server trả về các yêu cầu thử thách chứng minh quyền sở hữu tên miền.
+  \item \textbf{Thực hiện thử thách (Challenge Fulfillment):} Client triển khai nội dung thử thách và thông báo cho Server thẩm định.
+  \item \textbf{Hoàn tất và cấp phát (Finalize \& Certificate Issuance):} Client gửi file yêu cầu ký chứng chỉ (CSR). Server ký và trả về chuỗi chứng chỉ X.509 hoàn chỉnh.
+\end{enumerate}
+
+\subsection{Các Phương Thức Thử Thách Sở Hữu Tên Miền}
+
+\begin{itemize}
+  \item \textbf{HTTP-01 Challenge:} ACME Server yêu cầu Client đặt một file xác thực tại đường dẫn công khai:
+  \begin{equation}
+  \texttt{http://<YOUR\_DOMAIN>/.well-known/acme-challenge/<TOKEN>}
+  \end{equation}
+  ACME Server sẽ gửi truy vấn HTTP GET tới URL trên để kiểm tra giá trị \texttt{Key Authorization}. Nhược điểm: Bắt buộc mở cổng 80 và không cấp được chứng chỉ Wildcard (\texttt{*.kma.edu.vn}).
+  \item \textbf{DNS-01 Challenge:} ACME Server yêu cầu Client tạo một bản ghi TXT trên hệ thống máy chủ DNS:
+  \begin{equation}
+  \texttt{\_acme-challenge.<YOUR\_DOMAIN>} \quad \text{IN TXT} \quad \texttt{"<DIGEST>"}
+  \end{equation}
+  Ưu điểm: Hỗ trợ chứng chỉ Wildcard, không cần mở cổng dịch vụ web và hoạt động hoàn hảo trong mạng nội bộ cô lập.
+  \item \textbf{TLS-ALPN-01 Challenge:} Xác thực thông qua đàm phán giao thức lớp ứng dụng TLS ALPN trên cổng 443 với định danh \texttt{acme-tls/1}.
+\end{itemize}
+
+\begin{batngo}
+Tự động hóa là bức tường phòng thủ an ninh mạnh nhất:\\
+Theo thống kê của CA/B Forum, hơn 80\% các vụ gián đoạn dịch vụ liên quan đến PKI trong thập kỷ qua xuất phát từ lỗi con người: quên gia hạn chứng chỉ khiến website bị sập hoặc cấu hình sai các trường ASN.1. Việc triển khai ACME không chỉ cắt giảm 99\% chi phí vận hành mà còn loại bỏ hoàn toàn yếu tố sai sót chủ quan của con người.
+\end{batngo}
+
+\section{Kiến Trúc mTLS Service Mesh \& Quản Trị Danh Tính Động}
+
+Trong môi trường điện toán đám mây và Kubernetes, hạ tầng PKI được nhúng sâu vào Service Mesh (Istio, Linkerd) kết hợp các chuẩn định danh mã nguồn mở:
+\begin{itemize}
+  \item \textbf{SPIFFE (Secure Production Identity Framework for Everyone):} Chuẩn hóa chuỗi định danh tài nguyên (SPIFFE ID dạng URI: \path{spiffe://kma.edu.vn/ns/prod/sa/payment-service}).
+  \item \textbf{SPIRE (SPIFFE Runtime Environment):} Tự động cấp phát chứng chỉ số X.509 SVID ngắn hạn (thời hạn 1 giờ) vào bộ nhớ tạm của container mà không lưu khóa bí mật xuống đĩa cứng.
+  \item \textbf{Step-CA \& HashiCorp Vault:} Đóng vai trò máy chủ Issuing CA nội bộ cấp phát hàng chục nghìn chứng chỉ mTLS mỗi phút với hiệu năng cao.
+\end{itemize}
+
+\begin{chayngay}
+Khởi động máy chủ ACME nội bộ Step-CA bằng Docker:
+\begin{lstlisting}[language=bash]
+# Khoi dong Step-CA ho tro ACME protocol tren cong 9000
+docker run -d --name step-ca -p 9000:9000 \
+  -e "DOCKER_STEPCA_INIT_NAME=KMA Private PKI" \
+  -e "DOCKER_STEPCA_INIT_DNS_NAMES=localhost,step-ca.kma.local" \
+  smallstep/step-ca
+\end{lstlisting}
+\end{chayngay}
+
+\begin{tukiemtra}
+\begin{enumerate}
+  \item Phân tích quy trình bắt tay xác thực hai chiều mTLS và so sánh với TLS một chiều truyền thống.
+  \item Tại sao phương thức thử thách HTTP-01 không thể sử dụng để cấp chứng chỉ số Wildcard?
+  \item Trình bày cơ chế hoạt động của chuẩn định danh SPIFFE/SPIRE trong kiến trúc Kubernetes.
+\end{enumerate}
+\end{tukiemtra}
+
+\begin{kbox}
+Kiến trúc Zero Trust đòi hỏi mã hóa mTLS toàn diện và chứng chỉ số thời hạn ngắn (Ephemeral). Giao thức ACME (RFC 8555) giải quyết triệt để bài toán mở rộng quy mô thông qua tự động hóa hoàn toàn các phương thức thử thách HTTP-01 và DNS-01.
+\end{kbox}
